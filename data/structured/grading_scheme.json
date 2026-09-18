@@ -1,0 +1,127 @@
+{
+  "table": "grading_scheme",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 7,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "grade_band_id": "GRADE-BAND-01",
+      "marks_range": "90>=",
+      "grade_regular": "A+",
+      "grade_point_regular": 10,
+      "grade_remedial": "A",
+      "grade_point_remedial": 9,
+      "applies_to_program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "Examination Grade Range & Value",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "grade_band_id": "GRADE-BAND-02",
+      "marks_range": "80 To 89",
+      "grade_regular": "A",
+      "grade_point_regular": 9,
+      "grade_remedial": "B+",
+      "grade_point_remedial": 8,
+      "applies_to_program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "Examination Grade Range & Value",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "grade_band_id": "GRADE-BAND-03",
+      "marks_range": "70 To 79",
+      "grade_regular": "B+",
+      "grade_point_regular": 8,
+      "grade_remedial": "B",
+      "grade_point_remedial": 7,
+      "applies_to_program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "Examination Grade Range & Value",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "grade_band_id": "GRADE-BAND-04",
+      "marks_range": "60 To 69",
+      "grade_regular": "B",
+      "grade_point_regular": 7,
+      "grade_remedial": "C+",
+      "grade_point_remedial": 6,
+      "applies_to_program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "Examination Grade Range & Value",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "grade_band_id": "GRADE-BAND-05",
+      "marks_range": "50 To 59",
+      "grade_regular": "C+",
+      "grade_point_regular": 6,
+      "grade_remedial": "C",
+      "grade_point_remedial": 5,
+      "applies_to_program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "Examination Grade Range & Value",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "grade_band_id": "GRADE-BAND-06",
+      "marks_range": "40 To 49",
+      "grade_regular": "C",
+      "grade_point_regular": 5,
+      "grade_remedial": "C",
+      "grade_point_remedial": 5,
+      "applies_to_program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "Examination Grade Range & Value",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "grade_band_id": "GRADE-BAND-07",
+      "marks_range": "<40",
+      "grade_regular": "F",
+      "grade_point_regular": 0,
+      "grade_remedial": "F",
+      "grade_point_remedial": 0,
+      "applies_to_program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "Examination Grade Range & Value",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    }
+  ]
+}

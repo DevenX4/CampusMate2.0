@@ -1,0 +1,651 @@
+{
+  "table": "academic_calendar",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 25,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-001",
+      "title": "Registration period – odd semester",
+      "event_type": "registration",
+      "start_date": "2026-07-06",
+      "end_date": "2026-07-10",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-002",
+      "title": "Orientation for new B.Tech IT and M.Tech IT students",
+      "event_type": "orientation",
+      "start_date": "2026-07-13",
+      "end_date": "2026-07-15",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-MTECH-IT-01"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-003",
+      "title": "Odd semester teaching begins",
+      "event_type": "semester_start",
+      "start_date": "2026-07-16",
+      "end_date": "2026-07-16",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-004",
+      "title": "Capstone / major project topic registration deadline",
+      "event_type": "project_deadline",
+      "start_date": "2026-08-14",
+      "end_date": "2026-08-14",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-005",
+      "title": "Independence Day – holiday",
+      "event_type": "holiday",
+      "start_date": "2026-08-15",
+      "end_date": "2026-08-15",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-006",
+      "title": "Mid-semester examinations – odd semester",
+      "event_type": "examination",
+      "start_date": "2026-09-07",
+      "end_date": "2026-09-12",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-007",
+      "title": "Capstone Project mid-review",
+      "event_type": "project_evaluation",
+      "start_date": "2026-09-28",
+      "end_date": "2026-10-03",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-008",
+      "title": "Autumn break",
+      "event_type": "holiday",
+      "start_date": "2026-11-02",
+      "end_date": "2026-11-14",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-009",
+      "title": "Capstone Project final submission (Capstone Project-I and III)",
+      "event_type": "project_deadline",
+      "start_date": "2026-11-18",
+      "end_date": "2026-11-18",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-010",
+      "title": "Last teaching day – odd semester",
+      "event_type": "semester_end",
+      "start_date": "2026-11-20",
+      "end_date": "2026-11-20",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-011",
+      "title": "Practical and viva examinations – odd semester",
+      "event_type": "examination",
+      "start_date": "2026-11-23",
+      "end_date": "2026-11-28",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-012",
+      "title": "End-semester theory examinations – odd semester",
+      "event_type": "examination",
+      "start_date": "2026-11-30",
+      "end_date": "2026-12-12",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-013",
+      "title": "Winter break",
+      "event_type": "holiday",
+      "start_date": "2026-12-14",
+      "end_date": "2026-12-31",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-014",
+      "title": "Result publication – odd semester",
+      "event_type": "result",
+      "start_date": "2027-01-08",
+      "end_date": "2027-01-08",
+      "term": "Odd semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-07",
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-03"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-015",
+      "title": "Registration period – even semester",
+      "event_type": "registration",
+      "start_date": "2027-01-04",
+      "end_date": "2027-01-06",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-02",
+        "SEM-BTECH-IT-04",
+        "SEM-BTECH-IT-06",
+        "SEM-BTECH-IT-08",
+        "SEM-MTECH-IT-02",
+        "SEM-MTECH-IT-04"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-016",
+      "title": "Even semester teaching begins",
+      "event_type": "semester_start",
+      "start_date": "2027-01-07",
+      "end_date": "2027-01-07",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-02",
+        "SEM-BTECH-IT-04",
+        "SEM-BTECH-IT-06",
+        "SEM-BTECH-IT-08",
+        "SEM-MTECH-IT-02",
+        "SEM-MTECH-IT-04"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-017",
+      "title": "Republic Day – holiday",
+      "event_type": "holiday",
+      "start_date": "2027-01-26",
+      "end_date": "2027-01-26",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-02",
+        "SEM-BTECH-IT-04",
+        "SEM-BTECH-IT-06",
+        "SEM-BTECH-IT-08",
+        "SEM-MTECH-IT-02",
+        "SEM-MTECH-IT-04"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-018",
+      "title": "Mid-semester examinations – even semester",
+      "event_type": "examination",
+      "start_date": "2027-02-22",
+      "end_date": "2027-02-27",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-02",
+        "SEM-BTECH-IT-04",
+        "SEM-BTECH-IT-06",
+        "SEM-BTECH-IT-08",
+        "SEM-MTECH-IT-02",
+        "SEM-MTECH-IT-04"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-019",
+      "title": "Capstone Project-II final submission",
+      "event_type": "project_deadline",
+      "start_date": "2027-04-16",
+      "end_date": "2027-04-16",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-06"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-020",
+      "title": "Industrial Training (2CEIT801) final report and presentation",
+      "event_type": "project_deadline",
+      "start_date": "2027-04-30",
+      "end_date": "2027-04-30",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-08"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-021",
+      "title": "M.Tech Major Project Part - II thesis submission",
+      "event_type": "project_deadline",
+      "start_date": "2027-04-23",
+      "end_date": "2027-04-23",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-MTECH-IT-04"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-022",
+      "title": "Last teaching day – even semester",
+      "event_type": "semester_end",
+      "start_date": "2027-04-24",
+      "end_date": "2027-04-24",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-02",
+        "SEM-BTECH-IT-04",
+        "SEM-BTECH-IT-06",
+        "SEM-BTECH-IT-08",
+        "SEM-MTECH-IT-02",
+        "SEM-MTECH-IT-04"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-023",
+      "title": "End-semester theory examinations – even semester",
+      "event_type": "examination",
+      "start_date": "2027-05-03",
+      "end_date": "2027-05-15",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-02",
+        "SEM-BTECH-IT-04",
+        "SEM-BTECH-IT-06",
+        "SEM-BTECH-IT-08",
+        "SEM-MTECH-IT-02",
+        "SEM-MTECH-IT-04"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-024",
+      "title": "Summer vacation",
+      "event_type": "holiday",
+      "start_date": "2027-05-17",
+      "end_date": "2027-06-30",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-02",
+        "SEM-BTECH-IT-04",
+        "SEM-BTECH-IT-06",
+        "SEM-BTECH-IT-08",
+        "SEM-MTECH-IT-02",
+        "SEM-MTECH-IT-04"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-CALENDAR-001",
+      "academic_year": "2026-2027",
+      "event_id": "CAL-2026-27-025",
+      "title": "Result publication – even semester",
+      "event_type": "result",
+      "start_date": "2027-06-11",
+      "end_date": "2027-06-11",
+      "term": "Even semester 2026-2027",
+      "department_id": "DEPT-IT-001",
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "semester_ids": [
+        "SEM-BTECH-IT-02",
+        "SEM-BTECH-IT-04",
+        "SEM-BTECH-IT-06",
+        "SEM-BTECH-IT-08",
+        "SEM-MTECH-IT-02",
+        "SEM-MTECH-IT-04"
+      ],
+      "synthetic_notice": "Synthetic demo date — not an actual Ganpat University schedule.",
+      "status": "active",
+      "version": "1.0"
+    }
+  ]
+}

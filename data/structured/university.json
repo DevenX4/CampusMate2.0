@@ -1,0 +1,25 @@
+{
+  "table": "university",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 1,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "university_id": "UNIV-GUNI-001",
+      "name": "Ganpat University",
+      "short_name": "GUNI",
+      "address": "Ganpat Vidyanagar - 384 012, Mehsana-Gandhinagar Highway, District: Mehsana, Gujarat, INDIA",
+      "phone": "+91 2762 - 226000",
+      "fax": "+91 2762 - 286080",
+      "toll_free": "1800 233 12345",
+      "email": "info@guni.ac.in",
+      "website": "www.guni.ac.in",
+      "note": "General university contact block printed on the letterhead of the certified course list. No department- or person-level contacts are present in either PDF.",
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-CATALOG-001",
+      "source_page": 1,
+      "source_section": "Letterhead / cover page",
+      "document_version": "Certified list covering academic years 2017-2018 to 2021-2022"
+    }
+  ]
+}

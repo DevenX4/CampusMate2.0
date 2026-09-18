@@ -1,0 +1,6 @@
+# Store and check out text files with LF on every OS, so dataset files stay
+# byte-identical to their originals regardless of a machine's core.autocrlf setting.
+* text=auto eol=lf
+
+*.pdf binary
+*.png binary

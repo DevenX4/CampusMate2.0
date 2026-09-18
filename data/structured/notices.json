@@ -1,0 +1,640 @@
+{
+  "table": "notices",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 20,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-001",
+      "title": "Orientation programme for new B.Tech IT and M.Tech IT students",
+      "date": "2026-07-01",
+      "department_id": "DEPT-IT-001",
+      "category": "orientation",
+      "target_audience": [
+        "students_new"
+      ],
+      "content": "All newly admitted students of PROG-BTECH-IT-001 (Semester I) and PROG-MTECH-IT-001 (Semester I) must attend the orientation programme from 13 to 15 July 2026 in the IT Seminar Hall (FCL-IT-001, Demo Innovation Block B, Room DB-201). Sessions cover the curriculum, laboratory rules (POLICY-002, POLICY-003) and student services.",
+      "effective_date": "2026-07-13",
+      "expiry_date": "2026-07-15",
+      "related_course_ids": [],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [
+        "FCL-IT-001"
+      ],
+      "related_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "related_calendar_ids": [
+        "CAL-2026-27-002"
+      ],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-002",
+      "title": "Odd semester course registration window",
+      "date": "2026-07-02",
+      "department_id": "DEPT-IT-001",
+      "category": "registration",
+      "target_audience": [
+        "students_all"
+      ],
+      "content": "Course registration for the odd semester of AY 2026-2027 is open from 6 to 10 July 2026. Semester V students must select one course each from ELECTIVE-I (EGRP-BTECH-IT-05-ELECTIVE-I) and ELECTIVE-II (EGRP-BTECH-IT-05-ELECTIVE-II). Queries: Department Office (FCL-IT-010).",
+      "effective_date": "2026-07-06",
+      "expiry_date": "2026-07-10",
+      "related_course_ids": [],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [
+        "FCL-IT-010"
+      ],
+      "related_policy_ids": [],
+      "related_calendar_ids": [
+        "CAL-2026-27-001"
+      ],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-003",
+      "title": "Odd semester timetable published",
+      "date": "2026-07-08",
+      "department_id": "DEPT-IT-001",
+      "category": "timetable",
+      "target_audience": [
+        "students_all",
+        "faculty"
+      ],
+      "content": "The odd semester timetable for B.Tech IT Semesters III, V and VII and M.Tech IT Semesters I and III is published. Practicals for 2CEIT303 DATABASE MANAGEMENT SYSTEM run in LAB-IT-003 (Room DA-303); practicals for 2CEIT503 COMPUTER NETWORKS run in LAB-IT-005 (Room DA-401).",
+      "effective_date": "2026-07-16",
+      "expiry_date": "2026-11-20",
+      "related_course_ids": [
+        "COURSE-2CEIT303",
+        "COURSE-2CEIT503"
+      ],
+      "related_faculty_ids": [],
+      "related_lab_ids": [
+        "LAB-IT-003",
+        "LAB-IT-005"
+      ],
+      "related_facility_ids": [],
+      "related_policy_ids": [],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-004",
+      "title": "Capstone project team formation and topic registration",
+      "date": "2026-07-20",
+      "department_id": "DEPT-IT-001",
+      "category": "project",
+      "target_audience": [
+        "students_sem5",
+        "students_sem7"
+      ],
+      "content": "Students of 2CEIT504 CAPSTONE PROJECT-I (Semester V) and 2CEIT703 CAPSTONE PROJECT-III (Semester VII) must form teams of 2–4 and register titles with the Project Coordinator Dr. Leena Projectkar (FAC-IT-020) by 14 August 2026 as per POLICY-004.",
+      "effective_date": "2026-07-20",
+      "expiry_date": "2026-08-14",
+      "related_course_ids": [
+        "COURSE-2CEIT504",
+        "COURSE-2CEIT703"
+      ],
+      "related_faculty_ids": [
+        "FAC-IT-020"
+      ],
+      "related_lab_ids": [],
+      "related_facility_ids": [],
+      "related_policy_ids": [
+        "POLICY-004"
+      ],
+      "related_calendar_ids": [
+        "CAL-2026-27-004"
+      ],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-005",
+      "title": "Mid-semester examination schedule – odd semester (version 1)",
+      "date": "2026-08-10",
+      "department_id": "DEPT-IT-001",
+      "category": "examination",
+      "target_audience": [
+        "students_all"
+      ],
+      "content": "Mid-semester examinations for the odd semester will be held from 7 to 12 September 2026. Detailed paper-wise timetable is attached to this notice. This notice is SUPERSEDED by NOTICE-008.",
+      "effective_date": "2026-09-07",
+      "expiry_date": "2026-09-12",
+      "related_course_ids": [],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [],
+      "related_policy_ids": [],
+      "related_calendar_ids": [
+        "CAL-2026-27-006"
+      ],
+      "supersedes": null,
+      "superseded_by": "NOTICE-008",
+      "status": "superseded",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-006",
+      "title": "Independence Day holiday",
+      "date": "2026-08-12",
+      "department_id": "DEPT-IT-001",
+      "category": "holiday",
+      "target_audience": [
+        "students_all",
+        "faculty",
+        "staff"
+      ],
+      "content": "The department will remain closed on 15 August 2026 (CAL-2026-27-005). Laboratories LAB-IT-001 to LAB-IT-010 will be closed.",
+      "effective_date": "2026-08-15",
+      "expiry_date": "2026-08-15",
+      "related_course_ids": [],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [],
+      "related_policy_ids": [],
+      "related_calendar_ids": [
+        "CAL-2026-27-005"
+      ],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-007",
+      "title": "Hands-on workshop: Retrieval-Augmented Generation with local SLMs",
+      "date": "2026-08-18",
+      "department_id": "DEPT-IT-001",
+      "category": "workshop",
+      "target_audience": [
+        "students_sem7",
+        "students_mtech"
+      ],
+      "content": "A one-day workshop on retrieval-augmented generation, BM25 + vector hybrid search and local small language models will be conducted by Dr. Nisha Tokenwala (FAC-IT-003) in the Natural Language Processing Lab (LAB-IT-002, Room DA-302) on 29 August 2026. Recommended for students of 2CEIT78PE7 NATURAL LANGUAGE PROCESSING and 3CEIT307.",
+      "effective_date": "2026-08-29",
+      "expiry_date": "2026-08-29",
+      "related_course_ids": [
+        "COURSE-2CEIT78PE7",
+        "COURSE-3CEIT307"
+      ],
+      "related_faculty_ids": [
+        "FAC-IT-003"
+      ],
+      "related_lab_ids": [
+        "LAB-IT-002"
+      ],
+      "related_facility_ids": [],
+      "related_policy_ids": [],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-008",
+      "title": "REVISED mid-semester examination schedule – odd semester (version 2)",
+      "date": "2026-08-28",
+      "department_id": "DEPT-IT-001",
+      "category": "examination",
+      "target_audience": [
+        "students_all"
+      ],
+      "content": "This notice supersedes NOTICE-005. The mid-semester examination window remains 7 to 12 September 2026, but the 2CEIT602 ARTIFICIAL INTELLIGENCE paper for re-registered students moves to 12 September 2026 (Saturday) and all papers now start at 10:00 instead of 09:30.",
+      "effective_date": "2026-09-07",
+      "expiry_date": "2026-09-12",
+      "related_course_ids": [
+        "COURSE-2CEIT602"
+      ],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [],
+      "related_policy_ids": [],
+      "related_calendar_ids": [
+        "CAL-2026-27-006"
+      ],
+      "supersedes": "NOTICE-005",
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-009",
+      "title": "Weekly lab slot registration opens for Database Systems Lab and Programming Lab",
+      "date": "2026-09-01",
+      "department_id": "DEPT-IT-001",
+      "category": "laboratory",
+      "target_audience": [
+        "students_all"
+      ],
+      "content": "Extra practice slots in LAB-IT-003 (Database Systems Lab) and LAB-IT-004 (Programming Lab) can be registered every Monday from 09:00 by email to it-labs@campusmate-demo.example, as per POLICY-002.",
+      "effective_date": "2026-09-07",
+      "expiry_date": "2026-11-20",
+      "related_course_ids": [],
+      "related_faculty_ids": [],
+      "related_lab_ids": [
+        "LAB-IT-003",
+        "LAB-IT-004"
+      ],
+      "related_facility_ids": [],
+      "related_policy_ids": [
+        "POLICY-002"
+      ],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-010",
+      "title": "Guest seminar: Responsible AI in education",
+      "date": "2026-09-03",
+      "department_id": "DEPT-IT-001",
+      "category": "seminar",
+      "target_audience": [
+        "students_all",
+        "faculty"
+      ],
+      "content": "A guest seminar on responsible AI in education will be held on 16 September 2026 at 11:00 in the IT Seminar Hall (FCL-IT-001). Coordinated by Dr. Arjun Tensorkar (FAC-IT-002).",
+      "effective_date": "2026-09-16",
+      "expiry_date": "2026-09-16",
+      "related_course_ids": [],
+      "related_faculty_ids": [
+        "FAC-IT-002"
+      ],
+      "related_lab_ids": [],
+      "related_facility_ids": [
+        "FCL-IT-001"
+      ],
+      "related_policy_ids": [],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-011",
+      "title": "Faculty meeting – capstone mid-review panels",
+      "date": "2026-09-08",
+      "department_id": "DEPT-IT-001",
+      "category": "meeting",
+      "target_audience": [
+        "faculty"
+      ],
+      "content": "All IT faculty members are requested to attend a meeting on 15 September 2026 at 15:00 in the Faculty Lounge (FCL-IT-004) to finalise panels for the capstone mid-review (CAL-2026-27-007) under POLICY-005. Convened by the Head of Department, Dr. Meera Datavala (FAC-IT-001).",
+      "effective_date": "2026-09-15",
+      "expiry_date": "2026-09-15",
+      "related_course_ids": [],
+      "related_faculty_ids": [
+        "FAC-IT-001"
+      ],
+      "related_lab_ids": [],
+      "related_facility_ids": [
+        "FCL-IT-004"
+      ],
+      "related_policy_ids": [
+        "POLICY-005"
+      ],
+      "related_calendar_ids": [
+        "CAL-2026-27-007"
+      ],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-012",
+      "title": "Capstone mid-review schedule",
+      "date": "2026-09-10",
+      "department_id": "DEPT-IT-001",
+      "category": "project",
+      "target_audience": [
+        "students_sem5",
+        "students_sem7",
+        "faculty"
+      ],
+      "content": "Capstone Project mid-reviews for 2CEIT504 and 2CEIT703 will run from 28 September to 3 October 2026 in the Capstone Project Room (FCL-IT-002, Room DA-205). Teams must upload an interim report 48 hours before their slot (POLICY-004, POLICY-005).",
+      "effective_date": "2026-09-28",
+      "expiry_date": "2026-10-03",
+      "related_course_ids": [
+        "COURSE-2CEIT504",
+        "COURSE-2CEIT703"
+      ],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [
+        "FCL-IT-002"
+      ],
+      "related_policy_ids": [
+        "POLICY-004",
+        "POLICY-005"
+      ],
+      "related_calendar_ids": [
+        "CAL-2026-27-007"
+      ],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-013",
+      "title": "GPU Computing Facility maintenance",
+      "date": "2026-09-14",
+      "department_id": "DEPT-IT-001",
+      "category": "facility",
+      "target_audience": [
+        "students_all",
+        "faculty"
+      ],
+      "content": "The GPU Computing Facility (FCL-IT-008, Room DA-405) will be unavailable on 19–20 September 2026 for scheduled maintenance. Jobs queued before 18 September 18:00 will be resumed afterwards.",
+      "effective_date": "2026-09-19",
+      "expiry_date": "2026-09-20",
+      "related_course_ids": [],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [
+        "FCL-IT-008"
+      ],
+      "related_policy_ids": [],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-014",
+      "title": "Timetable update: Cloud Computing and Big Data Analytics practicals",
+      "date": "2026-09-17",
+      "department_id": "DEPT-IT-001",
+      "category": "timetable",
+      "target_audience": [
+        "students_sem7"
+      ],
+      "content": "From 21 September 2026, practicals of 2CEIT702 BIG DATA ANALYTICS move from Wednesday to Friday 14:00–16:00 in LAB-IT-006 (Cloud & Big Data Lab, Room DA-402).",
+      "effective_date": "2026-09-21",
+      "expiry_date": "2026-11-20",
+      "related_course_ids": [
+        "COURSE-2CEIT702"
+      ],
+      "related_faculty_ids": [],
+      "related_lab_ids": [
+        "LAB-IT-006"
+      ],
+      "related_facility_ids": [],
+      "related_policy_ids": [],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-015",
+      "title": "Summer internship report submission (AY 2025-2026 carry-over)",
+      "date": "2026-06-15",
+      "department_id": "DEPT-IT-001",
+      "category": "general",
+      "target_audience": [
+        "students_sem5"
+      ],
+      "content": "Students who completed optional summer internships must submit a 2-page report to the Department Office (FCL-IT-010) by 31 July 2026. This notice has EXPIRED.",
+      "effective_date": "2026-06-15",
+      "expiry_date": "2026-07-31",
+      "related_course_ids": [],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [
+        "FCL-IT-010"
+      ],
+      "related_policy_ids": [],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-016",
+      "title": "Mandatory safety induction for IoT & Robotics Lab",
+      "date": "2026-07-25",
+      "department_id": "DEPT-IT-001",
+      "category": "laboratory",
+      "target_audience": [
+        "students_sem6",
+        "students_mtech"
+      ],
+      "content": "Students intending to take 2CEIT6PE6 ROBOTICS or 2CEIT6PE9 INTERNET OF THINGS, and M.Tech students of 3CEIT305, must complete the safety induction in LAB-IT-007 (Room DB-101) as per POLICY-003.",
+      "effective_date": "2026-08-03",
+      "expiry_date": "2026-08-07",
+      "related_course_ids": [
+        "COURSE-2CEIT6PE6",
+        "COURSE-2CEIT6PE9",
+        "COURSE-3CEIT305"
+      ],
+      "related_faculty_ids": [],
+      "related_lab_ids": [
+        "LAB-IT-007"
+      ],
+      "related_facility_ids": [],
+      "related_policy_ids": [
+        "POLICY-003"
+      ],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-017",
+      "title": "M.Tech Major Project Part - I supervisor allocation",
+      "date": "2026-08-05",
+      "department_id": "DEPT-IT-001",
+      "category": "project",
+      "target_audience": [
+        "students_mtech"
+      ],
+      "content": "Supervisor allocation for 3CEIT301 MAJOR PROJECT PART - I is published. Students must submit research proposals by the end of week 4 as per POLICY-010. Contact the Project Coordinator (FAC-IT-020).",
+      "effective_date": "2026-08-05",
+      "expiry_date": "2026-08-31",
+      "related_course_ids": [
+        "COURSE-3CEIT301"
+      ],
+      "related_faculty_ids": [
+        "FAC-IT-020"
+      ],
+      "related_lab_ids": [],
+      "related_facility_ids": [],
+      "related_policy_ids": [
+        "POLICY-010"
+      ],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-018",
+      "title": "End-semester examination form submission",
+      "date": "2026-09-18",
+      "department_id": "DEPT-IT-001",
+      "category": "examination",
+      "target_audience": [
+        "students_all"
+      ],
+      "content": "Examination forms for the odd semester end-semester examinations (CAL-2026-27-012, 30 November to 12 December 2026) must be submitted between 21 September and 9 October 2026 via the Department Office (FCL-IT-010).",
+      "effective_date": "2026-09-21",
+      "expiry_date": "2026-10-09",
+      "related_course_ids": [],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [
+        "FCL-IT-010"
+      ],
+      "related_policy_ids": [],
+      "related_calendar_ids": [
+        "CAL-2026-27-012"
+      ],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-019",
+      "title": "Department reading room extended hours",
+      "date": "2026-08-20",
+      "department_id": "DEPT-IT-001",
+      "category": "general",
+      "target_audience": [
+        "students_all"
+      ],
+      "content": "The Department Reading Room (FCL-IT-009, Room DA-209) will remain open until 21:00 on weekdays until the end of the odd semester examinations.",
+      "effective_date": "2026-08-24",
+      "expiry_date": "2026-12-12",
+      "related_course_ids": [],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [
+        "FCL-IT-009"
+      ],
+      "related_policy_ids": [],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-NOTICES-001",
+      "academic_year": "2026-2027",
+      "notice_id": "NOTICE-020",
+      "title": "Seminar topic approval deadline for M.Tech SEMINAR (3CEIT302)",
+      "date": "2026-07-30",
+      "department_id": "DEPT-IT-001",
+      "category": "seminar",
+      "target_audience": [
+        "students_mtech"
+      ],
+      "content": "M.Tech Semester III students must get seminar topics approved by 21 August 2026 as per POLICY-007. Seminars will be delivered in the IT Seminar Hall (FCL-IT-001).",
+      "effective_date": "2026-07-30",
+      "expiry_date": "2026-08-21",
+      "related_course_ids": [
+        "COURSE-3CEIT302"
+      ],
+      "related_faculty_ids": [],
+      "related_lab_ids": [],
+      "related_facility_ids": [
+        "FCL-IT-001"
+      ],
+      "related_policy_ids": [
+        "POLICY-007"
+      ],
+      "related_calendar_ids": [],
+      "supersedes": null,
+      "superseded_by": null,
+      "status": "expired",
+      "version": "1.0"
+    }
+  ]
+}

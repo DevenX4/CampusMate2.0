@@ -1,0 +1,110 @@
+{
+  "table": "programs",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 2,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "program_id": "PROG-BTECH-IT-001",
+      "program_name": "Bachelor of Technology in Information Technology",
+      "short_name": "B.TECH-IT",
+      "degree_type": "Bachelor of Technology (B.Tech)",
+      "university_id": "UNIV-GUNI-001",
+      "org_unit_id": "COLLEGE-UVPCE-001",
+      "department_id": "DEPT-IT-001",
+      "number_of_semesters": 8,
+      "duration": "8 semesters",
+      "total_credits": 174.0,
+      "effective_year": "2021-2022",
+      "catalog_program_code": "202",
+      "catalog_program_name": "BTech(Information Technology)",
+      "semester_ids": [
+        "SEM-BTECH-IT-01",
+        "SEM-BTECH-IT-02",
+        "SEM-BTECH-IT-03",
+        "SEM-BTECH-IT-04",
+        "SEM-BTECH-IT-05",
+        "SEM-BTECH-IT-06",
+        "SEM-BTECH-IT-07",
+        "SEM-BTECH-IT-08"
+      ],
+      "program_description": null,
+      "field_provenance": {
+        "program_name": "official",
+        "short_name": "official",
+        "degree_type": "derived_official",
+        "org_unit_id": "official",
+        "number_of_semesters": "derived_official",
+        "duration": "derived_official",
+        "total_credits": "derived_official",
+        "catalog_program_code": "official",
+        "department_id": "synthetic (the PDFs name no department; DEPT-IT-001 is a CampusMate demo entity)",
+        "program_description": "unavailable in official sources",
+        "synthetic_program_description": "synthetic",
+        "synthetic_program_coordinator_faculty_id": "synthetic"
+      },
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "Page header / Program field",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022",
+      "additional_sources": [
+        {
+          "source_document": "DOC-OFFICIAL-CATALOG-001",
+          "note": "Catalog program code 202 = BTech(Information Technology)"
+        }
+      ],
+      "synthetic_program_description": "Synthetic summary: an eight-semester undergraduate programme combining engineering foundations (Semesters I–II), core computing (III–IV), specialisation electives and a three-stage capstone project (V–VII) and a full semester of industrial training (VIII).",
+      "synthetic_program_coordinator_faculty_id": "FAC-IT-020"
+    },
+    {
+      "program_id": "PROG-MTECH-IT-001",
+      "program_name": "Master of Technology in Information Technology",
+      "short_name": "M.TECH-IT",
+      "degree_type": "Master of Technology (M.Tech)",
+      "university_id": "UNIV-GUNI-001",
+      "org_unit_id": "COLLEGE-UVPCE-001",
+      "department_id": "DEPT-IT-001",
+      "number_of_semesters": 4,
+      "duration": "4 semesters",
+      "total_credits": 74.0,
+      "effective_year": "2021-2022",
+      "catalog_program_code": "402",
+      "catalog_program_name": "Mtech(Information Technology)",
+      "semester_ids": [
+        "SEM-MTECH-IT-01",
+        "SEM-MTECH-IT-02",
+        "SEM-MTECH-IT-03",
+        "SEM-MTECH-IT-04"
+      ],
+      "program_description": null,
+      "field_provenance": {
+        "program_name": "official",
+        "short_name": "official",
+        "degree_type": "derived_official",
+        "org_unit_id": "official",
+        "number_of_semesters": "derived_official",
+        "duration": "derived_official",
+        "total_credits": "derived_official",
+        "catalog_program_code": "official",
+        "department_id": "synthetic (the PDFs name no department; DEPT-IT-001 is a CampusMate demo entity)",
+        "program_description": "unavailable in official sources",
+        "synthetic_program_description": "synthetic",
+        "synthetic_program_coordinator_faculty_id": "synthetic"
+      },
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 104,
+      "source_section": "Page header / Program field",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022",
+      "additional_sources": [
+        {
+          "source_document": "DOC-OFFICIAL-CATALOG-001",
+          "note": "Catalog program code 402 = Mtech(Information Technology)"
+        }
+      ],
+      "synthetic_program_description": "Synthetic summary: a four-semester postgraduate programme with advanced core courses and electives in Semesters I–II followed by a two-part major project and seminar in Semesters III–IV.",
+      "synthetic_program_coordinator_faculty_id": "FAC-IT-013"
+    }
+  ]
+}

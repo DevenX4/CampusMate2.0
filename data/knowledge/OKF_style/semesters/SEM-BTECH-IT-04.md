@@ -1,0 +1,49 @@
+---
+id: SEM-BTECH-IT-04
+type: semester
+title: BTECH IT Semester IV
+program: PROG-BTECH-IT-001
+semester: SEM-BTECH-IT-04
+academic_year: 2021-2022
+source_type: official
+source_document: DOC-OFFICIAL-SYLLABUS-001
+source_page: 13
+rendered_in:
+- DOC-PROGRAMS-001#page=3
+structured_record: synthetic/structured/semesters.json#SEM-BTECH-IT-04
+version: '1.0'
+status: active
+last_updated: '2026-09-18'
+relationships:
+  contains:
+  - COURSE-2BS4101
+  - COURSE-2CEIT401
+  - COURSE-2CEIT402
+  - COURSE-2CEIT403
+  - COURSE-2CEIT404
+  - COURSE-2CEIT405
+  contained_in:
+  - PROG-BTECH-IT-001
+  offers:
+  - COURSE-2BS4101
+  - COURSE-2CEIT401
+  - COURSE-2CEIT402
+  - COURSE-2CEIT403
+  - COURSE-2CEIT404
+  - COURSE-2CEIT405
+  governed_or_scheduled_by:
+  - CAL-2026-27-015
+  - CAL-2026-27-016
+  - CAL-2026-27-017
+  - CAL-2026-27-018
+  - CAL-2026-27-022
+  - CAL-2026-27-023
+  - CAL-2026-27-024
+  - CAL-2026-27-025
+---
+
+# BTECH IT Semester IV
+
+**BTECH IT Semester IV** (SEM-BTECH-IT-04): total credits 21.0 (TH 15.0, PR 6.0), contact hours 27.0, total marks 750.
+
+Regular courses: 2BS4101 MATHEMATICS FOR COMPUTER ENGINEERING & INFORMATION TECHNOLOGY; 2CEIT401 OPERATING SYSTEMS; 2CEIT402 DESIGN AND ANALYSIS OF ALGORITHMS; 2CEIT403 APPLICATION DEVELOPMENT TOOLS; 2CEIT404 PROGRAMMING WITH PYTHON; 2CEIT405 NOSQL DATABASE SYSTEMS.

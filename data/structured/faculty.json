@@ -1,0 +1,650 @@
+{
+  "table": "faculty",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 20,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-001",
+      "name": "Dr. Meera Datavala",
+      "designation": "Professor & Head of Department",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Computer Science)",
+      "specialization": "Database systems and data engineering",
+      "research_area_ids": [
+        "RA-IT-003"
+      ],
+      "research_areas": [
+        "Databases & Data Engineering"
+      ],
+      "email": "meera.datavala@campusmate-demo.example",
+      "office_id": "ROOM-DA-202",
+      "consultation_hours": "Tuesday & Thursday 15:00–16:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT303",
+        "COURSE-3CEIT211",
+        "COURSE-3CEIT202"
+      ],
+      "joining_year": 2008,
+      "is_hod": true,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-002",
+      "name": "Dr. Arjun Tensorkar",
+      "designation": "Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Artificial Intelligence)",
+      "specialization": "Machine learning and intelligent systems",
+      "research_area_ids": [
+        "RA-IT-001"
+      ],
+      "research_areas": [
+        "Artificial Intelligence & Machine Learning"
+      ],
+      "email": "arjun.tensorkar@campusmate-demo.example",
+      "office_id": "ROOM-DA-210",
+      "consultation_hours": "Monday & Wednesday 14:00–15:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT602",
+        "COURSE-3CEIT101",
+        "COURSE-2CEIT78PE1"
+      ],
+      "joining_year": 2010,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-003",
+      "name": "Dr. Nisha Tokenwala",
+      "designation": "Associate Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Computational Linguistics)",
+      "specialization": "Natural language processing and information retrieval",
+      "research_area_ids": [
+        "RA-IT-002",
+        "RA-IT-001"
+      ],
+      "research_areas": [
+        "Natural Language Processing",
+        "Artificial Intelligence & Machine Learning"
+      ],
+      "email": "nisha.tokenwala@campusmate-demo.example",
+      "office_id": "ROOM-DA-210",
+      "consultation_hours": "Tuesday & Thursday 15:00–16:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT78PE7",
+        "COURSE-3CEIT307",
+        "COURSE-3CEIT303"
+      ],
+      "joining_year": 2013,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-004",
+      "name": "Dr. Kabir Modelkar",
+      "designation": "Associate Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Data Science)",
+      "specialization": "Applied machine learning and data science",
+      "research_area_ids": [
+        "RA-IT-001",
+        "RA-IT-003"
+      ],
+      "research_areas": [
+        "Artificial Intelligence & Machine Learning",
+        "Databases & Data Engineering"
+      ],
+      "email": "kabir.modelkar@campusmate-demo.example",
+      "office_id": "ROOM-DA-211",
+      "consultation_hours": "Monday & Wednesday 14:00–15:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT602",
+        "COURSE-2CEIT6PE4",
+        "COURSE-3CEIT309"
+      ],
+      "joining_year": 2014,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-005",
+      "name": "Prof. Riya Queryani",
+      "designation": "Assistant Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "M.Tech (Information Technology)",
+      "specialization": "NoSQL and web-scale data management",
+      "research_area_ids": [
+        "RA-IT-003"
+      ],
+      "research_areas": [
+        "Databases & Data Engineering"
+      ],
+      "email": "riya.queryani@campusmate-demo.example",
+      "office_id": "ROOM-DA-211",
+      "consultation_hours": "Tuesday & Thursday 15:00–16:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT303",
+        "COURSE-2CEIT405",
+        "COURSE-2CEIT78PE5"
+      ],
+      "joining_year": 2018,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-006",
+      "name": "Dr. Vikram Packetkar",
+      "designation": "Associate Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Computer Networks)",
+      "specialization": "Wireless and software-defined networking",
+      "research_area_ids": [
+        "RA-IT-010"
+      ],
+      "research_areas": [
+        "Computer Networks"
+      ],
+      "email": "vikram.packetkar@campusmate-demo.example",
+      "office_id": "ROOM-DA-212",
+      "consultation_hours": "Monday & Wednesday 14:00–15:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT503",
+        "COURSE-3CEIT105",
+        "COURSE-3CEIT106",
+        "COURSE-3CEIT108"
+      ],
+      "joining_year": 2011,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-007",
+      "name": "Dr. Sana Cipherwala",
+      "designation": "Associate Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Information Security)",
+      "specialization": "Applied cryptography and PKI",
+      "research_area_ids": [
+        "RA-IT-004"
+      ],
+      "research_areas": [
+        "Cyber Security & Cryptography"
+      ],
+      "email": "sana.cipherwala@campusmate-demo.example",
+      "office_id": "ROOM-DA-212",
+      "consultation_hours": "Tuesday & Thursday 15:00–16:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT6PE3",
+        "COURSE-3CEIT103",
+        "COURSE-3CEIT207",
+        "COURSE-3CEIT310"
+      ],
+      "joining_year": 2012,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-008",
+      "name": "Prof. Dev Firewallani",
+      "designation": "Assistant Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "M.Tech (Cyber Security)",
+      "specialization": "Ethical hacking, digital forensics and blockchain",
+      "research_area_ids": [
+        "RA-IT-004"
+      ],
+      "research_areas": [
+        "Cyber Security & Cryptography"
+      ],
+      "email": "dev.firewallani@campusmate-demo.example",
+      "office_id": "ROOM-DA-213",
+      "consultation_hours": "Monday & Wednesday 14:00–15:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT6PE7",
+        "COURSE-2CEIT78PE8",
+        "COURSE-2CEIT78PE2"
+      ],
+      "joining_year": 2019,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-009",
+      "name": "Dr. Aditi Cloudani",
+      "designation": "Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Distributed Systems)",
+      "specialization": "Cloud computing and service-oriented architectures",
+      "research_area_ids": [
+        "RA-IT-005"
+      ],
+      "research_areas": [
+        "Cloud, Distributed & High Performance Computing"
+      ],
+      "email": "aditi.cloudani@campusmate-demo.example",
+      "office_id": "ROOM-DA-213",
+      "consultation_hours": "Tuesday & Thursday 15:00–16:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT603",
+        "COURSE-3CEIT203",
+        "COURSE-3CEIT110",
+        "COURSE-3CEIT111",
+        "COURSE-2CEIT78PE10"
+      ],
+      "joining_year": 2009,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-010",
+      "name": "Dr. Harsh Clusterwala",
+      "designation": "Associate Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (High Performance Computing)",
+      "specialization": "Big data platforms and parallel computing",
+      "research_area_ids": [
+        "RA-IT-005",
+        "RA-IT-003"
+      ],
+      "research_areas": [
+        "Cloud, Distributed & High Performance Computing",
+        "Databases & Data Engineering"
+      ],
+      "email": "harsh.clusterwala@campusmate-demo.example",
+      "office_id": "ROOM-DA-214",
+      "consultation_hours": "Monday & Wednesday 14:00–15:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT702",
+        "COURSE-3CEIT306",
+        "COURSE-2CEIT78PE12",
+        "COURSE-3CEIT109",
+        "COURSE-2CEIT78PE11"
+      ],
+      "joining_year": 2015,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-011",
+      "name": "Prof. Tanya Pixelani",
+      "designation": "Assistant Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "M.Tech (Computer Vision)",
+      "specialization": "Image processing, computer vision and XR",
+      "research_area_ids": [
+        "RA-IT-007",
+        "RA-IT-001"
+      ],
+      "research_areas": [
+        "Computer Vision & Graphics",
+        "Artificial Intelligence & Machine Learning"
+      ],
+      "email": "tanya.pixelani@campusmate-demo.example",
+      "office_id": "ROOM-DA-214",
+      "consultation_hours": "Tuesday & Thursday 15:00–16:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT5PE2",
+        "COURSE-2CEIT78PE3",
+        "COURSE-2CEIT78PE13",
+        "COURSE-3CEIT201",
+        "COURSE-2CEIT78PE6"
+      ],
+      "joining_year": 2020,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-012",
+      "name": "Prof. Ishaan Stackani",
+      "designation": "Assistant Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "M.Tech (Computer Engineering)",
+      "specialization": "Programming languages and data structures",
+      "research_area_ids": [
+        "RA-IT-009"
+      ],
+      "research_areas": [
+        "Theoretical Computer Science & Algorithms"
+      ],
+      "email": "ishaan.stackani@campusmate-demo.example",
+      "office_id": "ROOM-DA-215",
+      "consultation_hours": "Monday & Wednesday 14:00–15:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT302",
+        "COURSE-2CEIT304",
+        "COURSE-2CEIT5PE1",
+        "COURSE-2CEIT5PE8"
+      ],
+      "joining_year": 2017,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-013",
+      "name": "Dr. Pooja Lambdani",
+      "designation": "Associate Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Theoretical Computer Science)",
+      "specialization": "Automata, compilers and algorithms",
+      "research_area_ids": [
+        "RA-IT-009"
+      ],
+      "research_areas": [
+        "Theoretical Computer Science & Algorithms"
+      ],
+      "email": "pooja.lambdani@campusmate-demo.example",
+      "office_id": "ROOM-DA-215",
+      "consultation_hours": "Tuesday & Thursday 15:00–16:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT601",
+        "COURSE-2CEIT701",
+        "COURSE-3CEIT308",
+        "COURSE-2CEIT402",
+        "COURSE-3CEIT102",
+        "COURSE-2CEIT78PE9"
+      ],
+      "joining_year": 2012,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-014",
+      "name": "Prof. Rohan Kernelwala",
+      "designation": "Assistant Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "M.Tech (Computer Systems)",
+      "specialization": "Operating systems and computer architecture",
+      "research_area_ids": [
+        "RA-IT-005"
+      ],
+      "research_areas": [
+        "Cloud, Distributed & High Performance Computing"
+      ],
+      "email": "rohan.kernelwala@campusmate-demo.example",
+      "office_id": "ROOM-DA-216",
+      "consultation_hours": "Monday & Wednesday 14:00–15:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT401",
+        "COURSE-2CEIT501",
+        "COURSE-3CEIT204",
+        "COURSE-3CEIT205",
+        "COURSE-3CEIT113"
+      ],
+      "joining_year": 2018,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-015",
+      "name": "Prof. Kavya Graphwala",
+      "designation": "Assistant Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "M.Tech (Information Technology)",
+      "specialization": "Web and mobile application development",
+      "research_area_ids": [
+        "RA-IT-008"
+      ],
+      "research_areas": [
+        "Software Engineering & Human-Computer Interaction"
+      ],
+      "email": "kavya.graphwala@campusmate-demo.example",
+      "office_id": "ROOM-DA-216",
+      "consultation_hours": "Tuesday & Thursday 15:00–16:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT6PE1",
+        "COURSE-2CEIT5PE5",
+        "COURSE-2CEIT403",
+        "COURSE-3CEIT107",
+        "COURSE-2CEIT78PE4"
+      ],
+      "joining_year": 2019,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-016",
+      "name": "Prof. Aman Circuitkar",
+      "designation": "Assistant Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "M.Tech (Embedded Systems)",
+      "specialization": "IoT, robotics and digital systems",
+      "research_area_ids": [
+        "RA-IT-006"
+      ],
+      "research_areas": [
+        "Internet of Things & Robotics"
+      ],
+      "email": "aman.circuitkar@campusmate-demo.example",
+      "office_id": "ROOM-DA-217",
+      "consultation_hours": "Monday & Wednesday 14:00–15:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT301",
+        "COURSE-2CEIT6PE6",
+        "COURSE-2CEIT6PE9",
+        "COURSE-3CEIT305",
+        "COURSE-3CEIT208"
+      ],
+      "joining_year": 2016,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-017",
+      "name": "Dr. Neha Testani",
+      "designation": "Associate Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Software Engineering)",
+      "specialization": "Software testing, architecture and design patterns",
+      "research_area_ids": [
+        "RA-IT-008"
+      ],
+      "research_areas": [
+        "Software Engineering & Human-Computer Interaction"
+      ],
+      "email": "neha.testani@campusmate-demo.example",
+      "office_id": "ROOM-DA-217",
+      "consultation_hours": "Tuesday & Thursday 15:00–16:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT502",
+        "COURSE-2CEIT6PE2",
+        "COURSE-3CEIT112",
+        "COURSE-3CEIT206",
+        "COURSE-2CEIT5PE4"
+      ],
+      "joining_year": 2013,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-018",
+      "name": "Prof. Yash Uxwala",
+      "designation": "Assistant Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "M.Des (Interaction Design)",
+      "specialization": "User experience, HCI and game design",
+      "research_area_ids": [
+        "RA-IT-008"
+      ],
+      "research_areas": [
+        "Software Engineering & Human-Computer Interaction"
+      ],
+      "email": "yash.uxwala@campusmate-demo.example",
+      "office_id": "ROOM-DA-218",
+      "consultation_hours": "Monday & Wednesday 14:00–15:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT604",
+        "COURSE-2CEIT5PE6",
+        "COURSE-2CEIT6PE5",
+        "COURSE-2CEIT5PE7"
+      ],
+      "joining_year": 2021,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-019",
+      "name": "Dr. Farhan Pythonwala",
+      "designation": "Assistant Professor",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Applied Mathematics)",
+      "specialization": "Scientific Python, quantum computing and modelling",
+      "research_area_ids": [
+        "RA-IT-009",
+        "RA-IT-001"
+      ],
+      "research_areas": [
+        "Theoretical Computer Science & Algorithms",
+        "Artificial Intelligence & Machine Learning"
+      ],
+      "email": "farhan.pythonwala@campusmate-demo.example",
+      "office_id": "ROOM-DA-218",
+      "consultation_hours": "Tuesday & Thursday 15:00–16:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT404",
+        "COURSE-2CEIT5PE3",
+        "COURSE-3CEIT209",
+        "COURSE-3CEIT210",
+        "COURSE-3CEIT304"
+      ],
+      "joining_year": 2020,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "faculty_id": "FAC-IT-020",
+      "name": "Dr. Leena Projectkar",
+      "designation": "Associate Professor & Project Coordinator",
+      "department_id": "DEPT-IT-001",
+      "qualification": "Ph.D. (Information Technology)",
+      "specialization": "Project-based learning and IT infrastructure management",
+      "research_area_ids": [
+        "RA-IT-008",
+        "RA-IT-005"
+      ],
+      "research_areas": [
+        "Software Engineering & Human-Computer Interaction",
+        "Cloud, Distributed & High Performance Computing"
+      ],
+      "email": "leena.projectkar@campusmate-demo.example",
+      "office_id": "ROOM-DA-219",
+      "consultation_hours": "Monday & Wednesday 14:00–15:30 (synthetic)",
+      "courses_taught": [
+        "COURSE-2CEIT504",
+        "COURSE-2CEIT605",
+        "COURSE-2CEIT703",
+        "COURSE-2CEIT801",
+        "COURSE-3CEIT301",
+        "COURSE-3CEIT302",
+        "COURSE-3CEIT401",
+        "COURSE-3CEIT104",
+        "COURSE-2CEIT704",
+        "COURSE-2CEIT6PE8"
+      ],
+      "joining_year": 2011,
+      "is_hod": false,
+      "status": "active",
+      "version": "1.0",
+      "identity_note": "Fictional demo identity. Not a real Ganpat University faculty member."
+    }
+  ]
+}

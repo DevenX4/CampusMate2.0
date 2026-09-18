@@ -1,0 +1,3 @@
+building_id,name,code,floors,description,source_type,source_document,academic_year
+BLDG-DEMO-A,Demo Academic Block A,DA,5,"Fictional academic block used for CampusMate testing. Houses the IT department office, faculty cabins and most teaching laboratories.",synthetic,DOC-FACILITIES-001,2026-2027
+BLDG-DEMO-B,Demo Innovation Block B,DB,3,"Fictional block housing the seminar hall, hardware lab and innovation spaces.",synthetic,DOC-FACILITIES-001,2026-2027

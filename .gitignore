@@ -1,0 +1,42 @@
+# --- Secrets: never commit. .env.example IS committed. ---
+.env
+.env.*
+!.env.example
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Node (frontend, later) ---
+node_modules/
+dist/
+
+# --- Local data: PDFs are verified with data/pdfs.sha256 instead ---
+data/pdfs/**
+!data/pdfs/.gitkeep
+
+# --- Runtime storage: uploads, processed files, vector index, temp ---
+storage/**
+!storage/*/
+!storage/*/.gitkeep
+
+# --- Models, caches, logs ---
+models/
+model_cache/
+chroma/
+logs/
+*.log
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

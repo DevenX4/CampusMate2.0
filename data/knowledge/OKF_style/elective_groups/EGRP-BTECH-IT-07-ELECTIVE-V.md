@@ -1,0 +1,31 @@
+---
+id: EGRP-BTECH-IT-07-ELECTIVE-V
+type: elective_group
+title: ELECTIVE-V (SEM-BTECH-IT-07)
+program: PROG-BTECH-IT-001
+semester: SEM-BTECH-IT-07
+academic_year: 2021-2022
+source_type: official
+source_document: DOC-OFFICIAL-SYLLABUS-001
+source_page: 16
+rendered_in:
+- DOC-PROGRAMS-001#page=4
+structured_record: synthetic/structured/elective_groups.json#EGRP-BTECH-IT-07-ELECTIVE-V
+version: '1.0'
+status: active
+last_updated: '2026-09-18'
+relationships:
+  has_option:
+  - COURSE-2CEIT78PE1
+  - COURSE-2CEIT78PE2
+  - COURSE-2CEIT78PE3
+  - COURSE-2CEIT78PE4
+  - COURSE-2CEIT78PE5
+  - COURSE-2CEIT78PE6
+  elective_group_of:
+  - SEM-BTECH-IT-07
+---
+
+# ELECTIVE-V (SEM-BTECH-IT-07)
+
+ELECTIVE SUBJECT - 1 (ELECTIVE-V) in SEM-BTECH-IT-07: options 2CEIT78PE1 DEEP LEARNING; 2CEIT78PE2 BLOCKCHAIN TECHNOLOGIES; 2CEIT78PE3 FUNDAMENTALS OF IMAGE PROCESSING; 2CEIT78PE4 MOBILE COMPUTING; 2CEIT78PE5 SEARCH ENGINE OPTIMIZATION; 2CEIT78PE6 VIRTUAL REALITY. Slot credits 4.0.

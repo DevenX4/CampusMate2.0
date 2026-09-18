@@ -1,0 +1,248 @@
+{
+  "table": "course_prerequisites",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 24,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-001",
+      "course_id": "COURSE-2CEIT302",
+      "requires_course_id": "COURSE-2ES104",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-002",
+      "course_id": "COURSE-2CEIT303",
+      "requires_course_id": "COURSE-2ES104",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-003",
+      "course_id": "COURSE-2CEIT304",
+      "requires_course_id": "COURSE-2ES104",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-004",
+      "course_id": "COURSE-2CEIT401",
+      "requires_course_id": "COURSE-2CEIT304",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-005",
+      "course_id": "COURSE-2CEIT402",
+      "requires_course_id": "COURSE-2CEIT304",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-006",
+      "course_id": "COURSE-2CEIT405",
+      "requires_course_id": "COURSE-2CEIT303",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-007",
+      "course_id": "COURSE-2CEIT501",
+      "requires_course_id": "COURSE-2CEIT301",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-008",
+      "course_id": "COURSE-2CEIT503",
+      "requires_course_id": "COURSE-2CEIT401",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-009",
+      "course_id": "COURSE-2CEIT601",
+      "requires_course_id": "COURSE-2BS3102",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-010",
+      "course_id": "COURSE-2CEIT602",
+      "requires_course_id": "COURSE-2CEIT402",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-011",
+      "course_id": "COURSE-2CEIT602",
+      "requires_course_id": "COURSE-2BS3102",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-012",
+      "course_id": "COURSE-2CEIT603",
+      "requires_course_id": "COURSE-2CEIT503",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-013",
+      "course_id": "COURSE-2CEIT701",
+      "requires_course_id": "COURSE-2CEIT601",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-014",
+      "course_id": "COURSE-2CEIT702",
+      "requires_course_id": "COURSE-2CEIT303",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-015",
+      "course_id": "COURSE-2CEIT702",
+      "requires_course_id": "COURSE-2CEIT405",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-016",
+      "course_id": "COURSE-2CEIT6PE4",
+      "requires_course_id": "COURSE-2CEIT404",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-017",
+      "course_id": "COURSE-2CEIT6PE3",
+      "requires_course_id": "COURSE-2CEIT503",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-018",
+      "course_id": "COURSE-2CEIT6PE7",
+      "requires_course_id": "COURSE-2CEIT503",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-019",
+      "course_id": "COURSE-2CEIT78PE1",
+      "requires_course_id": "COURSE-2CEIT602",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-020",
+      "course_id": "COURSE-2CEIT78PE7",
+      "requires_course_id": "COURSE-2CEIT602",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-021",
+      "course_id": "COURSE-2CEIT78PE13",
+      "requires_course_id": "COURSE-2CEIT602",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-022",
+      "course_id": "COURSE-2CEIT605",
+      "requires_course_id": "COURSE-2CEIT504",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-023",
+      "course_id": "COURSE-2CEIT703",
+      "requires_course_id": "COURSE-2CEIT605",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-COURSES-001",
+      "academic_year": "2026-2027",
+      "prerequisite_id": "PREREQ-SYN-024",
+      "course_id": "COURSE-3CEIT401",
+      "requires_course_id": "COURSE-3CEIT301",
+      "strength": "recommended",
+      "synthetic_notice": "Synthetic advisory prerequisite for CampusMate testing. The official GUNI syllabus pages used here do not specify prerequisites."
+    }
+  ]
+}

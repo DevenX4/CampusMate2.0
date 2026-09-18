@@ -1,0 +1,85 @@
+{
+  "table": "departments",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 1,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027",
+      "department_id": "DEPT-IT-001",
+      "department_name": "Department of Information Technology",
+      "short_name": "IT",
+      "parent_org_unit_id": "COLLEGE-UVPCE-001",
+      "parent_link_note": "Synthetic assumption: the official syllabus lists B.TECH-IT and M.TECH-IT under U.V. Patel College of Engineering, Faculty of Engineering & Technology, but names no department. DEPT-IT-001 is a CampusMate demo entity.",
+      "university_id": "UNIV-GUNI-001",
+      "head_faculty_id": "FAC-IT-001",
+      "overview": "The Department of Information Technology (DEPT-IT-001) is a synthetic demo department created for CampusMate testing. It hosts the B.Tech IT programme (PROG-BTECH-IT-001) and the M.Tech IT programme (PROG-MTECH-IT-001), whose curricula are taken from the official GUNI structured syllabus, and it operates ten demo laboratories and ten shared facilities in the fictional Demo Academic Block A and Demo Innovation Block B.",
+      "vision": "To be a demo department whose teaching, laboratories and student services are fully discoverable through a trustworthy, citation-first AI assistant.",
+      "mission": [
+        "Deliver the B.Tech IT and M.Tech IT curricula with strong laboratory practice.",
+        "Guide every capstone and major project through documented, fair evaluation.",
+        "Keep policies, notices and schedules published as versioned, machine-readable records.",
+        "Encourage applied research in AI, data, security, cloud and IoT."
+      ],
+      "focus_areas": [
+        "Applied AI and data systems",
+        "Secure and scalable software",
+        "Industry-ready capstone projects",
+        "Research-led postgraduate study"
+      ],
+      "program_ids": [
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "research_area_ids": [
+        "RA-IT-001",
+        "RA-IT-002",
+        "RA-IT-003",
+        "RA-IT-004",
+        "RA-IT-005",
+        "RA-IT-006",
+        "RA-IT-007",
+        "RA-IT-008",
+        "RA-IT-009",
+        "RA-IT-010"
+      ],
+      "lab_ids": [
+        "LAB-IT-001",
+        "LAB-IT-002",
+        "LAB-IT-003",
+        "LAB-IT-004",
+        "LAB-IT-005",
+        "LAB-IT-006",
+        "LAB-IT-007",
+        "LAB-IT-008",
+        "LAB-IT-009",
+        "LAB-IT-010"
+      ],
+      "facility_ids": [
+        "FCL-IT-001",
+        "FCL-IT-002",
+        "FCL-IT-003",
+        "FCL-IT-004",
+        "FCL-IT-005",
+        "FCL-IT-006",
+        "FCL-IT-007",
+        "FCL-IT-008",
+        "FCL-IT-009",
+        "FCL-IT-010"
+      ],
+      "office_room_id": "ROOM-DA-201",
+      "contact": {
+        "office_email": "it-office@campusmate-demo.example",
+        "hod_office_email": "it-hod@campusmate-demo.example",
+        "projects_email": "it-projects@campusmate-demo.example",
+        "labs_email": "it-labs@campusmate-demo.example",
+        "phone": "SYN-EXT-4000 (placeholder extension, not a real number)",
+        "office_hours": "Monday–Friday 09:30–17:00 (synthetic)"
+      },
+      "version": "1.0",
+      "status": "active"
+    }
+  ]
+}

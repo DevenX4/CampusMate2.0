@@ -1,0 +1,392 @@
+{
+  "table": "laboratories",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 10,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-LABS-001",
+      "academic_year": "2026-2027",
+      "lab_id": "LAB-IT-001",
+      "lab_name": "AI & Machine Learning Lab",
+      "department_id": "DEPT-IT-001",
+      "building_id": "BLDG-DEMO-A",
+      "building": "Demo Academic Block A",
+      "floor": 3,
+      "room_id": "ROOM-DA-301",
+      "room_number": "DA-301",
+      "capacity": 36,
+      "equipment": [
+        "36 workstations (32 GB RAM, RTX-class GPU)",
+        "Python/Jupyter, PyTorch, scikit-learn",
+        "Shared model registry server"
+      ],
+      "responsible_faculty_id": "FAC-IT-002",
+      "related_courses": [
+        "COURSE-2CEIT602",
+        "COURSE-2CEIT6PE4",
+        "COURSE-2CEIT78PE1",
+        "COURSE-3CEIT101",
+        "COURSE-3CEIT309"
+      ],
+      "opening_hours": "Mon–Sat 09:00–18:00 (synthetic)",
+      "governing_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "booking_contact": "it-labs@campusmate-demo.example",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-LABS-001",
+      "academic_year": "2026-2027",
+      "lab_id": "LAB-IT-002",
+      "lab_name": "Natural Language Processing Lab",
+      "department_id": "DEPT-IT-001",
+      "building_id": "BLDG-DEMO-A",
+      "building": "Demo Academic Block A",
+      "floor": 3,
+      "room_id": "ROOM-DA-302",
+      "room_number": "DA-302",
+      "capacity": 30,
+      "equipment": [
+        "30 workstations",
+        "Local SLM inference server (8B-class models)",
+        "Annotated corpora for Indic and English text",
+        "Vector database sandbox"
+      ],
+      "responsible_faculty_id": "FAC-IT-003",
+      "related_courses": [
+        "COURSE-2CEIT78PE7",
+        "COURSE-3CEIT307",
+        "COURSE-3CEIT303",
+        "COURSE-2CEIT78PE5"
+      ],
+      "opening_hours": "Mon–Fri 09:00–17:30 (synthetic)",
+      "governing_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "booking_contact": "it-labs@campusmate-demo.example",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-LABS-001",
+      "academic_year": "2026-2027",
+      "lab_id": "LAB-IT-003",
+      "lab_name": "Database Systems Lab",
+      "department_id": "DEPT-IT-001",
+      "building_id": "BLDG-DEMO-A",
+      "building": "Demo Academic Block A",
+      "floor": 3,
+      "room_id": "ROOM-DA-303",
+      "room_number": "DA-303",
+      "capacity": 40,
+      "equipment": [
+        "40 workstations",
+        "PostgreSQL and MySQL servers",
+        "MongoDB and Cassandra cluster",
+        "ER-modelling tools"
+      ],
+      "responsible_faculty_id": "FAC-IT-001",
+      "related_courses": [
+        "COURSE-2CEIT303",
+        "COURSE-2CEIT405",
+        "COURSE-3CEIT211",
+        "COURSE-3CEIT202"
+      ],
+      "opening_hours": "Mon–Sat 09:00–17:30 (synthetic)",
+      "governing_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "booking_contact": "it-labs@campusmate-demo.example",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-LABS-001",
+      "academic_year": "2026-2027",
+      "lab_id": "LAB-IT-004",
+      "lab_name": "Programming Lab",
+      "department_id": "DEPT-IT-001",
+      "building_id": "BLDG-DEMO-A",
+      "building": "Demo Academic Block A",
+      "floor": 3,
+      "room_id": "ROOM-DA-304",
+      "room_number": "DA-304",
+      "capacity": 60,
+      "equipment": [
+        "60 workstations",
+        "JDK, .NET SDK, GCC, Python toolchains",
+        "Online judge server"
+      ],
+      "responsible_faculty_id": "FAC-IT-012",
+      "related_courses": [
+        "COURSE-2CEIT302",
+        "COURSE-2CEIT304",
+        "COURSE-2CEIT402",
+        "COURSE-2CEIT404",
+        "COURSE-2CEIT5PE1",
+        "COURSE-2CEIT5PE8",
+        "COURSE-2CEIT78PE9",
+        "COURSE-3CEIT102",
+        "COURSE-2CEIT5PE3",
+        "COURSE-3CEIT209",
+        "COURSE-3CEIT210",
+        "COURSE-3CEIT304"
+      ],
+      "opening_hours": "Mon–Sat 08:30–19:00 (synthetic)",
+      "governing_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "booking_contact": "it-labs@campusmate-demo.example",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-LABS-001",
+      "academic_year": "2026-2027",
+      "lab_id": "LAB-IT-005",
+      "lab_name": "Networks & Security Lab",
+      "department_id": "DEPT-IT-001",
+      "building_id": "BLDG-DEMO-A",
+      "building": "Demo Academic Block A",
+      "floor": 4,
+      "room_id": "ROOM-DA-401",
+      "room_number": "DA-401",
+      "capacity": 32,
+      "equipment": [
+        "Managed switches and routers",
+        "Isolated penetration-testing network",
+        "Packet capture appliances",
+        "Wireless test bed"
+      ],
+      "responsible_faculty_id": "FAC-IT-007",
+      "related_courses": [
+        "COURSE-2CEIT503",
+        "COURSE-2CEIT6PE3",
+        "COURSE-2CEIT6PE7",
+        "COURSE-2CEIT78PE8",
+        "COURSE-2CEIT78PE2",
+        "COURSE-3CEIT103",
+        "COURSE-3CEIT105",
+        "COURSE-3CEIT106",
+        "COURSE-3CEIT107",
+        "COURSE-3CEIT108",
+        "COURSE-3CEIT207",
+        "COURSE-3CEIT310",
+        "COURSE-3CEIT208"
+      ],
+      "opening_hours": "Mon–Fri 09:00–17:00 (synthetic)",
+      "governing_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "booking_contact": "it-labs@campusmate-demo.example",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-LABS-001",
+      "academic_year": "2026-2027",
+      "lab_id": "LAB-IT-006",
+      "lab_name": "Cloud & Big Data Lab",
+      "department_id": "DEPT-IT-001",
+      "building_id": "BLDG-DEMO-A",
+      "building": "Demo Academic Block A",
+      "floor": 4,
+      "room_id": "ROOM-DA-402",
+      "room_number": "DA-402",
+      "capacity": 36,
+      "equipment": [
+        "Private OpenStack cloud",
+        "Hadoop/Spark cluster (8 nodes)",
+        "Kubernetes sandbox"
+      ],
+      "responsible_faculty_id": "FAC-IT-009",
+      "related_courses": [
+        "COURSE-2CEIT603",
+        "COURSE-2CEIT702",
+        "COURSE-2CEIT78PE10",
+        "COURSE-2CEIT78PE11",
+        "COURSE-2CEIT78PE12",
+        "COURSE-3CEIT109",
+        "COURSE-3CEIT110",
+        "COURSE-3CEIT111",
+        "COURSE-3CEIT203",
+        "COURSE-3CEIT306",
+        "COURSE-2CEIT6PE8"
+      ],
+      "opening_hours": "Mon–Sat 09:00–18:00 (synthetic)",
+      "governing_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "booking_contact": "it-labs@campusmate-demo.example",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-LABS-001",
+      "academic_year": "2026-2027",
+      "lab_id": "LAB-IT-007",
+      "lab_name": "IoT & Robotics Lab",
+      "department_id": "DEPT-IT-001",
+      "building_id": "BLDG-DEMO-B",
+      "building": "Demo Innovation Block B",
+      "floor": 1,
+      "room_id": "ROOM-DB-101",
+      "room_number": "DB-101",
+      "capacity": 24,
+      "equipment": [
+        "Microcontroller and single-board computer kits",
+        "Sensor and actuator sets",
+        "Two mobile robot platforms",
+        "Digital electronics trainer kits"
+      ],
+      "responsible_faculty_id": "FAC-IT-016",
+      "related_courses": [
+        "COURSE-2CEIT301",
+        "COURSE-2CEIT6PE6",
+        "COURSE-2CEIT6PE9",
+        "COURSE-3CEIT305"
+      ],
+      "opening_hours": "Mon–Fri 10:00–17:00 (synthetic)",
+      "governing_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "booking_contact": "it-labs@campusmate-demo.example",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-LABS-001",
+      "academic_year": "2026-2027",
+      "lab_id": "LAB-IT-008",
+      "lab_name": "Web & Mobile Development Lab",
+      "department_id": "DEPT-IT-001",
+      "building_id": "BLDG-DEMO-A",
+      "building": "Demo Academic Block A",
+      "floor": 4,
+      "room_id": "ROOM-DA-403",
+      "room_number": "DA-403",
+      "capacity": 40,
+      "equipment": [
+        "40 workstations",
+        "Android and iOS device farm",
+        "Node.js/React toolchains",
+        "Usability testing station"
+      ],
+      "responsible_faculty_id": "FAC-IT-015",
+      "related_courses": [
+        "COURSE-2CEIT403",
+        "COURSE-2CEIT5PE5",
+        "COURSE-2CEIT5PE6",
+        "COURSE-2CEIT604",
+        "COURSE-2CEIT6PE1",
+        "COURSE-2CEIT78PE4",
+        "COURSE-2CEIT6PE5"
+      ],
+      "opening_hours": "Mon–Sat 09:00–18:00 (synthetic)",
+      "governing_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "booking_contact": "it-labs@campusmate-demo.example",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-LABS-001",
+      "academic_year": "2026-2027",
+      "lab_id": "LAB-IT-009",
+      "lab_name": "Vision & Graphics Lab",
+      "department_id": "DEPT-IT-001",
+      "building_id": "BLDG-DEMO-A",
+      "building": "Demo Academic Block A",
+      "floor": 4,
+      "room_id": "ROOM-DA-404",
+      "room_number": "DA-404",
+      "capacity": 24,
+      "equipment": [
+        "GPU workstations",
+        "Stereo and depth cameras",
+        "VR headsets"
+      ],
+      "responsible_faculty_id": "FAC-IT-011",
+      "related_courses": [
+        "COURSE-2CEIT5PE2",
+        "COURSE-2CEIT78PE3",
+        "COURSE-2CEIT78PE6",
+        "COURSE-2CEIT78PE13",
+        "COURSE-3CEIT201"
+      ],
+      "opening_hours": "Mon–Fri 09:00–17:00 (synthetic)",
+      "governing_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "booking_contact": "it-labs@campusmate-demo.example",
+      "status": "active",
+      "version": "1.0"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-LABS-001",
+      "academic_year": "2026-2027",
+      "lab_id": "LAB-IT-010",
+      "lab_name": "Systems & Software Engineering Lab",
+      "department_id": "DEPT-IT-001",
+      "building_id": "BLDG-DEMO-A",
+      "building": "Demo Academic Block A",
+      "floor": 3,
+      "room_id": "ROOM-DA-305",
+      "room_number": "DA-305",
+      "capacity": 40,
+      "equipment": [
+        "40 Linux workstations",
+        "Virtualisation host",
+        "CI/CD and test-automation server",
+        "Compiler construction toolkits"
+      ],
+      "responsible_faculty_id": "FAC-IT-014",
+      "related_courses": [
+        "COURSE-2CEIT401",
+        "COURSE-2CEIT501",
+        "COURSE-2CEIT502",
+        "COURSE-2CEIT601",
+        "COURSE-2CEIT701",
+        "COURSE-2CEIT6PE2",
+        "COURSE-2CEIT5PE4",
+        "COURSE-3CEIT112",
+        "COURSE-3CEIT113",
+        "COURSE-3CEIT204",
+        "COURSE-3CEIT205",
+        "COURSE-3CEIT206",
+        "COURSE-3CEIT308"
+      ],
+      "opening_hours": "Mon–Sat 09:00–17:30 (synthetic)",
+      "governing_policy_ids": [
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "booking_contact": "it-labs@campusmate-demo.example",
+      "status": "active",
+      "version": "1.0"
+    }
+  ]
+}

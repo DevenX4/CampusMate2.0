@@ -1,0 +1,908 @@
+{
+  "table": "teaching_assignments",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 90,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-001",
+      "faculty_id": "FAC-IT-001",
+      "course_id": "COURSE-2CEIT303",
+      "semester_id": "SEM-BTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-002",
+      "faculty_id": "FAC-IT-001",
+      "course_id": "COURSE-3CEIT211",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-003",
+      "faculty_id": "FAC-IT-001",
+      "course_id": "COURSE-3CEIT202",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-004",
+      "faculty_id": "FAC-IT-002",
+      "course_id": "COURSE-2CEIT602",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-005",
+      "faculty_id": "FAC-IT-002",
+      "course_id": "COURSE-3CEIT101",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-006",
+      "faculty_id": "FAC-IT-002",
+      "course_id": "COURSE-2CEIT78PE1",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-007",
+      "faculty_id": "FAC-IT-003",
+      "course_id": "COURSE-2CEIT78PE7",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-008",
+      "faculty_id": "FAC-IT-003",
+      "course_id": "COURSE-3CEIT307",
+      "semester_id": "SEM-MTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-009",
+      "faculty_id": "FAC-IT-003",
+      "course_id": "COURSE-3CEIT303",
+      "semester_id": "SEM-MTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-010",
+      "faculty_id": "FAC-IT-004",
+      "course_id": "COURSE-2CEIT602",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "lab_instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-011",
+      "faculty_id": "FAC-IT-004",
+      "course_id": "COURSE-2CEIT6PE4",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-012",
+      "faculty_id": "FAC-IT-004",
+      "course_id": "COURSE-3CEIT309",
+      "semester_id": "SEM-MTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-013",
+      "faculty_id": "FAC-IT-005",
+      "course_id": "COURSE-2CEIT303",
+      "semester_id": "SEM-BTECH-IT-03",
+      "role": "lab_instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-014",
+      "faculty_id": "FAC-IT-005",
+      "course_id": "COURSE-2CEIT405",
+      "semester_id": "SEM-BTECH-IT-04",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-015",
+      "faculty_id": "FAC-IT-005",
+      "course_id": "COURSE-2CEIT78PE5",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-016",
+      "faculty_id": "FAC-IT-006",
+      "course_id": "COURSE-2CEIT503",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-017",
+      "faculty_id": "FAC-IT-006",
+      "course_id": "COURSE-3CEIT105",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-018",
+      "faculty_id": "FAC-IT-006",
+      "course_id": "COURSE-3CEIT106",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-019",
+      "faculty_id": "FAC-IT-006",
+      "course_id": "COURSE-3CEIT108",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-020",
+      "faculty_id": "FAC-IT-007",
+      "course_id": "COURSE-2CEIT6PE3",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-021",
+      "faculty_id": "FAC-IT-007",
+      "course_id": "COURSE-3CEIT103",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-022",
+      "faculty_id": "FAC-IT-007",
+      "course_id": "COURSE-3CEIT207",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-023",
+      "faculty_id": "FAC-IT-007",
+      "course_id": "COURSE-3CEIT310",
+      "semester_id": "SEM-MTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-024",
+      "faculty_id": "FAC-IT-008",
+      "course_id": "COURSE-2CEIT6PE7",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-025",
+      "faculty_id": "FAC-IT-008",
+      "course_id": "COURSE-2CEIT78PE8",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-026",
+      "faculty_id": "FAC-IT-008",
+      "course_id": "COURSE-2CEIT78PE2",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-027",
+      "faculty_id": "FAC-IT-009",
+      "course_id": "COURSE-2CEIT603",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-028",
+      "faculty_id": "FAC-IT-009",
+      "course_id": "COURSE-3CEIT203",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-029",
+      "faculty_id": "FAC-IT-009",
+      "course_id": "COURSE-3CEIT110",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-030",
+      "faculty_id": "FAC-IT-009",
+      "course_id": "COURSE-3CEIT111",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-031",
+      "faculty_id": "FAC-IT-009",
+      "course_id": "COURSE-2CEIT78PE10",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-032",
+      "faculty_id": "FAC-IT-010",
+      "course_id": "COURSE-2CEIT702",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-033",
+      "faculty_id": "FAC-IT-010",
+      "course_id": "COURSE-3CEIT306",
+      "semester_id": "SEM-MTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-034",
+      "faculty_id": "FAC-IT-010",
+      "course_id": "COURSE-2CEIT78PE12",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-035",
+      "faculty_id": "FAC-IT-010",
+      "course_id": "COURSE-3CEIT109",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-036",
+      "faculty_id": "FAC-IT-010",
+      "course_id": "COURSE-2CEIT78PE11",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-037",
+      "faculty_id": "FAC-IT-011",
+      "course_id": "COURSE-2CEIT5PE2",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-038",
+      "faculty_id": "FAC-IT-011",
+      "course_id": "COURSE-2CEIT78PE3",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-039",
+      "faculty_id": "FAC-IT-011",
+      "course_id": "COURSE-2CEIT78PE13",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-040",
+      "faculty_id": "FAC-IT-011",
+      "course_id": "COURSE-3CEIT201",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-041",
+      "faculty_id": "FAC-IT-011",
+      "course_id": "COURSE-2CEIT78PE6",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-042",
+      "faculty_id": "FAC-IT-012",
+      "course_id": "COURSE-2CEIT302",
+      "semester_id": "SEM-BTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-043",
+      "faculty_id": "FAC-IT-012",
+      "course_id": "COURSE-2CEIT304",
+      "semester_id": "SEM-BTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-044",
+      "faculty_id": "FAC-IT-012",
+      "course_id": "COURSE-2CEIT5PE1",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-045",
+      "faculty_id": "FAC-IT-012",
+      "course_id": "COURSE-2CEIT5PE8",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-046",
+      "faculty_id": "FAC-IT-013",
+      "course_id": "COURSE-2CEIT601",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-047",
+      "faculty_id": "FAC-IT-013",
+      "course_id": "COURSE-2CEIT701",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-048",
+      "faculty_id": "FAC-IT-013",
+      "course_id": "COURSE-3CEIT308",
+      "semester_id": "SEM-MTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-049",
+      "faculty_id": "FAC-IT-013",
+      "course_id": "COURSE-2CEIT402",
+      "semester_id": "SEM-BTECH-IT-04",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-050",
+      "faculty_id": "FAC-IT-013",
+      "course_id": "COURSE-3CEIT102",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-051",
+      "faculty_id": "FAC-IT-013",
+      "course_id": "COURSE-2CEIT78PE9",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-052",
+      "faculty_id": "FAC-IT-014",
+      "course_id": "COURSE-2CEIT401",
+      "semester_id": "SEM-BTECH-IT-04",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-053",
+      "faculty_id": "FAC-IT-014",
+      "course_id": "COURSE-2CEIT501",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-054",
+      "faculty_id": "FAC-IT-014",
+      "course_id": "COURSE-3CEIT204",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-055",
+      "faculty_id": "FAC-IT-014",
+      "course_id": "COURSE-3CEIT205",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-056",
+      "faculty_id": "FAC-IT-014",
+      "course_id": "COURSE-3CEIT113",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-057",
+      "faculty_id": "FAC-IT-015",
+      "course_id": "COURSE-2CEIT6PE1",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-058",
+      "faculty_id": "FAC-IT-015",
+      "course_id": "COURSE-2CEIT5PE5",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-059",
+      "faculty_id": "FAC-IT-015",
+      "course_id": "COURSE-2CEIT403",
+      "semester_id": "SEM-BTECH-IT-04",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-060",
+      "faculty_id": "FAC-IT-015",
+      "course_id": "COURSE-3CEIT107",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-061",
+      "faculty_id": "FAC-IT-015",
+      "course_id": "COURSE-2CEIT78PE4",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-062",
+      "faculty_id": "FAC-IT-016",
+      "course_id": "COURSE-2CEIT301",
+      "semester_id": "SEM-BTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-063",
+      "faculty_id": "FAC-IT-016",
+      "course_id": "COURSE-2CEIT6PE6",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-064",
+      "faculty_id": "FAC-IT-016",
+      "course_id": "COURSE-2CEIT6PE9",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-065",
+      "faculty_id": "FAC-IT-016",
+      "course_id": "COURSE-3CEIT305",
+      "semester_id": "SEM-MTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-066",
+      "faculty_id": "FAC-IT-016",
+      "course_id": "COURSE-3CEIT208",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-067",
+      "faculty_id": "FAC-IT-017",
+      "course_id": "COURSE-2CEIT502",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-068",
+      "faculty_id": "FAC-IT-017",
+      "course_id": "COURSE-2CEIT6PE2",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-069",
+      "faculty_id": "FAC-IT-017",
+      "course_id": "COURSE-3CEIT112",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-070",
+      "faculty_id": "FAC-IT-017",
+      "course_id": "COURSE-3CEIT206",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-071",
+      "faculty_id": "FAC-IT-017",
+      "course_id": "COURSE-2CEIT5PE4",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-072",
+      "faculty_id": "FAC-IT-018",
+      "course_id": "COURSE-2CEIT604",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-073",
+      "faculty_id": "FAC-IT-018",
+      "course_id": "COURSE-2CEIT5PE6",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-074",
+      "faculty_id": "FAC-IT-018",
+      "course_id": "COURSE-2CEIT6PE5",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-075",
+      "faculty_id": "FAC-IT-018",
+      "course_id": "COURSE-2CEIT5PE7",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-076",
+      "faculty_id": "FAC-IT-019",
+      "course_id": "COURSE-2CEIT404",
+      "semester_id": "SEM-BTECH-IT-04",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-077",
+      "faculty_id": "FAC-IT-019",
+      "course_id": "COURSE-2CEIT5PE3",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-078",
+      "faculty_id": "FAC-IT-019",
+      "course_id": "COURSE-3CEIT209",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-079",
+      "faculty_id": "FAC-IT-019",
+      "course_id": "COURSE-3CEIT210",
+      "semester_id": "SEM-MTECH-IT-02",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-080",
+      "faculty_id": "FAC-IT-019",
+      "course_id": "COURSE-3CEIT304",
+      "semester_id": "SEM-MTECH-IT-03",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-081",
+      "faculty_id": "FAC-IT-020",
+      "course_id": "COURSE-2CEIT504",
+      "semester_id": "SEM-BTECH-IT-05",
+      "role": "coordinator"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-082",
+      "faculty_id": "FAC-IT-020",
+      "course_id": "COURSE-2CEIT605",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "coordinator"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-083",
+      "faculty_id": "FAC-IT-020",
+      "course_id": "COURSE-2CEIT703",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "coordinator"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-084",
+      "faculty_id": "FAC-IT-020",
+      "course_id": "COURSE-2CEIT801",
+      "semester_id": "SEM-BTECH-IT-08",
+      "role": "coordinator"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-085",
+      "faculty_id": "FAC-IT-020",
+      "course_id": "COURSE-3CEIT301",
+      "semester_id": "SEM-MTECH-IT-03",
+      "role": "coordinator"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-086",
+      "faculty_id": "FAC-IT-020",
+      "course_id": "COURSE-3CEIT302",
+      "semester_id": "SEM-MTECH-IT-03",
+      "role": "coordinator"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-087",
+      "faculty_id": "FAC-IT-020",
+      "course_id": "COURSE-3CEIT401",
+      "semester_id": "SEM-MTECH-IT-04",
+      "role": "coordinator"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-088",
+      "faculty_id": "FAC-IT-020",
+      "course_id": "COURSE-3CEIT104",
+      "semester_id": "SEM-MTECH-IT-01",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-089",
+      "faculty_id": "FAC-IT-020",
+      "course_id": "COURSE-2CEIT704",
+      "semester_id": "SEM-BTECH-IT-07",
+      "role": "instructor"
+    },
+    {
+      "source_type": "synthetic",
+      "source_document": "DOC-FACULTY-001",
+      "academic_year": "2026-2027",
+      "assignment_id": "TA-SYN-090",
+      "faculty_id": "FAC-IT-020",
+      "course_id": "COURSE-2CEIT6PE8",
+      "semester_id": "SEM-BTECH-IT-06",
+      "role": "instructor"
+    }
+  ]
+}

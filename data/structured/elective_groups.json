@@ -1,0 +1,665 @@
+{
+  "table": "elective_groups",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 18,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "elective_group_id": "EGRP-BTECH-IT-01-AUDIT",
+      "group_name": "AUDIT",
+      "slot_kind": "audit",
+      "slot_title": "AUDIT SUBJECT - 1",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-01",
+      "slot_no": 7,
+      "slot_scheme": {
+        "credit_th": 0.0,
+        "credit_pr": 0.0,
+        "credit_total": 0.0,
+        "contact_hours": 2.0,
+        "th_internal_max": null,
+        "th_external_max": null,
+        "pr_internal_max": null,
+        "pr_external_max": null,
+        "total_marks": 0,
+        "exam_raw": {
+          "th_internal": "-",
+          "th_external": "-",
+          "pr_internal": "-",
+          "pr_external": "-"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-2AC103"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "B.TECH-IT Semester I – slot 7 and List of Audit Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-BTECH-IT-02-UHV-ELECTIVE-I",
+      "group_name": "UHV_ELECTIVE-I",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (UHV_Elective-I)",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-02",
+      "slot_no": 7,
+      "slot_scheme": {
+        "credit_th": 2.0,
+        "credit_pr": 0.0,
+        "credit_total": 2.0,
+        "contact_hours": 2.0,
+        "th_internal_max": 100,
+        "th_external_max": null,
+        "pr_internal_max": null,
+        "pr_external_max": null,
+        "total_marks": 100,
+        "exam_raw": {
+          "th_internal": "0/100",
+          "th_external": "-",
+          "pr_internal": "-",
+          "pr_external": "-"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-UHV1IPDC1",
+        "COURSE-UHV3DYSBG1"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 11,
+      "source_section": "B.TECH-IT Semester II – slot 7 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-BTECH-IT-02-AUDIT",
+      "group_name": "AUDIT",
+      "slot_kind": "audit",
+      "slot_title": "AUDIT SUBJECT - 1",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-02",
+      "slot_no": 8,
+      "slot_scheme": {
+        "credit_th": 0.0,
+        "credit_pr": 0.0,
+        "credit_total": 0.0,
+        "contact_hours": 2.0,
+        "th_internal_max": null,
+        "th_external_max": null,
+        "pr_internal_max": null,
+        "pr_external_max": null,
+        "total_marks": 0,
+        "exam_raw": {
+          "th_internal": "-",
+          "th_external": "-",
+          "pr_internal": "-",
+          "pr_external": "-"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-2AC103"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 11,
+      "source_section": "B.TECH-IT Semester II – slot 8 and List of Audit Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-BTECH-IT-03-AUDIT",
+      "group_name": "AUDIT",
+      "slot_kind": "audit",
+      "slot_title": "AUDIT SUBJECT - 1",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-03",
+      "slot_no": 6,
+      "slot_scheme": {
+        "credit_th": 0.0,
+        "credit_pr": 0.0,
+        "credit_total": 0.0,
+        "contact_hours": 2.0,
+        "th_internal_max": null,
+        "th_external_max": null,
+        "pr_internal_max": null,
+        "pr_external_max": null,
+        "total_marks": 0,
+        "exam_raw": {
+          "th_internal": "-",
+          "th_external": "-",
+          "pr_internal": "-",
+          "pr_external": "-"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-2AC301"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 12,
+      "source_section": "B.TECH-IT Semester III – slot 6 and List of Audit Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-BTECH-IT-03-UHV-ELECTIVE-II",
+      "group_name": "UHV_ELECTIVE-II",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (UHV_Elective-II)",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-03",
+      "slot_no": 7,
+      "slot_scheme": {
+        "credit_th": 2.0,
+        "credit_pr": 0.0,
+        "credit_total": 2.0,
+        "contact_hours": 2.0,
+        "th_internal_max": 100,
+        "th_external_max": null,
+        "pr_internal_max": null,
+        "pr_external_max": null,
+        "total_marks": 100,
+        "exam_raw": {
+          "th_internal": "0/100",
+          "th_external": "-",
+          "pr_internal": "-",
+          "pr_external": "-"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-UHV2IPDC2",
+        "COURSE-UHV4DYSBG2"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 12,
+      "source_section": "B.TECH-IT Semester III – slot 7 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-BTECH-IT-05-ELECTIVE-I",
+      "group_name": "ELECTIVE-I",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-I)",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-05",
+      "slot_no": 5,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-2CEIT5PE1",
+        "COURSE-2CEIT5PE2",
+        "COURSE-2CEIT5PE3",
+        "COURSE-2CEIT5PE4"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 14,
+      "source_section": "B.TECH-IT Semester V – slot 5 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-BTECH-IT-05-ELECTIVE-II",
+      "group_name": "ELECTIVE-II",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-II)",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-05",
+      "slot_no": 6,
+      "slot_scheme": {
+        "credit_th": 2.0,
+        "credit_pr": 2.0,
+        "credit_total": 4.0,
+        "contact_hours": 6.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-2CEIT5PE5",
+        "COURSE-2CEIT5PE6",
+        "COURSE-2CEIT5PE7",
+        "COURSE-2CEIT5PE8"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 14,
+      "source_section": "B.TECH-IT Semester V – slot 6 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-BTECH-IT-06-ELECTIVE-III",
+      "group_name": "ELECTIVE-III",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-III)",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-06",
+      "slot_no": 6,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-2CEIT6PE1",
+        "COURSE-2CEIT6PE2",
+        "COURSE-2CEIT6PE3",
+        "COURSE-2CEIT6PE4",
+        "COURSE-2CEIT6PE5"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 15,
+      "source_section": "B.TECH-IT Semester VI – slot 6 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-BTECH-IT-06-ELECTIVE-IV",
+      "group_name": "ELECTIVE-IV",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-IV)",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-06",
+      "slot_no": 7,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-2CEIT6PE6",
+        "COURSE-2CEIT6PE7",
+        "COURSE-2CEIT6PE8",
+        "COURSE-2CEIT6PE9"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 15,
+      "source_section": "B.TECH-IT Semester VI – slot 7 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-BTECH-IT-07-ELECTIVE-V",
+      "group_name": "ELECTIVE-V",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-V)",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-07",
+      "slot_no": 4,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-2CEIT78PE1",
+        "COURSE-2CEIT78PE2",
+        "COURSE-2CEIT78PE3",
+        "COURSE-2CEIT78PE4",
+        "COURSE-2CEIT78PE5",
+        "COURSE-2CEIT78PE6"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 16,
+      "source_section": "B.TECH-IT Semester VII – slot 4 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-BTECH-IT-07-ELECTIVE-VI",
+      "group_name": "ELECTIVE-VI",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-VI)",
+      "program_id": "PROG-BTECH-IT-001",
+      "semester_id": "SEM-BTECH-IT-07",
+      "slot_no": 5,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-2CEIT78PE7",
+        "COURSE-2CEIT78PE8",
+        "COURSE-2CEIT78PE9",
+        "COURSE-2CEIT78PE10",
+        "COURSE-2CEIT78PE11",
+        "COURSE-2CEIT78PE12",
+        "COURSE-2CEIT78PE13"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 16,
+      "source_section": "B.TECH-IT Semester VII – slot 5 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-MTECH-IT-01-ELECTIVE-I",
+      "group_name": "ELECTIVE-I",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-I)",
+      "program_id": "PROG-MTECH-IT-001",
+      "semester_id": "SEM-MTECH-IT-01",
+      "slot_no": 5,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-3CEIT105",
+        "COURSE-3CEIT106",
+        "COURSE-3CEIT107",
+        "COURSE-3CEIT108",
+        "COURSE-3CEIT109"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 104,
+      "source_section": "M.TECH-IT Semester I – slot 5 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-MTECH-IT-01-ELECTIVE-II",
+      "group_name": "ELECTIVE-II",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-II)",
+      "program_id": "PROG-MTECH-IT-001",
+      "semester_id": "SEM-MTECH-IT-01",
+      "slot_no": 6,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-3CEIT110",
+        "COURSE-3CEIT111",
+        "COURSE-3CEIT112",
+        "COURSE-3CEIT113"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 104,
+      "source_section": "M.TECH-IT Semester I – slot 6 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-MTECH-IT-02-ELECTIVE-III",
+      "group_name": "ELECTIVE-III",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-III)",
+      "program_id": "PROG-MTECH-IT-001",
+      "semester_id": "SEM-MTECH-IT-02",
+      "slot_no": 4,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-3CEIT204",
+        "COURSE-3CEIT205",
+        "COURSE-3CEIT206",
+        "COURSE-3CEIT207"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 105,
+      "source_section": "M.TECH-IT Semester II – slot 4 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-MTECH-IT-02-ELECTIVE-IV",
+      "group_name": "ELECTIVE-IV",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-IV)",
+      "program_id": "PROG-MTECH-IT-001",
+      "semester_id": "SEM-MTECH-IT-02",
+      "slot_no": 5,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-3CEIT208",
+        "COURSE-3CEIT209",
+        "COURSE-3CEIT210",
+        "COURSE-3CEIT211"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 105,
+      "source_section": "M.TECH-IT Semester II – slot 5 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-MTECH-IT-02-OPEN",
+      "group_name": "OPEN",
+      "slot_kind": "open",
+      "slot_title": "OPEN SUBJECT - 1",
+      "program_id": "PROG-MTECH-IT-001",
+      "semester_id": "SEM-MTECH-IT-02",
+      "slot_no": 6,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 0.0,
+        "credit_total": 3.0,
+        "contact_hours": 3.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": null,
+        "pr_external_max": null,
+        "total_marks": 100,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "-",
+          "pr_external": "-"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-3OS201"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 105,
+      "source_section": "M.TECH-IT Semester II – slot 6 and List of Open Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-MTECH-IT-03-ELECTIVE-V",
+      "group_name": "ELECTIVE-V",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-V)",
+      "program_id": "PROG-MTECH-IT-001",
+      "semester_id": "SEM-MTECH-IT-03",
+      "slot_no": 3,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-3CEIT303",
+        "COURSE-3CEIT304",
+        "COURSE-3CEIT305",
+        "COURSE-3CEIT306"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 107,
+      "source_section": "M.TECH-IT Semester III – slot 3 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "elective_group_id": "EGRP-MTECH-IT-03-ELECTIVE-VI",
+      "group_name": "ELECTIVE-VI",
+      "slot_kind": "elective",
+      "slot_title": "ELECTIVE SUBJECT - 1 (ELECTIVE-VI)",
+      "program_id": "PROG-MTECH-IT-001",
+      "semester_id": "SEM-MTECH-IT-03",
+      "slot_no": 4,
+      "slot_scheme": {
+        "credit_th": 3.0,
+        "credit_pr": 1.0,
+        "credit_total": 4.0,
+        "contact_hours": 5.0,
+        "th_internal_max": 40,
+        "th_external_max": 60,
+        "pr_internal_max": 30,
+        "pr_external_max": 20,
+        "total_marks": 150,
+        "exam_raw": {
+          "th_internal": "0/40",
+          "th_external": "0/60",
+          "pr_internal": "0/30",
+          "pr_external": "0/20"
+        }
+      },
+      "option_course_ids": [
+        "COURSE-3CEIT307",
+        "COURSE-3CEIT308",
+        "COURSE-3CEIT309",
+        "COURSE-3CEIT310"
+      ],
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 107,
+      "source_section": "M.TECH-IT Semester III – slot 4 and List of Elective Subjects",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    }
+  ]
+}

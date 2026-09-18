@@ -1,0 +1,440 @@
+{
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "summary": {
+    "PASS": 37
+  },
+  "checks": [
+    {
+      "check": "no duplicate entity IDs across all tables",
+      "status": "PASS",
+      "detail": "566 unique IDs"
+    },
+    {
+      "check": "no duplicate course codes",
+      "status": "PASS",
+      "detail": "116 codes"
+    },
+    {
+      "check": "no duplicate course (name, program) pairs",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "department / lab / facility / faculty names unique",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no orphan foreign keys (60 FK rules)",
+      "status": "PASS",
+      "detail": "0 orphans"
+    },
+    {
+      "check": "FAQ references resolve",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "all 1202 relationships resolve",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "every faculty member teaches >=1 course",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "faculty.courses_taught == teaching_assignments",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "labs <-> courses bidirectionally consistent",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "prerequisite graph is acyclic",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "synthetic prerequisites always point to an earlier semester",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "every record has a valid source_type",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "all invented entity tables are labelled synthetic and cite synthetic documents",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "every official/derived_official record cites a GUNI PDF + page",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "mixed course records flag synthetic fields in field_provenance",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "official prerequisites/description left null (not invented)",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no real-looking contact data in synthetic tables (all emails @campusmate-demo.example)",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "every policy carries the synthetic-policy statement",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "every official course / semester / elective group re-verified on its cited PDF page",
+      "status": "PASS",
+      "detail": "116 courses, 12 semesters, 18 groups verified"
+    },
+    {
+      "check": "per-semester credits reconcile with printed totals",
+      "status": "PASS",
+      "detail": "12/12 semesters reconcile"
+    },
+    {
+      "check": "programme totals = sum of semester totals",
+      "status": "PASS",
+      "detail": {
+        "PROG-BTECH-IT-001": 174.0,
+        "PROG-MTECH-IT-001": 74.0
+      }
+    },
+    {
+      "check": "semester naming consistent (SEM-<PROG>-NN / 'Semester <ROMAN>')",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "synthetic academic_year consistently '2026-2027'",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "single department name used everywhere",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ID formats",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "notice status consistent with dates (as of 2026-09-18)",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "calendar dates valid (end >= start)",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "registry file hashes match files",
+      "status": "PASS",
+      "detail": "12 documents"
+    },
+    {
+      "check": "every synthetic PDF: disclaimer banner on p.1, header on every page, metadata block, entity IDs present as text",
+      "status": "PASS",
+      "detail": "10/10 PDFs"
+    },
+    {
+      "check": "10 separate synthetic PDFs, none merged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "registry entity_ids resolve",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "every entity (except offering rows) is described by >=1 registered document",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "OKF items (297) have valid id/source_type and resolvable relationships",
+      "status": "PASS",
+      "detail": "ok"
+    },
+    {
+      "check": "evaluation set: 58 questions across 8 categories (A–H); 23 negatives",
+      "status": "PASS",
+      "detail": {
+        "A_simple_factual": 8,
+        "B_exact_lexical": 8,
+        "C_semantic": 7,
+        "D_metadata_filtered": 7,
+        "E_multi_hop": 8,
+        "F_cross_document": 7,
+        "G_structured_sql": 7,
+        "H_unanswerable": 6
+      }
+    },
+    {
+      "check": "schema.sql + seed.sql load into PostgreSQL 16 with all FK/CHECK constraints",
+      "status": "PASS",
+      "detail": "loaded"
+    },
+    {
+      "check": "all 14 reference SQL queries execute and return rows",
+      "status": "PASS",
+      "detail": "ok"
+    }
+  ],
+  "info": {
+    "row_counts": {
+      "university": 1,
+      "org_units": 2,
+      "departments": 1,
+      "research_areas": 10,
+      "buildings": 2,
+      "rooms": 31,
+      "programs": 2,
+      "semesters": 12,
+      "elective_groups": 18,
+      "course_offerings": 112,
+      "grading_scheme": 7,
+      "faculty": 20,
+      "teaching_assignments": 90,
+      "laboratories": 10,
+      "facilities": 10,
+      "course_prerequisites": 24,
+      "courses": 116,
+      "policies": 11,
+      "academic_calendar": 25,
+      "notices": 20,
+      "faq": 32,
+      "data_quality_conflicts": 10
+    },
+    "relationships": 1202,
+    "okf_items": 297,
+    "db_counts": [
+      "courses|116",
+      "relationships|1202",
+      "document_entities|733",
+      "catalog_listings|291"
+    ],
+    "source_type_counts": {
+      "official": 145,
+      "synthetic": 286,
+      "derived_official": 135
+    },
+    "relationship_source_types": {
+      "official": 320,
+      "synthetic": 751,
+      "derived_official": 131
+    },
+    "courses_without_lab_but_with_practical_credits": [
+      "COURSE-2CEIT504",
+      "COURSE-2CEIT5PE7",
+      "COURSE-2CEIT605",
+      "COURSE-2CEIT703",
+      "COURSE-2CEIT704",
+      "COURSE-2CEIT801",
+      "COURSE-3CEIT104",
+      "COURSE-3CEIT301",
+      "COURSE-3CEIT302",
+      "COURSE-3CEIT401"
+    ],
+    "note_courses_without_lab": "Project, seminar, soft-skill, training and entrepreneurship courses deliberately use facilities (FCL-IT-002/007/001) rather than a lab.",
+    "data_quality_conflicts_in_official_sources": [
+      "DQ-CONFLICT-001: 2HS101 = 'COMMUNICATION SKILLS' in syllabus but 'CALCULUS' in catalog 2017-2018 prog 201",
+      "DQ-CONFLICT-002: 2HS101 = 'COMMUNICATION SKILLS' in syllabus but 'CALCULUS' in catalog 2017-2018 prog 205",
+      "DQ-CONFLICT-003: 2HS101 = 'COMMUNICATION SKILLS' in syllabus but 'CALCULUS' in catalog 2019-2020 prog 215",
+      "DQ-CONFLICT-004: 2HS101 = 'COMMUNICATION SKILLS' in syllabus but 'CALCULUS' in catalog 2020-2021 prog 215",
+      "DQ-CONFLICT-005: 2HS102 = 'SEMINAR' in syllabus but 'LINEAR ALGEBRA' in catalog 2017-2018 prog 201",
+      "DQ-CONFLICT-006: 2HS102 = 'SEMINAR' in syllabus but 'LINEAR ALGEBRA' in catalog 2017-2018 prog 205",
+      "DQ-CONFLICT-007: 2HS102 = 'SEMINAR' in syllabus but 'LINEAR ALGEBRA' in catalog 2019-2020 prog 215",
+      "DQ-CONFLICT-008: 2HS102 = 'SEMINAR' in syllabus but 'LINEAR ALGEBRA' in catalog 2020-2021 prog 215",
+      "DQ-CONFLICT-009: 3OS201 = 'OPEN SUBJECT' in syllabus but 'ENGLISH LANGUAGE & COMMUNICATION SKILLS' in catalog 2017-2018 prog 401",
+      "DQ-CONFLICT-010: 3OS201 = 'OPEN SUBJECT' in syllabus but 'ENGLISH LANGUAGE & COMMUNICATION SKILLS' in catalog 2018-2019 prog 401"
+    ],
+    "sql_reference_results": {
+      "EVAL-024": {
+        "ok": true,
+        "rows": [
+          "2CEIT601|THEORY OF COMPUTATION|regular",
+          "2CEIT602|ARTIFICIAL INTELLIGENCE|regular",
+          "2CEIT603|CLOUD COMPUTING|regular",
+          "2CEIT604|USER EXPERIENCE DESIGN|regular",
+          "2CEIT605|CAPSTONE PROJECT-II|regular",
+          "2HS6101|APTITUDE SKILL BUILDING–II|regular",
+          "2CEIT6PE1|WEB TECHNOLOGY|elective",
+          "2CEIT6PE2|SOFTWARE VALIDATION & TESTING|elective",
+          "2CEIT6PE3|CRYPTOGRAPHY AND NETWORK SECURITY|elective",
+          "2CEIT6PE4|DATA SCIENCES AND MACHINE LEARNING|elective",
+          "2CEIT6PE5|GAME DESIGN & DEVELOPMENT|elective",
+          "2CEIT6PE6|ROBOTICS|elective"
+        ],
+        "err": ""
+      },
+      "EVAL-025": {
+        "ok": true,
+        "rows": [
+          "NOTICE-009|2026-09-01|Weekly lab slot registration opens for Database Systems Lab and Programming Lab",
+          "NOTICE-010|2026-09-03|Guest seminar: Responsible AI in education",
+          "NOTICE-011|2026-09-08|Faculty meeting – capstone mid-review panels",
+          "NOTICE-012|2026-09-10|Capstone mid-review schedule",
+          "NOTICE-013|2026-09-14|GPU Computing Facility maintenance",
+          "NOTICE-014|2026-09-17|Timetable update: Cloud Computing and Big Data Analytics practicals",
+          "NOTICE-018|2026-09-18|End-semester examination form submission"
+        ],
+        "err": ""
+      },
+      "EVAL-026": {
+        "ok": true,
+        "rows": [
+          "NOTICE-003|Odd semester timetable published|2026-11-20",
+          "NOTICE-009|Weekly lab slot registration opens for Database Systems Lab and Programming Lab|2026-11-20",
+          "NOTICE-012|Capstone mid-review schedule|2026-10-03",
+          "NOTICE-013|GPU Computing Facility maintenance|2026-09-20",
+          "NOTICE-014|Timetable update: Cloud Computing and Big Data Analytics practicals|2026-11-20",
+          "NOTICE-018|End-semester examination form submission|2026-10-09",
+          "NOTICE-019|Department reading room extended hours|2026-12-12"
+        ],
+        "err": ""
+      },
+      "EVAL-027": {
+        "ok": true,
+        "rows": [
+          "POLICY-001|Attendance Policy (Demo)",
+          "POLICY-002|Laboratory Usage Policy (Demo)",
+          "POLICY-003|Laboratory Safety Policy (Demo)",
+          "POLICY-005|Project Evaluation Policy (Demo)",
+          "POLICY-007|Seminar Policy (Demo)",
+          "POLICY-008|Faculty Consultation Policy (Demo)",
+          "POLICY-009|Facility Booking Policy (Demo)",
+          "POLICY-010|M.Tech Major Project Policy (Demo)",
+          "POLICY-011|Academic Integrity Policy (Demo)"
+        ],
+        "err": ""
+      },
+      "EVAL-029": {
+        "ok": true,
+        "rows": [
+          "CAL-2026-27-006|Mid-semester examinations – odd semester|2026-09-07|2026-09-12",
+          "CAL-2026-27-011|Practical and viva examinations – odd semester|2026-11-23|2026-11-28",
+          "CAL-2026-27-012|End-semester theory examinations – odd semester|2026-11-30|2026-12-12"
+        ],
+        "err": ""
+      },
+      "EVAL-034": {
+        "ok": true,
+        "rows": [
+          "B.TECH-IT|75",
+          "M.TECH-IT|36"
+        ],
+        "err": ""
+      },
+      "EVAL-036": {
+        "ok": true,
+        "rows": [
+          "COURSE-2CEIT602|1",
+          "COURSE-2CEIT402|2",
+          "COURSE-2BS3102|2",
+          "COURSE-2CEIT304|3",
+          "COURSE-2ES104|4"
+        ],
+        "err": ""
+      },
+      "EVAL-046": {
+        "ok": true,
+        "rows": [
+          "174.0"
+        ],
+        "err": ""
+      },
+      "EVAL-047": {
+        "ok": true,
+        "rows": [
+          "7"
+        ],
+        "err": ""
+      },
+      "EVAL-048": {
+        "ok": true,
+        "rows": [
+          "FAC-IT-009|Dr. Aditi Cloudani|5",
+          "FAC-IT-010|Dr. Harsh Clusterwala|5",
+          "FAC-IT-011|Prof. Tanya Pixelani|5",
+          "FAC-IT-013|Dr. Pooja Lambdani|6",
+          "FAC-IT-014|Prof. Rohan Kernelwala|5",
+          "FAC-IT-015|Prof. Kavya Graphwala|5",
+          "FAC-IT-016|Prof. Aman Circuitkar|5",
+          "FAC-IT-017|Dr. Neha Testani|5",
+          "FAC-IT-019|Dr. Farhan Pythonwala|5",
+          "FAC-IT-020|Dr. Leena Projectkar|10"
+        ],
+        "err": ""
+      },
+      "EVAL-049": {
+        "ok": true,
+        "rows": [
+          "Semester I|6",
+          "Semester II|6",
+          "Semester III|5",
+          "Semester IV|6",
+          "Semester V|5",
+          "Semester VI|6",
+          "Semester VII|4",
+          "Semester VIII|1"
+        ],
+        "err": ""
+      },
+      "EVAL-050": {
+        "ok": true,
+        "rows": [
+          "LAB-IT-003|Database Systems Lab|40",
+          "LAB-IT-004|Programming Lab|60",
+          "LAB-IT-008|Web & Mobile Development Lab|40",
+          "LAB-IT-010|Systems & Software Engineering Lab|40"
+        ],
+        "err": ""
+      },
+      "EVAL-051": {
+        "ok": true,
+        "rows": [
+          "3.00|5"
+        ],
+        "err": ""
+      },
+      "EVAL-052": {
+        "ok": true,
+        "rows": [
+          "2CEIT302|OBJECT ORIENTED PROGRAMMING",
+          "2CEIT304|DATA STRUCTURES",
+          "2CEIT403|APPLICATION DEVELOPMENT TOOLS",
+          "2CEIT703|CAPSTONE PROJECT-III",
+          "2CEIT801|INDUSTRIAL TRAINING",
+          "2ES102|WORKSHOP MANUFACTURING PRACTICE",
+          "2ES104|PROGRAMMING FOR PROBLEM SOLVING",
+          "2ES110|IT PERIPHERALS & TOOLS",
+          "2ES111|IT WORKSHOP",
+          "2HS102|SEMINAR"
+        ],
+        "err": ""
+      }
+    }
+  }
+}
