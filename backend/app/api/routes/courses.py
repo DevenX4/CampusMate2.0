@@ -1,13 +1,13 @@
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Depends, Query
 
-from app.api.deps import NOT_FOUND, DbSession, Limit, Offset, SearchText
+from app.api.deps import NOT_FOUND, DbSession, Limit, Offset, SearchText, require
 from app.schemas.catalog import CourseDetail, CourseSummary
 from app.schemas.common import Page
 from app.services import courses
 
-router = APIRouter(prefix="/courses", tags=["catalog"])
+router = APIRouter(prefix="/courses", tags=["catalog"], dependencies=[Depends(require("catalog:read"))])
 
 
 @router.get("", response_model=Page[CourseSummary])

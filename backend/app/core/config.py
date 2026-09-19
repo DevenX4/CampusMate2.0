@@ -34,6 +34,10 @@ class Settings(BaseSettings):
     db_user: str = "campusmate_app"
     db_password: SecretStr  # SecretStr prints as '**********' in logs and reprs
 
+    # Login sessions. COOKIE_SECURE must be true in production (cookie only sent over HTTPS).
+    session_ttl_hours: int = 12
+    cookie_secure: bool = False
+
     # Local folders. Overridable so a container can mount them elsewhere later.
     data_dir: Path = REPO_ROOT / "data"  # the canonical dataset (read-only input)
     storage_dir: Path = REPO_ROOT / "storage"  # uploaded/original documents and indexes

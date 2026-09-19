@@ -99,6 +99,25 @@ HTTP request -> route (app/api/routes)  -> service (app/services) -> SQLAlchemy 
 | Search escapes `%` and `_` | User text is matched literally. All values are bound parameters, never string-built SQL |
 | Only GET endpoints so far | Writes (documents) arrive with authentication and authorization in Phases 5–6 |
 
+## Authentication and authorization (Phase 5)
+
+| Decision | Why |
+|---|---|
+| Argon2id password hashes (`argon2-cffi`); a dummy verification for unknown emails | Slow, memory-hard hashing; response time doesn't reveal which emails exist |
+| Opaque random session token; the database stores only its SHA-256 (`user_sessions`) | A leaked database contains no usable tokens. Logout and deactivation take effect **immediately**, which a stateless JWT cannot do without a denylist |
+| Token delivered as an httpOnly, SameSite=Lax cookie (browser) **or** `Authorization: Bearer` (API clients) | JavaScript can't read the cookie, so XSS can't steal it. SameSite blocks cross-site POSTs. `COOKIE_SECURE=true` in production |
+| Endpoints require a **permission** (`require("users:manage")`), not a role | Changing who may do what is a data change (`role_permissions`), not a code change |
+| Anonymous requests get the `guest` role's permissions | The catalog is public by configuration, not by special-casing |
+| Roles and permissions are inserted by migration 3 | The code depends on them, so they are part of the schema version |
+| 401 vs 403 | 401 = unknown caller (log in); 403 = known caller without the permission |
+| Failed logins answer "Invalid email or password." for every cause | No account enumeration |
+| Admins cannot deactivate or demote themselves; deactivation or a password change revokes all of that user's sessions | Prevents lock-out and makes the change immediate |
+| No user deletion (deactivate instead) | Audit entries keep pointing at a real account |
+| Every login, logout and user change is audited, in the same transaction as the change; passwords and tokens never appear in audit details | An action and its audit record succeed or fail together |
+| `X-Request-ID` on every response (generated, or a safe caller-supplied one), stored in audit entries | One ID links a user's error report to the exact log line |
+
+Not yet: login rate limiting and account lockout, and expired-session cleanup. Both are planned for Phase 18 (hardening).
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth · 6 documents · 7 ingestion · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents · 7 ingestion · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

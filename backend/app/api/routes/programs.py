@@ -1,10 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
-from app.api.deps import NOT_FOUND, DbSession
+from app.api.deps import NOT_FOUND, DbSession, require
 from app.schemas.catalog import ProgramDetail, ProgramSummary, SemesterDetail
 from app.services import organization
 
-router = APIRouter(tags=["catalog"])
+router = APIRouter(tags=["catalog"], dependencies=[Depends(require("catalog:read"))])
 
 
 @router.get("/programs", response_model=list[ProgramSummary])

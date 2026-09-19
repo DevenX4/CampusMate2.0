@@ -7,7 +7,7 @@ import pytest
 from sqlalchemy import text
 from sqlalchemy.exc import DBAPIError, IntegrityError
 
-from app.models.auth import Role, User
+from app.models.auth import User
 from app.models.campus import Building
 from app.models.content import CalendarEvent
 from app.models.curriculum import Course, CourseOffering, ElectiveGroup, Program, Semester
@@ -157,7 +157,7 @@ def test_deferred_check_still_catches_a_missing_head(curriculum):
 
 
 def test_email_is_unique_regardless_of_case(db):
-    db.add(Role(code="student", name="Student"))
+    # The "student" role is reference data created by the migrations.
     db.add(User(email="Asha@Example.com", password_hash="x", role_code="student"))
     db.flush()
     db.add(User(email="asha@example.com", password_hash="x", role_code="student"))

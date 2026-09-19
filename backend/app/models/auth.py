@@ -1,9 +1,12 @@
-"""Users, roles and permissions. Tables only: login and authorization arrive in Phase 5."""
+"""Users, roles, permissions and login sessions.
+
+Roles and permissions are reference data inserted by a migration, because code depends on them."""
 
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Column, ForeignKey, Index, Table, func, text
+from sqlalchemy import CheckConstraint, Column, ForeignKey, Index, Table, func, text
+from sqlalchemy.dialects.postgresql import INET
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base, TimestampMixin
@@ -44,7 +47,28 @@ class User(TimestampMixin, Base):
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, server_default=func.gen_random_uuid())
     email: Mapped[str]
     full_name: Mapped[str | None]
-    password_hash: Mapped[str]  # never the password itself (hashing: Phase 5)
+    password_hash: Mapped[str]  # Argon2 hash, never the password itself
     role_code: Mapped[str] = mapped_column(ForeignKey("roles.code"))
     is_active: Mapped[bool] = mapped_column(server_default=text("true"))
     last_login_at: Mapped[datetime | None]
+
+
+class UserSession(Base):
+    """One login. The token itself is only ever held by the client; we store its SHA-256.
+    A session is valid while not revoked and not expired, so logout and deactivation take
+    effect immediately (unlike a self-contained JWT)."""
+
+    __tablename__ = "user_sessions"
+    __table_args__ = (
+        CheckConstraint("expires_at > created_at", name="expiry_after_creation"),
+        Index("ix_user_sessions_user_id", "user_id"),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, server_default=func.gen_random_uuid())
+    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    token_sha256: Mapped[str] = mapped_column(unique=True)
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+    expires_at: Mapped[datetime]
+    revoked_at: Mapped[datetime | None]
+    ip_address: Mapped[str | None] = mapped_column(INET)
+    user_agent: Mapped[str | None]

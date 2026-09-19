@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 4 (read-only catalog API).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. There is no authentication, document management, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 5 (authentication and RBAC).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. There is no document management, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -119,6 +119,32 @@ cd backend
 
 - Health (liveness): http://127.0.0.1:8000/api/v1/system/health → `{"status":"ok"}`
 - Readiness: http://127.0.0.1:8000/api/v1/system/ready → 200 `"status":"ready"` when PostgreSQL is reachable **and** migrated; otherwise 503 with the reason
+
+## Accounts and login
+
+Create the first admin (the password is asked for at a hidden prompt):
+
+```bash
+cd backend
+.venv/Scripts/python -m app.accounts create --email admin@campusmate-demo.example --role admin --name "Admin"
+```
+
+| Endpoint | Who |
+|---|---|
+| `POST /api/v1/auth/login` `{"email", "password"}` | anyone. Sets an httpOnly session cookie and also returns `access_token` |
+| `POST /api/v1/auth/logout` | revokes the session immediately |
+| `GET /api/v1/auth/me` | logged in. Returns the user and their permissions |
+| `GET/POST /api/v1/users`, `PATCH /api/v1/users/{id}` | `users:manage` (admin) |
+| `GET /api/v1/audit-logs` | `audit:read` (admin) |
+
+In `/docs`, click **Authorize** and paste the `access_token` to call protected endpoints. The catalog stays public: visitors who are not logged in act as the `guest` role, which has `catalog:read`.
+
+| Role | Permissions |
+|---|---|
+| guest | catalog:read |
+| student | + chat:use |
+| faculty | + documents:read |
+| admin | + documents:manage, ingestion:manage, users:manage, audit:read |
 
 ## Catalog API (read-only)
 

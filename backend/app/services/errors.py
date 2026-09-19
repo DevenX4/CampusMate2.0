@@ -7,3 +7,8 @@ class NotFoundError(Exception):
         self.resource = resource
         self.identifier = identifier
         super().__init__(f"{resource} '{identifier}' not found")
+
+
+class ConflictError(Exception):
+    """The request is valid but conflicts with the current state (e.g. email already in use,
+    or an admin trying to deactivate their own account)."""
