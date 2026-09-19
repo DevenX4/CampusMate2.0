@@ -58,6 +58,17 @@ class ProvenanceMixin:
     source_page: Mapped[int | None] = mapped_column(sort_order=803)
     source_section: Mapped[str | None] = mapped_column(sort_order=804)
 
+    @property
+    def provenance(self) -> dict:
+        """The citation for this row, in the shape the API and chat answers use."""
+        return {
+            "source_type": self.source_type,
+            "document_id": self.source_document_id,
+            "version_no": self.source_version_no,
+            "page": self.source_page,
+            "section": self.source_section,
+        }
+
 
 def provenance_constraints() -> tuple:
     """Constraints every ProvenanceMixin table must include in its __table_args__."""

@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 3 (dataset seeded).** FastAPI skeleton, a 41-table PostgreSQL schema managed by Alembic, and an idempotent, validated seed that loads the whole dataset (2,360 rows plus the 12 PDFs). There are no API endpoints for the data yet (Phase 4), and no authentication, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 4 (read-only catalog API).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. There is no authentication, document management, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -11,8 +11,9 @@ backend/            FastAPI application (Python)
   app/core/         configuration (config.py), logging (logging.py), database session (db.py)
   app/models/       SQLAlchemy models = the database schema, one file per domain
   app/seed/         dataset loader: source -> transform -> write -> validate (python -m app.seed)
-  app/services/     reusable business logic (storage.py: content-addressed file storage)
-  app/api/routes/   HTTP endpoints
+  app/services/     business logic and queries, no HTTP (catalog services, storage)
+  app/api/routes/   HTTP endpoints (thin: parameters in, service call, response schema out)
+  app/api/errors.py one JSON error format for 404 / 422 / 500
   app/schemas/      Pydantic request/response models
   migrations/       Alembic migrations (versions/ holds one file per schema change)
   scripts/          one-off setup scripts (e.g. create_local_db.sql)
@@ -118,6 +119,30 @@ cd backend
 
 - Health (liveness): http://127.0.0.1:8000/api/v1/system/health → `{"status":"ok"}`
 - Readiness: http://127.0.0.1:8000/api/v1/system/ready → 200 `"status":"ready"` when PostgreSQL is reachable **and** migrated; otherwise 503 with the reason
+
+## Catalog API (read-only)
+
+| Endpoint | Notes |
+|---|---|
+| `GET /api/v1/departments`, `/departments/{id}` | profile, head, contact (synthetic) |
+| `GET /api/v1/programs`, `/programs/{id}` | semesters; semester count and total credits are computed |
+| `GET /api/v1/semesters/{id}` | regular courses and elective/audit/open slots with their options |
+| `GET /api/v1/courses` | `q` (code/name search), `code`, `program_id`, `semester_id`, `course_type`, `limit` (1–100), `offset` |
+| `GET /api/v1/courses/{id}` | offerings and credits, teaching staff, labs, prerequisites, catalog listings |
+| `GET /api/v1/faculty`, `/faculty/{id}` | `department_id`, `q`; detail includes teaching and research areas |
+
+```bash
+curl "http://127.0.0.1:8000/api/v1/courses?q=artificial"
+curl "http://127.0.0.1:8000/api/v1/semesters/SEM-BTECH-IT-06"
+curl "http://127.0.0.1:8000/api/v1/courses/COURSE-2CEIT602"
+```
+
+Every entity in a response carries `provenance` (`source_type`, `document_id`, `version_no`, `page`, `section`) or, in short references, `source_type`. Clients must show `synthetic` data as demo data.
+
+Errors always look like `{"error": {"code": "not_found", "message": "...", "details": null}}`:
+- 404 for an unknown ID or URL;
+- 422 for invalid parameters, with `details` naming each bad parameter;
+- 500 with a generic message (the details are logged on the server only).
 - Interactive API docs: http://127.0.0.1:8000/docs
 
 ## Test

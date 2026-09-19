@@ -81,6 +81,24 @@ Migration 2 (`drop redundant link tables`) removed `elective_group_options` (ide
 | Lost-information check | 25 comparisons rebuild every dropped JSON field (e.g. `faculty.courses_taught`, `laboratories.room_number`, notice status as of 2026-09-18) from the database |
 | Totals | 2,360 rows in 34 tables. Facts: official 436, derived_official 444, synthetic 286. These reconcile with the dataset audit (145 / 135 / 286) once the 291 catalog-listing and 309 shared-listing sub-records are excluded |
 
+## REST API (Phase 4)
+
+```
+HTTP request -> route (app/api/routes)  -> service (app/services) -> SQLAlchemy -> PostgreSQL
+                 parameters, status code    queries, rules, DTOs
+             <- response schema (app/schemas): the contract, never a raw database row
+```
+
+| Decision | Why |
+|---|---|
+| Services raise domain errors (`NotFoundError`), and `app/api/errors.py` maps them to HTTP | Services stay HTTP-free, so the Phase 16 chat pipeline calls them directly |
+| One error envelope `{"error": {code, message, details}}` for 404/422/500 | Clients branch on `error.code`. Internals never leak on 500 |
+| `provenance` on every summary and detail, `source_type` on every short reference | The UI and the chat layer can never present synthetic data as official |
+| Computed values (programme credits, `is_head_of_department`, a slot's options) are computed in services | Consistent with "store once, compute the rest" |
+| `limit` 1–100 (default 20) + `offset`, and `total` in every page | Bounded responses, and the client knows how many pages exist |
+| Search escapes `%` and `_` | User text is matched literally. All values are bound parameters, never string-built SQL |
+| Only GET endpoints so far | Writes (documents) arrive with authentication and authorization in Phases 5–6 |
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog · 5 auth · 6 documents · 7 ingestion · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth · 6 documents · 7 ingestion · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

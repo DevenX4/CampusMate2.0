@@ -6,7 +6,8 @@ from importlib.metadata import version
 
 from fastapi import FastAPI
 
-from app.api.routes import system
+from app.api.errors import register_error_handlers
+from app.api.routes import courses, departments, faculty, programs, system
 from app.core.config import get_settings
 from app.core.logging import setup_logging
 
@@ -32,6 +33,13 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title=settings.app_name,
     version=version("campusmate-backend"),
+    description=(
+        "Every item carries its provenance. `source_type` is `official` (stated in a Ganpat "
+        "University PDF), `derived_official` (computed from one) or `synthetic` (demo data, "
+        "never a Ganpat University fact)."
+    ),
     lifespan=lifespan,
 )
-app.include_router(system.router, prefix=API_PREFIX)
+register_error_handlers(app)
+for module in (system, departments, programs, courses, faculty):
+    app.include_router(module.router, prefix=API_PREFIX)

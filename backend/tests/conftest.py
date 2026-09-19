@@ -36,6 +36,26 @@ requires_dataset = pytest.mark.skipif(
 )
 
 
+@pytest.fixture(scope="module")
+def seeded_session(migrated_engine):
+    """campusmate_test with the whole dataset loaded, inside a transaction that is rolled
+    back when the test module finishes (so other modules still see an empty schema)."""
+    if not _pdfs_present():
+        pytest.skip("dataset PDFs missing from data/pdfs (see README > PDFs)")
+    from app.seed.run import seed
+
+    with migrated_engine.connect() as connection:
+        transaction = connection.begin()
+        session = Session(bind=connection, join_transaction_mode="create_savepoint")
+        report = seed(session, get_settings().data_dir, storage_dir=None)
+        assert report.problems == [], report.problems
+        try:
+            yield session
+        finally:
+            session.close()
+            transaction.rollback()
+
+
 @pytest.fixture(scope="session")
 def migrated_engine():
     """A freshly migrated campusmate_test database, shared by the whole test run."""
