@@ -78,11 +78,16 @@ def make_retriever(mode: str, db, reranker_model: str | None = None):
     raise ValueError(f"unknown mode {mode}")
 
 
+def _git(*args: str) -> str:
+    return subprocess.run(["git", *args], cwd=REPO_ROOT, capture_output=True, text=True, check=True).stdout.strip()
+
+
 def git_commit() -> str | None:
+    """The commit the code was measured at, with "-dirty" if anything but the results folder
+    differs from it (the commit alone would then misstate what was measured)."""
     try:
-        # "-dirty" marks results measured with uncommitted code, which the commit alone would misstate.
-        return subprocess.run(["git", "describe", "--always", "--dirty"], cwd=REPO_ROOT, capture_output=True,
-                              text=True, check=True).stdout.strip()
+        changed = _git("status", "--porcelain", "--", ".", ":(exclude)evaluation/results")
+        return _git("rev-parse", "--short", "HEAD") + ("-dirty" if changed else "")
     except (OSError, subprocess.CalledProcessError):
         return None
 
