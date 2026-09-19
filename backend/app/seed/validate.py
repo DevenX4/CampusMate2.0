@@ -3,12 +3,13 @@ Every check returns a list of problems; any problem means the whole seed is roll
 
 from typing import Any
 
-from sqlalchemy import and_, func, or_, select, union_all
+from sqlalchemy import and_, func, or_, select
 from sqlalchemy.orm import Session
 
 from app.models import Base
 from app.seed.source import SourceData, has_mojibake
 from app.seed.transform import Rows
+from app.services.entities import entity_id_query
 
 TABLES = Base.metadata.tables
 DOCUMENT_TABLES = ("documents", "document_versions", "document_entities")
@@ -70,11 +71,7 @@ def check_provenance(session: Session) -> list[str]:
 
 def check_references(session: Session) -> list[str]:
     """Every entity ID used in a polymorphic link must exist in some entity table."""
-    entity_tables = [t for t in provenance_tables() if len(t.primary_key.columns) == 1]
-    known_ids = union_all(
-        *(select(next(iter(t.primary_key.columns)).label("id")) for t in entity_tables),
-        select(TABLES["documents"].c.document_id.label("id")),
-    ).subquery()
+    known_ids = entity_id_query().subquery()
     problems = []
     for name, column in POLYMORPHIC_REFERENCES.items():
         col = TABLES[name].c[column]

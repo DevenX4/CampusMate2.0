@@ -1,11 +1,7 @@
 """Document management: uploads, validation, versions, lifecycle, reindex, download, permissions."""
 
-import io
-import uuid
-
 import pytest
 from fastapi.testclient import TestClient
-from pypdf import PdfWriter
 from sqlalchemy import select
 
 from app.api.routes.documents import storage_root
@@ -13,24 +9,9 @@ from app.core.db import get_db
 from app.main import app
 from app.models.documents import DocumentVersion
 from app.models.operations import AuditLog, IngestionJob
-from app.schemas.users import UserCreate
-from app.services import users
-from app.services.audit import RequestContext
+from tests.helpers import API, headers_for, make_pdf
 
-API = "/api/v1"
-PASSWORD = "correct-horse-battery"
 FORM = {"title": "Examination Rules 2026", "document_type": "examination", "source_type": "synthetic"}
-
-
-def make_pdf(pages: int = 1) -> bytes:
-    """A real, tiny PDF. The random title makes every file's bytes (and SHA-256) unique."""
-    writer = PdfWriter()
-    for _ in range(pages):
-        writer.add_blank_page(width=200, height=200)
-    writer.add_metadata({"/Title": uuid.uuid4().hex})
-    buffer = io.BytesIO()
-    writer.write(buffer)
-    return buffer.getvalue()
 
 
 @pytest.fixture
@@ -46,15 +27,6 @@ def client(db_session, storage):
         yield TestClient(app)
     finally:
         app.dependency_overrides.clear()
-
-
-def headers_for(client, db, role: str) -> dict:
-    email = f"{role}-{uuid.uuid4().hex[:6]}@campusmate-demo.example"
-    users.create_user(db, UserCreate(email=email, password=PASSWORD, role=role), actor_id=None,
-                      context=RequestContext())
-    token = client.post(f"{API}/auth/login", json={"email": email, "password": PASSWORD}).json()["access_token"]
-    client.cookies.clear()  # rely on the explicit header only
-    return {"Authorization": f"Bearer {token}"}
 
 
 @pytest.fixture

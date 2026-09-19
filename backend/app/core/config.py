@@ -41,6 +41,12 @@ class Settings(BaseSettings):
     # Largest accepted upload. The official syllabus PDF is 37 MB.
     max_upload_mb: int = 50
 
+    # Ingestion: largest chunk (characters); a job 'processing' longer than the lease is
+    # assumed to belong to a crashed worker and is picked up again.
+    chunk_max_chars: int = 1200
+    ingestion_lease_minutes: int = 30
+    worker_poll_seconds: int = 5
+
     # Local folders. Overridable so a container can mount them elsewhere later.
     data_dir: Path = REPO_ROOT / "data"  # the canonical dataset (read-only input)
     storage_dir: Path = REPO_ROOT / "storage"  # uploaded/original documents and indexes

@@ -138,6 +138,28 @@ document: active ⇄ inactive, active/inactive ─► archived ─► active, an
 | Upload IDs are `DOC-<10 hex>` | Unique without a counter race. Seeded documents keep their dataset IDs |
 | `storage_root` is a FastAPI dependency | Tests store files in a temporary folder |
 
+## Ingestion (Phase 7)
+
+```
+worker ─ claim (FOR UPDATE SKIP LOCKED; re-claim 'processing' jobs past their lease)
+       ─ extract (page scope) ─ clean ─ chunk ─ enrich ─ store ┐ one transaction: replace the version's chunks,
+                                                                 ┘ version ready/active, job completed, audit
+       ─ on error: roll back, job failed (stage, type, trace), ingest version failed, audit
+```
+
+| Decision | Why |
+|---|---|
+| Separate worker process polling a DB job table | Durable (a restart loses nothing), observable (stage + timings), no Redis/Celery needed at this scale |
+| Page scope from `document_versions.page_scope` | The 742-page university-wide syllabus contributes only its 14 IT pages |
+| Boilerplate = same text at the same top/bottom position on at least 60% of pages | Removes running headers ("Page #", the synthetic banner). The first version removed every repeated line, which deleted field labels and their trust markers. Found by inspecting chunks |
+| Structure-aware chunking; lines never split | Official table rows (a course with all its credits) stay intact. Entity blocks (`COURSE-… —`) become their own chunks. Semantic (embedding-based) chunking is deferred until evaluation shows a need |
+| Per-chunk `source_type`: official PDF → `official`; synthetic PDF → `synthetic` if any synthetic label (or none), else `derived_official` | A demo document is never an official source, even when it quotes one |
+| Chunk metadata: title, document_type, department, academic_year, program_ids, semester_ids (official pages via the semesters' page provenance), labels | Enables metadata filters ("semester VI", "official only") in retrieval |
+| Old versions keep their chunks; retrieval uses only active versions of active documents | Rollback is instant |
+| `storage/processed/<doc>/v<n>.json` | A human-readable view of exactly what was extracted, for debugging |
+
+Real dataset: 12 documents → 935 chunks in about 20 s. The official catalog is ingested in full (137 pages, 619 chunks). Its other programmes' course lists are genuine official data, and they are exactly the code/name collisions the evaluation set tests.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

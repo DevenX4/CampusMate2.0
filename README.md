@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 6 (document management).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. There is no ingestion, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 7 (ingestion).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. There is no retrieval, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -161,6 +161,22 @@ curl -b jar.txt -F "file=@rules.pdf;type=application/pdf" -F "title=Exam rules" 
 ```
 
 Uploads are checked for extension, declared type, **content** (`%PDF-` and it must open), size (`MAX_UPLOAD_MB`) and duplicates (SHA-256). They are stored as `storage/originals/<2 hex>/<sha256>.pdf`, never under the client's filename, and each upload queues an ingestion job.
+
+## Ingestion
+
+```bash
+cd backend
+.venv/Scripts/python -m app.ingestion queue-missing   # once, after seeding: queue the 12 dataset documents
+.venv/Scripts/python -m app.ingestion worker          # keep running in a second terminal
+.venv/Scripts/python -m app.ingestion worker --once   # or: process what is waiting, then exit
+```
+
+Pipeline per job: **extract** (only the version's page scope, e.g. syllabus pp.10–18, 104–108) → **clean** (repair garbled text, remove running headers and footers) → **chunk** (new chunk at each entity or numbered heading or semester page; lines are never split; at most `CHUNK_MAX_CHARS`) → **enrich** (page range, section, entity IDs, programme/semester, trust level) → **store** (one transaction). A successful ingest activates a newer version automatically. A failure never touches the version that is currently answering.
+
+| Endpoint | Who |
+|---|---|
+| `GET /api/v1/ingestion/jobs` (`status`, `document_id`), `/ingestion/jobs/{id}` (stage, per-stage timings, error) | `ingestion:manage` (admin) |
+| `POST /api/v1/ingestion/jobs/{id}/retry` (failed jobs) | admin |
 
 ## Catalog API (read-only)
 
