@@ -445,6 +445,27 @@ Full review: [security.md](security.md). What was added, and why:
 
 **Hallucination tests:** all 23 trap questions of `negative_questions.json` run through the whole pipeline with every real PDF ingested (`tests/test_hallucination.py`), and also in `python -m app.evaluation answers`. The rule: abstain, or answer only from sources, with demo data labelled; never cite synthetic data for an "official" question; never answer about an entity that does not exist.
 
+## Docker (Phase 20)
+
+```
+browser ── 127.0.0.1:8080 ──► web (nginx: built UI, /api proxy) ──► api :8000 (FastAPI + ingestion thread,
+                                                                     embedded vector store in the `storage` volume)
+                                                                          └──► db :5432 (PostgreSQL 18, `pgdata` volume)
+          only port published: 8080, on the loopback interface; api and db are on the compose network only
+```
+
+| Decision | Why |
+|---|---|
+| Three containers: `db`, `api`, `web`. No Chroma server, no Redis, no separate worker | The API owns the embedded vector store (Phase 19: the Chroma server has an unfixed remote-code-execution flaw). Jobs stay durable in PostgreSQL |
+| Only `web` is published, on `127.0.0.1:8080` | Local only, as required. The browser never reaches the API or the database directly, and the session cookie stays same-origin |
+| `api` image: `python:3.13-slim`, dependencies installed with `-c requirements.lock` (the exact tested versions), BGE model downloaded at build time, non-root user (uid 10001), `alembic upgrade head` on every start | Reproducible, starts offline, least privilege, and the schema always matches the code |
+| `web` image: Node builds the UI, then an **unprivileged** nginx serves it, with CSP (`default-src 'self'`), `nosniff`, `DENY` framing and no referrer. `X-Forwarded-For` is *set*, not appended | Security headers for the UI too; clients cannot forge the IP that the login throttle counts |
+| `db`: `postgres:18` (the version used natively); the first start runs the same `create_local_db.sql` with passwords from the environment | Same low-privilege role as a native install; secrets never written to files |
+| `mem_limit` of 512 MB (db), 1.5 GB (api), 128 MB (web) | This machine has 7.2 GB of RAM and little free; the limits keep containers from starving it |
+| Shell scripts are LF (the repository's `.gitattributes` already checks out every text file with LF; the scripts were also written with LF) | A Windows checkout would otherwise produce `/bin/sh^M` errors in the containers |
+
+**Status:** `docker compose config` validates the file. The images have **not been built yet**: Docker Desktop is installed but was not running, and starting it (a WSL2 VM of roughly 2–4 GB of RAM) plus pulling and building several GB of images is left to the owner's decision.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend ✅ · 18 integration ✅ (SLM pending) · 19 testing + hardening ✅ · 20 Docker · 21 deployment evaluation
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend ✅ · 18 integration ✅ (SLM pending) · 19 testing + hardening ✅ · 20 Docker ✅ (files; build pending) · 21 deployment evaluation

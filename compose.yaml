@@ -1,0 +1,64 @@
+# CampusMate in containers, on this machine only (the UI is published on 127.0.0.1).
+#
+#   docker compose up --build -d                    # build and start
+#   docker compose run --rm api python -m app.seed  # once: load the dataset
+#   docker compose run --rm api python -m app.ingestion queue-missing
+#   docker compose run --rm api python -m app.accounts create --email ... --role admin
+#   open http://localhost:8080
+#
+# Secrets come from .env (never committed): DB_PASSWORD for the application's database role,
+# POSTGRES_PASSWORD for the database superuser (used only to create that role on first start).
+name: campusmate
+
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      CAMPUSMATE_DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./docker/postgres/10-campusmate.sh:/docker-entrypoint-initdb.d/10-campusmate.sh:ro
+      - ./backend/scripts/create_local_db.sql:/campusmate/create_local_db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d campusmate"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    mem_limit: 512m
+    restart: unless-stopped
+    # No published port: only the API can reach the database.
+
+  api:
+    build: ./backend
+    env_file: .env
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      APP_ENV: production
+      COOKIE_SECURE: "true"   # browsers accept Secure cookies on http://localhost
+      # A model server on the host (e.g. Ollama), if GENERATION_PROVIDER=openai_compatible.
+      GENERATION_BASE_URL: ${GENERATION_BASE_URL:-http://host.docker.internal:11434/v1}
+    volumes:
+      - storage:/app/storage      # uploads, processed files and the embedded vector store
+      - ./data:/app/data:ro       # the dataset, read-only
+    depends_on:
+      db:
+        condition: service_healthy
+    mem_limit: 1536m
+    restart: unless-stopped
+    # No published port: only the web container can reach the API.
+
+  web:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    mem_limit: 128m
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  storage:

@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 19 (testing and security hardening).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. A React frontend (`frontend/`) has the assistant for students and faculty, and a knowledge-base page for administrators. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 20 (Docker; images not yet built).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. A React frontend (`frontend/`) has the assistant for students and faculty, and a knowledge-base page for administrators. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -280,6 +280,27 @@ In development, Vite forwards `/api` to the API (`CAMPUSMATE_API` overrides the 
 | `/login` | everyone | Sign in (the account is created with `python -m app.accounts`) |
 | `/` | students, faculty, admins (`chat:use`) | Ask questions. Each `[n]` in an answer opens its source (document, version, page, trust level, text). Synthetic data carries a warning. Answers can be rated |
 | `/admin` | faculty (read), admins (manage) | Document statistics and list; upload with an explicit trust level; activate, deactivate, archive, delete and re-index. A document's panel shows its versions (new-version upload, rollback by activating an older one, the original PDF for admins) and recent ingestion. Ingestion jobs with retry |
+
+## Docker
+
+`compose.yaml` runs CampusMate in three containers:
+
+- `db`: PostgreSQL 18, created with the same low-privilege role as a native install;
+- `api`: the API with its ingestion thread and the embedding model baked in; it runs as a non-root user and migrates on start;
+- `web`: nginx serving the built UI and forwarding `/api`.
+
+Only the UI is published, and only on `127.0.0.1:8080`. The database and the API are reachable only inside the compose network.
+
+```bash
+# in .env: DB_PASSWORD (application role) and POSTGRES_PASSWORD (superuser, used once to create that role)
+docker compose up --build -d
+docker compose run --rm api python -m app.seed                     # once: the dataset (./data is mounted read-only)
+docker compose run --rm api python -m app.ingestion queue-missing  # the API's thread then ingests the PDFs
+docker compose run --rm api python -m app.accounts create --email admin@campusmate-demo.example --role admin
+# open http://localhost:8080
+```
+
+Data lives in two named volumes, `pgdata` and `storage` (uploads and the vector index). `docker compose down` keeps them; `docker compose down -v` deletes them. To use a model server on the host (e.g. Ollama), set `GENERATION_PROVIDER=openai_compatible` and `GENERATION_MODEL` in `.env`; the API reaches the host at `host.docker.internal:11434`.
 
 ## Security
 
