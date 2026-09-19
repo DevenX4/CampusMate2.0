@@ -18,6 +18,8 @@ dependencies = [
     "email-validator>=2.1",
     "python-multipart>=0.0.9",
     "pypdf>=5.0",
+    "chromadb>=1.0",
+    "fastembed>=0.5",
 ]
 
 [project.optional-dependencies]

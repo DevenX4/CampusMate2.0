@@ -47,11 +47,17 @@ class Settings(BaseSettings):
     ingestion_lease_minutes: int = 30
     worker_poll_seconds: int = 5
 
+    # Retrieval. Models are downloaded once into MODEL_CACHE_DIR (ignored by Git).
+    embedding_model: str = "BAAI/bge-small-en-v1.5"
+    chroma_collection: str = "campusmate_chunks"
+    retrieval_top_k: int = 8
+
     # Local folders. Overridable so a container can mount them elsewhere later.
     data_dir: Path = REPO_ROOT / "data"  # the canonical dataset (read-only input)
     storage_dir: Path = REPO_ROOT / "storage"  # uploaded/original documents and indexes
+    model_cache_dir: Path = REPO_ROOT / "model_cache"  # downloaded ML models
 
-    @field_validator("data_dir", "storage_dir")
+    @field_validator("data_dir", "storage_dir", "model_cache_dir")
     @classmethod
     def _relative_to_repo_root(cls, value: Path) -> Path:
         # "data" means <repo>/data regardless of the folder the app is started from.

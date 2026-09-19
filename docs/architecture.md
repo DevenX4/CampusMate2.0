@@ -160,6 +160,28 @@ worker ─ claim (FOR UPDATE SKIP LOCKED; re-claim 'processing' jobs past their 
 
 Real dataset: 12 documents → 935 chunks in about 20 s. The official catalog is ingested in full (137 pages, 619 chunks). Its other programmes' course lists are genuine official data, and they are exactly the code/name collisions the evaluation set tests.
 
+## Vector retrieval (Phase 8)
+
+```
+query ─► PostgreSQL: eligible versions (active version of an active document, + document filters)
+      ─► Chroma: nearest vectors WHERE version_key IN eligible AND chunk filters (source_type, semester, programme)
+      ─► PostgreSQL: load chunks by id, re-check eligibility, keep similarity order ─► hits with citations
+```
+
+| Decision | Why |
+|---|---|
+| Model `BAAI/bge-small-en-v1.5` (384 dims) run by `fastembed`. It resolves to Qdrant's quantized ONNX export (65 MB) | The BGE model the project specified, on CPU without PyTorch (7 GB RAM machine). Queries get BGE's search instruction prefix; passages don't |
+| `Embedder` interface; `HashEmbedder` in tests | The model can be swapped without touching indexing or search; tests never download models or judge quality |
+| Embedded text = `title \| section` + chunk | A bare table row still carries which document and which semester |
+| PostgreSQL decides eligibility at query time via `version_key` | Activating, deactivating or deleting a document needs no index update. Stale vectors can never answer |
+| Vectors written before the chunk commit; stale vectors removed after | A committed chunk always has a vector. A leftover vector is ignored by the eligibility check |
+| Collection records model name and dimension; a mismatch refuses to start | Vectors from different models are never mixed. `rebuild-index --reset` re-embeds from PostgreSQL |
+
+First observations with the real model (to be *measured* in Phase 9):
+- semantic questions work (attendance → FAQ-026 and POLICY-001);
+- exact codes fail (`2CEIT78PE7` returns other `2CEIT78PE*` courses);
+- number-heavy official table rows rank poorly. This is the motivation for BM25 (Phase 10).
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

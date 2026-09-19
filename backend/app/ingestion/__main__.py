@@ -15,6 +15,7 @@ from app.core.config import get_settings
 from app.core.db import SessionLocal
 from app.core.logging import setup_logging
 from app.ingestion.pipeline import process_next
+from app.retrieval.runtime import get_indexer
 from app.services.ingestion_jobs import queue_missing
 
 logger = logging.getLogger("campusmate.worker")
@@ -22,12 +23,13 @@ logger = logging.getLogger("campusmate.worker")
 
 def run_worker(once: bool) -> int:
     settings = get_settings()
+    indexer = get_indexer()  # loads the embedding model once
     processed = 0
     logger.info("Worker started (once=%s)", once)
     while True:
         with SessionLocal() as db:
             result = process_next(db, settings.storage_dir, max_chars=settings.chunk_max_chars,
-                                  lease_minutes=settings.ingestion_lease_minutes)
+                                  lease_minutes=settings.ingestion_lease_minutes, indexer=indexer)
         if result is not None:
             processed += 1
             print(f"{result.status:9} job {result.job_id} "

@@ -3,8 +3,11 @@
 Transaction design:
 - progress (current_stage) is committed as the job moves through the stages, so an admin
   can watch it;
-- the result (old chunks deleted, new chunks inserted, version status, job 'completed') is
-  ONE transaction: retrieval never sees half an index;
+- vectors for the NEW chunks are written to the vector index first; then the result (old
+  chunks deleted, new chunks inserted, version status, job 'completed') is ONE PostgreSQL
+  transaction; only after that are the old vectors removed. At no moment does a committed
+  chunk lack its vector, and a leftover vector is harmless: search re-checks every hit
+  against PostgreSQL;
 - on any error that transaction is rolled back and the failure is recorded separately.
   A failed NEW version never affects the version that is currently answering questions.
 """
@@ -14,6 +17,7 @@ import json
 import logging
 import time
 import traceback
+import uuid
 from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -28,6 +32,7 @@ from app.ingestion.enrich import chunk_source_type, find_entity_ids, official_pa
 from app.ingestion.extract import extract_pages, pages_in_scope
 from app.models.documents import Document, DocumentChunk, DocumentVersion
 from app.models.operations import IngestionJob
+from app.retrieval.indexing import ChunkIndexer
 from app.services import audit, storage
 from app.services.audit import RequestContext
 from app.services.entities import known_entity_ids
@@ -97,6 +102,7 @@ def build_chunks(db: Session, document: Document, version: DocumentVersion, path
             source_type, labels = chunk_source_type(chunk.text, document.source_type)
             pages_ctx = [context[p] for p in range(chunk.page_start, chunk.page_end + 1) if p in context]
             rows.append(DocumentChunk(
+                chunk_id=uuid.uuid4(),  # known before insert, so vectors can be written first
                 document_id=document.document_id, version_no=version.version_no, chunk_index=index,
                 text=chunk.text, content_sha256=hashlib.sha256(chunk.text.encode()).hexdigest(),
                 page_start=chunk.page_start, page_end=chunk.page_end, section=chunk.section,
@@ -137,7 +143,8 @@ def _activate_if_newer(db: Session, document: Document, version: DocumentVersion
     return active.version_no if active else None
 
 
-def run_job(db: Session, job: IngestionJob, storage_root: Path, max_chars: int) -> JobResult:
+def run_job(db: Session, job: IngestionJob, storage_root: Path, max_chars: int,
+            indexer: ChunkIndexer) -> JobResult:
     job_uuid, job_id = job.id, str(job.id)
     timer = _Timer(db, job)
     try:
@@ -146,6 +153,8 @@ def run_job(db: Session, job: IngestionJob, storage_root: Path, max_chars: int) 
         path = storage.resolve(storage_root, version.storage_key)
         rows = build_chunks(db, document, version, path, max_chars, timer,
                             storage_root / "processed" / document.document_id)
+        with timer.stage("index"):
+            indexer.index_chunks(document, rows)
         with timer.stage("store"):
             db.execute(delete(DocumentChunk).where(DocumentChunk.document_id == job.document_id,
                                                    DocumentChunk.version_no == job.version_no))
@@ -161,11 +170,19 @@ def run_job(db: Session, job: IngestionJob, storage_root: Path, max_chars: int) 
                      details={"job_id": job_id, "version_no": job.version_no, "chunks": len(rows),
                               "activated": version.status == "active", "replaced_version_no": replaced})
         db.commit()
+        _remove_stale_vectors(indexer, job.document_id, job.version_no, {str(r.chunk_id) for r in rows})
         logger.info("Job %s: %s v%s -> %d chunks %s", job_id, job.document_id, job.version_no, len(rows), timer.timings)
         return JobResult(job_id, "completed", len(rows))
     except Exception as exc:
         db.rollback()
         return _record_failure(db, job_uuid, exc, timer)
+
+
+def _remove_stale_vectors(indexer: ChunkIndexer, document_id: str, version_no: int, keep: set[str]) -> None:
+    try:
+        indexer.remove_stale(document_id, version_no, keep)
+    except Exception:  # harmless if it fails: search ignores vectors whose chunk no longer exists
+        logger.exception("Could not remove stale vectors for %s v%s", document_id, version_no)
 
 
 def _record_failure(db: Session, job_uuid, exc: Exception, timer: _Timer) -> JobResult:
@@ -187,6 +204,7 @@ def _record_failure(db: Session, job_uuid, exc: Exception, timer: _Timer) -> Job
     return JobResult(job_id, "failed", error=job.error_message)
 
 
-def process_next(db: Session, storage_root: Path, *, max_chars: int, lease_minutes: int) -> JobResult | None:
+def process_next(db: Session, storage_root: Path, *, max_chars: int, lease_minutes: int,
+                 indexer: ChunkIndexer) -> JobResult | None:
     job = claim_next_job(db, lease_minutes)
-    return None if job is None else run_job(db, job, storage_root, max_chars)
+    return None if job is None else run_job(db, job, storage_root, max_chars, indexer)

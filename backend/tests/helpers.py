@@ -2,10 +2,14 @@
 
 import io
 import uuid
+from pathlib import Path
 
 from fpdf import FPDF
 from pypdf import PdfWriter
 
+from app.retrieval.embeddings import HashEmbedder
+from app.retrieval.indexing import ChunkIndexer
+from app.retrieval.vector_index import VectorIndex
 from app.schemas.users import UserCreate
 from app.services import users
 from app.services.audit import RequestContext
@@ -46,3 +50,9 @@ def headers_for(client, db, role: str) -> dict:
     token = client.post(f"{API}/auth/login", json={"email": email, "password": PASSWORD}).json()["access_token"]
     client.cookies.clear()  # rely on the explicit header only
     return {"Authorization": f"Bearer {token}"}
+
+
+def make_indexer(folder: Path) -> ChunkIndexer:
+    """A vector index in a temporary folder with the deterministic test embedder (no download)."""
+    embedder = HashEmbedder()
+    return ChunkIndexer(embedder, VectorIndex(folder, "test-chunks", embedder.model_name, embedder.dimension))

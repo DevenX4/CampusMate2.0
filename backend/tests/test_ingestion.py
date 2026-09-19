@@ -17,7 +17,7 @@ from app.main import app
 from app.models.documents import DocumentChunk, DocumentVersion
 from app.models.operations import AuditLog, IngestionJob
 from app.services.ingestion_jobs import queue_missing
-from tests.helpers import API, headers_for, text_pdf
+from tests.helpers import API, headers_for, make_indexer, text_pdf
 
 # --- stage units (no database) -------------------------------------------------------------------
 
@@ -108,6 +108,11 @@ def admin(client, db_session):
     return headers_for(client, db_session, "admin")
 
 
+@pytest.fixture
+def indexer(tmp_path):
+    return make_indexer(tmp_path / "chroma")
+
+
 FORM = {"title": "Exam Handbook", "document_type": "handbook", "source_type": "synthetic"}
 PAGES = [["1.1 Examination rules", "Students must carry their ID card."],
          ["1.2 Re-evaluation", "Apply within 7 days of results."]]
@@ -118,9 +123,9 @@ def upload(client, headers, pages=PAGES, path="/documents", form=FORM):
     return client.post(API + path, headers=headers, files=files, data=form).json()
 
 
-def run_worker(db, storage) -> list:
+def run_worker(db, storage, indexer) -> list:
     results = []
-    while (result := process_next(db, storage, max_chars=1200, lease_minutes=30)) is not None:
+    while (result := process_next(db, storage, max_chars=1200, lease_minutes=30, indexer=indexer)) is not None:
         results.append(result)
     return results
 
@@ -131,9 +136,9 @@ def chunks_of(db, document_id, version_no):
                       .order_by(DocumentChunk.chunk_index)).all()
 
 
-def test_upload_is_ingested_and_activated(client, db_session, storage, admin):
+def test_upload_is_ingested_and_activated(client, db_session, storage, admin, indexer):
     doc_id = upload(client, admin)["document_id"]
-    [result] = run_worker(db_session, storage)
+    [result] = run_worker(db_session, storage, indexer)
     assert result.status == "completed"
 
     chunks = chunks_of(db_session, doc_id, 1)
@@ -143,32 +148,33 @@ def test_upload_is_ingested_and_activated(client, db_session, storage, admin):
     assert chunks[0].metadata_["document_type"] == "handbook"
 
     job = db_session.scalar(select(IngestionJob).where(IngestionJob.document_id == doc_id))
-    assert set(job.stage_timings) == {"extract", "clean", "chunk", "enrich", "store"}
+    assert set(job.stage_timings) == {"extract", "clean", "chunk", "enrich", "index", "store"}
+    assert indexer.index.count() == 2  # one vector per chunk
     detail = client.get(f"{API}/documents/{doc_id}", headers=admin).json()
     assert detail["active_version"]["version_no"] == 1  # answerable now
     assert client.get(f"{API}/documents/stats", headers=admin).json()["total_chunks"] == 2
     assert (storage / "processed" / doc_id / "v1.json").is_file()
 
 
-def test_replacement_activates_new_version_and_keeps_old_chunks_for_rollback(client, db_session, storage, admin):
+def test_replacement_activates_new_version_and_keeps_old_chunks_for_rollback(client, db_session, storage, admin, indexer):
     doc_id = upload(client, admin)["document_id"]
-    run_worker(db_session, storage)
+    run_worker(db_session, storage, indexer)
     upload(client, admin, pages=[["2.1 Revised rules", "New text."]], path=f"/documents/{doc_id}/versions", form={})
-    run_worker(db_session, storage)
+    run_worker(db_session, storage, indexer)
     statuses = {v.version_no: v.status for v in db_session.scalars(
         select(DocumentVersion).where(DocumentVersion.document_id == doc_id))}
     assert statuses == {1: "superseded", 2: "active"}
     assert len(chunks_of(db_session, doc_id, 1)) == 2  # kept: rollback is instant
 
 
-def test_failed_new_version_leaves_the_active_one_answering(client, db_session, storage, admin):
+def test_failed_new_version_leaves_the_active_one_answering(client, db_session, storage, admin, indexer):
     doc_id = upload(client, admin)["document_id"]
-    run_worker(db_session, storage)
+    run_worker(db_session, storage, indexer)
     detail = upload(client, admin, pages=[["new"]], path=f"/documents/{doc_id}/versions", form={})
     v2 = next(v for v in detail["versions"] if v["version_no"] == 2)
     (storage / "originals" / v2["sha256"][:2] / f"{v2['sha256']}.pdf").write_bytes(b"%PDF-1.4 corrupted")
 
-    [result] = run_worker(db_session, storage)
+    [result] = run_worker(db_session, storage, indexer)
     assert result.status == "failed"
     job = db_session.scalar(select(IngestionJob).where(IngestionJob.document_id == doc_id,
                                                        IngestionJob.version_no == 2))
@@ -184,18 +190,19 @@ def test_failed_new_version_leaves_the_active_one_answering(client, db_session, 
     assert client.post(f"{API}/ingestion/jobs/{job.id}/retry", headers=admin).status_code == 409
 
 
-def test_reindex_replaces_chunks_and_keeps_version_active(client, db_session, storage, admin):
+def test_reindex_replaces_chunks_and_keeps_version_active(client, db_session, storage, admin, indexer):
     doc_id = upload(client, admin)["document_id"]
-    run_worker(db_session, storage)
+    run_worker(db_session, storage, indexer)
     before = {c.chunk_id for c in chunks_of(db_session, doc_id, 1)}
     client.post(f"{API}/documents/{doc_id}/reindex", headers=admin)
-    run_worker(db_session, storage)
+    run_worker(db_session, storage, indexer)
     after = chunks_of(db_session, doc_id, 1)
     assert len(after) == len(before) and not before & {c.chunk_id for c in after}  # rebuilt
+    assert indexer.index.count() == len(after)  # the replaced chunks' vectors were removed
     assert db_session.get(DocumentVersion, (doc_id, 1)).status == "active"
 
 
-def test_job_of_a_crashed_worker_is_claimed_again(client, db_session, storage, admin):
+def test_job_of_a_crashed_worker_is_claimed_again(client, db_session, storage, admin, indexer):
     upload(client, admin)
     job = db_session.scalar(select(IngestionJob))
     job.status, job.started_at = "processing", datetime.now(UTC) - timedelta(hours=2)
@@ -222,7 +229,7 @@ def ingested(seeded_session, tmp_path_factory):
     storage = tmp_path_factory.mktemp("storage")
     seed(seeded_session, get_settings().data_dir, storage)  # copies the 12 PDFs into this storage
     assert queue_missing(seeded_session) == 12
-    results = run_worker(seeded_session, storage)
+    results = run_worker(seeded_session, storage, make_indexer(storage / "chroma"))
     assert [r.status for r in results] == ["completed"] * 12
     return seeded_session
 

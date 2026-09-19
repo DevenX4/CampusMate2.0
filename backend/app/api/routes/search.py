@@ -1,0 +1,38 @@
+import time
+from typing import Annotated, Literal
+
+from fastapi import APIRouter, Depends, Query
+
+from app.api.deps import AUTH_ERRORS, DbSession, require
+from app.core.config import get_settings
+from app.retrieval.embeddings import Embedder
+from app.retrieval.runtime import get_embedder, get_vector_index
+from app.retrieval.search import SearchFilters, vector_search
+from app.retrieval.vector_index import VectorIndex
+from app.schemas.search import SearchResponse
+
+router = APIRouter(prefix="/search", tags=["search"], responses=AUTH_ERRORS,
+                   dependencies=[Depends(require("chat:use"))])
+
+SourceTypeFilter = Literal["official", "derived_official", "synthetic"]
+
+
+@router.get("", response_model=SearchResponse)
+def search(
+    db: DbSession,
+    embedder: Annotated[Embedder, Depends(get_embedder)],
+    index: Annotated[VectorIndex, Depends(get_vector_index)],
+    q: Annotated[str, Query(min_length=2, max_length=500, description="The question or keywords")],
+    k: Annotated[int | None, Query(ge=1, le=50)] = None,
+    source_type: Annotated[list[SourceTypeFilter] | None, Query(description="Repeatable, e.g. official")] = None,
+    document_type: Annotated[list[str] | None, Query()] = None,
+    program_id: str | None = None,
+    semester_id: str | None = None,
+):
+    """Find the document passages most relevant to a question. Only active versions of active
+    documents are searched; every hit carries its citation and source_type."""
+    started = time.perf_counter()
+    filters = SearchFilters(source_types=source_type or [], document_types=document_type or [],
+                            program_id=program_id, semester_id=semester_id)
+    hits = vector_search(db, embedder, index, q, k or get_settings().retrieval_top_k, filters)
+    return SearchResponse(query=q, mode="vector", took_ms=round((time.perf_counter() - started) * 1000), hits=hits)
