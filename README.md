@@ -4,6 +4,22 @@ An AI-powered campus assistant for Ganpat University's IT programmes. It combine
 
 **Status: all 21 phases done, local only; pending decisions: the SLM, the vector store, building the Docker images. See [docs/deployment-evaluation.md](docs/deployment-evaluation.md).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. A React frontend (`frontend/`) has the assistant for students and faculty, and a knowledge-base page for administrators. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
+## Quick start (Windows)
+
+Needs Python 3.11+, Node.js 20+, PostgreSQL running on port 5432, the 12 PDFs in `data/pdfs/`, and `backend\.venv` (see Setup below).
+
+```powershell
+cd "D:\MP 7th Sem\CampusMate"
+.\scripts\setup-local.ps1 -AdminEmail admin@campusmate-demo.example
+.\scripts\start-local.ps1
+```
+
+`setup-local.ps1` runs once, and is safe to re-run. It asks once for the `postgres` superuser's password and uses it only to create the low-privilege role `campusmate_app` and its two databases. The role's password comes from `DB_PASSWORD` in `.env`. The script then creates the schema, loads the dataset, queues the 12 PDFs for ingestion and creates the admin (it prompts for that password; pass `-AdminEmail` only on the first run).
+
+`start-local.ps1` opens two windows, **CampusMate API** and **CampusMate UI**, then opens http://127.0.0.1:5173. Close the two windows to stop. The API ingests the queued PDFs by itself during the first minute or two; the knowledge-base page shows the progress.
+
+To add a student account: `backend\.venv\Scripts\python -m app.accounts create --email student@campusmate-demo.example --role student` (run it from `backend`).
+
 ## Repository layout
 
 ```
