@@ -21,7 +21,7 @@ import re
 from dataclasses import dataclass, field
 
 from app.generation.base import ABSTAIN_MESSAGE, ContextBlock
-from app.generation.extractive import sentences
+from app.generation.extractive import SYNTHETIC_NOTE, sentences
 from app.retrieval.bm25 import STOPWORDS, tokenize
 
 _CITATION = re.compile(r"\[(\d+(?:\s*,\s*\d+)*)\]")
@@ -91,7 +91,9 @@ def validate(answer: str, blocks: list[ContextBlock]) -> GroundingReport:
             report.warnings.append(f"'{token}' occurs only in a source the answer does not cite")
     if names := unknown_names(body, known):
         report.issues.append(f"names that occur in no source: {', '.join(names)}")
-    if refs and (uncited := [s for s in sentences(text) if not _CITATION.search(s) and _WORD.search(s)]):
+    # The demo-data disclaimer states no fact, so it needs no citation.
+    claims = [s for s in sentences(text) if s != SYNTHETIC_NOTE and _WORD.search(s)]
+    if refs and (uncited := [s for s in claims if not _CITATION.search(s)]):
         report.warnings.append(f"{len(uncited)} sentence(s) without a citation")
     report.passed = not report.issues
 

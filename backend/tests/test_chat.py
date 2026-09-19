@@ -103,7 +103,8 @@ def test_uncited_fact_is_a_warning_and_undisclosed_synthetic_source_gets_a_notic
 
 @pytest.mark.parametrize("question", [AI_QUESTION, "Who teaches ARTIFICIAL INTELLIGENCE?", "When do examinations start?"])
 def test_extractive_answers_always_pass_grounding(question):
-    assert validate(extract_answer(question, BLOCKS), BLOCKS).passed
+    report = validate(extract_answer(question, BLOCKS), BLOCKS)
+    assert report.passed and report.warnings == []  # the demo-data disclaimer is not an uncited claim
 
 
 # --- pipeline -----------------------------------------------------------------------------------
