@@ -2,11 +2,11 @@
  "summary": {
   "answerable": {
    "n": 52,
-   "answered": 0.654,
-   "fact_recall": 0.335,
-   "term_recall": 0.32,
-   "cites_required": 0.481,
-   "grounded": 0.654
+   "answered": 0.673,
+   "fact_recall": 0.34,
+   "term_recall": 0.335,
+   "cites_required": 0.462,
+   "grounded": 0.673
   },
   "unanswerable": {
    "n": 6,
@@ -14,14 +14,14 @@
   },
   "fallbacks": 0,
   "latency_ms": {
-   "p50": 62,
-   "p95": 146
+   "p50": 70,
+   "p95": 137
   },
   "by_category": {
    "A_simple_factual": {
     "answered": 0.875,
     "fact_recall": 0.594,
-    "term_recall": 0.519,
+    "term_recall": 0.531,
     "cites_required": 0.75
    },
    "B_exact_lexical": {
@@ -38,8 +38,8 @@
    },
    "D_metadata_filtered": {
     "answered": 0.714,
-    "fact_recall": 0.41,
-    "term_recall": 0.438,
+    "fact_recall": 0.422,
+    "term_recall": 0.45,
     "cites_required": 0.429
    },
    "E_multi_hop": {
@@ -49,16 +49,16 @@
     "cites_required": 0.25
    },
    "F_cross_document": {
-    "answered": 0.429,
-    "fact_recall": 0.231,
-    "term_recall": 0.151,
+    "answered": 0.714,
+    "fact_recall": 0.277,
+    "term_recall": 0.249,
     "cites_required": 0.286
    },
    "G_structured_sql": {
-    "answered": 0.714,
-    "fact_recall": 0.41,
-    "term_recall": 0.37,
-    "cites_required": 0.714
+    "answered": 0.571,
+    "fact_recall": 0.386,
+    "term_recall": 0.352,
+    "cites_required": 0.571
    }
   }
  },
@@ -75,13 +75,13 @@
    ],
    "issues": [],
    "warnings": [],
-   "latency_ms": 378,
+   "latency_ms": 415,
    "answered": true,
    "fact_recall": 1.0,
    "term_recall": 0.7368,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 378
+   "wall_ms": 415
   },
   {
    "question_id": "EVAL-002",
@@ -89,21 +89,20 @@
    "answerable": true,
    "answer_type": "answered",
    "route": "documents",
-   "answer": "(Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.12 \u2014 B.TECH-IT Semester III \u2013 course table [2]. Synthetic demo data is not official GUNI information.",
+   "answer": "(Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.12 \u2014 B.TECH-IT Semester III \u2013 course table also in syllabus of [DO] [2]. (Synthetic demo data) SEM-BTECH-IT-03 (BTECH IT Semester III) [O] course_type regular credits [2]. (Synthetic demo data) SEM-MTECH-IT-03 (MTECH IT Semester III) [O] course_type regular credits [3]. Synthetic demo data is not official GUNI information.",
    "cited": [
-    "DOC-COURSES-001 p.45"
+    "DOC-COURSES-001 p.45",
+    "DOC-COURSES-001 p.33"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 70,
+   "warnings": [],
+   "latency_ms": 91,
    "answered": true,
    "fact_recall": 0.0,
-   "term_recall": 0.1818,
+   "term_recall": 0.2727,
    "cites_required": false,
    "grounded": true,
-   "wall_ms": 70
+   "wall_ms": 91
   },
   {
    "question_id": "EVAL-003",
@@ -111,23 +110,21 @@
    "answerable": true,
    "answer_type": "answered",
    "route": "documents",
-   "answer": "(Synthetic demo data) Dr. Meera Datavala (FAC-IT-001), Professor & Head of Department, cabin ROOM-DA-202 (synthetic demo [1]. (Synthetic demo data) Convened by the Head of Department, Dr. Meera Datavala (FAC-IT-001) [5]. (Synthetic demo data) Department identity \u2014 DEPT-IT-001 [2]. Synthetic demo data is not official GUNI information.",
+   "answer": "(Synthetic demo data) Dr. Meera Datavala (FAC-IT-001), Professor & Head of Department, cabin ROOM-DA-202 (synthetic demo identity) [1]. (Synthetic demo data) Convened by the Head of Department, Dr. Meera Datavala (FAC-IT-001) [5]. (Synthetic demo data) Department identity \u2014 DEPT-IT-001 [2]. Synthetic demo data is not official GUNI information.",
    "cited": [
     "DOC-FAQ-001 p.2",
     "DOC-DEPT-PROFILE-001 p.1",
     "DOC-NOTICES-001 p.6"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 65,
+   "warnings": [],
+   "latency_ms": 71,
    "answered": true,
    "fact_recall": 1.0,
    "term_recall": 0.875,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 65
+   "wall_ms": 71
   },
   {
    "question_id": "EVAL-004",
@@ -140,16 +137,14 @@
     "DOC-FACILITIES-001 p.None"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 163,
+   "warnings": [],
+   "latency_ms": 197,
    "answered": true,
    "fact_recall": 0.25,
    "term_recall": 0.2308,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 163
+   "wall_ms": 197
   },
   {
    "question_id": "EVAL-005",
@@ -161,13 +156,13 @@
    "cited": [],
    "issues": [],
    "warnings": [],
-   "latency_ms": 56,
+   "latency_ms": 60,
    "answered": false,
    "fact_recall": 0.0,
    "term_recall": 0.0,
    "cites_required": false,
    "grounded": false,
-   "wall_ms": 56
+   "wall_ms": 60
   },
   {
    "question_id": "EVAL-006",
@@ -175,23 +170,21 @@
    "answerable": true,
    "answer_type": "answered",
    "route": "structured",
-   "answer": "B.TECH-IT Semester VIII (20 credits in total): regular courses: 2CEIT801 INDUSTRIAL TRAINING (20 cr) [1]. SEM-BTECH-IT-08 \u2014 B.TECH-IT Semester VIII [2]. (Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.10 \u2014 B.TECH-IT Semester I \u2013 course table [3]. Synthetic demo data is not official GUNI information.",
+   "answer": "B.TECH-IT Semester VIII (20 credits in total): regular courses: 2CEIT801 INDUSTRIAL TRAINING (20 cr) [1]. SEM-BTECH-IT-08 \u2014 B.TECH-IT Semester VIII [2]. (Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.10 \u2014 B.TECH-IT Semester I \u2013 course table also in syllabus of [DO] [3]. Synthetic demo data is not official GUNI information.",
    "cited": [
     "DOC-OFFICIAL-SYLLABUS-001 p.18",
     "DOC-PROGRAMS-001 p.5",
     "DOC-COURSES-001 p.38"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 71,
+   "warnings": [],
+   "latency_ms": 79,
    "answered": true,
    "fact_recall": 0.5,
    "term_recall": 0.5,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 71
+   "wall_ms": 79
   },
   {
    "question_id": "EVAL-007",
@@ -205,13 +198,13 @@
    ],
    "issues": [],
    "warnings": [],
-   "latency_ms": 58,
+   "latency_ms": 68,
    "answered": true,
    "fact_recall": 1.0,
    "term_recall": 0.7143,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 58
+   "wall_ms": 68
   },
   {
    "question_id": "EVAL-008",
@@ -219,23 +212,21 @@
    "answerable": true,
    "answer_type": "answered",
    "route": "structured",
-   "answer": "Master of Technology in Information Technology (M.TECH-IT): 4 semesters and 74 credits in total, computed from the official semester totals (Sem I: 21, Sem II: 23, Sem III: 18, Sem IV: 12) [1]. (Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.108 \u2014 M.TECH-IT Semester IV \u2013 course table [3]. (Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.107 \u2014 M.TECH-IT Semester III \u2013 course table [4]. Synthetic demo data is not official GUNI information.",
+   "answer": "Master of Technology in Information Technology (M.TECH-IT): 4 semesters and 74 credits in total, computed from the official semester totals (Sem I: 21, Sem II: 23, Sem III: 18, Sem IV: 12) [1]. (Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.108 \u2014 M.TECH-IT Semester IV \u2013 course table also in syllabus of [DO] [3]. (Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.107 \u2014 M.TECH-IT Semester III \u2013 course table also in syllabus of [DO] [4]. Synthetic demo data is not official GUNI information.",
    "cited": [
     "DOC-OFFICIAL-SYLLABUS-001 p.104",
     "DOC-COURSES-001 p.37",
     "DOC-COURSES-001 p.33"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 66,
+   "warnings": [],
+   "latency_ms": 76,
    "answered": true,
    "fact_recall": 1.0,
    "term_recall": 0.9167,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 66
+   "wall_ms": 76
   },
   {
    "question_id": "EVAL-009",
@@ -251,13 +242,13 @@
    "warnings": [
     "a synthetic source was not disclosed by the answer; a notice was added"
    ],
-   "latency_ms": 129,
+   "latency_ms": 132,
    "answered": true,
    "fact_recall": 0.3333,
    "term_recall": 0.25,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 129
+   "wall_ms": 132
   },
   {
    "question_id": "EVAL-010",
@@ -270,16 +261,14 @@
     "DOC-POLICIES-001 p.None"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 122,
+   "warnings": [],
+   "latency_ms": 130,
    "answered": true,
    "fact_recall": 1.0,
    "term_recall": 0.5385,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 122
+   "wall_ms": 130
   },
   {
    "question_id": "EVAL-011",
@@ -293,16 +282,14 @@
     "DOC-FACILITIES-001 p.1"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 60,
+   "warnings": [],
+   "latency_ms": 65,
    "answered": true,
    "fact_recall": 0.0,
    "term_recall": 0.1818,
    "cites_required": false,
    "grounded": true,
-   "wall_ms": 60
+   "wall_ms": 66
   },
   {
    "question_id": "EVAL-012",
@@ -317,16 +304,14 @@
     "DOC-NOTICES-001 p.5"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 107,
+   "warnings": [],
+   "latency_ms": 122,
    "answered": true,
    "fact_recall": 0.2,
    "term_recall": 0.3548,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 107
+   "wall_ms": 123
   },
   {
    "question_id": "EVAL-013",
@@ -334,22 +319,21 @@
    "answerable": true,
    "answer_type": "answered",
    "route": "graph",
-   "answer": "3CEIT211 ADVANCED DATABASE MANAGEMENT SYSTEM: course_code: 3CEIT211 [official] [1]. (Synthetic demo data) course_code [O] [4]. 3CEIT211 ADVANCED DATABASE MANAGEMENT SYSTEM (course COURSE-3CEIT211, derived_official) [1]. Synthetic demo data is not official GUNI information.",
+   "answer": "3CEIT211 ADVANCED DATABASE MANAGEMENT SYSTEM: course_code: 3CEIT211 [official] [1]. (Synthetic demo data) COURSE-3CEIT211 course_code [O] [4]. (Synthetic demo data) COURSE-3CEIT102 course_code [O] [5]. Synthetic demo data is not official GUNI information.",
    "cited": [
     "DOC-OFFICIAL-SYLLABUS-001 p.105",
-    "DOC-COURSES-001 p.33"
+    "DOC-COURSES-001 p.33",
+    "DOC-COURSES-001 p.22"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 147,
+   "warnings": [],
+   "latency_ms": 125,
    "answered": true,
    "fact_recall": 0.5,
    "term_recall": 0.4118,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 147
+   "wall_ms": 125
   },
   {
    "question_id": "EVAL-014",
@@ -364,16 +348,14 @@
     "DOC-OFFICIAL-SYLLABUS-001 p.15"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 102,
+   "warnings": [],
+   "latency_ms": 117,
    "answered": true,
    "fact_recall": null,
    "term_recall": 0.8889,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 102
+   "wall_ms": 117
   },
   {
    "question_id": "EVAL-015",
@@ -387,16 +369,14 @@
     "DOC-PROGRAMS-001 p.4"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 73,
+   "warnings": [],
+   "latency_ms": 72,
    "answered": true,
    "fact_recall": 1.0,
    "term_recall": 0.9231,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 73
+   "wall_ms": 72
   },
   {
    "question_id": "EVAL-016",
@@ -410,16 +390,14 @@
     "DOC-COURSES-001 p.49"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 55,
+   "warnings": [],
+   "latency_ms": 64,
    "answered": true,
    "fact_recall": 0.2222,
    "term_recall": 0.3043,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 55
+   "wall_ms": 64
   },
   {
    "question_id": "EVAL-017",
@@ -431,13 +409,13 @@
    "cited": [],
    "issues": [],
    "warnings": [],
-   "latency_ms": 57,
+   "latency_ms": 64,
    "answered": false,
    "fact_recall": 0.0,
    "term_recall": 0.0,
    "cites_required": false,
    "grounded": false,
-   "wall_ms": 57
+   "wall_ms": 64
   },
   {
    "question_id": "EVAL-018",
@@ -445,22 +423,20 @@
    "answerable": true,
    "answer_type": "answered",
    "route": "documents",
-   "answer": "(Synthetic demo data) COURSE-2HS6101 \u2014 2HS6101 APTITUDE SKILL BUILDING\u2013II [1]. (Synthetic demo data) COURSE-2HS5101 \u2014 2HS5101 APTITUDE SKILL BUILDING-I [3]. Synthetic demo data is not official GUNI information.",
+   "answer": "(Synthetic demo data) COURSE-2HS6101 \u2014 2HS6101 APTITUDE SKILL BUILDING\u2013II course_id [1]. (Synthetic demo data) COURSE-2HS5101 \u2014 2HS5101 APTITUDE SKILL BUILDING-I course_id [3]. Synthetic demo data is not official GUNI information.",
    "cited": [
     "DOC-COURSES-001 p.48",
     "DOC-COURSES-001 p.47"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 62,
+   "warnings": [],
+   "latency_ms": 64,
    "answered": true,
    "fact_recall": 0.0,
    "term_recall": 0.1429,
    "cites_required": false,
    "grounded": true,
-   "wall_ms": 63
+   "wall_ms": 64
   },
   {
    "question_id": "EVAL-019",
@@ -472,17 +448,609 @@
    "cited": [],
    "issues": [],
    "warnings": [],
-   "latency_ms": 60,
+   "latency_ms": 66,
    "answered": false,
    "fact_recall": 0.0,
    "term_recall": 0.0,
    "cites_required": false,
    "grounded": false,
-   "wall_ms": 60
+   "wall_ms": 66
   },
   {
    "question_id": "EVAL-020",
    "category": "C_semantic",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "documents",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 70,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 70
+  },
+  {
+   "question_id": "EVAL-021",
+   "category": "C_semantic",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "documents",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 67,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 67
+  },
+  {
+   "question_id": "EVAL-022",
+   "category": "C_semantic",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "documents",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 65,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 65
+  },
+  {
+   "question_id": "EVAL-023",
+   "category": "C_semantic",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "documents",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 68,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 68
+  },
+  {
+   "question_id": "EVAL-024",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "structured",
+   "answer": "B.TECH-IT Semester VI (23 credits in total): regular courses: 2CEIT601 THEORY OF COMPUTATION (4 cr); 2CEIT602 ARTIFICIAL INTELLIGENCE (4 cr); 2CEIT603 CLOUD COMPUTING (4 cr); 2CEIT604 USER EXPERIENCE DESIGN (1 cr); 2CEIT605 CAPSTONE PROJECT-II (1 cr); 2HS6101 APTITUDE SKILL BUILDING\u2013II (1 cr) | ELECTIVE-III (elective, 4 cr), choose one of: 2CEIT6PE1 WEB TECHNOLOGY, 2CEIT6PE2 SOFTWARE VALIDATION & TESTING, 2CEIT6PE3 CRYPTOGRAPHY AND NETWORK SECURITY, 2CEIT6PE4 DATA SCIENCES AND MACHINE LEARNING, ",
+   "cited": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.15",
+    "DOC-COURSES-001 p.48",
+    "DOC-COURSES-001 p.17"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 77,
+   "answered": true,
+   "fact_recall": 1.0,
+   "term_recall": 0.9767,
+   "cites_required": true,
+   "grounded": true,
+   "wall_ms": 78
+  },
+  {
+   "question_id": "EVAL-025",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "documents",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 64,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 64
+  },
+  {
+   "question_id": "EVAL-026",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "documents",
+   "answer": "(Synthetic demo data) Department Notices \u2014 June to September 2026 [3]. (Synthetic demo data) Department Notices \u2014 June to September 2026 (Synthetic) version [3]. (Synthetic demo data) Twenty synthetic department notices dated June\u2013September 2026 [3]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-NOTICES-001 p.1"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 68,
+   "answered": true,
+   "fact_recall": 0.0625,
+   "term_recall": 0.0678,
+   "cites_required": false,
+   "grounded": true,
+   "wall_ms": 69
+  },
+  {
+   "question_id": "EVAL-027",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "documents",
+   "answer": "(Synthetic demo data) POLICY-010 \u2014 CM-SYN-POL-010 M.Tech Major Project Policy (Demo) [2]. (Synthetic demo data) NOTICE-001 \u2014 Orientation programme for new B.Tech IT and M.Tech IT students [3]. (Synthetic demo data) DEPT-IT-001 applies to programmes [2]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-POLICIES-001 p.6",
+    "DOC-NOTICES-001 p.2"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 63,
+   "answered": true,
+   "fact_recall": 0.2222,
+   "term_recall": 0.3103,
+   "cites_required": true,
+   "grounded": true,
+   "wall_ms": 63
+  },
+  {
+   "question_id": "EVAL-028",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "structured",
+   "answer": "B.TECH-IT Semester VII (23 credits in total): ELECTIVE-V (elective, 4 cr), choose one of: 2CEIT78PE1 DEEP LEARNING, 2CEIT78PE2 BLOCKCHAIN TECHNOLOGIES, 2CEIT78PE3 FUNDAMENTALS OF IMAGE PROCESSING, 2CEIT78PE4 MOBILE COMPUTING, 2CEIT78PE5 SEARCH ENGINE OPTIMIZATION, 2CEIT78PE6 VIRTUAL REALITY | ELECTIVE-VI (elective, 4 cr), choose one of: 2CEIT78PE10 FOG COMPUTING, 2CEIT78PE11 FAULT TOLERANT SYSTEMS, 2CEIT78PE12 HIGH PERFORMANCE COMPUTING, 2CEIT78PE13 COMPUTER VISION, 2CEIT78PE7 NATURAL LANGUAGE P",
+   "cited": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.16",
+    "DOC-COURSES-001 p.20"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 73,
+   "answered": true,
+   "fact_recall": 1.0,
+   "term_recall": 1.0,
+   "cites_required": true,
+   "grounded": true,
+   "wall_ms": 73
+  },
+  {
+   "question_id": "EVAL-029",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "documents",
+   "answer": "(Synthetic demo data) CAL-2026-27-011 (examination): Practical and viva examinations \u2013 odd semester \u2014 2026-11-23 to [2]. (Synthetic demo data) CAL-2026-27-012 (examination): End-semester theory examinations \u2013 odd semester \u2014 2026-11-30 to [2]. (Synthetic demo data) Mid-semester examinations for the odd semester will be held from 7 to 12 September 2026 [3]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-CALENDAR-001 p.3",
+    "DOC-NOTICES-001 p.4"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 65,
+   "answered": true,
+   "fact_recall": 0.6667,
+   "term_recall": 0.7917,
+   "cites_required": false,
+   "grounded": true,
+   "wall_ms": 65
+  },
+  {
+   "question_id": "EVAL-030",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "documents",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 50,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 50
+  },
+  {
+   "question_id": "EVAL-031",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "graph",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 120,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 120
+  },
+  {
+   "question_id": "EVAL-032",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "graph",
+   "answer": "(Synthetic demo data) 2CEIT602 ARTIFICIAL INTELLIGENCE: taught_by: FAC-IT-002 [synthetic], FAC-IT-004 (Dr. Kabir Modelkar) [synthetic] [2]. (Synthetic demo data) 2CEIT6PE4 DATA SCIENCES AND MACHINE LEARNING: taught_by: FAC-IT-004 (Dr. Kabir Modelkar) [synthetic] [3]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.15",
+    "DOC-OFFICIAL-SYLLABUS-001 p.15"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 127,
+   "answered": true,
+   "fact_recall": 0.5,
+   "term_recall": 0.4783,
+   "cites_required": false,
+   "grounded": true,
+   "wall_ms": 127
+  },
+  {
+   "question_id": "EVAL-033",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "documents",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 66,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 66
+  },
+  {
+   "question_id": "EVAL-034",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "documents",
+   "answer": "(Synthetic demo data) Programmes offered [5]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-DEPT-PROFILE-001 p.1"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 64,
+   "answered": true,
+   "fact_recall": 0.1667,
+   "term_recall": 0.0833,
+   "cites_required": false,
+   "grounded": true,
+   "wall_ms": 64
+  },
+  {
+   "question_id": "EVAL-035",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "graph",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 149,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 149
+  },
+  {
+   "question_id": "EVAL-036",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "graph",
+   "answer": "2CEIT78PE1 DEEP LEARNING (course COURSE-2CEIT78PE1, derived_official) [1]. 2CEIT78PE1 DEEP LEARNING: course_code: 2CEIT78PE1 [official] [1]. 2CEIT78PE1 DEEP LEARNING: course_name: DEEP LEARNING [official] [1]. Note: [1] contains synthetic demo data, not official GUNI information.",
+   "cited": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.16"
+   ],
+   "issues": [],
+   "warnings": [
+    "a synthetic source was not disclosed by the answer; a notice was added"
+   ],
+   "latency_ms": 132,
+   "answered": true,
+   "fact_recall": 0.25,
+   "term_recall": 0.2083,
+   "cites_required": false,
+   "grounded": true,
+   "wall_ms": 132
+  },
+  {
+   "question_id": "EVAL-037",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "graph",
+   "answer": "(Synthetic demo data) 2CEIT702 BIG DATA ANALYTICS: practicals_in: LAB-IT-006 (Cloud & Big Data Lab) [synthetic] [1]. (Synthetic demo data) 3CEIT306 BIG DATA ANALYTICS: practicals_in: LAB-IT-006 (Cloud & Big Data Lab) [synthetic] [2]. (Synthetic demo data) NOTICE-014 \u2014 Timetable update: Cloud Computing and Big Data Analytics practicals [5]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.16",
+    "DOC-OFFICIAL-SYLLABUS-001 p.107",
+    "DOC-NOTICES-001 p.7"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 126,
+   "answered": true,
+   "fact_recall": 0.5,
+   "term_recall": 0.5294,
+   "cites_required": true,
+   "grounded": true,
+   "wall_ms": 127
+  },
+  {
+   "question_id": "EVAL-038",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "graph",
+   "answer": "(Synthetic demo data) Computer Networks (research_area RA-IT-010, synthetic) [2]. (Synthetic demo data) Computer Networks: research_area_of: DEPT-IT-001 [synthetic] [2]. (Synthetic demo data) Wireless and software-defined networking research areas [4]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-DEPT-PROFILE-001 p.None",
+    "DOC-FACULTY-001 p.3"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 122,
+   "answered": true,
+   "fact_recall": 0.3333,
+   "term_recall": 0.5,
+   "cites_required": true,
+   "grounded": true,
+   "wall_ms": 122
+  },
+  {
+   "question_id": "EVAL-039",
+   "category": "F_cross_document",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "graph",
+   "answer": "(Synthetic demo data) Final presentations follow the submission deadlines in the calendar and are held in the IT Seminar Hall [4]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-FAQ-001 p.1"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 119,
+   "answered": true,
+   "fact_recall": 0.0,
+   "term_recall": 0.1613,
+   "cites_required": false,
+   "grounded": true,
+   "wall_ms": 119
+  },
+  {
+   "question_id": "EVAL-040",
+   "category": "F_cross_document",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "documents",
+   "answer": "(Synthetic demo data) NOTICE-012 \u2014 Capstone mid-review schedule [1]. (Synthetic demo data) Capstone Project mid-reviews for 2CEIT504 and 2CEIT703 will run from 28 September to 3 October 2026 in the Capstone Project Room (FCL-IT-002, Room DA-205) [1]. (Synthetic demo data) NOTICE-011 \u2014 Faculty meeting \u2013 capstone mid-review panels [2]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-NOTICES-001 p.7",
+    "DOC-NOTICES-001 p.6"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 66,
+   "answered": true,
+   "fact_recall": 0.6667,
+   "term_recall": 0.5556,
+   "cites_required": true,
+   "grounded": true,
+   "wall_ms": 67
+  },
+  {
+   "question_id": "EVAL-041",
+   "category": "F_cross_document",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "documents",
+   "answer": "1.1.3 List of courses having focus on employability/ entrepreneurship/ skill development for year 2019-2020 [3].",
+   "cited": [
+    "DOC-OFFICIAL-CATALOG-001 p.71"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 75,
+   "answered": true,
+   "fact_recall": 0.375,
+   "term_recall": 0.16,
+   "cites_required": false,
+   "grounded": true,
+   "wall_ms": 75
+  },
+  {
+   "question_id": "EVAL-042",
+   "category": "F_cross_document",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "documents",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 67,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 67
+  },
+  {
+   "question_id": "EVAL-043",
+   "category": "F_cross_document",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "documents",
+   "answer": "(Synthetic demo data) Submit an offer letter from the host organisation to the Project Coordinator before Semester VIII starts; then send fortnightly progress reports [1]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-FAQ-001 p.2"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 70,
+   "answered": true,
+   "fact_recall": 0.1,
+   "term_recall": 0.3438,
+   "cites_required": false,
+   "grounded": true,
+   "wall_ms": 70
+  },
+  {
+   "question_id": "EVAL-044",
+   "category": "F_cross_document",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "documents",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 67,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 67
+  },
+  {
+   "question_id": "EVAL-045",
+   "category": "F_cross_document",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "structured",
+   "answer": "2CEIT703 CAPSTONE PROJECT-III: 6 credits (theory 0 + practical/TW 6), 12 contact hours, 100 total marks; regular course in B.TECH-IT Semester VII [1].",
+   "cited": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.16"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 137,
+   "answered": true,
+   "fact_recall": 0.8,
+   "term_recall": 0.5238,
+   "cites_required": true,
+   "grounded": true,
+   "wall_ms": 137
+  },
+  {
+   "question_id": "EVAL-046",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "structured",
+   "answer": "Bachelor of Technology in Information Technology (B.TECH-IT): 8 semesters and 174 credits in total, computed from the official semester totals (Sem I: 20, Sem II: 20, Sem III: 24, Sem IV: 21, Sem V: 23, Sem VI: 23, Sem VII: 23, Sem VIII: 20) [1].",
+   "cited": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.10"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 66,
+   "answered": true,
+   "fact_recall": 1.0,
+   "term_recall": 0.7143,
+   "cites_required": true,
+   "grounded": true,
+   "wall_ms": 66
+  },
+  {
+   "question_id": "EVAL-047",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "structured",
+   "answer": "ELECTIVE-VI in B.TECH-IT Semester VII has 7 options (4 credits): 2CEIT78PE10 FOG COMPUTING, 2CEIT78PE11 FAULT TOLERANT SYSTEMS, 2CEIT78PE12 HIGH PERFORMANCE COMPUTING, 2CEIT78PE13 COMPUTER VISION, 2CEIT78PE7 NATURAL LANGUAGE PROCESSING, 2CEIT78PE8 FORENSICS & CYBER LAW, 2CEIT78PE9 ADVANCED ALGORITHMS [1]. B.TECH-IT Semester VII (23 credits in total): ELECTIVE-V (elective, 4 cr), choose one of: 2CEIT78PE1 DEEP LEARNING, 2CEIT78PE2 BLOCKCHAIN TECHNOLOGIES, 2CEIT78PE3 FUNDAMENTALS OF IMAGE PROCESSI",
+   "cited": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.16",
+    "DOC-OFFICIAL-SYLLABUS-001 p.16",
+    "DOC-COURSES-001 p.20"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 82,
+   "answered": true,
+   "fact_recall": 1.0,
+   "term_recall": 1.0,
+   "cites_required": true,
+   "grounded": true,
+   "wall_ms": 82
+  },
+  {
+   "question_id": "EVAL-048",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "answer_type": "abstained",
+   "route": "documents",
+   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+   "cited": [],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 65,
+   "answered": false,
+   "fact_recall": 0.0,
+   "term_recall": 0.0,
+   "cites_required": false,
+   "grounded": false,
+   "wall_ms": 65
+  },
+  {
+   "question_id": "EVAL-049",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "answer_type": "answered",
+   "route": "documents",
+   "answer": "(Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.10 \u2014 B.TECH-IT Semester I \u2013 course table also in syllabus of [DO] [1]. (Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.11 \u2014 B.TECH-IT Semester II \u2013 course table also in syllabus of [DO] [3]. SEM-BTECH-IT-01 \u2014 B.TECH-IT Semester I [4]. Synthetic demo data is not official GUNI information.",
+   "cited": [
+    "DOC-COURSES-001 p.38",
+    "DOC-COURSES-001 p.42",
+    "DOC-PROGRAMS-001 p.2"
+   ],
+   "issues": [],
+   "warnings": [],
+   "latency_ms": 65,
+   "answered": true,
+   "fact_recall": 0.5,
+   "term_recall": 0.4667,
+   "cites_required": true,
+   "grounded": true,
+   "wall_ms": 65
+  },
+  {
+   "question_id": "EVAL-050",
+   "category": "G_structured_sql",
    "answerable": true,
    "answer_type": "abstained",
    "route": "documents",
@@ -499,621 +1067,6 @@
    "wall_ms": 63
   },
   {
-   "question_id": "EVAL-021",
-   "category": "C_semantic",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "documents",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 61,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 61
-  },
-  {
-   "question_id": "EVAL-022",
-   "category": "C_semantic",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "documents",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 51,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 51
-  },
-  {
-   "question_id": "EVAL-023",
-   "category": "C_semantic",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "documents",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 60,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 60
-  },
-  {
-   "question_id": "EVAL-024",
-   "category": "D_metadata_filtered",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "structured",
-   "answer": "B.TECH-IT Semester VI (23 credits in total): regular courses: 2CEIT601 THEORY OF COMPUTATION (4 cr); 2CEIT602 ARTIFICIAL INTELLIGENCE (4 cr); 2CEIT603 CLOUD COMPUTING (4 cr); 2CEIT604 USER EXPERIENCE DESIGN (1 cr); 2CEIT605 CAPSTONE PROJECT-II (1 cr); 2HS6101 APTITUDE SKILL BUILDING\u2013II (1 cr) | ELECTIVE-III (elective, 4 cr), choose one of: 2CEIT6PE1 WEB TECHNOLOGY, 2CEIT6PE2 SOFTWARE VALIDATION & TESTING, 2CEIT6PE3 CRYPTOGRAPHY AND NETWORK SECURITY, 2CEIT6PE4 DATA SCIENCES AND MACHINE LEARNING, ",
-   "cited": [
-    "DOC-OFFICIAL-SYLLABUS-001 p.15",
-    "DOC-COURSES-001 p.48",
-    "DOC-COURSES-001 p.17"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 58,
-   "answered": true,
-   "fact_recall": 1.0,
-   "term_recall": 0.9767,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 58
-  },
-  {
-   "question_id": "EVAL-025",
-   "category": "D_metadata_filtered",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "documents",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 53,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 53
-  },
-  {
-   "question_id": "EVAL-026",
-   "category": "D_metadata_filtered",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "documents",
-   "answer": "(Synthetic demo data) Department Notices \u2014 June to September 2026 [3]. (Synthetic demo data) Department Notices \u2014 June to September 2026 (Synthetic) [3]. (Synthetic demo data) Twenty synthetic department notices dated June\u2013September 2026 [3]. Synthetic demo data is not official GUNI information.",
-   "cited": [
-    "DOC-NOTICES-001 p.1"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 53,
-   "answered": true,
-   "fact_recall": 0.0625,
-   "term_recall": 0.0678,
-   "cites_required": false,
-   "grounded": true,
-   "wall_ms": 53
-  },
-  {
-   "question_id": "EVAL-027",
-   "category": "D_metadata_filtered",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "documents",
-   "answer": "(Synthetic demo data) NOTICE-001 \u2014 Orientation programme for new B.Tech IT and M.Tech IT students [3]. (Synthetic demo data) POLICY-010 \u2014 CM-SYN-POL-010 M.Tech Major Project Policy (Demo) [2]. (Synthetic demo data) applies to programmes [2]. Synthetic demo data is not official GUNI information.",
-   "cited": [
-    "DOC-POLICIES-001 p.6",
-    "DOC-NOTICES-001 p.2"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 62,
-   "answered": true,
-   "fact_recall": 0.2222,
-   "term_recall": 0.3103,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 62
-  },
-  {
-   "question_id": "EVAL-028",
-   "category": "D_metadata_filtered",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "structured",
-   "answer": "B.TECH-IT Semester VII (23 credits in total): ELECTIVE-V (elective, 4 cr), choose one of: 2CEIT78PE1 DEEP LEARNING, 2CEIT78PE2 BLOCKCHAIN TECHNOLOGIES, 2CEIT78PE3 FUNDAMENTALS OF IMAGE PROCESSING, 2CEIT78PE4 MOBILE COMPUTING, 2CEIT78PE5 SEARCH ENGINE OPTIMIZATION, 2CEIT78PE6 VIRTUAL REALITY | ELECTIVE-VI (elective, 4 cr), choose one of: 2CEIT78PE10 FOG COMPUTING, 2CEIT78PE11 FAULT TOLERANT SYSTEMS, 2CEIT78PE12 HIGH PERFORMANCE COMPUTING, 2CEIT78PE13 COMPUTER VISION, 2CEIT78PE7 NATURAL LANGUAGE P",
-   "cited": [
-    "DOC-OFFICIAL-SYLLABUS-001 p.16",
-    "DOC-COURSES-001 p.20"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 56,
-   "answered": true,
-   "fact_recall": 1.0,
-   "term_recall": 1.0,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 57
-  },
-  {
-   "question_id": "EVAL-029",
-   "category": "D_metadata_filtered",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "documents",
-   "answer": "(Synthetic demo data) CAL-2026-27-014 (result): Result publication \u2013 odd semester \u2014 2027-01-08 [2]. (Synthetic demo data) CAL-2026-27-011 (examination): Practical and viva examinations \u2013 odd semester \u2014 2026-11-23 to [2]. (Synthetic demo data) CAL-2026-27-012 (examination): End-semester theory examinations \u2013 odd semester \u2014 2026-11-30 to [2]. Synthetic demo data is not official GUNI information.",
-   "cited": [
-    "DOC-CALENDAR-001 p.3"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 54,
-   "answered": true,
-   "fact_recall": 0.5833,
-   "term_recall": 0.7083,
-   "cites_required": false,
-   "grounded": true,
-   "wall_ms": 54
-  },
-  {
-   "question_id": "EVAL-030",
-   "category": "D_metadata_filtered",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "documents",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 54,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 54
-  },
-  {
-   "question_id": "EVAL-031",
-   "category": "E_multi_hop",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "graph",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 101,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 101
-  },
-  {
-   "question_id": "EVAL-032",
-   "category": "E_multi_hop",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "graph",
-   "answer": "(Synthetic demo data) 2CEIT602 ARTIFICIAL INTELLIGENCE: taught_by: FAC-IT-002 [synthetic], FAC-IT-004 (Dr. Kabir Modelkar) [synthetic] [2]. (Synthetic demo data) 2CEIT6PE4 DATA SCIENCES AND MACHINE LEARNING: taught_by: FAC-IT-004 (Dr. Kabir Modelkar) [synthetic] [3]. Synthetic demo data is not official GUNI information.",
-   "cited": [
-    "DOC-OFFICIAL-SYLLABUS-001 p.15",
-    "DOC-OFFICIAL-SYLLABUS-001 p.15"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 146,
-   "answered": true,
-   "fact_recall": 0.5,
-   "term_recall": 0.4783,
-   "cites_required": false,
-   "grounded": true,
-   "wall_ms": 147
-  },
-  {
-   "question_id": "EVAL-033",
-   "category": "E_multi_hop",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "documents",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 60,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 61
-  },
-  {
-   "question_id": "EVAL-034",
-   "category": "E_multi_hop",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "documents",
-   "answer": "(Synthetic demo data) Programmes offered [5]. Synthetic demo data is not official GUNI information.",
-   "cited": [
-    "DOC-DEPT-PROFILE-001 p.1"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 59,
-   "answered": true,
-   "fact_recall": 0.1667,
-   "term_recall": 0.0833,
-   "cites_required": false,
-   "grounded": true,
-   "wall_ms": 60
-  },
-  {
-   "question_id": "EVAL-035",
-   "category": "E_multi_hop",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "graph",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 102,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 102
-  },
-  {
-   "question_id": "EVAL-036",
-   "category": "E_multi_hop",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "graph",
-   "answer": "2CEIT78PE1 DEEP LEARNING (course COURSE-2CEIT78PE1, derived_official) [1]. 2CEIT78PE1 DEEP LEARNING: course_code: 2CEIT78PE1 [official] [1]. 2CEIT78PE1 DEEP LEARNING: course_name: DEEP LEARNING [official] [1]. Note: [1] contains synthetic demo data, not official GUNI information.",
-   "cited": [
-    "DOC-OFFICIAL-SYLLABUS-001 p.16"
-   ],
-   "issues": [],
-   "warnings": [
-    "a synthetic source was not disclosed by the answer; a notice was added"
-   ],
-   "latency_ms": 122,
-   "answered": true,
-   "fact_recall": 0.25,
-   "term_recall": 0.2083,
-   "cites_required": false,
-   "grounded": true,
-   "wall_ms": 122
-  },
-  {
-   "question_id": "EVAL-037",
-   "category": "E_multi_hop",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "graph",
-   "answer": "(Synthetic demo data) 2CEIT702 BIG DATA ANALYTICS: practicals_in: LAB-IT-006 (Cloud & Big Data Lab) [synthetic] [1]. (Synthetic demo data) 3CEIT306 BIG DATA ANALYTICS: practicals_in: LAB-IT-006 (Cloud & Big Data Lab) [synthetic] [2]. (Synthetic demo data) NOTICE-014 \u2014 Timetable update: Cloud Computing and Big Data Analytics practicals [5]. Synthetic demo data is not official GUNI information.",
-   "cited": [
-    "DOC-OFFICIAL-SYLLABUS-001 p.16",
-    "DOC-OFFICIAL-SYLLABUS-001 p.107",
-    "DOC-NOTICES-001 p.7"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 107,
-   "answered": true,
-   "fact_recall": 0.5,
-   "term_recall": 0.5294,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 107
-  },
-  {
-   "question_id": "EVAL-038",
-   "category": "E_multi_hop",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "graph",
-   "answer": "(Synthetic demo data) Computer Networks (research_area RA-IT-010, synthetic) [2]. (Synthetic demo data) Computer Networks: research_area_of: DEPT-IT-001 [synthetic] [2]. (Synthetic demo data) research areas [4]. Synthetic demo data is not official GUNI information.",
-   "cited": [
-    "DOC-DEPT-PROFILE-001 p.None",
-    "DOC-FACULTY-001 p.3"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 98,
-   "answered": true,
-   "fact_recall": 0.3333,
-   "term_recall": 0.5,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 98
-  },
-  {
-   "question_id": "EVAL-039",
-   "category": "F_cross_document",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "graph",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 122,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 122
-  },
-  {
-   "question_id": "EVAL-040",
-   "category": "F_cross_document",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "documents",
-   "answer": "(Synthetic demo data) NOTICE-012 \u2014 Capstone mid-review schedule [1]. (Synthetic demo data) Capstone Project mid-reviews for 2CEIT504 and 2CEIT703 will run from 28 September to 3 October 2026 in [1]. (Synthetic demo data) NOTICE-011 \u2014 Faculty meeting \u2013 capstone mid-review panels [2]. Synthetic demo data is not official GUNI information.",
-   "cited": [
-    "DOC-NOTICES-001 p.7",
-    "DOC-NOTICES-001 p.6"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 59,
-   "answered": true,
-   "fact_recall": 0.4444,
-   "term_recall": 0.3704,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 59
-  },
-  {
-   "question_id": "EVAL-041",
-   "category": "F_cross_document",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "documents",
-   "answer": "1.1.3 List of courses having focus on employability/ entrepreneurship/ skill development for year 2019-2020 [3].",
-   "cited": [
-    "DOC-OFFICIAL-CATALOG-001 p.71"
-   ],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 65,
-   "answered": true,
-   "fact_recall": 0.375,
-   "term_recall": 0.16,
-   "cites_required": false,
-   "grounded": true,
-   "wall_ms": 65
-  },
-  {
-   "question_id": "EVAL-042",
-   "category": "F_cross_document",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "documents",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 65,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 65
-  },
-  {
-   "question_id": "EVAL-043",
-   "category": "F_cross_document",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "documents",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 56,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 56
-  },
-  {
-   "question_id": "EVAL-044",
-   "category": "F_cross_document",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "documents",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 58,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 58
-  },
-  {
-   "question_id": "EVAL-045",
-   "category": "F_cross_document",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "structured",
-   "answer": "2CEIT703 CAPSTONE PROJECT-III: 6 credits (theory 0 + practical/TW 6), 12 contact hours, 100 total marks; regular course in B.TECH-IT Semester VII [1].",
-   "cited": [
-    "DOC-OFFICIAL-SYLLABUS-001 p.16"
-   ],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 102,
-   "answered": true,
-   "fact_recall": 0.8,
-   "term_recall": 0.5238,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 102
-  },
-  {
-   "question_id": "EVAL-046",
-   "category": "G_structured_sql",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "structured",
-   "answer": "Bachelor of Technology in Information Technology (B.TECH-IT): 8 semesters and 174 credits in total, computed from the official semester totals (Sem I: 20, Sem II: 20, Sem III: 24, Sem IV: 21, Sem V: 23, Sem VI: 23, Sem VII: 23, Sem VIII: 20) [1].",
-   "cited": [
-    "DOC-OFFICIAL-SYLLABUS-001 p.10"
-   ],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 59,
-   "answered": true,
-   "fact_recall": 1.0,
-   "term_recall": 0.7143,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 59
-  },
-  {
-   "question_id": "EVAL-047",
-   "category": "G_structured_sql",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "structured",
-   "answer": "ELECTIVE-VI in B.TECH-IT Semester VII has 7 options (4 credits): 2CEIT78PE10 FOG COMPUTING, 2CEIT78PE11 FAULT TOLERANT SYSTEMS, 2CEIT78PE12 HIGH PERFORMANCE COMPUTING, 2CEIT78PE13 COMPUTER VISION, 2CEIT78PE7 NATURAL LANGUAGE PROCESSING, 2CEIT78PE8 FORENSICS & CYBER LAW, 2CEIT78PE9 ADVANCED ALGORITHMS [1]. B.TECH-IT Semester VII (23 credits in total): ELECTIVE-V (elective, 4 cr), choose one of: 2CEIT78PE1 DEEP LEARNING, 2CEIT78PE2 BLOCKCHAIN TECHNOLOGIES, 2CEIT78PE3 FUNDAMENTALS OF IMAGE PROCESSI",
-   "cited": [
-    "DOC-OFFICIAL-SYLLABUS-001 p.16",
-    "DOC-OFFICIAL-SYLLABUS-001 p.16",
-    "DOC-COURSES-001 p.20"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 65,
-   "answered": true,
-   "fact_recall": 1.0,
-   "term_recall": 1.0,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 65
-  },
-  {
-   "question_id": "EVAL-048",
-   "category": "G_structured_sql",
-   "answerable": true,
-   "answer_type": "abstained",
-   "route": "documents",
-   "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
-   "cited": [],
-   "issues": [],
-   "warnings": [],
-   "latency_ms": 57,
-   "answered": false,
-   "fact_recall": 0.0,
-   "term_recall": 0.0,
-   "cites_required": false,
-   "grounded": false,
-   "wall_ms": 57
-  },
-  {
-   "question_id": "EVAL-049",
-   "category": "G_structured_sql",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "documents",
-   "answer": "(Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.10 \u2014 B.TECH-IT Semester I \u2013 course table [1]. (Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.11 \u2014 B.TECH-IT Semester II \u2013 course table [3]. SEM-BTECH-IT-01 \u2014 B.TECH-IT Semester I [4]. Synthetic demo data is not official GUNI information.",
-   "cited": [
-    "DOC-COURSES-001 p.38",
-    "DOC-COURSES-001 p.42",
-    "DOC-PROGRAMS-001 p.2"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 56,
-   "answered": true,
-   "fact_recall": 0.5,
-   "term_recall": 0.4667,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 56
-  },
-  {
-   "question_id": "EVAL-050",
-   "category": "G_structured_sql",
-   "answerable": true,
-   "answer_type": "answered",
-   "route": "documents",
-   "answer": "(Synthetic demo data) 40 students [1]. Synthetic demo data is not official GUNI information.",
-   "cited": [
-    "DOC-LABS-001 p.4"
-   ],
-   "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 57,
-   "answered": true,
-   "fact_recall": 0.1667,
-   "term_recall": 0.125,
-   "cites_required": true,
-   "grounded": true,
-   "wall_ms": 57
-  },
-  {
    "question_id": "EVAL-051",
    "category": "G_structured_sql",
    "answerable": true,
@@ -1125,13 +1078,13 @@
    ],
    "issues": [],
    "warnings": [],
-   "latency_ms": 64,
+   "latency_ms": 72,
    "answered": true,
    "fact_recall": 0.2,
    "term_recall": 0.2857,
    "cites_required": true,
    "grounded": true,
-   "wall_ms": 65
+   "wall_ms": 72
   },
   {
    "question_id": "EVAL-052",
@@ -1143,13 +1096,13 @@
    "cited": [],
    "issues": [],
    "warnings": [],
-   "latency_ms": 61,
+   "latency_ms": 64,
    "answered": false,
    "fact_recall": 0.0,
    "term_recall": 0.0,
    "cites_required": false,
    "grounded": false,
-   "wall_ms": 61
+   "wall_ms": 64
   },
   {
    "question_id": "EVAL-053",
@@ -1161,9 +1114,9 @@
    "cited": [],
    "issues": [],
    "warnings": [],
-   "latency_ms": 98,
+   "latency_ms": 111,
    "abstained": true,
-   "wall_ms": 98
+   "wall_ms": 111
   },
   {
    "question_id": "EVAL-054",
@@ -1175,9 +1128,9 @@
    "cited": [],
    "issues": [],
    "warnings": [],
-   "latency_ms": 76,
+   "latency_ms": 84,
    "abstained": true,
-   "wall_ms": 76
+   "wall_ms": 84
   },
   {
    "question_id": "EVAL-055",
@@ -1193,9 +1146,9 @@
    ],
    "issues": [],
    "warnings": [],
-   "latency_ms": 76,
+   "latency_ms": 92,
    "abstained": false,
-   "wall_ms": 76
+   "wall_ms": 92
   },
   {
    "question_id": "EVAL-056",
@@ -1207,9 +1160,9 @@
    "cited": [],
    "issues": [],
    "warnings": [],
-   "latency_ms": 59,
+   "latency_ms": 65,
    "abstained": true,
-   "wall_ms": 59
+   "wall_ms": 65
   },
   {
    "question_id": "EVAL-057",
@@ -1221,9 +1174,9 @@
    "cited": [],
    "issues": [],
    "warnings": [],
-   "latency_ms": 55,
+   "latency_ms": 63,
    "abstained": true,
-   "wall_ms": 55
+   "wall_ms": 63
   },
   {
    "question_id": "EVAL-058",
@@ -1231,26 +1184,192 @@
    "answerable": false,
    "answer_type": "answered",
    "route": "documents",
-   "answer": "FACULTY OF ENGINEERING & TECHNOLOGY [3]. (Synthetic demo data) COLLEGE-UVPCE-001 U.V. Patel College of Engineering, SCHOOL-FET-001 Faculty of [5]. (Synthetic demo data) Engineering & Technology [O] [5]. Synthetic demo data is not official GUNI information.",
+   "answer": "FACULTY OF ENGINEERING & TECHNOLOGY [3]. (Synthetic demo data) COLLEGE-UVPCE-001 U.V. Patel College of Engineering, SCHOOL-FET-001 Faculty of [5]. (Synthetic demo data) Engineering & Technology [O] department [5]. Synthetic demo data is not official GUNI information.",
    "cited": [
     "DOC-OFFICIAL-SYLLABUS-001 p.10",
     "DOC-PROGRAMS-001 p.1"
    ],
    "issues": [],
-   "warnings": [
-    "1 sentence(s) without a citation"
-   ],
-   "latency_ms": 59,
+   "warnings": [],
+   "latency_ms": 66,
    "abstained": false,
-   "wall_ms": 59
+   "wall_ms": 66
   }
  ],
+ "traps": {
+  "n": 23,
+  "abstained": 15,
+  "violations": 0,
+  "questions": [
+   {
+    "question_id": "NEG-001",
+    "trap_type": "real_contact",
+    "answer_type": "answered",
+    "answer": "(Synthetic demo data) SYN-EXT-4000 (placeholder extension, not a real number) [1]. Synthetic demo data is not official GUNI information.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-002",
+    "trap_type": "official_vs_synthetic_trap",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-003",
+    "trap_type": "official_vs_synthetic_trap",
+    "answer_type": "answered",
+    "answer": "(Synthetic demo data) All dates are synthetic and are not an actual Ganpat University schedule [1]. Synthetic demo data is not official GUNI information.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-004",
+    "trap_type": "real_contact",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-005",
+    "trap_type": "unsupported_detail",
+    "answer_type": "answered",
+    "answer": "2CEIT303 DATABASE MANAGEMENT SYSTEM: curriculum_status: active_in_2021_2022_syllabus [1]. Note: [1] contains synthetic demo data, not official GUNI information.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-006",
+    "trap_type": "official_vs_synthetic_trap",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-007",
+    "trap_type": "nonexistent_entity",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-008",
+    "trap_type": "real_location",
+    "answer_type": "answered",
+    "answer": "(Synthetic demo data) For real Ganpat University contacts see the official university letterhead (UNIV-GUNI-001, catalog p.1); no department-level contacts exist in the official sources [2]. (Synthetic demo data) SYN-EXT-4000 (placeholder extension, not a real number) [2]. Synthetic demo data is not",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-009",
+    "trap_type": "unsupported_detail",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-010",
+    "trap_type": "unsupported_detail",
+    "answer_type": "answered",
+    "answer": "(Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.14 \u2014 B.TECH-IT Semester V \u2013 course table also in syllabus of [DO] [1]. (Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.10 \u2014 B.TECH-IT Semester I \u2013 course table also in syllabus of [DO] [2]. (Synthetic demo data) DOC-OFFICIAL-SYLLABUS-001 p.15 \u2014 B.T",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-011",
+    "trap_type": "unsupported_detail",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-012",
+    "trap_type": "real_person",
+    "answer_type": "answered",
+    "answer": "(Synthetic demo data) For real Ganpat University contacts see the official university letterhead (UNIV-GUNI-001, catalog p.1); no department-level contacts exist in the official sources [1]. Synthetic demo data is not official GUNI information.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-013",
+    "trap_type": "version_out_of_scope",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-014",
+    "trap_type": "real_contact",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-015",
+    "trap_type": "code_collision_trap",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-016",
+    "trap_type": "unsupported_detail",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-017",
+    "trap_type": "nonexistent_entity",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-018",
+    "trap_type": "unsupported_detail",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-019",
+    "trap_type": "nonexistent_entity",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-020",
+    "trap_type": "unsupported_detail",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-021",
+    "trap_type": "version_out_of_scope",
+    "answer_type": "answered",
+    "answer": "(Synthetic demo data) Synthetic academic calendar for the demo academic year 2026-2027 [2]. (Synthetic demo data) 1.0 academic_year [4]. Synthetic demo data is not official GUNI information.",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-022",
+    "trap_type": "unsupported_detail",
+    "answer_type": "answered",
+    "answer": "3IT101 SOFT COMPUTING is listed in the official employability course list for 2017-2018 under programme code 402; it is not part of the 2021-2022 syllabus [1]. 3IT101 SOFT COMPUTING is listed in the official employability course list for 2018-2019 under programme code 402; it is not part of the 2021",
+    "violations": []
+   },
+   {
+    "question_id": "NEG-023",
+    "trap_type": "official_vs_synthetic_trap",
+    "answer_type": "abstained",
+    "answer": "I couldn't find authoritative information for that in the current CampusMate knowledge base.",
+    "violations": []
+   }
+  ]
+ },
  "run": {
   "label": "extractive-v1",
   "provider": "extractive",
   "model": "extractive-v1",
-  "commit": "353d253",
-  "timestamp": "2026-09-19T10:17:16+00:00",
+  "commit": "2bc9c79",
+  "timestamp": "2026-09-19T10:47:08+00:00",
   "max_tokens": 400,
   "temperature": 0.0
  }
