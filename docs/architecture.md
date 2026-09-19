@@ -274,6 +274,26 @@ PostgreSQL rows + link tables ─► 29 edge queries (app/knowledge/graph.py) �
 
 The only difference is the citation of the 2 COORDINATED_BY edges: the faculty record instead of the programmes document, at the same synthetic level. The schema stores a field's trust level (`field_provenance`) but not which document stated that one field.
 
+## Query routing (Phase 14)
+
+```
+question ─► resolve entities (IDs, printed codes, names, unambiguous acronyms, "Semester VI of B.Tech", "official")
+         ─► ordered rules: automation │ personal │ structured intents │ graph (entity + relation words) │ documents
+         ─► evidence: structured facts / graph neighbourhood (2 hops, hubs not expanded) first, then hybrid passages
+```
+
+| Decision | Why |
+|---|---|
+| Deterministic rules, not an LLM agent | Explainable (`reasons`), repeatable, testable, and 27 ms |
+| Structured intents: course facts, a semester's courses, programme summary, elective-slot options, grade for marks | Exact tabular facts come with their official citation (e.g. syllabus p.15), with no paraphrasing |
+| Documents always appended as supporting evidence | A routing miss costs precision, not the answer |
+| An acronym is used only if it names exactly one entity and is not a department code | A found bug: "IT" in "B.Tech IT" matched four "Industrial Training"-style course names |
+| Arbitrary aggregates ("faculty with more than four courses") are **not** handled; they fall back to documents | That needs text-to-SQL (an LLM plus a read-only, whitelisted query layer), a deliberate future step |
+
+**Measured (same 52 questions):** routed Hit@1 **0.615** (hybrid 0.442), MRR **0.707** (0.581), Hit@5 0.827, p50 27 ms. Against hybrid it is better on 11, the same on 38, worse on 3 (p = 0.057). It is strongest on structured (Hit@5 0.857 vs vector 0.429) and multi-hop questions (MRR 0.875).
+
+**Caveat:** the rules were written while reading these same questions, so this is an **in-sample, optimistic** estimate. A held-out question set is needed for an unbiased number.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

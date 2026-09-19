@@ -24,15 +24,21 @@ from app.models.documents import DocumentChunk
 from app.retrieval.rerank import CrossEncoderReranker
 from app.retrieval.runtime import get_bm25_cache, get_indexer
 from app.retrieval.search import bm25_search, hybrid_search, reranked_search, vector_search
+from app.routing.entities import EntityResolver
+from app.routing.evidence import RetrievalDeps, gather
+from app.routing.router import decide
 
 QUESTIONS = REPO_ROOT / "evaluation" / "datasets" / "evaluation_questions.json"
 RESULTS = REPO_ROOT / "evaluation" / "results"
-MODES = ("vector", "bm25", "hybrid", "hybrid_rerank")  # extended as retrieval modes are added
+MODES = ("vector", "bm25", "hybrid", "hybrid_rerank", "routed")  # extended as retrieval modes are added
 
 
 def to_retrieved(hits) -> list[Retrieved]:
     return [Retrieved(h.citation.document_id, h.citation.page_start, h.citation.page_end,
                       tuple(h.entity_ids), h.score) for h in hits]
+
+
+ROUTES: dict[str, str] = {}  # question -> route, filled by the routed retriever
 
 
 def make_retriever(mode: str, db, reranker_model: str | None = None):
@@ -45,6 +51,16 @@ def make_retriever(mode: str, db, reranker_model: str | None = None):
     if mode == "hybrid":
         cache = get_bm25_cache()
         return lambda question, k: to_retrieved(hybrid_search(db, indexer.embedder, indexer.index, cache, question, k))
+    if mode == "routed":
+        resolver, deps = EntityResolver(db), RetrievalDeps(indexer.embedder, indexer.index, get_bm25_cache())
+
+        def routed(question: str, k: int) -> list[Retrieved]:
+            decision = decide(question, resolver.resolve(question))
+            ROUTES[question] = decision.route
+            evidence = gather(db, question, decision, deps, k_documents=k)
+            return [Retrieved(e.citation.document_id, e.citation.page_start, e.citation.page_end,
+                              tuple(e.entity_ids), e.score) for e in evidence][:k]
+        return routed
     if mode == "hybrid_rerank":
         cache, settings = get_bm25_cache(), get_settings()
         reranker = CrossEncoderReranker(reranker_model or settings.reranker_model, settings.model_cache_dir)
@@ -60,6 +76,22 @@ def git_commit() -> str | None:
                               text=True, check=True).stdout.strip()
     except (OSError, subprocess.CalledProcessError):
         return None
+
+
+def questions_by_id() -> dict:
+    return {q.question_id: q for q in load_questions(QUESTIONS)}
+
+
+def route_table(result: dict, questions: dict) -> str:
+    counts: dict[str, dict[str, int]] = {}
+    for qid, route in result["routes"].items():
+        row = counts.setdefault(questions[qid].category, {})
+        row[route] = row.get(route, 0) + 1
+    routes = sorted({r for row in counts.values() for r in row})
+    lines = ["Routes chosen per category:", "", "| category | " + " | ".join(routes) + " |",
+             "|---|" + "---|" * len(routes)]
+    lines += [f"| {cat} | " + " | ".join(str(row.get(r, 0)) for r in routes) + " |" for cat, row in sorted(counts.items())]
+    return "\n".join(lines) + "\n"
 
 
 def write_report() -> None:
@@ -84,6 +116,7 @@ def write_report() -> None:
                   f"Commit `{run['commit']}` · {run['timestamp']} · model `{run['embedding_model']}` · "
                   f"{run['chunks']} chunks · {result['questions']['answerable']} answerable questions", "",
                   category_table(result), "",
+                  *([route_table(result, questions_by_id())] if "routes" in result else []),
                   f"Mean top score: answerable {result['top_score']['answerable_mean']}, "
                   f"unanswerable {result['top_score']['unanswerable_mean']}.", ""]
     (RESULTS / "RETRIEVAL.md").write_text("\n".join(parts), encoding="utf-8")
@@ -105,6 +138,9 @@ def main(argv: list[str] | None = None) -> int:
         result = evaluate(questions, make_retriever(args.mode, db, args.reranker_model))
         chunks = db.scalar(select(func.count()).select_from(DocumentChunk))
     label = args.label or args.mode
+    if ROUTES:  # routing decisions per question, for the report
+        text_of = {q.text: q for q in questions}
+        result["routes"] = {text_of[t].question_id: r for t, r in ROUTES.items()}
     result["run"] = {"mode": args.mode, "label": label, "timestamp": datetime.now(UTC).isoformat(timespec="seconds"),
                      "reranker_model": (args.reranker_model or settings.reranker_model) if args.mode == "hybrid_rerank" else None,
                      "rerank_candidates": settings.rerank_candidates, "rerank_max_chars": settings.rerank_max_chars,
