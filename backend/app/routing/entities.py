@@ -17,7 +17,7 @@ from dataclasses import dataclass, field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.ingestion.enrich import find_entity_ids
+from app.ingestion.enrich import COURSE_CODE, ENTITY_ID, find_entity_ids
 from app.models.campus import Facility, Laboratory
 from app.models.content import Policy
 from app.models.curriculum import Course, Program
@@ -41,6 +41,9 @@ class Resolution:
     semester_ids: list[str] = field(default_factory=list)
     official_only: bool = False
     numbers: list[float] = field(default_factory=list)
+    # IDs or course codes written in the question that are not in the knowledge base
+    # ("LAB-IT-011", "2CEIT999"): nothing can be said about them.
+    unknown_ids: list[str] = field(default_factory=list)
 
     def of_type(self, prefix: str) -> list[str]:
         return [e for e in self.entity_ids if e.startswith(prefix + "-")]
@@ -116,9 +119,12 @@ class EntityResolver:
 
         programs = [pid for pid, pattern in (("PROG-BTECH-IT-001", _BTECH), ("PROG-MTECH-IT-001", _MTECH))
                     if pid in self.programs and pattern.search(question)]
+        # Matched as written (IDs are upper case), so ordinary words never look like IDs.
+        referenced = set(ENTITY_ID.findall(question)) | {f"COURSE-{c}" for c in COURSE_CODE.findall(question)}
+        unknown = sorted(r.removeprefix("COURSE-") for r in referenced - self.known_ids)
         return Resolution(ordered, programs, self._semesters(question, programs),
                           bool(_OFFICIAL.search(question)),
-                          [float(n) for n in re.findall(r"\b\d{1,3}(?:\.\d+)?\b", question)])
+                          [float(n) for n in re.findall(r"\b\d{1,3}(?:\.\d+)?\b", question)], unknown)
 
     @staticmethod
     def _semesters(question: str, programs: list[str]) -> list[str]:

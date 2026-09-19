@@ -252,3 +252,32 @@ def test_synthetic_documents_never_produce_official_chunks(ingested):
     mixed = ingested.scalar(select(DocumentChunk).where(DocumentChunk.document_id == "DOC-COURSES-001",
                                                         DocumentChunk.section.like("COURSE-2CEIT602 %")))
     assert mixed.source_type == "synthetic"  # it also lists synthetic faculty and labs
+
+
+def test_background_worker_keeps_polling_through_errors_and_stops(monkeypatch):
+    import threading
+    from contextlib import nullcontext
+
+    from app.core.config import get_settings
+    from app.ingestion import background
+
+    calls = []
+    enough = threading.Event()
+
+    def fake_process_next(db, storage, **kwargs):
+        calls.append(kwargs["indexer"])
+        if len(calls) == 2:
+            raise RuntimeError("database briefly unreachable")  # must not kill the thread
+        if len(calls) >= 4:
+            enough.set()
+        return None
+
+    monkeypatch.setattr(background, "get_indexer", lambda: "the-indexer")
+    monkeypatch.setattr(background, "process_next", fake_process_next)
+    monkeypatch.setattr(background, "SessionLocal", lambda: nullcontext())
+    monkeypatch.setattr(background, "get_settings", lambda: get_settings().model_copy(update={"worker_poll_seconds": 0.01}))
+    worker = background.BackgroundWorker()
+    worker.start()
+    assert enough.wait(5)
+    worker.stop(timeout=5)
+    assert not worker._thread.is_alive() and set(calls) == {"the-indexer"}

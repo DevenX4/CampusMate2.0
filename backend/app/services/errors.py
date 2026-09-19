@@ -9,6 +9,14 @@ class NotFoundError(Exception):
         super().__init__(f"{resource} '{identifier}' not found")
 
 
+class RateLimited(Exception):
+    """Too many attempts in a short time; the caller may retry after `retry_after` seconds."""
+
+    def __init__(self, message: str, retry_after: int):
+        self.retry_after = max(1, retry_after)
+        super().__init__(message)
+
+
 class UploadRejected(Exception):
     """An uploaded file was refused. `kind` is one of: too_large, unsupported_type, invalid."""
 

@@ -29,8 +29,15 @@ SYNTHETIC_PREFIX = "(Synthetic demo data)"
 SYNTHETIC_NOTE = "Synthetic demo data is not official GUNI information."
 
 
+# A line break inside a sentence (a PDF line wrap): the line does not end a sentence and the next
+# one continues in lower case. Found in the hallucination tests: "All dates are synthetic and are
+# not / an actual Ganpat University schedule." was quoted as "an actual Ganpat University
+# schedule", the opposite of what it says. "key: value" lines are not continuations.
+_WRAPPED_LINE = re.compile(r"(?<![.!?:;])[ \t]*(?:\r\n|\r|\n)[ \t]*(?=[a-z])(?![a-z_]+:\s)")
+
+
 def sentences(text: str) -> list[str]:
-    return [s.strip() for s in _SENTENCE_END.split(text) if len(s.strip()) > 2]
+    return [s.strip() for s in _SENTENCE_END.split(_WRAPPED_LINE.sub(" ", text)) if len(s.strip()) > 2]
 
 
 def _term(token: str) -> str:

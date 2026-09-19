@@ -68,6 +68,16 @@ def test_it_in_btech_it_is_not_a_course_acronym(resolver):
     assert (resolution.program_ids, resolution.semester_ids) == (["PROG-BTECH-IT-001"], ["SEM-BTECH-IT-06"])
 
 
+@pytest.mark.parametrize("question,unknown", [
+    ("Is LAB-IT-011 open on Sundays?", ["LAB-IT-011"]),
+    ("Who teaches course 2CEIT999?", ["2CEIT999"]),
+    ("Is LAB-IT-001 open, and what is 2CEIT602?", []),        # both exist
+    ("Is the lab-based course hard?", []),                     # ordinary words never look like IDs
+])
+def test_references_to_things_that_do_not_exist(resolver, question, unknown):
+    assert resolver.resolve(question).unknown_ids == unknown
+
+
 def test_semester_without_programme(resolver):
     assert resolver.resolve("courses in sem 7").semester_ids == ["SEM-BTECH-IT-07"]  # M.Tech has only 4
     assert resolver.resolve("courses in 2nd semester").semester_ids == ["SEM-BTECH-IT-02", "SEM-MTECH-IT-02"]

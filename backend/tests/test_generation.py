@@ -48,6 +48,14 @@ def test_sentences_do_not_split_after_titles_or_initials():
         "Dr. A. Patel (Prof. of IT) heads it, e.g. the lab.", "Next one!", "Line two"]
 
 
+def test_a_wrapped_line_is_never_quoted_on_its_own():
+    # Half of a wrapped sentence can say the opposite of the whole sentence.
+    text = ("All dates are synthetic and are not\nan actual Ganpat University schedule.\nOdd semester 2026-2027\n"
+            "source_type: synthetic\n2CEIT601 THEORY OF COMPUTATION (4 cr)")
+    assert sentences(text) == ["All dates are synthetic and are not an actual Ganpat University schedule.",
+                               "Odd semester 2026-2027", "source_type: synthetic", "2CEIT601 THEORY OF COMPUTATION (4 cr)"]
+
+
 def test_graph_facts_are_quoted_clause_by_clause_and_questions_never():
     graph = ContextBlock(1, "graph", "official", "Knowledge graph",
                          "AI (Course COURSE-X, official). credits: 4. Relationships: practicals_in: LAB-1 (AI Lab) "

@@ -35,7 +35,8 @@ def route_question(
     return RouteResponse(
         question=q, route=decision.route, intents=decision.intents, reasons=decision.reasons,
         resolved=ResolvedEntities(entity_ids=resolution.entity_ids, program_ids=resolution.program_ids,
-                                  semester_ids=resolution.semester_ids, official_only=resolution.official_only),
+                                  semester_ids=resolution.semester_ids, official_only=resolution.official_only,
+                                  unknown_ids=resolution.unknown_ids),
         evidence=[EvidenceOut(kind=e.kind, text=e.text, source_type=e.source_type, citation=e.citation,
                               entity_ids=e.entity_ids) for e in evidence],
         took_ms=round((time.perf_counter() - started) * 1000))

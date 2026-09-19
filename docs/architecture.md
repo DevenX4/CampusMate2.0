@@ -407,6 +407,8 @@ chroma run :8001 ◄── HTTP ──┬── API (uvicorn :8000) ◄── /a
                             └── ingestion worker ──► PostgreSQL (jobs, chunks, chat log)
 ```
 
+*Superseded in Phase 19: the Chroma server has an unfixed pre-authentication remote-code-execution flaw (CVE-2026-45829). Ingestion now runs as a thread of the API process, which is the only user of the embedded store. See "Security hardening (Phase 19)".*
+
 **Found by running the processes together:** the API and the worker each opened the embedded Chroma store (`PersistentClient`). After the worker indexed a new document, the API's next question failed with `chromadb InternalError: Error finding id`. Each process keeps its own in-memory view of the index, and the embedded store is not safe across processes. It never showed up before, because the worker and the API had not run at the same time. Now both use one Chroma server (`CHROMA_URL`). The embedded store remains for tests and single-process tools, and the worker warns when it starts without `CHROMA_URL`. Exact search now fetches the eligible vectors over HTTP: about 60 ms instead of 25 ms.
 
 **Scenarios:**
@@ -418,6 +420,24 @@ chroma run :8001 ◄── HTTP ──┬── API (uvicorn :8000) ◄── /a
 
 Not yet integrated: the SLM. The pipeline runs with the extractive provider until a model is chosen (see [slm-evaluation.md](slm-evaluation.md)). Switching is configuration only, and the same scenarios and the answer evaluation will then run with the model.
 
+## Security hardening (Phase 19)
+
+Full review: [security.md](security.md). What was added, and why:
+
+| Change | Why |
+|---|---|
+| Login throttling from the audit log: 5 failures per account, 30 per client IP, in 15 minutes, checked before the password | Stops password guessing and spraying without Redis. During a lockout the right password is refused too, so guessing learns nothing |
+| 20 questions per minute per user, counted from `chat_queries` | Generation can take seconds of a local model; one user must not starve the others |
+| Security headers on every response; CSP `default-src 'none'` and `no-store` on the API | The API serves only JSON: nothing may frame it, script it or cache personal answers |
+| JSON bodies ≤ 64 KB, enforced by Content-Length and while reading (chunked bodies too) | Without it, one huge body is parsed into memory. Found in testing: the limit had to be the innermost middleware, or FastAPI turned it into a generic 400 |
+| `COOKIE_SECURE` mandatory in production; API docs off in production | Safe defaults cannot be forgotten |
+| `purge-sessions`, plus a per-user purge at each login | Dead sessions do not accumulate |
+| An ID in the question that does not exist → abstain | Found by the hallucination traps: "Is LAB-IT-011 open on Sundays?" was answered from an unrelated lab notice |
+| A PDF line wrap never splits a quoted sentence | Found by the hallucination traps: "... are not / an actual Ganpat University schedule" was quoted as "an actual Ganpat University schedule" |
+| **Ingestion inside the API process; no Chroma server** | The dependency audit found CVE-2026-45829 (pre-authentication remote code execution in chromadb's server, no fix) |
+
+**Hallucination tests:** all 23 trap questions of `negative_questions.json` run through the whole pipeline with every real PDF ingested (`tests/test_hallucination.py`), and also in `python -m app.evaluation answers`. The rule: abstain, or answer only from sources, with demo data labelled; never cite synthetic data for an "official" question; never answer about an entity that does not exist.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend ✅ · 18 integration ✅ (SLM pending) · 19 testing + hardening · 20 Docker · 21 deployment evaluation
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend ✅ · 18 integration ✅ (SLM pending) · 19 testing + hardening ✅ · 20 Docker · 21 deployment evaluation

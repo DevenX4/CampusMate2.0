@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 18 (full integration).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. A React frontend (`frontend/`) has the assistant for students and faculty, and a knowledge-base page for administrators. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 19 (testing and security hardening).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. A React frontend (`frontend/`) has the assistant for students and faculty, and a knowledge-base page for administrators. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -123,16 +123,11 @@ cd backend
 .venv/Scripts/python -m uvicorn app.main:app --reload --port 8000
 ```
 
-The whole application runs as four processes. The API and the ingestion worker must share **one Chroma server**: the embedded store (no `CHROMA_URL`) is safe for a single process only.
+The whole application is two processes. The API also ingests uploaded documents, in a background thread (`INGESTION_IN_API`, on by default): the embedded vector store may be used by one process only, and a separate Chroma server is avoided on purpose (see [docs/security.md](docs/security.md)).
 
 ```bash
-# 1. vector index server (owns storage/chroma)
-cd backend && .venv/Scripts/chroma run --path ../storage/chroma --host 127.0.0.1 --port 8001
-# 2. API, and 3. ingestion worker, both with CHROMA_URL=http://127.0.0.1:8001 (in .env)
-cd backend && .venv/Scripts/python -m uvicorn app.main:app --port 8000
-cd backend && .venv/Scripts/python -m app.ingestion worker
-# 4. UI
-cd frontend && npm run dev     # http://127.0.0.1:5173
+cd backend && .venv/Scripts/python -m uvicorn app.main:app --port 8000   # API + ingestion
+cd frontend && npm run dev                                                # UI: http://127.0.0.1:5173
 ```
 
 End-to-end check against the running application (adds one fictitious synthetic document, follows it through ingestion, answering and deactivation, then deletes it; development databases only):
@@ -285,6 +280,16 @@ In development, Vite forwards `/api` to the API (`CAMPUSMATE_API` overrides the 
 | `/login` | everyone | Sign in (the account is created with `python -m app.accounts`) |
 | `/` | students, faculty, admins (`chat:use`) | Ask questions. Each `[n]` in an answer opens its source (document, version, page, trust level, text). Synthetic data carries a warning. Answers can be rated |
 | `/admin` | faculty (read), admins (manage) | Document statistics and list; upload with an explicit trust level; activate, deactivate, archive, delete and re-index. A document's panel shows its versions (new-version upload, rollback by activating an older one, the original PDF for admins) and recent ingestion. Ingestion jobs with retry |
+
+## Security
+
+Summary. The full review, with the test behind each control and the open risks, is in [docs/security.md](docs/security.md).
+
+- Login: Argon2id; after 5 failures for an account, or 30 from one client, within 15 minutes → 429 with `Retry-After`, even for the right password. Sessions are hashed, httpOnly, `SameSite=Lax`, and `Secure` in production (enforced).
+- Chat: 20 questions per minute per user. JSON bodies are limited to 64 KB; uploads to 50 MB.
+- Every API response carries `Content-Security-Policy: default-src 'none'`, `X-Frame-Options: DENY`, `nosniff`, `no-referrer` and `Cache-Control: no-store`.
+- `python -m app.accounts purge-sessions` deletes expired and logged-out sessions.
+- Dependency audit: `npm audit` is clean. chromadb has an **unfixed** remote-code-execution flaw in its *server*; CampusMate uses only the embedded store, and never runs that server.
 
 ## Knowledge (OKF)
 

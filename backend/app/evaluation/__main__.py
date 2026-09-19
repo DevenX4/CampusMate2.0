@@ -24,7 +24,7 @@ from app.core.config import REPO_ROOT, get_settings
 from app.core.db import SessionLocal
 from app.core.logging import setup_logging
 from app.chat.pipeline import answer_question
-from app.evaluation.answers import evaluate_answers, report
+from app.evaluation.answers import evaluate_answers, evaluate_traps, load_traps, report
 from app.evaluation.metrics import Retrieved
 from app.generation.runtime import get_generator
 from app.evaluation.runner import category_table, evaluate, load_questions, paired_comparison, summary_table
@@ -37,6 +37,7 @@ from app.routing.evidence import RetrievalDeps, gather
 from app.routing.router import decide
 
 QUESTIONS = REPO_ROOT / "evaluation" / "datasets" / "evaluation_questions.json"
+TRAPS = REPO_ROOT / "evaluation" / "datasets" / "negative_questions.json"
 RESULTS = REPO_ROOT / "evaluation" / "results"
 MODES = ("vector", "bm25", "hybrid", "hybrid_rerank", "routed")  # extended as retrieval modes are added
 
@@ -141,8 +142,11 @@ def run_answers(label: str | None) -> int:
     print(generator.check())
     with SessionLocal() as db:
         deps = RetrievalDeps(indexer.embedder, indexer.index, get_bm25_cache())
-        result = evaluate_answers(load_questions(QUESTIONS), lambda question: answer_question(
-            db, question, deps, generator, settings.generation_max_tokens, settings.generation_temperature))
+        def ask(question: str):
+            return answer_question(db, question, deps, generator, settings.generation_max_tokens,
+                                   settings.generation_temperature)
+        result = evaluate_answers(load_questions(QUESTIONS), ask)
+        result["traps"] = evaluate_traps(load_traps(TRAPS), ask)
     label = label or re.sub(r"[^A-Za-z0-9_.-]+", "-", generator.model)
     result["run"] = {"label": label, "provider": generator.name, "model": generator.model, "commit": git_commit(),
                      "timestamp": datetime.now(UTC).isoformat(timespec="seconds"),
@@ -155,7 +159,8 @@ def run_answers(label: str | None) -> int:
     s = result["summary"]
     print(f"{label}: answered {s['answerable']['answered']} | fact recall {s['answerable']['fact_recall']} | "
           f"term recall {s['answerable']['term_recall']} | cites required {s['answerable']['cites_required']} | "
-          f"H abstained {s['unanswerable']['abstained']} | fallbacks {s['fallbacks']} | p50 {s['latency_ms']['p50']} ms")
+          f"H abstained {s['unanswerable']['abstained']} | fallbacks {s['fallbacks']} | p50 {s['latency_ms']['p50']} ms | "
+          f"traps: {result['traps']['abstained']}/{result['traps']['n']} abstained, {result['traps']['violations']} violations")
     return 0
 
 

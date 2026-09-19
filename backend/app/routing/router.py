@@ -70,6 +70,8 @@ def decide(question: str, res: Resolution) -> RouteDecision:
 
     intents.append("documents")
     reasons.append("supporting passages: hybrid retrieval" if len(intents) > 1 else "no structured intent: hybrid retrieval")
+    if res.unknown_ids:
+        reasons.append(f"not in the knowledge base: {', '.join(res.unknown_ids)} (the chat abstains)")
     primary = intents[0]
     route = ("structured" if primary in ("grade_for_marks", "elective_slot_options", "course_facts",
                                          "semester_courses", "program_summary")

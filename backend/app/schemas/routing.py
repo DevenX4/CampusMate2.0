@@ -11,6 +11,7 @@ class ResolvedEntities(BaseModel):
     program_ids: list[str]
     semester_ids: list[str]
     official_only: bool
+    unknown_ids: list[str] = Field(default_factory=list, description="Referenced IDs or course codes that do not exist")
 
 
 class EvidenceOut(BaseModel):

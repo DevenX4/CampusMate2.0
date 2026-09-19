@@ -12,12 +12,16 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @router.post("/login", response_model=LoginResponse,
-             responses={401: {"model": ErrorResponse, "description": "Invalid email or password"}})
+             responses={401: {"model": ErrorResponse, "description": "Invalid email or password"},
+                        429: {"model": ErrorResponse, "description": "Too many failed attempts; see Retry-After"}})
 def login(body: LoginRequest, response: Response, db: DbSession, context: Context):
     """Open a session. The token is set as an httpOnly cookie (for browsers) and also
     returned in the body (for API clients such as curl or the /docs Authorize button)."""
     settings = get_settings()
-    result = auth.login(db, body.email, body.password, ttl_hours=settings.session_ttl_hours, context=context)
+    limits = auth.LoginLimits(settings.login_max_failures, settings.login_max_failures_per_ip,
+                              settings.login_window_minutes)
+    result = auth.login(db, body.email, body.password, ttl_hours=settings.session_ttl_hours, context=context,
+                        limits=limits)
     if result is None:
         # Deliberately vague: never reveal whether the email exists.
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid email or password.")

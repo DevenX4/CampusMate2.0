@@ -1,11 +1,11 @@
-"""Live end-to-end scenario against a RUNNING CampusMate: the API, the ingestion worker and the
-real embedding model, reached through the same URL the browser uses.
+"""Live end-to-end scenario against a RUNNING CampusMate: the API (which also ingests, in a
+background thread) and the real embedding model, reached through the same URL the browser uses.
 
     CAMPUSMATE_ADMIN_PASSWORD=... CAMPUSMATE_STUDENT_PASSWORD=... \
     python scripts/e2e_live.py --base http://127.0.0.1:5173 --admin admin@... --student student@...
 
-Needs `uvicorn app.main:app`, `python -m app.ingestion worker` and, for the /api proxy, the Vite
-dev server (or point --base at the API itself, http://127.0.0.1:8000).
+Needs `uvicorn app.main:app` and, for the /api proxy, the Vite dev server (or point --base at the
+API itself, http://127.0.0.1:8000).
 
 For a development database only: it uploads one clearly fictitious synthetic document, checks
 that answers follow its lifecycle, and deletes it again (soft delete) at the end.

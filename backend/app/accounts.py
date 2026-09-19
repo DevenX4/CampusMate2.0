@@ -1,6 +1,7 @@
-"""Create a user account from the command line, e.g. the very first admin:
+"""User accounts from the command line.
 
     python -m app.accounts create --email admin@campusmate-demo.example --role admin --name "Admin"
+    python -m app.accounts purge-sessions     delete expired and logged-out sessions (e.g. nightly)
 
 The password is typed at a hidden prompt (twice), or read from an environment variable named
 with --password-env (for scripts). It is never accepted as a plain command-line argument,
@@ -16,7 +17,7 @@ from pydantic import ValidationError
 
 from app.core.db import SessionLocal
 from app.schemas.users import UserCreate
-from app.services import users
+from app.services import auth, users
 from app.services.audit import RequestContext
 from app.services.errors import ConflictError
 
@@ -38,7 +39,15 @@ def main(argv: list[str] | None = None) -> int:
     create.add_argument("--role", required=True, choices=["admin", "faculty", "student"])
     create.add_argument("--name", default=None)
     create.add_argument("--password-env", default=None, help="read the password from this environment variable")
+    commands.add_parser("purge-sessions", help="delete expired and logged-out sessions")
     args = parser.parse_args(argv)
+
+    if args.command == "purge-sessions":
+        with SessionLocal() as db:
+            removed = auth.purge_sessions(db)
+            db.commit()
+        print(f"Removed {removed} expired or logged-out sessions")
+        return 0
 
     try:
         data = UserCreate(email=args.email, full_name=args.name, role=args.role,

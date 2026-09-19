@@ -75,6 +75,12 @@ def answer_question(db: Session, question: str, deps: RetrievalDeps, generator: 
     if decision.route in UNSUPPORTED:
         message = UNSUPPORTED[decision.route]
         return finish(message, "unsupported", Context([], {}), GroundingReport(message, passed=True))
+    if resolution.unknown_ids:
+        # A question about something that does not exist ("Is LAB-IT-011 open on Sundays?") must
+        # not be answered from passages about something else that merely shares its words.
+        return finish(ABSTAIN_MESSAGE, "abstained", Context([], {}), GroundingReport(
+            ABSTAIN_MESSAGE, passed=True, abstained=True,
+            warnings=[f"not in the knowledge base: {', '.join(resolution.unknown_ids)}"]))
 
     with watch.stage("evidence"):
         context = build_context(gather(db, question, decision, deps), official_only=resolution.official_only)

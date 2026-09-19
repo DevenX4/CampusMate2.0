@@ -14,6 +14,7 @@ from app.retrieval.search import Bm25Cache
 from app.retrieval.vector_index import VectorIndex
 from app.routing.evidence import RetrievalDeps
 from app.schemas.chat import ChatRequest, ChatResponse, FeedbackRequest, FeedbackResponse, GroundingOut, SourceOut
+from app.schemas.common import ErrorResponse
 from app.services import chat as chat_service
 
 router = APIRouter(prefix="/chat", tags=["chat"], responses=AUTH_ERRORS)
@@ -34,7 +35,8 @@ def to_response(query_id, answer: ChatAnswer) -> ChatResponse:
         provider=answer.provider, model=answer.model, timings_ms=answer.timings_ms)
 
 
-@router.post("/query", response_model=ChatResponse)
+@router.post("/query", response_model=ChatResponse,
+             responses={429: {"model": ErrorResponse, "description": "Too many questions; see Retry-After"}})
 def chat_query(
     body: ChatRequest,
     db: DbSession,
@@ -49,6 +51,7 @@ def chat_query(
     The answer is checked against its sources before it is returned. If the knowledge base does
     not contain the answer, the reply says so instead of guessing (`answer_type` "abstained")."""
     settings = get_settings()
+    chat_service.check_rate(db, user.id if user else None, settings.chat_questions_per_minute)
     answer = answer_question(db, body.question, RetrievalDeps(embedder, index, bm25), generator,
                              settings.generation_max_tokens, settings.generation_temperature)
     row = chat_service.log_answer(db, user.id if user else None, answer)

@@ -14,9 +14,12 @@ These are lexical proxies: they reward stating the expected facts and citing the
 but cannot judge a paraphrase. Wrong-but-plausible wording needs a human or a model judge.
 """
 
+import json
 import re
 import time
 from collections.abc import Callable
+from dataclasses import dataclass
+from pathlib import Path
 from statistics import mean
 
 from app.chat.pipeline import ChatAnswer
@@ -59,6 +62,49 @@ def score(question: Question, answer: ChatAnswer) -> dict:
             "term_recall": _share(expected_terms, terms(answer.answer)) if answered else 0.0,
             "cites_required": any(matches(c, s) for c in cited for s in question.sources) if question.sources else None,
             "grounded": answer.answer_type == "answered"}
+
+
+# --- hallucination traps (evaluation/datasets/negative_questions.json) -----------------------------
+
+@dataclass
+class Trap:
+    question_id: str
+    text: str
+    trap_type: str  # real_contact, nonexistent_entity, official_vs_synthetic_trap, ...
+
+
+def load_traps(path: Path) -> list[Trap]:
+    return [Trap(q["question_id"], q["question"], q["trap_type"])
+            for q in json.loads(path.read_text(encoding="utf-8"))["questions"]]
+
+
+def trap_violations(trap: Trap, answer: ChatAnswer) -> list[str]:
+    """What the answer must never do. Abstaining is always right; an answer is allowed only if
+    it is grounded and labels demo data as demo data (the dataset's expected behaviour)."""
+    if answer.answer_type in ("abstained", "unsupported"):
+        return []
+    cited = [answer.context.evidence[r] for r in answer.grounding.cited if r in answer.context.evidence]
+    synthetic = [e for e in cited if e.source_type == "synthetic" or "[synthetic]" in e.text]
+    violations = []
+    if not answer.grounding.passed:
+        violations.append("ungrounded")
+    if synthetic and not re.search(r"synthetic|demo", answer.answer, re.I):
+        violations.append("synthetic source not disclosed")
+    if synthetic and re.search(r"\bofficial\b", trap.text, re.I):
+        violations.append("synthetic source cited for a question about official information")
+    if trap.trap_type == "nonexistent_entity":
+        violations.append("answered about an entity that does not exist")
+    return violations
+
+
+def evaluate_traps(traps: list[Trap], ask: Ask) -> dict:
+    rows = []
+    for trap in traps:
+        answer = ask(trap.text)
+        rows.append({"question_id": trap.question_id, "trap_type": trap.trap_type, "answer_type": answer.answer_type,
+                     "answer": answer.answer[:300], "violations": trap_violations(trap, answer)})
+    return {"n": len(rows), "abstained": sum(r["answer_type"] in ("abstained", "unsupported") for r in rows),
+            "violations": sum(bool(r["violations"]) for r in rows), "questions": rows}
 
 
 def _mean(rows: list[dict], key: str) -> float | None:
@@ -115,6 +161,11 @@ def report(results: dict[str, dict]) -> str:
                   "| category | answered | fact recall | term recall | cites required |", "|---|---|---|---|---|"]
         lines += [f"| {cat} | " + " | ".join(_fmt(v) for v in m.values()) + " |"
                   for cat, m in result["summary"]["by_category"].items()]
+        if traps := result.get("traps"):
+            lines += ["", f"Hallucination traps: {traps['abstained']} of {traps['n']} abstained, "
+                          f"{traps['violations']} with a violation.", ""]
+            lines += [f"- {r['question_id']} ({r['trap_type']}): " + "; ".join(r["violations"])
+                      for r in traps["questions"] if r["violations"]]
         wrong = [r for r in result["questions"] if (not r["answerable"] and not r["abstained"])
                  or (r["answerable"] and not r["answered"])]
         if wrong:

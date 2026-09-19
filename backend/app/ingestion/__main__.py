@@ -1,7 +1,10 @@
 """Ingestion command line.
 
-    python -m app.ingestion worker           process jobs forever (run in its own terminal)
+    python -m app.ingestion worker           process jobs forever, only while the API is stopped
     python -m app.ingestion worker --once    process every waiting job, then exit
+
+The API normally ingests by itself (a background thread, INGESTION_IN_API), because only one
+process may use the embedded vector store.
     python -m app.ingestion queue-missing    queue jobs for active versions that have no chunks
                                              (e.g. the seeded dataset documents)
 """
@@ -26,9 +29,9 @@ def run_worker(once: bool) -> int:
     indexer = get_indexer()  # loads the embedding model once
     processed = 0
     logger.info("Worker started (once=%s)", once)
-    if not settings.chroma_url and not once:
-        logger.warning("Vectors go to the embedded Chroma store, which only one process may use. "
-                       "If the API runs at the same time, start a Chroma server and set CHROMA_URL.")
+    if not settings.chroma_url:
+        logger.warning("Vectors go to the embedded Chroma store, which only one process may use: run this "
+                       "only while the API is stopped. (The API ingests by itself; see INGESTION_IN_API.)")
     while True:
         with SessionLocal() as db:
             result = process_next(db, settings.storage_dir, max_chars=settings.chunk_max_chars,

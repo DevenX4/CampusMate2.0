@@ -38,6 +38,15 @@ class Settings(BaseSettings):
     session_ttl_hours: int = 12
     cookie_secure: bool = False
 
+    # Abuse limits, counted in PostgreSQL (the audit log and the chat log): no extra service.
+    # Failed logins per account, and per client IP (behind a reverse proxy, run uvicorn with
+    # --proxy-headers so the IP is the client's and not the proxy's), within the window.
+    login_max_failures: int = 5
+    login_max_failures_per_ip: int = 30
+    login_window_minutes: int = 15
+    chat_questions_per_minute: int = 20  # per user; protects the generation model
+    max_body_kb: int = 64  # JSON request bodies; uploads have their own limit (MAX_UPLOAD_MB)
+
     # Largest accepted upload. The official syllabus PDF is 37 MB.
     max_upload_mb: int = 50
 
@@ -46,13 +55,18 @@ class Settings(BaseSettings):
     chunk_max_chars: int = 1200
     ingestion_lease_minutes: int = 30
     worker_poll_seconds: int = 5
+    # Run the ingestion worker as a thread of the API process (the default), so that only one
+    # process uses the embedded Chroma store. Turn off only when running `python -m app.ingestion
+    # worker` against a Chroma server (CHROMA_URL) instead.
+    ingestion_in_api: bool = True
 
     # Retrieval. Models are downloaded once into MODEL_CACHE_DIR (ignored by Git).
     embedding_model: str = "BAAI/bge-small-en-v1.5"
     chroma_collection: str = "campusmate_chunks"
-    # A Chroma server shared by the API and the ingestion worker, e.g. http://127.0.0.1:8001
-    # (start it with: chroma run --path storage/chroma --port 8001). Empty: an embedded store in
-    # STORAGE_DIR/chroma, safe only while a single process uses it.
+    # Empty (the default): an embedded store in STORAGE_DIR/chroma, used by the API process only.
+    # A Chroma server URL is possible, but chromadb has an UNFIXED pre-authentication
+    # remote-code-execution flaw in its server (CVE-2026-45829): never let anything but CampusMate
+    # reach such a server (no published port, an isolated network).
     chroma_url: str | None = None
     retrieval_top_k: int = 8
     # Opt-in reranking (search mode hybrid_rerank). Best measured configuration; it did NOT
@@ -83,6 +97,13 @@ class Settings(BaseSettings):
     def _relative_to_repo_root(cls, value: Path) -> Path:
         # "data" means <repo>/data regardless of the folder the app is started from.
         return value if value.is_absolute() else REPO_ROOT / value
+
+    @field_validator("cookie_secure")
+    @classmethod
+    def _secure_cookie_in_production(cls, value: bool, info: ValidationInfo) -> bool:
+        if info.data.get("app_env") == "production" and not value:
+            raise ValueError("COOKIE_SECURE must be true in production (the session cookie needs HTTPS)")
+        return value
 
     # A field validator, not a model validator: a model validator's error message would print
     # the whole input, secrets included.

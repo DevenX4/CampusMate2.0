@@ -13,7 +13,8 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.services.errors import ConflictError, NotFoundError, UploadRejected
+from app.api.middleware import BodyTooLarge
+from app.services.errors import ConflictError, NotFoundError, RateLimited, UploadRejected
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +47,15 @@ async def upload_rejected(request: Request, exc: UploadRejected) -> JSONResponse
     return error_response(UPLOAD_STATUS[exc.kind], f"upload_{exc.kind}", str(exc))
 
 
+async def rate_limited(request: Request, exc: RateLimited) -> JSONResponse:
+    return error_response(status.HTTP_429_TOO_MANY_REQUESTS, "rate_limited", str(exc),
+                          headers={"Retry-After": str(exc.retry_after)})
+
+
+async def body_too_large(request: Request, exc: BodyTooLarge) -> JSONResponse:
+    return error_response(status.HTTP_413_CONTENT_TOO_LARGE, "body_too_large", exc.detail)
+
+
 async def invalid_request(request: Request, exc: RequestValidationError) -> JSONResponse:
     # e.g. ?limit=0 -> [{"location": "query.limit", "message": "Input should be greater than or equal to 1"}]
     details = [
@@ -76,6 +86,8 @@ def register_error_handlers(app: FastAPI) -> None:
     app.add_exception_handler(NotFoundError, not_found)
     app.add_exception_handler(ConflictError, conflict)
     app.add_exception_handler(UploadRejected, upload_rejected)
+    app.add_exception_handler(RateLimited, rate_limited)
+    app.add_exception_handler(BodyTooLarge, body_too_large)
     app.add_exception_handler(RequestValidationError, invalid_request)
     app.add_exception_handler(StarletteHTTPException, http_error)
     app.add_exception_handler(Exception, unexpected_error)
