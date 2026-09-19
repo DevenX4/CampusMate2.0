@@ -70,9 +70,13 @@ export interface Page<T> {
   offset: number;
 }
 
+export type VersionStatus = "pending" | "ready" | "active" | "superseded" | "failed";
+
 export interface Version {
   version_no: number;
-  status: string;
+  status: VersionStatus;
+  sha256: string;
+  notes: string | null;
   original_filename: string;
   size_bytes: number;
   page_count: number | null;
@@ -95,6 +99,25 @@ export interface DocumentSummary {
   updated_at: string;
   active_version: Version | null;
   latest_version_no: number | null;
+}
+
+export interface JobSummary {
+  id: string;
+  version_no: number;
+  job_type: string;
+  status: JobStatus;
+  current_stage: string | null;
+  attempts: number;
+  error_message: string | null;
+  chunk_count: number | null;
+  created_at: string;
+  finished_at: string | null;
+}
+
+export interface DocumentDetail extends DocumentSummary {
+  versions: Version[];
+  recent_jobs: JobSummary[];
+  entity_count: number;
 }
 
 export interface DocumentStats {

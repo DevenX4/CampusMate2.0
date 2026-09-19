@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { api, type DocumentAction } from "../api/client";
 import type { DocumentStats, DocumentStatus, DocumentSummary, IngestionJob, Page } from "../api/types";
 import { useAuth } from "../auth";
+import { DocumentPanel } from "../components/DocumentPanel";
 import { TopBar } from "../components/TopBar";
 import { UploadDialog } from "../components/UploadDialog";
 
@@ -34,6 +35,7 @@ export function AdminPage() {
   const [tab, setTab] = useState<"documents" | "jobs">("documents");
   const [stats, setStats] = useState<DocumentStats | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [openDocument, setOpenDocument] = useState<string | null>(null);
   const [version, setVersion] = useState(0);  // bumped after any change, to reload
   const reload = useCallback(() => setVersion((v) => v + 1), []);
 
@@ -70,9 +72,12 @@ export function AdminPage() {
           <TabButton active={tab === "documents"} onClick={() => setTab("documents")}>Documents</TabButton>
           {can("ingestion:manage") && <TabButton active={tab === "jobs"} onClick={() => setTab("jobs")}>Ingestion jobs</TabButton>}
         </div>
-        {tab === "documents" ? <DocumentsTable version={version} onChanged={reload} /> : <JobsTable version={version} onChanged={reload} />}
+        {tab === "documents"
+          ? <DocumentsTable version={version} onChanged={reload} onOpen={setOpenDocument} />
+          : <JobsTable version={version} onChanged={reload} />}
         <Pipeline />
       </main>
+      {openDocument && <DocumentPanel documentId={openDocument} onClose={() => setOpenDocument(null)} onChanged={reload} />}
       {uploading && <UploadDialog onClose={() => setUploading(false)} onUploaded={() => { setUploading(false); reload(); }} />}
     </div>
   );
@@ -109,7 +114,9 @@ function StatusPill({ status }: { status: string }) {
   return <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-xs capitalize ${style[status] ?? "bg-sunken text-ink-2"}`}>{status}</span>;
 }
 
-function DocumentsTable({ version, onChanged }: { version: number; onChanged: () => void }) {
+function DocumentsTable({ version, onChanged, onOpen }: {
+  version: number; onChanged: () => void; onOpen: (documentId: string) => void;
+}) {
   const { can } = useAuth();
   const [q, setQ] = useState("");
   const [status, setStatus] = useState("");
@@ -167,7 +174,10 @@ function DocumentsTable({ version, onChanged }: { version: number; onChanged: ()
           <tbody>
             {page?.items.map((d) => (
               <tr key={d.document_id} className="border-t border-line">
-                <td className="px-4 py-3"><p className="font-medium">{d.title}</p><p className="font-mono text-xs text-ink-3">{d.document_id}</p></td>
+                <td className="px-4 py-3">
+                  <button type="button" onClick={() => onOpen(d.document_id)} className="text-left font-medium hover:text-accent hover:underline">{d.title}</button>
+                  <p className="font-mono text-xs text-ink-3">{d.document_id}</p>
+                </td>
                 <td className="px-4 py-3 text-ink-2">{d.document_type.replaceAll("_", " ")}</td>
                 <td className="px-4 py-3">
                   <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-xs ${d.source_type === "official" ? "bg-accent-soft text-accent" : "bg-demo-soft text-demo"}`}>

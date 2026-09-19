@@ -378,6 +378,7 @@ browser ── http://127.0.0.1:5173 ──► Vite (static UI) ── /api/* �
 | Answers rendered as React text; `[n]` becomes a button that opens source *n* | No HTML from answers ever reaches the DOM (tested with an `<img onerror>` answer) |
 | Trust levels on every source; synthetic data in amber, never in the official sapphire; a warning under any answer that uses it | Synthetic information must never look official |
 | An upload requires the admin to choose "official" or "synthetic"; there is no default | The label decides how every answer from that file is presented |
+| A document panel lists its versions: status, file, size, pages, SHA-256. It offers "Activate" only for `ready` and `superseded` versions (a rollback), and a new-version upload | Mirrors the backend's rules. A new version replaces the active one automatically once ingested |
 | Fonts self-hosted (`@fontsource`); no external requests at runtime | Works offline, and nothing leaks to third parties |
 
 **Stitch mock facts not carried over:**
@@ -391,9 +392,9 @@ browser ── http://127.0.0.1:5173 ──► Vite (static UI) ── /api/* �
 The admin page describes the pipeline as implemented, and shows counts from `GET /documents/stats`.
 
 **Testing:**
-- Vitest + Testing Library (16 tests) with a fetch mock that exercises the real client, routing and auth.
+- Vitest + Testing Library (17 tests) with a fetch mock that exercises the real client, routing and auth.
 - The whole flow was also checked against the running API through the Vite proxy, with curl: login cookie, `/me`, a chat answer, feedback, a 403 for a student on documents, and logout.
-- Headless Edge, driven over the DevTools protocol, took screenshots of the login page, the assistant (desktop and 390 px mobile) and the admin page.
+- Headless Edge, driven over the DevTools protocol, took screenshots of the login page, the assistant (desktop and 390 px mobile), the admin page and a document's versions panel.
 
 Found by the headless browser and fixed:
 - Chromium's `scrollIntoView` returns a Promise. An effect returned it, React called it as a clean-up and the page went blank. jsdom has no `scrollIntoView`, so the unit tests could not see it; a regression test now simulates Chromium.

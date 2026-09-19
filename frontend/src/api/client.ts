@@ -2,7 +2,8 @@
 // with the httpOnly session cookie; the UI never sees or stores the session token.
 
 import type {
-  ChatResponse, Department, DocumentStats, DocumentSummary, Feedback, IngestionJob, JobStatus, Me, Page, Rating,
+  ChatResponse, Department, DocumentDetail, DocumentStats, DocumentSummary, Feedback, IngestionJob, JobStatus, Me, Page,
+  Rating,
 } from "./types";
 
 const BASE = "/api/v1";
@@ -72,6 +73,14 @@ export const api = {
     call<DocumentSummary>(`/documents/${encodeURIComponent(documentId)}/${action}`, post()),
   deleteDocument: (documentId: string) =>
     call<DocumentSummary>(`/documents/${encodeURIComponent(documentId)}`, { method: "DELETE" }),
+  document: (documentId: string) => call<DocumentDetail>(`/documents/${encodeURIComponent(documentId)}`),
+  uploadVersion: (documentId: string, form: FormData) =>
+    call<DocumentDetail>(`/documents/${encodeURIComponent(documentId)}/versions`, post(form)),
+  activateVersion: (documentId: string, versionNo: number) =>
+    call<DocumentDetail>(`/documents/${encodeURIComponent(documentId)}/versions/${versionNo}/activate`, post()),
+  // A plain link: the browser sends the session cookie itself (administrators only).
+  versionFileUrl: (documentId: string, versionNo: number) =>
+    `${BASE}/documents/${encodeURIComponent(documentId)}/versions/${versionNo}/file`,
   departments: () => call<Department[]>("/departments"),
 
   jobs: (params: { status?: JobStatus; limit?: number; offset?: number }) =>

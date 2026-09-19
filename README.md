@@ -263,7 +263,7 @@ In development, Vite forwards `/api` to the API (`CAMPUSMATE_API` overrides the 
 |---|---|---|
 | `/login` | everyone | Sign in (the account is created with `python -m app.accounts`) |
 | `/` | students, faculty, admins (`chat:use`) | Ask questions. Each `[n]` in an answer opens its source (document, version, page, trust level, text). Synthetic data carries a warning. Answers can be rated |
-| `/admin` | faculty (read), admins (manage) | Document statistics and list; upload with an explicit trust level; activate, deactivate, archive, delete and re-index; ingestion jobs with retry |
+| `/admin` | faculty (read), admins (manage) | Document statistics and list; upload with an explicit trust level; activate, deactivate, archive, delete and re-index. A document's panel shows its versions (new-version upload, rollback by activating an older one, the original PDF for admins) and recent ingestion. Ingestion jobs with retry |
 
 ## Knowledge (OKF)
 
