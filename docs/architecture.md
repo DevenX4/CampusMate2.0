@@ -294,6 +294,31 @@ question ─► resolve entities (IDs, printed codes, names, unambiguous acronym
 
 **Caveat:** the rules were written while reading these same questions, so this is an **in-sample, optimistic** estimate. A held-out question set is needed for an unbiased number.
 
+## Generation providers (Phase 15)
+
+```
+evidence ─► context blocks [1..n] (kind, trust level, label, text) ─► GenerationProvider.generate() ─► answer citing [n]
+                                                                      ├── ExtractiveProvider (no model; the default)
+                                                                      └── OpenAICompatibleProvider ─HTTP─► Ollama / llama.cpp / LM Studio / hosted API
+```
+
+| Decision | Why |
+|---|---|
+| A `Protocol` with `generate()` and `check()`; one factory (`generation/runtime.py`) | Only the factory knows the concrete classes. Changing the model means changing configuration, not code |
+| One provider for every OpenAI-compatible server, instead of one class per model or vendor | The same code serves local runtimes and hosted APIs. No model-specific logic, apart from dropping a leading `<think>` block, which is a convention shared by reasoning models |
+| The model runs in its own process (HTTP), not inside the API | A model crash or out-of-memory error cannot take the API down; models can be swapped freely; no fragile CUDA Python builds |
+| The prompt lives in one provider-independent module (`generation/prompt.py`) | Numbered sources with trust labels, five short rules, and the exact abstain sentence |
+| The extractive provider is the default | CampusMate works end to end with no download. It cannot invent anything, and it is the baseline an SLM must beat |
+| Temperature 0 | The same evidence gives the same answer, so answers are reproducible and can be evaluated |
+| The API key is a `SecretStr`, sent only as a header to `GENERATION_BASE_URL`. Error messages drop any `user:password@`. A warning is logged when the server is not local | Keeps secrets out of logs and makes data leaving the machine visible |
+| `GENERATION_MODEL` is checked with a field validator, not a model validator | Found in testing: a model validator's error message printed the whole settings input, including `DB_PASSWORD` |
+
+Two bugs found while testing the extractive provider:
+- The sentence splitter broke names after "Dr." and initials.
+- An official graph item quoted a relationship to a *synthetic* lab without a label. Each quoted piece is now labelled by what it says, not only by its block.
+
+Model choice: [slm-evaluation.md](slm-evaluation.md).
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

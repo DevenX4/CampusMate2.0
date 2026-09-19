@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Literal
 from urllib.parse import quote_plus
 
-from pydantic import SecretStr, field_validator
+from pydantic import Field, SecretStr, ValidationInfo, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # backend/app/core/config.py -> parents[3] is the CampusMate repo root.
@@ -58,6 +58,17 @@ class Settings(BaseSettings):
     rerank_candidates: int = 30  # hybrid candidates the cross-encoder rescores
     rerank_max_chars: int | None = None  # passage prefix the cross-encoder reads (None = all)
 
+    # Answer generation. "extractive" needs no model (copies cited sentences); "openai_compatible"
+    # talks to any server speaking the OpenAI chat API: a local Ollama / llama.cpp / LM Studio
+    # server, or a hosted API. A non-local URL sends questions and evidence off this machine.
+    generation_provider: Literal["extractive", "openai_compatible"] = "extractive"
+    generation_base_url: str = "http://127.0.0.1:11434/v1"  # Ollama's default address
+    generation_model: str | None = Field(default=None, validate_default=True)
+    generation_api_key: SecretStr | None = None  # only for hosted APIs; local servers need none
+    generation_timeout_seconds: float = 120.0
+    generation_max_tokens: int = 400
+    generation_temperature: float = 0.0  # deterministic: the same evidence gives the same answer
+
     # Local folders. Overridable so a container can mount them elsewhere later.
     data_dir: Path = REPO_ROOT / "data"  # the canonical dataset (read-only input)
     storage_dir: Path = REPO_ROOT / "storage"  # uploaded/original documents and indexes
@@ -68,6 +79,15 @@ class Settings(BaseSettings):
     def _relative_to_repo_root(cls, value: Path) -> Path:
         # "data" means <repo>/data regardless of the folder the app is started from.
         return value if value.is_absolute() else REPO_ROOT / value
+
+    # A field validator, not a model validator: a model validator's error message would print
+    # the whole input, secrets included.
+    @field_validator("generation_model")
+    @classmethod
+    def _generation_model_required(cls, value: str | None, info: ValidationInfo) -> str | None:
+        if info.data.get("generation_provider") == "openai_compatible" and not value:
+            raise ValueError("GENERATION_MODEL is required when GENERATION_PROVIDER=openai_compatible")
+        return value
 
     @property
     def database_url(self) -> str:
