@@ -20,7 +20,7 @@ def get_embedder() -> Embedder:
 @lru_cache
 def get_vector_index() -> VectorIndex:
     settings, embedder = get_settings(), get_embedder()
-    return VectorIndex(settings.storage_dir / "chroma", settings.chroma_collection,
+    return VectorIndex(settings.chroma_url or settings.storage_dir / "chroma", settings.chroma_collection,
                        embedder.model_name, embedder.dimension)
 
 

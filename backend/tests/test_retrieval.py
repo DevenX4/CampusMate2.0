@@ -11,6 +11,7 @@ from app.main import app
 from app.models.documents import DocumentChunk
 from app.retrieval.runtime import get_embedder, get_vector_index
 from app.retrieval.search import SearchFilters, vector_search
+from app.retrieval import vector_index
 from app.retrieval.vector_index import VectorIndex, VectorItem
 from app.services import documents
 from app.services.audit import RequestContext
@@ -73,6 +74,16 @@ def test_vector_query_is_exact_and_breaks_ties_by_id(tmp_path):
     ranked = index.query([1.0, 0.0], 3, {"version_key": {"$in": ["DOC-A:v1"]}})
     assert [chunk_id for chunk_id, _ in ranked] == ["d-best", "a-tie", "b-tie"]  # e-other is filtered out
     assert ranked[1][1] == pytest.approx(ranked[2][1]) == pytest.approx(0.7071, abs=1e-4)
+
+
+def test_a_url_selects_a_chroma_server(monkeypatch, tmp_path):
+    # The API and the worker must share one Chroma server; a folder is the embedded store.
+    seen = {}
+    monkeypatch.setattr(vector_index.chromadb, "HttpClient", lambda **kwargs: seen.update(kwargs) or "server")
+    assert vector_index.chroma_client("http://127.0.0.1:8001") == "server"
+    assert (seen["host"], seen["port"], seen["ssl"]) == ("127.0.0.1", 8001, False)
+    assert vector_index.chroma_client("https://chroma.example") == "server" and (seen["port"], seen["ssl"]) == (443, True)
+    assert not isinstance(vector_index.chroma_client(tmp_path / "embedded"), str)  # a PersistentClient
 
 
 def test_index_refuses_vectors_from_a_different_model(tmp_path):

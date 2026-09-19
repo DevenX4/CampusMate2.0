@@ -50,6 +50,10 @@ class Settings(BaseSettings):
     # Retrieval. Models are downloaded once into MODEL_CACHE_DIR (ignored by Git).
     embedding_model: str = "BAAI/bge-small-en-v1.5"
     chroma_collection: str = "campusmate_chunks"
+    # A Chroma server shared by the API and the ingestion worker, e.g. http://127.0.0.1:8001
+    # (start it with: chroma run --path storage/chroma --port 8001). Empty: an embedded store in
+    # STORAGE_DIR/chroma, safe only while a single process uses it.
+    chroma_url: str | None = None
     retrieval_top_k: int = 8
     # Opt-in reranking (search mode hybrid_rerank). Best measured configuration; it did NOT
     # reliably beat plain hybrid on the evaluation set and costs ~5 s/query on CPU, so the

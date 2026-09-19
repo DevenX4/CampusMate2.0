@@ -7,13 +7,15 @@ Chroma is a DERIVED index: every vector can be rebuilt from document_chunks in P
 The search is EXACT: Chroma filters the vectors by metadata and numpy compares the query with
 every one of them. Chroma's own approximate (HNSW) search was measured to return different
 neighbours in different processes, missing a true #2 neighbour in about half the runs, even on
-a freshly built index. At this size (about 1,000 chunks) the exact search costs about 25 ms; it
-grows linearly (roughly 30 ms per 1,000 chunks), so with tens of thousands of chunks an
-approximate index would be worth its errors again, after measuring its recall.
+a freshly built index. At this size (about 1,000 chunks) the exact search costs about 25 ms with
+the embedded store and about 60 ms from a Chroma server (the vectors travel over HTTP); it grows
+linearly, so with tens of thousands of chunks a vector cache keyed like the BM25 cache, or an
+approximate index whose recall has been measured, would be worth adding.
 """
 
 from dataclasses import dataclass
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import chromadb
 import numpy as np
@@ -31,10 +33,24 @@ class VectorItem:
     metadata: dict
 
 
+def chroma_client(location: Path | str):
+    """A Chroma server ("http://host:port") or an embedded store in a folder.
+
+    The embedded store is for ONE process at a time (tests, command-line tools): measured in
+    Phase 18, an API process reading it while the ingestion worker wrote to it failed with
+    "Error finding id", because each process keeps its own in-memory view of the index. When the
+    API and the worker run together, both must talk to one Chroma server (CHROMA_URL)."""
+    settings = chromadb.Settings(anonymized_telemetry=False)
+    if isinstance(location, str) and location.startswith(("http://", "https://")):
+        url = urlsplit(location)
+        return chromadb.HttpClient(host=url.hostname, port=url.port or (443 if url.scheme == "https" else 8000),
+                                   ssl=url.scheme == "https", settings=settings)
+    return chromadb.PersistentClient(path=str(location), settings=settings)
+
+
 class VectorIndex:
-    def __init__(self, path: Path, collection: str, model_name: str, dimension: int):
-        self._client = chromadb.PersistentClient(
-            path=str(path), settings=chromadb.Settings(anonymized_telemetry=False))
+    def __init__(self, location: Path | str, collection: str, model_name: str, dimension: int):
+        self._client = chroma_client(location)
         self._collection = self._client.get_or_create_collection(
             collection, embedding_function=None,
             metadata={"hnsw:space": "cosine", "embedding_model": model_name, "dimension": dimension},

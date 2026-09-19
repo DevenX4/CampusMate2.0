@@ -26,6 +26,9 @@ def run_worker(once: bool) -> int:
     indexer = get_indexer()  # loads the embedding model once
     processed = 0
     logger.info("Worker started (once=%s)", once)
+    if not settings.chroma_url and not once:
+        logger.warning("Vectors go to the embedded Chroma store, which only one process may use. "
+                       "If the API runs at the same time, start a Chroma server and set CHROMA_URL.")
     while True:
         with SessionLocal() as db:
             result = process_next(db, settings.storage_dir, max_chars=settings.chunk_max_chars,

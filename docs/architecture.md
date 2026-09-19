@@ -400,6 +400,24 @@ Found by the headless browser and fixed:
 - Chromium's `scrollIntoView` returns a Promise. An effect returned it, React called it as a clean-up and the page went blank. jsdom has no `scrollIntoView`, so the unit tests could not see it; a regression test now simulates Chromium.
 - An extractive answer quoted a neighbouring course's relationship without its subject.
 
+## Full integration (Phase 18)
+
+```
+chroma run :8001 ◄── HTTP ──┬── API (uvicorn :8000) ◄── /api proxy ── Vite UI :5173 ◄── browser
+                            └── ingestion worker ──► PostgreSQL (jobs, chunks, chat log)
+```
+
+**Found by running the processes together:** the API and the worker each opened the embedded Chroma store (`PersistentClient`). After the worker indexed a new document, the API's next question failed with `chromadb InternalError: Error finding id`. Each process keeps its own in-memory view of the index, and the embedded store is not safe across processes. It never showed up before, because the worker and the API had not run at the same time. Now both use one Chroma server (`CHROMA_URL`). The embedded store remains for tests and single-process tools, and the worker warns when it starts without `CHROMA_URL`. Exact search now fetches the eligible vectors over HTTP: about 60 ms instead of 25 ms.
+
+**Scenarios:**
+
+| | How | What it proves |
+|---|---|---|
+| `tests/test_e2e.py` (in the test suite) | HTTP through the real app, the real ingestion pipeline, the full seeded dataset (test embedder, extractive generation) | SQL facts cite syllabus p.15. Graph answers label synthetic lab data. Personal questions are unsupported; unknown questions abstain. A student cannot upload. For an uploaded document: not answered before ingestion, answered after it, gone once deactivated. A new version replaces the fact after ingestion (the old one answers meanwhile), and a rollback brings the old fact back. Feedback is stored |
+| `scripts/e2e_live.py` (against the running application) | Four real processes (Chroma server, API, worker with BGE, Vite proxy) and real logins | The same lifecycle with the real embedding model and a separate worker process. Ingestion took about 2 s, the answer 0.22 s; it passed twice in a row with no errors |
+
+Not yet integrated: the SLM. The pipeline runs with the extractive provider until a model is chosen (see [slm-evaluation.md](slm-evaluation.md)). Switching is configuration only, and the same scenarios and the answer evaluation will then run with the model.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend ✅ · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend ✅ · 18 integration ✅ (SLM pending) · 19 testing + hardening · 20 Docker · 21 deployment evaluation
