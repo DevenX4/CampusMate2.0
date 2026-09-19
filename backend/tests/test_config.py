@@ -10,6 +10,7 @@ def make_settings(**env) -> Settings:
 
 
 def test_reads_environment_variables(monkeypatch):
+    monkeypatch.setenv("DB_PASSWORD", "test-password")
     monkeypatch.setenv("DB_HOST", "db.example.internal")
     monkeypatch.setenv("DB_PORT", "6543")
     settings = make_settings()
@@ -24,6 +25,7 @@ def test_password_is_required(monkeypatch):
 
 
 def test_invalid_port_is_rejected(monkeypatch):
+    monkeypatch.setenv("DB_PASSWORD", "test-password")  # so the port is the only problem
     monkeypatch.setenv("DB_PORT", "not-a-number")
     with pytest.raises(ValidationError):
         make_settings()
@@ -31,6 +33,8 @@ def test_invalid_port_is_rejected(monkeypatch):
 
 def test_password_hidden_in_repr_but_present_in_url(monkeypatch):
     monkeypatch.setenv("DB_PASSWORD", "p@ss:word/1")
+    monkeypatch.setenv("DB_HOST", "localhost")
+    monkeypatch.setenv("DB_PORT", "5432")
     settings = make_settings()
     assert "p@ss" not in repr(settings)
     # Special characters are URL-encoded so the connection URL stays valid.

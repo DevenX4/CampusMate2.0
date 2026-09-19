@@ -2,15 +2,17 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 1 (project foundation).** A FastAPI skeleton with configuration, logging and a health endpoint. There is no database layer, authentication, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 2 (PostgreSQL schema).** FastAPI skeleton plus the complete database schema (43 tables) managed by Alembic migrations, and health/readiness endpoints. The dataset is not loaded yet (Phase 3), and there is no authentication, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
 ```
 backend/            FastAPI application (Python)
-  app/core/         configuration (config.py) and logging (logging.py)
+  app/core/         configuration (config.py), logging (logging.py), database session (db.py)
+  app/models/       SQLAlchemy models = the database schema, one file per domain
   app/api/routes/   HTTP endpoints
   app/schemas/      Pydantic request/response models
+  migrations/       Alembic migrations (versions/ holds one file per schema change)
   scripts/          one-off setup scripts (e.g. create_local_db.sql)
   tests/
 data/
@@ -65,12 +67,27 @@ Put the 12 PDFs under `data/pdfs/` with the paths listed in `data/pdfs.sha256`, 
 cd data/pdfs && sha256sum -c ../pdfs.sha256
 ```
 
-### Database role (one-time, needed from Phase 2)
+### Database setup (one-time)
 
-The application connects as the low-privilege role `campusmate_app`, never as `postgres`. Create the role and the database once, using the same password you put in `.env`:
+The application connects as the low-privilege role `campusmate_app`, never as `postgres`. The script creates that role plus two databases: `campusmate` (development) and `campusmate_test` (used only by pytest). It reads the password from `.env`, so the role and the app always agree. Run it from the repo root as the `postgres` superuser. This is the only time the superuser is needed.
 
 ```bash
-psql -U postgres -h localhost -p 5432 -v app_password='YOUR_DB_PASSWORD' -f backend/scripts/create_local_db.sql
+# Git Bash
+psql -U postgres -h localhost -p 5432      -v app_password="$(grep '^DB_PASSWORD=' .env | cut -d= -f2-)"      -f backend/scripts/create_local_db.sql
+```
+
+```powershell
+# PowerShell
+$pw = ((Select-String -Path .env -Pattern '^DB_PASSWORD=').Line -split '=', 2)[1]
+psql -U postgres -h localhost -p 5432 -v app_password="$pw" -f backend/scripts/create_local_db.sql
+```
+
+Then create the schema:
+
+```bash
+cd backend
+.venv/Scripts/alembic upgrade head      # apply all migrations
+.venv/Scripts/alembic current           # shows the revision, e.g. 7cc478e218c5 (head)
 ```
 
 ## Run
@@ -80,15 +97,26 @@ cd backend
 .venv/Scripts/python -m uvicorn app.main:app --reload --port 8000
 ```
 
-- Health check: http://127.0.0.1:8000/api/v1/system/health → `{"status":"ok"}`
+- Health (liveness): http://127.0.0.1:8000/api/v1/system/health → `{"status":"ok"}`
+- Readiness: http://127.0.0.1:8000/api/v1/system/ready → 200 `"status":"ready"` when PostgreSQL is reachable **and** migrated; otherwise 503 with the reason
 - Interactive API docs: http://127.0.0.1:8000/docs
 
 ## Test
 
 ```bash
 cd backend
-.venv/Scripts/python -m pytest -v
+.venv/Scripts/python -m pytest -v -rs
 ```
+
+Database tests run against `campusmate_test`, which they rebuild from the migrations. They are skipped, with the reason shown, if that database is not reachable.
+
+## Changing the database schema
+
+1. Edit or add a model in `backend/app/models/`.
+2. `.venv/Scripts/alembic revision --autogenerate -m "short description"` generates a migration by comparing the models with the database.
+3. **Review the generated file.** Autogenerate misses some things. In the initial migration it silently omitted the two circular foreign keys, and triggers are never detected. Fix it by hand where needed.
+4. `.venv/Scripts/alembic upgrade head`, then `.venv/Scripts/alembic check` (it must report "No new upgrade operations detected").
+5. `.venv/Scripts/alembic downgrade -1` must also work. The test suite checks the full down/up round trip.
 
 ## Configuration
 

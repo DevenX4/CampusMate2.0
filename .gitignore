@@ -28,11 +28,13 @@ storage/**
 !storage/*/
 !storage/*/.gitkeep
 
-# --- Models, caches, logs ---
-models/
-model_cache/
-chroma/
-logs/
+# --- Model weights, caches, logs ---
+# Leading "/" = only at the repo root. An unanchored "models/" would also hide
+# backend/app/models/ (the SQLAlchemy models), which must be committed.
+/models/
+/model_cache/
+/chroma/
+/logs/
 *.log
 
 # --- OS / editor ---
