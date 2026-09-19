@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from statistics import mean
 
-from app.evaluation.metrics import Retrieved, Source, average, percentile, question_metrics
+from app.evaluation.metrics import Retrieved, Source, average, percentile, question_metrics, sign_test_p
 
 Retriever = Callable[[str, int], list[Retrieved]]
 K_VALUES = (1, 3, 5, 10)
@@ -93,4 +93,19 @@ def category_table(result: dict, k: int = 5) -> str:
     for category, metrics in result["by_category"].items():
         m, m10 = metrics[str(k)], metrics["10"]
         lines.append(f"| {category} | {m['hit']:.3f} | {m['recall']:.3f} | {m10['rr']:.3f} | {m['entity_recall']:.3f} |")
+    return "\n".join(lines)
+
+
+def paired_comparison(results: dict[str, dict], baseline: str, metric: str = "rr", k: str = "10") -> str:
+    """Per question: is each mode better, equal or worse than the baseline? Averages can hide
+    losses; this shows them, with a sign-test p-value for "could this be chance?"."""
+    base = {r["question_id"]: r["metrics"][k][metric] for r in results[baseline]["per_question"] if r["answerable"]}
+    lines = [f"| mode vs {baseline} ({metric}@{k}) | better | same | worse | sign-test p |", "|---|---|---|---|---|"]
+    for mode, result in results.items():
+        if mode == baseline:
+            continue
+        other = {r["question_id"]: r["metrics"][k][metric] for r in result["per_question"] if r["answerable"]}
+        wins = sum(other[q] > base[q] for q in base)
+        losses = sum(other[q] < base[q] for q in base)
+        lines.append(f"| {mode} | {wins} | {len(base) - wins - losses} | {losses} | {sign_test_p(wins, losses):.3f} |")
     return "\n".join(lines)

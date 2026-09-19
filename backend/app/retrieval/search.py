@@ -9,6 +9,7 @@ So a deactivated or deleted document disappears from results immediately, with n
 to the vector index, and a stale vector can never produce an answer.
 
 BM25 (lexical) search works over the same eligible chunks; see Bm25Cache below.
+Hybrid search fuses both ranked lists with Reciprocal Rank Fusion (fusion.py).
 """
 
 import threading
@@ -20,6 +21,7 @@ from sqlalchemy.orm import Session
 from app.models.documents import Document, DocumentChunk, DocumentVersion
 from app.retrieval.bm25 import Bm25Index
 from app.retrieval.embeddings import Embedder, embedding_text
+from app.retrieval.fusion import reciprocal_rank_fusion
 from app.retrieval.vector_index import VectorIndex, version_key
 from app.schemas.search import Citation, SearchHit
 
@@ -54,7 +56,8 @@ def chroma_where(versions: list[tuple[str, int]], filters: SearchFilters) -> dic
     return conditions[0] if len(conditions) == 1 else {"$and": conditions}
 
 
-def load_hits(db: Session, ranked: list[tuple[str, float]], score_name: str) -> list[SearchHit]:
+def load_hits(db: Session, ranked: list[tuple[str, float]], score_name: str,
+              details: dict[str, dict[str, float]] | None = None) -> list[SearchHit]:
     """Chunks for (chunk_id, score) pairs, in the given order, skipping anything that is no
     longer eligible (e.g. a vector left over from a replaced version)."""
     if not ranked:
@@ -75,7 +78,8 @@ def load_hits(db: Session, ranked: list[tuple[str, float]], score_name: str) -> 
         chunk, document = by_id[chunk_id]
         hits.append(SearchHit(
             chunk_id=chunk.chunk_id, rank=len(hits) + 1, score=round(score, 4), text=chunk.text,
-            source_type=chunk.source_type, entity_ids=chunk.entity_ids, scores={score_name: round(score, 4)},
+            source_type=chunk.source_type, entity_ids=chunk.entity_ids,
+            scores={score_name: round(score, 4), **(details or {}).get(chunk_id, {})},
             citation=Citation(document_id=chunk.document_id, version_no=chunk.version_no, title=document.title,
                               document_type=document.document_type, page_start=chunk.page_start,
                               page_end=chunk.page_end, section=chunk.section),
@@ -83,14 +87,17 @@ def load_hits(db: Session, ranked: list[tuple[str, float]], score_name: str) -> 
     return hits
 
 
-def vector_search(db: Session, embedder: Embedder, index: VectorIndex, query: str, k: int,
-                  filters: SearchFilters | None = None) -> list[SearchHit]:
-    filters = filters or SearchFilters()
+def vector_ranking(db: Session, embedder: Embedder, index: VectorIndex, query: str, k: int,
+                   filters: SearchFilters) -> list[tuple[str, float]]:
     versions = eligible_versions(db, filters)
     if not versions:
         return []
-    ranked = index.query(embedder.embed_query(query), k, chroma_where(versions, filters))
-    return load_hits(db, ranked, "vector")
+    return index.query(embedder.embed_query(query), k, chroma_where(versions, filters))
+
+
+def vector_search(db: Session, embedder: Embedder, index: VectorIndex, query: str, k: int,
+                  filters: SearchFilters | None = None) -> list[SearchHit]:
+    return load_hits(db, vector_ranking(db, embedder, index, query, k, filters or SearchFilters()), "vector")
 
 
 # --- BM25 ---------------------------------------------------------------------------------------
@@ -169,9 +176,35 @@ def _allowed(attrs: list[_ChunkAttrs], filters: SearchFilters):
     return check
 
 
+def bm25_ranking(db: Session, cache: Bm25Cache, query: str, k: int, filters: SearchFilters) -> list[tuple[str, float]]:
+    corpus = cache.get(db)
+    return corpus.index.search(query, k, _allowed(corpus.attrs, filters))
+
+
 def bm25_search(db: Session, cache: Bm25Cache, query: str, k: int,
                 filters: SearchFilters | None = None) -> list[SearchHit]:
-    filters = filters or SearchFilters()
-    corpus = cache.get(db)
-    ranked = corpus.index.search(query, k, _allowed(corpus.attrs, filters))
-    return load_hits(db, ranked, "bm25")
+    return load_hits(db, bm25_ranking(db, cache, query, k, filters or SearchFilters()), "bm25")
+
+
+# --- Hybrid -------------------------------------------------------------------------------------
+
+def hybrid_ranking(db: Session, embedder: Embedder, index: VectorIndex, cache: Bm25Cache, query: str,
+                   candidates: int, filters: SearchFilters) -> list[tuple[str, float, dict[str, float]]]:
+    """(chunk id, fused score, per-method details) for the union of both candidate lists."""
+    vector = vector_ranking(db, embedder, index, query, candidates, filters)
+    lexical = bm25_ranking(db, cache, query, candidates, filters)
+    raw = {"vector": dict(vector), "bm25": dict(lexical)}
+    fused = reciprocal_rank_fusion({"vector": [c for c, _ in vector], "bm25": [c for c, _ in lexical]})
+    return [
+        (chunk_id, score, {**{f"{m}_rank": r for m, r in ranks.items()},
+                           **{m: round(raw[m][chunk_id], 4) for m in ranks}})
+        for chunk_id, score, ranks in fused
+    ]
+
+
+def hybrid_search(db: Session, embedder: Embedder, index: VectorIndex, cache: Bm25Cache, query: str, k: int,
+                  filters: SearchFilters | None = None, candidates: int = 30) -> list[SearchHit]:
+    """Vector and BM25 each propose `candidates` chunks; RRF merges them; the best k are returned.
+    Each hit's `scores` shows both methods' ranks, so the fusion is explainable."""
+    fused = hybrid_ranking(db, embedder, index, cache, query, max(candidates, k), filters or SearchFilters())[:k]
+    return load_hits(db, [(c, s) for c, s, _ in fused], "rrf", {c: d for c, _, d in fused})

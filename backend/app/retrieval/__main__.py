@@ -1,7 +1,7 @@
 """Retrieval command line.
 
     python -m app.retrieval rebuild-index [--reset]   re-embed every chunk from PostgreSQL
-    python -m app.retrieval search "question" [-k 5] [--official]
+    python -m app.retrieval search "question" [-k 5] [--mode hybrid|vector|bm25] [--official]
 """
 
 import argparse
@@ -13,8 +13,8 @@ from app.core.config import get_settings
 from app.core.db import SessionLocal
 from app.core.logging import setup_logging
 from app.models.documents import Document, DocumentChunk
-from app.retrieval.runtime import get_indexer
-from app.retrieval.search import SearchFilters, vector_search
+from app.retrieval.runtime import get_bm25_cache, get_indexer
+from app.retrieval.search import SearchFilters, bm25_search, hybrid_search, vector_search
 
 
 def rebuild_index(reset: bool) -> int:
@@ -41,6 +41,7 @@ def main(argv: list[str] | None = None) -> int:
     search = commands.add_parser("search", help="try a query")
     search.add_argument("query")
     search.add_argument("-k", type=int, default=5)
+    search.add_argument("--mode", choices=["hybrid", "vector", "bm25"], default="hybrid")
     search.add_argument("--official", action="store_true", help="only official chunks")
     args = parser.parse_args(argv)
     setup_logging(get_settings().log_level)
@@ -51,7 +52,13 @@ def main(argv: list[str] | None = None) -> int:
     indexer = get_indexer()
     with SessionLocal() as db:
         filters = SearchFilters(source_types=["official"] if args.official else [])
-        for hit in vector_search(db, indexer.embedder, indexer.index, args.query, args.k, filters):
+        if args.mode == "bm25":
+            hits = bm25_search(db, get_bm25_cache(), args.query, args.k, filters)
+        elif args.mode == "vector":
+            hits = vector_search(db, indexer.embedder, indexer.index, args.query, args.k, filters)
+        else:
+            hits = hybrid_search(db, indexer.embedder, indexer.index, get_bm25_cache(), args.query, args.k, filters)
+        for hit in hits:
             c = hit.citation
             print(f"{hit.rank}. {hit.score:.3f} [{hit.source_type}] {c.document_id} v{c.version_no} "
                   f"p.{c.page_start} | {c.section or ''}")

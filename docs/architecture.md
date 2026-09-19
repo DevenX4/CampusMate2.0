@@ -222,6 +222,20 @@ These are the targets for BM25, hybrid fusion and reranking.
 
 The two are complementary. BM25 wins on simple factual (recall 0.54 vs 0.38), semantic and cross-document questions; vector wins on metadata-style (Hit@5 0.71 vs 0.43) and multi-hop questions. Exact code lookups (`2CEIT78PE7`) now rank the right course first. Different failure patterns are the condition under which fusion should help. That is Phase 11's hypothesis to *measure*.
 
+## Hybrid retrieval (Phase 11)
+
+Vector and BM25 each propose 30 candidates, which are merged with Reciprocal Rank Fusion (`fused = Σ 1/(60 + rank)`), and the best K are kept. RRF uses ranks only, so incomparable scores (BM25 about 0–20, cosine 0–1) need no calibration, and agreement between the methods wins. Every hit's `scores` shows `vector_rank` and `bm25_rank`, so the fusion is explainable.
+
+**Measured (52 answerable questions, K = 5):**
+
+| mode | Hit@1 | Hit@5 | Recall@5 | MRR | p50 |
+|---|---|---|---|---|---|
+| vector | 0.346 | 0.712 | 0.357 | 0.495 | 17 ms |
+| bm25 | 0.288 | 0.692 | **0.412** | 0.457 | 4 ms |
+| hybrid | **0.442** | **0.769** | 0.410 | **0.581** | 21 ms |
+
+**Paired per question (reciprocal rank, versus vector):** hybrid is better on 15, the same on 31 and worse on 6; sign test **p = 0.078**. The improvement is consistent across the averages and the per-question comparison, but with 52 questions it is **not statistically conclusive** at the 0.05 level. It is reported as such, not as proven. Hybrid is the default search mode because it is best on every ranking metric and rarely worse.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

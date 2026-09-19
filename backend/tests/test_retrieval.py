@@ -85,7 +85,7 @@ def test_search_api_requires_chat_permission_and_returns_citations(client, db_se
     add_document(db_session, indexer, "DOC-A", [{"text": "attendance policy minimum"}])
     assert client.get(f"{API}/search", params={"q": "attendance"}).status_code == 401  # guest
     student = headers_for(client, db_session, "student")
-    body = client.get(f"{API}/search", params={"q": "attendance", "k": 3}, headers=student).json()
+    body = client.get(f"{API}/search", params={"q": "attendance", "k": 3, "mode": "vector"}, headers=student).json()
     assert body["mode"] == "vector" and body["hits"][0]["citation"]["document_id"] == "DOC-A"
     assert body["hits"][0]["source_type"] == "synthetic"
     assert client.get(f"{API}/search", params={"q": "x"}, headers=student).status_code == 422  # too short

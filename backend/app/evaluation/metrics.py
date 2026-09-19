@@ -4,6 +4,7 @@ A retrieved chunk is RELEVANT to a question if it comes from one of the question
 sources: the same document, and (when the source names a page) a page range that covers it.
 """
 
+import math
 from dataclasses import dataclass
 from statistics import mean
 
@@ -60,3 +61,13 @@ def average(rows: list[dict]) -> dict:
 def percentile(values: list[float], share: float) -> float:
     ordered = sorted(values)
     return ordered[min(len(ordered) - 1, round(share * (len(ordered) - 1)))] if ordered else 0.0
+
+
+def sign_test_p(wins: int, losses: int) -> float:
+    """Two-sided sign test: how likely is a split at least this lopsided if both systems were
+    equally good (each non-tied question a coin flip)? Small p = unlikely to be chance."""
+    n = wins + losses
+    if n == 0:
+        return 1.0
+    tail = sum(math.comb(n, i) for i in range(0, min(wins, losses) + 1)) / 2 ** n
+    return min(1.0, 2 * tail)

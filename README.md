@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 10 (BM25 lexical retrieval).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index and searchable at `/api/v1/search`. There is no answer generation or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 11 (hybrid retrieval).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index and searchable at `/api/v1/search`. There is no answer generation or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -187,7 +187,7 @@ cd backend
 curl -b jar.txt "http://127.0.0.1:8000/api/v1/search?q=minimum%20attendance&source_type=official"
 ```
 
-`GET /api/v1/search` (`chat:use`) takes `q`, `mode` (`vector` or `bm25`), `k`, `source_type` (repeatable), `document_type`, `program_id` and `semester_id`. Each hit has `text`, `score`, `source_type`, `entity_ids` and a `citation` (document, version, pages, section). The worker indexes new versions automatically. `rebuild-index --reset` recreates the whole index from PostgreSQL.
+`GET /api/v1/search` (`chat:use`) takes `q`, `mode` (`hybrid` (default), `vector` or `bm25`), `k`, `source_type` (repeatable), `document_type`, `program_id` and `semester_id`. Each hit has `text`, `score`, `source_type`, `entity_ids` and a `citation` (document, version, pages, section). The worker indexes new versions automatically. `rebuild-index --reset` recreates the whole index from PostgreSQL.
 
 ## Evaluation
 
