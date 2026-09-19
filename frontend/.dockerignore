@@ -1,6 +1,0 @@
-node_modules/
-dist/
-stitch-reference/
-**/*.test.ts
-**/*.test.tsx
-src/test/

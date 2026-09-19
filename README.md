@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: all 21 phases done, local only; pending decisions: the SLM, the vector store, building the Docker images. See [docs/deployment-evaluation.md](docs/deployment-evaluation.md).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. A React frontend (`frontend/`), built to the Stitch designs, has the student workspace (assistant with sources, knowledge tree and trace; curriculum; faculty; calendar; policies) and the admin Knowledge Control Center. Demo logins: `admin` / `admin@123` and `student` / `student@123` (local only). See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: all 21 phases done, local only; pending decisions: the SLM, the vector store, building the Docker images. See [docs/deployment-evaluation.md](docs/deployment-evaluation.md).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. **There is no UI at the moment:** the React frontend was removed on 2026-09-19, to be rebuilt from scratch (it is in the Git history, commit `c2e2a2d`). Use the API through http://127.0.0.1:8000/docs. Demo logins for the API: `admin` / `admin@123` and `student` / `student@123` (local only). See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Quick start (Windows)
 
@@ -14,20 +14,20 @@ cd "D:\MP 7th Sem\CampusMate"
 .\scripts\start-local.ps1
 ```
 
-Then sign in at http://127.0.0.1:5173 with a demo account:
+Then open http://127.0.0.1:8000/docs (the API's interactive documentation) and log in with `POST /api/v1/auth/login` using a demo account:
 
-| Username | Password | Opens |
+| Username | Password | Can |
 |---|---|---|
-| `admin` | `admin@123` | the Knowledge Control Center (`/admin`); **Open assistant** switches to the student view |
-| `student` | `student@123` | the assistant (`/`) |
+| `admin` | `admin@123` | everything: documents, ingestion, users, audit log, chat |
+| `student` | `student@123` | chat and the catalogue |
 
 The demo accounts are for a local demo only: their passwords are public. `python -m app.accounts demo` (which `-DemoAccounts` runs) refuses to create them when `APP_ENV=production`, and the API refuses their logins there. For a real admin, use `-AdminEmail you@example.org` instead (a hidden prompt asks for its password).
 
 `setup-local.ps1` runs once, and is safe to re-run. It asks once for the `postgres` superuser's password and uses it only to create the low-privilege role `campusmate_app` and its two databases. The role's password comes from `DB_PASSWORD` in `.env`. The script then creates the schema, loads the dataset, queues the 12 PDFs for ingestion and creates the demo accounts (`-DemoAccounts`, safe to repeat: it resets their passwords) or a real admin (`-AdminEmail`, prompts for the password; first run only).
 
-`start-local.ps1` opens two windows, **CampusMate API** and **CampusMate UI**, then opens http://127.0.0.1:5173. Close the two windows to stop. The API ingests the queued PDFs by itself during the first minute or two; the knowledge-base page shows the progress.
+`start-local.ps1` opens the **CampusMate API** window, then http://127.0.0.1:8000/docs. Close the window to stop. The API ingests the queued PDFs by itself during the first minute or two (`GET /api/v1/ingestion/jobs` shows the progress).
 
-To add another account: `backend\.venv\Scripts\python -m app.accounts create --email jane@campusmate-demo.example --username jane --role student` (run it from `backend`), or use **Users** in the admin console.
+To add another account: `backend\.venv\Scripts\python -m app.accounts create --email jane@campusmate-demo.example --username jane --role student` (run it from `backend`), or `POST /api/v1/users` as an admin.
 
 ## Repository layout
 
@@ -50,12 +50,6 @@ data/
   pdfs/             official + synthetic PDFs. NOT in Git; verify with data/pdfs.sha256
   reference/        read-only material: legacy SQL, audit, generator scripts, gap analysis
 evaluation/datasets/  evaluation questions (58) and negative/hallucination questions (23)
-frontend/           React + TypeScript UI (Vite, Tailwind); talks only to the FastAPI API
-  src/api/          the only code that calls the server (client.ts) and the response types
-  src/student/      the student workspace: assistant, curriculum, faculty, calendar, policies
-  src/admin/        the admin console: dashboard, documents, ingestion, analytics, users, settings
-  src/components/   shared pieces (citations, source cards, badges, dialogs)
-  stitch-reference/ Stitch UI mockups: visual reference only. Their sample data is NOT factual.
 storage/            runtime files (uploads, processed, vector index, tmp). NOT in Git
 docs/               architecture and decisions
 ```
@@ -72,7 +66,6 @@ docs/               architecture and decisions
 
 - Python 3.11+ (developed on 3.13)
 - PostgreSQL (developed on native PostgreSQL 18 on port 5432)
-- Node.js 20+ for the frontend (developed on 22)
 - Git
 
 ## Setup (Windows, Git Bash)
@@ -150,11 +143,10 @@ cd backend
 .venv/Scripts/python -m uvicorn app.main:app --reload --port 8000
 ```
 
-The whole application is two processes. The API also ingests uploaded documents, in a background thread (`INGESTION_IN_API`, on by default): the embedded vector store may be used by one process only, and a separate Chroma server is avoided on purpose (see [docs/security.md](docs/security.md)).
+The whole application is one process. The API also ingests uploaded documents, in a background thread (`INGESTION_IN_API`, on by default): the embedded vector store may be used by one process only, and a separate Chroma server is avoided on purpose (see [docs/security.md](docs/security.md)).
 
 ```bash
 cd backend && .venv/Scripts/python -m uvicorn app.main:app --port 8000   # API + ingestion
-cd frontend && npm run dev                                                # UI: http://127.0.0.1:5173
 ```
 
 End-to-end check against the running application (adds one fictitious synthetic document, follows it through ingestion, answering and deactivation, then deletes it; development databases only):
@@ -301,37 +293,22 @@ python -m app.evaluation answers   # all dataset questions through the whole pip
 
 ## Frontend
 
-```bash
-# terminal 1: the API
-cd backend && .venv/Scripts/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
-# terminal 2: the UI
-cd frontend && npm ci && npm run dev     # open http://127.0.0.1:5173
-npm test                                 # component and page tests (Vitest; no server needed)
-npm run build                            # type-check, then a production build in frontend/dist
-```
-
-In development, Vite forwards `/api` to the API (`CAMPUSMATE_API` overrides the address). The browser therefore talks to one origin only: the session cookie stays httpOnly and same-origin, and the API needs no CORS.
-
-| Page | Who | What |
-|---|---|---|
-| `/login` | everyone | Sign in with a username or email. In development, the demo accounts are shown and fill the form with one click |
-| `/` | students, faculty, admins (`chat:use`) | The assistant (the Stitch "Universal Student AI Assistant" design). Ask a question, or pick a quick inquiry; the header's Dept / Program / Term selectors give the question its context. Answers show their tables and `[n]` citations. The side panel has three tabs: **Sources** (document, version, page, trust level, text), **Tree** (the knowledge graph around the answer's entities) and **Trace** (route, reasons, grounding, timings). Answers can be rated. Ctrl K searches courses and faculty, Alt N starts a new question, and the microphone dictates (where the browser supports it) |
-| `/curriculum` | same | Programmes → semesters → courses, from the official syllabus: credits, contact hours, marks and elective slots, with a course drawer |
-| `/faculty`, `/calendar`, `/policies` | same | Faculty directory, academic calendar (filterable by the selected term) and policies. These are synthetic demo data and say so |
-| `/admin` | faculty (read), admins (manage) | The Knowledge Control Center (the Stitch admin design): statistics, documents by category, quick actions on the selected document, upload with an explicit trust level, the ingestion pipeline. A document's panel shows its versions (new-version upload, rollback by activating an older one, the original PDF for admins) and recent ingestion |
-| `/admin/documents`, `/admin/ingestion`, `/admin/analytics`, `/admin/users`, `/admin/settings` | by permission | All documents; ingestion jobs with retry; usage analytics; accounts; the running configuration (read-only, no secrets) |
-
-The UI is light by default, as designed in Stitch; the moon button in the header switches to dark mode (remembered in this browser).
+None at the moment. The first UI (React 19, Vite, Tailwind 4, to the Stitch designs) was removed on
+2026-09-19 so that it can be rebuilt from scratch; `git show c2e2a2d` has the last version, and
+`git checkout c2e2a2d -- frontend/stitch-reference` restores the Stitch designs alone. The API is
+ready for a new UI: every screen of the old one was fed by the endpoints listed in this README.
+A new frontend must talk only to this API (never to PostgreSQL or the vector store) and should
+be served from the same origin (for example through a dev-server proxy for `/api`), so the
+session cookie stays httpOnly and no CORS is needed.
 
 ## Docker
 
-`compose.yaml` runs CampusMate in three containers:
+`compose.yaml` runs CampusMate in two containers (the `web` container went with the frontend):
 
 - `db`: PostgreSQL 18, created with the same low-privilege role as a native install;
 - `api`: the API with its ingestion thread and the embedding model baked in; it runs as a non-root user and migrates on start;
-- `web`: nginx serving the built UI and forwarding `/api`.
 
-Only the UI is published, and only on `127.0.0.1:8080`. The database and the API are reachable only inside the compose network.
+Only the API is published, and only on `127.0.0.1:8000`. The database is reachable only inside the compose network.
 
 ```bash
 # in .env: DB_PASSWORD (application role) and POSTGRES_PASSWORD (superuser, used once to create that role)
@@ -339,7 +316,7 @@ docker compose up --build -d
 docker compose run --rm api python -m app.seed                     # once: the dataset (./data is mounted read-only)
 docker compose run --rm api python -m app.ingestion queue-missing  # the API's thread then ingests the PDFs
 docker compose run --rm api python -m app.accounts create --email admin@campusmate-demo.example --role admin
-# open http://localhost:8080
+# open http://localhost:8000/docs  (API docs are disabled when APP_ENV=production; use /api/v1/system/ready)
 ```
 
 Data lives in two named volumes, `pgdata` and `storage` (uploads and the vector index). `docker compose down` keeps them; `docker compose down -v` deletes them. To use a model server on the host (e.g. Ollama), set `GENERATION_PROVIDER=openai_compatible` and `GENERATION_MODEL` in `.env`; the API reaches the host at `host.docker.internal:11434`.

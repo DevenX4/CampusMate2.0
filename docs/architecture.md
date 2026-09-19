@@ -371,6 +371,8 @@ Found by the answer evaluation and fixed:
 
 ## Frontend (Phase 17)
 
+> **Removed on 2026-09-19** at the user's request, to be rebuilt from scratch. This section and the next one describe the removed UI (last version: commit `c2e2a2d`). The API endpoints it used remain.
+
 ```
 browser ── http://127.0.0.1:5173 ──► Vite (static UI) ── /api/* ──► FastAPI :8000 ──► PostgreSQL / Chroma
             one origin: httpOnly session cookie, no CORS, no token in JavaScript

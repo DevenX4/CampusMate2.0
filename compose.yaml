@@ -1,10 +1,11 @@
-# CampusMate in containers, on this machine only (the UI is published on 127.0.0.1).
+# CampusMate in containers, on this machine only (the API is published on 127.0.0.1).
+# There is no UI yet: the frontend was removed on 2026-09-19 to be rebuilt from scratch.
 #
 #   docker compose up --build -d                    # build and start
 #   docker compose run --rm api python -m app.seed  # once: load the dataset
 #   docker compose run --rm api python -m app.ingestion queue-missing
 #   docker compose run --rm api python -m app.accounts create --email ... --role admin
-#   open http://localhost:8080
+#   open http://localhost:8000/api/v1/system/ready
 #
 # Secrets come from .env (never committed): DB_PASSWORD for the application's database role,
 # POSTGRES_PASSWORD for the database superuser (used only to create that role on first start).
@@ -45,18 +46,9 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    mem_limit: 1536m
-    restart: unless-stopped
-    # No published port: only the web container can reach the API.
-
-  web:
-    build: ./frontend
     ports:
-      - "127.0.0.1:8080:8080"
-    depends_on:
-      api:
-        condition: service_healthy
-    mem_limit: 128m
+      - "127.0.0.1:8000:8000"   # this machine only
+    mem_limit: 1536m
     restart: unless-stopped
 
 volumes:
