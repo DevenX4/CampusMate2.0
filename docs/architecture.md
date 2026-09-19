@@ -468,4 +468,4 @@ browser ── 127.0.0.1:8080 ──► web (nginx: built UI, /api proxy) ──
 
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend ✅ · 18 integration ✅ (SLM pending) · 19 testing + hardening ✅ · 20 Docker ✅ (files; build pending) · 21 deployment evaluation
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend ✅ · 18 integration ✅ (SLM pending) · 19 testing + hardening ✅ · 20 Docker ✅ (files; build pending) · 21 deployment evaluation ✅ (no deployment; see [deployment-evaluation.md](deployment-evaluation.md))
