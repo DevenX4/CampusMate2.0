@@ -360,6 +360,43 @@ Found by the answer evaluation and fixed:
 - the name check read the letters inside `2CEIT78PE7` as names;
 - BM25 ties and Chroma's approximate search made evidence differ between processes (see Phase 8).
 
+## Frontend (Phase 17)
+
+```
+browser ── http://127.0.0.1:5173 ──► Vite (static UI) ── /api/* ──► FastAPI :8000 ──► PostgreSQL / Chroma
+            one origin: httpOnly session cookie, no CORS, no token in JavaScript
+```
+
+| Decision | Why |
+|---|---|
+| Vite + React 19 + TypeScript (strict) + Tailwind 4; tokens from the Stitch `DESIGN.md` (warm neutrals, one sapphire accent) | The stack the project specified. Design tokens in one `@theme` block |
+| One API module (`src/api/client.ts`), same-origin requests with the cookie | The browser never sees PostgreSQL, Chroma or the session token. The backend's error format becomes one `ApiError` |
+| Route guards read `GET /auth/me` permissions; the server checks every request again | The UI hides what a role cannot do; it is never the security boundary |
+| No facts in the UI: everything shown comes from API responses. The example questions are only questions | The Stitch mockups contained wrong facts; see below |
+| Answers rendered as React text; `[n]` becomes a button that opens source *n* | No HTML from answers ever reaches the DOM (tested with an `<img onerror>` answer) |
+| Trust levels on every source; synthetic data in amber, never in the official sapphire; a warning under any answer that uses it | Synthetic information must never look official |
+| An upload requires the admin to choose "official" or "synthetic"; there is no default | The label decides how every answer from that file is presented |
+| Fonts self-hosted (`@fontsource`); no external requests at runtime | Works offline, and nothing leaks to third parties |
+
+**Stitch mock facts not carried over:**
+- 2CEIT601–604 were mapped to the wrong courses. The syllabus has 601 THEORY OF COMPUTATION and 602 ARTIFICIAL INTELLIGENCE.
+- "Charusat / GTU" names other universities.
+- "Revision v3.2", "Section 3.4 … 16 credits" and the "Authentic" badge were invented.
+- "ChromaDB v0.5", "text-embedding-3-small", "PyMuPDF / OCR" and "overlap 120 tokens / 512" misdescribe the real pipeline.
+- The document counts were invented.
+- A quotation was attributed to Gandhi, but that attribution is disputed.
+
+The admin page describes the pipeline as implemented, and shows counts from `GET /documents/stats`.
+
+**Testing:**
+- Vitest + Testing Library (16 tests) with a fetch mock that exercises the real client, routing and auth.
+- The whole flow was also checked against the running API through the Vite proxy, with curl: login cookie, `/me`, a chat answer, feedback, a 403 for a student on documents, and logout.
+- Headless Edge, driven over the DevTools protocol, took screenshots of the login page, the assistant (desktop and 390 px mobile) and the admin page.
+
+Found by the headless browser and fixed:
+- Chromium's `scrollIntoView` returns a Promise. An effect returned it, React called it as a clean-up and the page went blank. jsdom has no `scrollIntoView`, so the unit tests could not see it; a regression test now simulates Chromium.
+- An extractive answer quoted a neighbouring course's relationship without its subject.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend ✅ · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

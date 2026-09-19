@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 16 (chat API).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. There is no frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 17 (frontend).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. A React frontend (`frontend/`) has the assistant for students and faculty, and a knowledge-base page for administrators. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -25,7 +25,10 @@ data/
   pdfs/             official + synthetic PDFs. NOT in Git; verify with data/pdfs.sha256
   reference/        read-only material: legacy SQL, audit, generator scripts, gap analysis
 evaluation/datasets/  evaluation questions (58) and negative/hallucination questions (23)
-frontend/stitch-reference/  Stitch UI mockups: visual reference only. Their sample data is NOT factual.
+frontend/           React + TypeScript UI (Vite, Tailwind); talks only to the FastAPI API
+  src/api/          the only code that calls the server (client.ts) and the response types
+  src/pages/        login, assistant, knowledge base (admin)
+  stitch-reference/ Stitch UI mockups: visual reference only. Their sample data is NOT factual.
 storage/            runtime files (uploads, processed, vector index, tmp). NOT in Git
 docs/               architecture and decisions
 ```
@@ -41,7 +44,8 @@ docs/               architecture and decisions
 ## Prerequisites
 
 - Python 3.11+ (developed on 3.13)
-- PostgreSQL (developed on native PostgreSQL 18 on port 5432). Not used until Phase 2.
+- PostgreSQL (developed on native PostgreSQL 18 on port 5432)
+- Node.js 20+ for the frontend (developed on 22)
 - Git
 
 ## Setup (Windows, Git Bash)
@@ -241,6 +245,25 @@ Every exchange is stored in `chat_queries`. `POST /api/v1/chat/feedback` with `{
 ```bash
 python -m app.evaluation answers   # all dataset questions through the whole pipeline -> evaluation/results/ANSWERS.md
 ```
+
+## Frontend
+
+```bash
+# terminal 1: the API
+cd backend && .venv/Scripts/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+# terminal 2: the UI
+cd frontend && npm ci && npm run dev     # open http://127.0.0.1:5173
+npm test                                 # component and page tests (Vitest; no server needed)
+npm run build                            # type-check, then a production build in frontend/dist
+```
+
+In development, Vite forwards `/api` to the API (`CAMPUSMATE_API` overrides the address). The browser therefore talks to one origin only: the session cookie stays httpOnly and same-origin, and the API needs no CORS.
+
+| Page | Who | What |
+|---|---|---|
+| `/login` | everyone | Sign in (the account is created with `python -m app.accounts`) |
+| `/` | students, faculty, admins (`chat:use`) | Ask questions. Each `[n]` in an answer opens its source (document, version, page, trust level, text). Synthetic data carries a warning. Answers can be rated |
+| `/admin` | faculty (read), admins (manage) | Document statistics and list; upload with an explicit trust level; activate, deactivate, archive, delete and re-index; ingestion jobs with retry |
 
 ## Knowledge (OKF)
 
