@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 8 (vector retrieval).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index and searchable at `/api/v1/search`. There is no answer generation or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 9 (retrieval evaluation).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index and searchable at `/api/v1/search`. There is no answer generation or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -188,6 +188,15 @@ curl -b jar.txt "http://127.0.0.1:8000/api/v1/search?q=minimum%20attendance&sour
 ```
 
 `GET /api/v1/search` (`chat:use`) takes `q`, `k`, `source_type` (repeatable), `document_type`, `program_id` and `semester_id`. Each hit has `text`, `score`, `source_type`, `entity_ids` and a `citation` (document, version, pages, section). The worker indexes new versions automatically. `rebuild-index --reset` recreates the whole index from PostgreSQL.
+
+## Evaluation
+
+```bash
+cd backend
+.venv/Scripts/python -m app.evaluation retrieval --mode vector
+```
+
+This runs the 58 dataset questions through one retrieval mode and writes `evaluation/results/retrieval_<mode>.json` (per-question metrics and top hits). It also regenerates `evaluation/results/RETRIEVAL.md`, which compares every stored mode on Hit@K, Recall@K, Precision@K, MRR, entity recall, latency and a per-category breakdown.
 
 ## Catalog API (read-only)
 

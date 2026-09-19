@@ -182,6 +182,28 @@ First observations with the real model (to be *measured* in Phase 9):
 - exact codes fail (`2CEIT78PE7` returns other `2CEIT78PE*` courses);
 - number-heavy official table rows rank poorly. This is the motivation for BM25 (Phase 10).
 
+## Retrieval evaluation (Phase 9)
+
+`app/evaluation`: pure metric functions and a runner that accepts any `retrieve(question, k)`, so every mode is measured identically. A chunk is relevant if it comes from a question's required source (same document, page covered by the chunk). Results: `evaluation/results/`.
+
+| Metric | Question it answers |
+|---|---|
+| Hit@K | Is any correct page in the top K? (Can the model find the evidence at all?) |
+| Recall@K | What share of all required pages is in the top K? (Multi-source questions) |
+| Precision@K | How much of the top K is relevant? (Noise reaching the model) |
+| MRR@10 | How high is the first correct page? |
+| Entity recall@K | Do the retrieved chunks mention the expected entities? (Independent signal) |
+
+**Baseline, vector only (BGE-small, 935 chunks, 52 answerable questions):** Hit@1 0.346, Hit@5 0.712, Recall@5 0.357, Precision@5 0.238, MRR 0.495, entity recall@5 0.810, p50 17 ms.
+
+Findings:
+1. The mean top similarity is 0.708 for answerable and **0.701 for unanswerable** questions. A similarity threshold cannot detect unanswerable questions, so abstention must rely on grounding checks (Phase 16).
+2. Most "semantic" misses retrieve FAQ entries that paraphrase the answer (entity recall 1.0), not the primary policy or facility page the dataset requires. The metric is deliberately strict about *which* source is cited.
+3. The official catalog (619 of 935 chunks) crowds out relevant pages for loosely worded questions (EVAL-018).
+4. Exact codes are weak for embeddings (Phase 8 observation).
+
+These are the targets for BM25, hybrid fusion and reranking.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
