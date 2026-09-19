@@ -1,0 +1,2589 @@
+{
+ "overall": {
+  "1": {
+   "hit": 0.4808,
+   "recall": 0.2271,
+   "precision": 0.4808,
+   "rr": 0.4808,
+   "entity_recall": 0.5745
+  },
+  "3": {
+   "hit": 0.7885,
+   "recall": 0.426,
+   "precision": 0.391,
+   "rr": 0.625,
+   "entity_recall": 0.8173
+  },
+  "5": {
+   "hit": 0.8269,
+   "recall": 0.4773,
+   "precision": 0.3154,
+   "rr": 0.6337,
+   "entity_recall": 0.8468
+  },
+  "10": {
+   "hit": 0.9038,
+   "recall": 0.5715,
+   "precision": 0.2423,
+   "rr": 0.6441,
+   "entity_recall": 0.9262
+  }
+ },
+ "by_category": {
+  "A_simple_factual": {
+   "1": {
+    "hit": 0.375,
+    "recall": 0.1979,
+    "precision": 0.375,
+    "rr": 0.375,
+    "entity_recall": 0.4375
+   },
+   "3": {
+    "hit": 0.75,
+    "recall": 0.4583,
+    "precision": 0.375,
+    "rr": 0.5625,
+    "entity_recall": 0.875
+   },
+   "5": {
+    "hit": 0.75,
+    "recall": 0.5,
+    "precision": 0.25,
+    "rr": 0.5625,
+    "entity_recall": 0.875
+   },
+   "10": {
+    "hit": 0.875,
+    "recall": 0.6042,
+    "precision": 0.175,
+    "rr": 0.5781,
+    "entity_recall": 1.0
+   }
+  },
+  "B_exact_lexical": {
+   "1": {
+    "hit": 0.75,
+    "recall": 0.4417,
+    "precision": 0.75,
+    "rr": 0.75,
+    "entity_recall": 0.75
+   },
+   "3": {
+    "hit": 1.0,
+    "recall": 0.6649,
+    "precision": 0.5833,
+    "rr": 0.875,
+    "entity_recall": 0.9437
+   },
+   "5": {
+    "hit": 1.0,
+    "recall": 0.6649,
+    "precision": 0.425,
+    "rr": 0.875,
+    "entity_recall": 1.0
+   },
+   "10": {
+    "hit": 1.0,
+    "recall": 0.7065,
+    "precision": 0.275,
+    "rr": 0.875,
+    "entity_recall": 1.0
+   }
+  },
+  "C_semantic": {
+   "1": {
+    "hit": 0.1429,
+    "recall": 0.1429,
+    "precision": 0.1429,
+    "rr": 0.1429,
+    "entity_recall": 0.9286
+   },
+   "3": {
+    "hit": 0.4286,
+    "recall": 0.3333,
+    "precision": 0.1429,
+    "rr": 0.2857,
+    "entity_recall": 0.9286
+   },
+   "5": {
+    "hit": 0.7143,
+    "recall": 0.4524,
+    "precision": 0.1429,
+    "rr": 0.35,
+    "entity_recall": 0.9286
+   },
+   "10": {
+    "hit": 0.7143,
+    "recall": 0.4524,
+    "precision": 0.1,
+    "rr": 0.35,
+    "entity_recall": 1.0
+   }
+  },
+  "D_metadata_filtered": {
+   "1": {
+    "hit": 0.4286,
+    "recall": 0.131,
+    "precision": 0.4286,
+    "rr": 0.4286,
+    "entity_recall": 0.4776
+   },
+   "3": {
+    "hit": 0.7143,
+    "recall": 0.381,
+    "precision": 0.3333,
+    "rr": 0.5476,
+    "entity_recall": 0.8571
+   },
+   "5": {
+    "hit": 0.7143,
+    "recall": 0.4762,
+    "precision": 0.3143,
+    "rr": 0.5476,
+    "entity_recall": 0.898
+   },
+   "10": {
+    "hit": 0.8571,
+    "recall": 0.6071,
+    "precision": 0.2714,
+    "rr": 0.5714,
+    "entity_recall": 0.9592
+   }
+  },
+  "E_multi_hop": {
+   "1": {
+    "hit": 0.625,
+    "recall": 0.249,
+    "precision": 0.625,
+    "rr": 0.625,
+    "entity_recall": 0.5312
+   },
+   "3": {
+    "hit": 1.0,
+    "recall": 0.4083,
+    "precision": 0.5,
+    "rr": 0.7917,
+    "entity_recall": 0.75
+   },
+   "5": {
+    "hit": 1.0,
+    "recall": 0.4292,
+    "precision": 0.425,
+    "rr": 0.7917,
+    "entity_recall": 0.7812
+   },
+   "10": {
+    "hit": 1.0,
+    "recall": 0.5687,
+    "precision": 0.325,
+    "rr": 0.7917,
+    "entity_recall": 0.9688
+   }
+  },
+  "F_cross_document": {
+   "1": {
+    "hit": 0.4286,
+    "recall": 0.1357,
+    "precision": 0.4286,
+    "rr": 0.4286,
+    "entity_recall": 0.5476
+   },
+   "3": {
+    "hit": 1.0,
+    "recall": 0.3548,
+    "precision": 0.4286,
+    "rr": 0.6905,
+    "entity_recall": 0.7857
+   },
+   "5": {
+    "hit": 1.0,
+    "recall": 0.4024,
+    "precision": 0.2857,
+    "rr": 0.6905,
+    "entity_recall": 0.7857
+   },
+   "10": {
+    "hit": 1.0,
+    "recall": 0.5262,
+    "precision": 0.1857,
+    "rr": 0.6905,
+    "entity_recall": 0.7857
+   }
+  },
+  "G_structured_sql": {
+   "1": {
+    "hit": 0.5714,
+    "recall": 0.2619,
+    "precision": 0.5714,
+    "rr": 0.5714,
+    "entity_recall": 0.35
+   },
+   "3": {
+    "hit": 0.5714,
+    "recall": 0.3452,
+    "precision": 0.3333,
+    "rr": 0.5714,
+    "entity_recall": 0.5643
+   },
+   "5": {
+    "hit": 0.5714,
+    "recall": 0.3929,
+    "precision": 0.3429,
+    "rr": 0.5714,
+    "entity_recall": 0.6429
+   },
+   "10": {
+    "hit": 0.8571,
+    "recall": 0.5119,
+    "precision": 0.3571,
+    "rr": 0.6077,
+    "entity_recall": 0.7429
+   }
+  }
+ },
+ "latency_ms": {
+  "mean": 5288.4,
+  "p50": 5215.9,
+  "p95": 6597.6
+ },
+ "top_score": {
+  "answerable_mean": 3.2889,
+  "unanswerable_mean": 1.2719
+ },
+ "questions": {
+  "answerable": 52,
+  "unanswerable": 6
+ },
+ "per_question": [
+  {
+   "question_id": "EVAL-001",
+   "category": "A_simple_factual",
+   "answerable": true,
+   "top_score": 4.1112,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.3333333333333333,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.1,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.4",
+    "DOC-COURSES-001 p.10",
+    "DOC-DEPT-PROFILE-001 p.2",
+    "DOC-COURSES-001 p.22",
+    "DOC-COURSES-001 p.18"
+   ]
+  },
+  {
+   "question_id": "EVAL-002",
+   "category": "A_simple_factual",
+   "answerable": true,
+   "top_score": 5.81,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.4",
+    "DOC-COURSES-001 p.33",
+    "DOC-COURSES-001 p.1",
+    "DOC-COURSES-001 p.2",
+    "DOC-COURSES-001 p.33"
+   ]
+  },
+  {
+   "question_id": "EVAL-003",
+   "category": "A_simple_factual",
+   "answerable": true,
+   "top_score": 7.8519,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.6666666666666666,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.4,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.4,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.2",
+    "DOC-DEPT-PROFILE-001 p.1",
+    "DOC-FACULTY-001 p.2",
+    "DOC-FACULTY-001 p.1",
+    "DOC-NOTICES-001 p.6"
+   ]
+  },
+  {
+   "question_id": "EVAL-004",
+   "category": "A_simple_factual",
+   "answerable": true,
+   "top_score": 4.9813,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.1,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FACILITIES-001 p.1",
+    "DOC-FACILITIES-001 p.2",
+    "DOC-FAQ-001 p.3",
+    "DOC-NOTICES-001 p.6",
+    "DOC-FACILITIES-001 p.4"
+   ]
+  },
+  {
+   "question_id": "EVAL-005",
+   "category": "A_simple_factual",
+   "answerable": true,
+   "top_score": 5.5082,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.6666666666666666,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-PROGRAMS-001 p.1",
+    "DOC-OFFICIAL-SYLLABUS-001 p.15",
+    "DOC-OFFICIAL-SYLLABUS-001 p.18",
+    "DOC-OFFICIAL-SYLLABUS-001 p.12",
+    "DOC-OFFICIAL-SYLLABUS-001 p.11"
+   ]
+  },
+  {
+   "question_id": "EVAL-006",
+   "category": "A_simple_factual",
+   "answerable": true,
+   "top_score": 5.6307,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.5
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.75,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.75,
+     "precision": 0.6,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.75,
+     "precision": 0.3,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.18",
+    "DOC-PROGRAMS-001 p.5",
+    "DOC-COURSES-001 p.21",
+    "DOC-PROGRAMS-001 p.1",
+    "DOC-COURSES-001 p.16"
+   ]
+  },
+  {
+   "question_id": "EVAL-007",
+   "category": "A_simple_factual",
+   "answerable": true,
+   "top_score": -1.2473,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "5": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.1,
+     "rr": 0.125,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.105",
+    "DOC-OFFICIAL-SYLLABUS-001 p.104",
+    "DOC-OFFICIAL-SYLLABUS-001 p.14",
+    "DOC-OFFICIAL-SYLLABUS-001 p.11",
+    "DOC-OFFICIAL-SYLLABUS-001 p.12"
+   ]
+  },
+  {
+   "question_id": "EVAL-008",
+   "category": "A_simple_factual",
+   "answerable": true,
+   "top_score": 7.0186,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.3333333333333333,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.6666666666666666,
+     "precision": 0.4,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.6666666666666666,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.4",
+    "DOC-PROGRAMS-001 p.6",
+    "DOC-PROGRAMS-001 p.1",
+    "DOC-COURSES-001 p.21",
+    "DOC-DEPT-PROFILE-001 p.2"
+   ]
+  },
+  {
+   "question_id": "EVAL-009",
+   "category": "B_exact_lexical",
+   "answerable": true,
+   "top_score": 3.58,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.6,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.6666666666666666,
+     "precision": 0.4,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-COURSES-001 p.20",
+    "DOC-COURSES-001 p.20",
+    "DOC-COURSES-001 p.20",
+    "DOC-COURSES-001 p.19",
+    "DOC-COURSES-001 p.18"
+   ]
+  },
+  {
+   "question_id": "EVAL-010",
+   "category": "B_exact_lexical",
+   "answerable": true,
+   "top_score": 5.4567,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.6,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.4,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-POLICIES-001 p.3",
+    "DOC-POLICIES-001 p.3",
+    "DOC-POLICIES-001 p.3",
+    "DOC-POLICIES-001 p.4",
+    "DOC-POLICIES-001 p.2"
+   ]
+  },
+  {
+   "question_id": "EVAL-011",
+   "category": "B_exact_lexical",
+   "answerable": true,
+   "top_score": 3.961,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.5
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.3333333333333333,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.4,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.3",
+    "DOC-LABS-001 p.2",
+    "DOC-FAQ-001 p.3",
+    "DOC-LABS-001 p.1",
+    "DOC-LABS-001 p.2"
+   ]
+  },
+  {
+   "question_id": "EVAL-012",
+   "category": "B_exact_lexical",
+   "answerable": true,
+   "top_score": 4.1737,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.6666666666666666,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.6,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.4,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-NOTICES-001 p.5",
+    "DOC-NOTICES-001 p.4",
+    "DOC-NOTICES-001 p.7",
+    "DOC-NOTICES-001 p.5",
+    "DOC-NOTICES-001 p.1"
+   ]
+  },
+  {
+   "question_id": "EVAL-013",
+   "category": "B_exact_lexical",
+   "answerable": true,
+   "top_score": 7.058,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.2,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.2,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.2,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.2,
+     "precision": 0.1,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-COURSES-001 p.33",
+    "DOC-COURSES-001 p.32",
+    "DOC-COURSES-001 p.28",
+    "DOC-COURSES-001 p.51",
+    "DOC-COURSES-001 p.22"
+   ]
+  },
+  {
+   "question_id": "EVAL-014",
+   "category": "B_exact_lexical",
+   "answerable": true,
+   "top_score": 5.9489,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FACULTY-001 p.3",
+    "DOC-FACULTY-001 p.7",
+    "DOC-FACULTY-001 p.4",
+    "DOC-FACULTY-001 p.4",
+    "DOC-FACULTY-001 p.1"
+   ]
+  },
+  {
+   "question_id": "EVAL-015",
+   "category": "B_exact_lexical",
+   "answerable": true,
+   "top_score": 4.2253,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 0.8
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-PROGRAMS-001 p.3",
+    "DOC-PROGRAMS-001 p.4",
+    "DOC-PROGRAMS-001 p.4",
+    "DOC-COURSES-001 p.14",
+    "DOC-COURSES-001 p.14"
+   ]
+  },
+  {
+   "question_id": "EVAL-016",
+   "category": "B_exact_lexical",
+   "answerable": true,
+   "top_score": 2.5399,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.5
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.2857142857142857,
+     "precision": 0.6666666666666666,
+     "rr": 0.5,
+     "entity_recall": 0.75
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.2857142857142857,
+     "precision": 0.6,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.2857142857142857,
+     "precision": 0.3,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-COURSES-001 p.50",
+    "DOC-PROGRAMS-001 p.1",
+    "DOC-COURSES-001 p.49",
+    "DOC-COURSES-001 p.49",
+    "DOC-COURSES-001 p.52"
+   ]
+  },
+  {
+   "question_id": "EVAL-017",
+   "category": "C_semantic",
+   "answerable": true,
+   "top_score": 0.4525,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.2,
+     "rr": 0.2,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.1,
+     "rr": 0.2,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.2",
+    "DOC-POLICIES-001 p.5",
+    "DOC-FAQ-001 p.3",
+    "DOC-FAQ-001 p.3",
+    "DOC-FACILITIES-001 p.2"
+   ]
+  },
+  {
+   "question_id": "EVAL-018",
+   "category": "C_semantic",
+   "answerable": true,
+   "top_score": -4.4616,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-LABS-001 p.4",
+    "DOC-OFFICIAL-CATALOG-001 p.119",
+    "DOC-OFFICIAL-CATALOG-001 p.67",
+    "DOC-OFFICIAL-CATALOG-001 p.44",
+    "DOC-COURSES-001 p.47"
+   ]
+  },
+  {
+   "question_id": "EVAL-019",
+   "category": "C_semantic",
+   "answerable": true,
+   "top_score": -0.2072,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.3333333333333333,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.1",
+    "DOC-POLICIES-001 p.3",
+    "DOC-NOTICES-001 p.7",
+    "DOC-CALENDAR-001 p.3",
+    "DOC-FAQ-001 p.1"
+   ]
+  },
+  {
+   "question_id": "EVAL-020",
+   "category": "C_semantic",
+   "answerable": true,
+   "top_score": -9.1802,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.5
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.5
+    },
+    "5": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.5
+    },
+    "10": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-PROGRAMS-001 p.4",
+    "DOC-PROGRAMS-001 p.6",
+    "DOC-COURSES-001 p.37",
+    "DOC-COURSES-001 p.17",
+    "DOC-POLICIES-001 p.3"
+   ]
+  },
+  {
+   "question_id": "EVAL-021",
+   "category": "C_semantic",
+   "answerable": true,
+   "top_score": -3.8664,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.3333333333333333,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-PROGRAMS-001 p.4",
+    "DOC-COURSES-001 p.20",
+    "DOC-PROGRAMS-001 p.7",
+    "DOC-COURSES-001 p.35",
+    "DOC-COURSES-001 p.32"
+   ]
+  },
+  {
+   "question_id": "EVAL-022",
+   "category": "C_semantic",
+   "answerable": true,
+   "top_score": 7.4156,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.2,
+     "rr": 0.25,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.1,
+     "rr": 0.25,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.3",
+    "DOC-FAQ-001 p.2",
+    "DOC-COURSES-001 p.13",
+    "DOC-NOTICES-001 p.3",
+    "DOC-OFFICIAL-CATALOG-001 p.21"
+   ]
+  },
+  {
+   "question_id": "EVAL-023",
+   "category": "C_semantic",
+   "answerable": true,
+   "top_score": -9.6002,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.1,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FACILITIES-001 p.3",
+    "DOC-FAQ-001 p.5",
+    "DOC-NOTICES-001 p.7",
+    "DOC-FAQ-001 p.2",
+    "DOC-FAQ-001 p.5"
+   ]
+  },
+  {
+   "question_id": "EVAL-024",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "top_score": 8.9325,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.1,
+     "rr": 0.16666666666666666,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.4",
+    "DOC-COURSES-001 p.9",
+    "DOC-PROGRAMS-001 p.7",
+    "DOC-COURSES-001 p.12",
+    "DOC-COURSES-001 p.11"
+   ]
+  },
+  {
+   "question_id": "EVAL-025",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "top_score": 7.6516,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.3333333333333333,
+     "rr": 0.3333333333333333,
+     "entity_recall": 0.14285714285714285
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.6,
+     "rr": 0.3333333333333333,
+     "entity_recall": 0.42857142857142855
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.5,
+     "rr": 0.3333333333333333,
+     "entity_recall": 0.7142857142857143
+    }
+   },
+   "top_hits": [
+    "DOC-NOTICES-001 p.4",
+    "DOC-NOTICES-001 p.5",
+    "DOC-NOTICES-001 p.6",
+    "DOC-NOTICES-001 p.7",
+    "DOC-NOTICES-001 p.7"
+   ]
+  },
+  {
+   "question_id": "EVAL-026",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "top_score": 6.9456,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.14285714285714285
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.6666666666666666,
+     "rr": 1.0,
+     "entity_recall": 0.8571428571428571
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.6,
+     "rr": 1.0,
+     "entity_recall": 0.8571428571428571
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.75,
+     "precision": 0.6,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-NOTICES-001 p.7",
+    "DOC-NOTICES-001 p.1",
+    "DOC-NOTICES-001 p.5",
+    "DOC-NOTICES-001 p.4",
+    "DOC-NOTICES-001 p.7"
+   ]
+  },
+  {
+   "question_id": "EVAL-027",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "top_score": 5.2115,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.16666666666666666,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.2
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.16666666666666666,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.4,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.3,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-POLICIES-001 p.6",
+    "DOC-NOTICES-001 p.2",
+    "DOC-POLICIES-001 p.1",
+    "DOC-NOTICES-001 p.3",
+    "DOC-POLICIES-001 p.5"
+   ]
+  },
+  {
+   "question_id": "EVAL-028",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "top_score": 6.974,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.6666666666666666
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.6666666666666666,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.4,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-PROGRAMS-001 p.4",
+    "DOC-PROGRAMS-001 p.4",
+    "DOC-COURSES-001 p.17",
+    "DOC-COURSES-001 p.20",
+    "DOC-COURSES-001 p.20"
+   ]
+  },
+  {
+   "question_id": "EVAL-029",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "top_score": 7.6139,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.3333333333333333
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.3333333333333333,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-NOTICES-001 p.4",
+    "DOC-CALENDAR-001 p.1",
+    "DOC-NOTICES-001 p.5",
+    "DOC-NOTICES-001 p.1",
+    "DOC-CALENDAR-001 p.3"
+   ]
+  },
+  {
+   "question_id": "EVAL-030",
+   "category": "D_metadata_filtered",
+   "answerable": true,
+   "top_score": 2.2563,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-COURSES-001 p.2",
+    "DOC-COURSES-001 p.2",
+    "DOC-COURSES-001 p.52",
+    "DOC-COURSES-001 p.1",
+    "DOC-COURSES-001 p.2"
+   ]
+  },
+  {
+   "question_id": "EVAL-031",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "top_score": 5.204,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.16666666666666666,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.5
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.16666666666666666,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 0.5
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.4,
+     "rr": 1.0,
+     "entity_recall": 0.75
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.3,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FACULTY-001 p.2",
+    "DOC-FACULTY-001 p.5",
+    "DOC-FACULTY-001 p.7",
+    "DOC-FACULTY-001 p.8",
+    "DOC-FACULTY-001 p.3"
+   ]
+  },
+  {
+   "question_id": "EVAL-032",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "top_score": 6.0834,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.3333333333333333,
+     "rr": 0.5,
+     "entity_recall": 0.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 0.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-LABS-001 p.3",
+    "DOC-LABS-001 p.2",
+    "DOC-LABS-001 p.5",
+    "DOC-LABS-001 p.4",
+    "DOC-LABS-001 p.4"
+   ]
+  },
+  {
+   "question_id": "EVAL-033",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "top_score": 2.4036,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.125,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.5
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.6666666666666666,
+     "rr": 1.0,
+     "entity_recall": 0.75
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.8,
+     "rr": 1.0,
+     "entity_recall": 0.75
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.5,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-POLICIES-001 p.2",
+    "DOC-POLICIES-001 p.3",
+    "DOC-POLICIES-001 p.1",
+    "DOC-POLICIES-001 p.3",
+    "DOC-POLICIES-001 p.2"
+   ]
+  },
+  {
+   "question_id": "EVAL-034",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "top_score": 3.504,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.8,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-PROGRAMS-001 p.1",
+    "DOC-PROGRAMS-001 p.2",
+    "DOC-PROGRAMS-001 p.6",
+    "DOC-PROGRAMS-001 p.1",
+    "DOC-PROGRAMS-001 p.4"
+   ]
+  },
+  {
+   "question_id": "EVAL-035",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "top_score": -1.0349,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.25
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.2,
+     "precision": 0.3333333333333333,
+     "rr": 0.3333333333333333,
+     "entity_recall": 0.75
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.2,
+     "precision": 0.2,
+     "rr": 0.3333333333333333,
+     "entity_recall": 0.75
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.4,
+     "precision": 0.2,
+     "rr": 0.3333333333333333,
+     "entity_recall": 0.75
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.3",
+    "DOC-NOTICES-001 p.7",
+    "DOC-LABS-001 p.2",
+    "DOC-FAQ-001 p.3",
+    "DOC-NOTICES-001 p.5"
+   ]
+  },
+  {
+   "question_id": "EVAL-036",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "top_score": 2.314,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.5
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.1,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-COURSES-001 p.52",
+    "DOC-FAQ-001 p.4",
+    "DOC-COURSES-001 p.16",
+    "DOC-COURSES-001 p.36",
+    "DOC-COURSES-001 p.20"
+   ]
+  },
+  {
+   "question_id": "EVAL-037",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "top_score": 3.0802,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.5
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.3333333333333333,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.3,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-NOTICES-001 p.7",
+    "DOC-LABS-001 p.3",
+    "DOC-FAQ-001 p.3",
+    "DOC-FACILITIES-001 p.4",
+    "DOC-NOTICES-001 p.1"
+   ]
+  },
+  {
+   "question_id": "EVAL-038",
+   "category": "E_multi_hop",
+   "answerable": true,
+   "top_score": -0.051,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.2,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.4,
+     "precision": 0.6666666666666666,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.4,
+     "precision": 0.4,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.4,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FACULTY-001 p.3",
+    "DOC-COURSES-001 p.5",
+    "DOC-FACULTY-001 p.7",
+    "DOC-FACULTY-001 p.8",
+    "DOC-LABS-001 p.3"
+   ]
+  },
+  {
+   "question_id": "EVAL-039",
+   "category": "F_cross_document",
+   "answerable": true,
+   "top_score": 4.6279,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.3333333333333333
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.3333333333333333,
+     "rr": 0.3333333333333333,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.2,
+     "rr": 0.3333333333333333,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.6666666666666666,
+     "precision": 0.2,
+     "rr": 0.3333333333333333,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.1",
+    "DOC-NOTICES-001 p.6",
+    "DOC-POLICIES-001 p.4",
+    "DOC-POLICIES-001 p.3",
+    "DOC-FAQ-001 p.1"
+   ]
+  },
+  {
+   "question_id": "EVAL-040",
+   "category": "F_cross_document",
+   "answerable": true,
+   "top_score": 6.5198,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.6666666666666666
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.3333333333333333,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.6666666666666666,
+     "precision": 0.4,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.6666666666666666,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.1",
+    "DOC-NOTICES-001 p.7",
+    "DOC-NOTICES-001 p.6",
+    "DOC-NOTICES-001 p.1",
+    "DOC-CALENDAR-001 p.1"
+   ]
+  },
+  {
+   "question_id": "EVAL-041",
+   "category": "F_cross_document",
+   "answerable": true,
+   "top_score": 7.1629,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.6666666666666666,
+     "rr": 0.5,
+     "entity_recall": 0.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.4,
+     "rr": 0.5,
+     "entity_recall": 0.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 0.0
+    }
+   },
+   "top_hits": [
+    "DOC-OFFICIAL-CATALOG-001 p.15",
+    "DOC-OFFICIAL-CATALOG-001 p.41",
+    "DOC-OFFICIAL-CATALOG-001 p.40",
+    "DOC-OFFICIAL-CATALOG-001 p.133",
+    "DOC-OFFICIAL-CATALOG-001 p.51"
+   ]
+  },
+  {
+   "question_id": "EVAL-042",
+   "category": "F_cross_document",
+   "answerable": true,
+   "top_score": 3.7265,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.5
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 0.5
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 0.5
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.1,
+     "rr": 1.0,
+     "entity_recall": 0.5
+    }
+   },
+   "top_hits": [
+    "DOC-NOTICES-001 p.5",
+    "DOC-NOTICES-001 p.4",
+    "DOC-NOTICES-001 p.1",
+    "DOC-NOTICES-001 p.2",
+    "DOC-NOTICES-001 p.1"
+   ]
+  },
+  {
+   "question_id": "EVAL-043",
+   "category": "F_cross_document",
+   "answerable": true,
+   "top_score": 4.467,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.2,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.4,
+     "precision": 0.6666666666666666,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.4,
+     "precision": 0.4,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.6,
+     "precision": 0.3,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-POLICIES-001 p.4",
+    "DOC-FAQ-001 p.2",
+    "DOC-CALENDAR-001 p.2",
+    "DOC-PROGRAMS-001 p.5",
+    "DOC-CALENDAR-001 p.4"
+   ]
+  },
+  {
+   "question_id": "EVAL-044",
+   "category": "F_cross_document",
+   "answerable": true,
+   "top_score": -2.302,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.3333333333333333
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.3333333333333333,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.6666666666666666,
+     "precision": 0.2,
+     "rr": 0.5,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.3",
+    "DOC-NOTICES-001 p.5",
+    "DOC-COURSES-001 p.35",
+    "DOC-COURSES-001 p.42",
+    "DOC-FACILITIES-001 p.3"
+   ]
+  },
+  {
+   "question_id": "EVAL-045",
+   "category": "F_cross_document",
+   "answerable": true,
+   "top_score": 0.3124,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.1,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-COURSES-001 p.16",
+    "DOC-COURSES-001 p.11",
+    "DOC-NOTICES-001 p.3",
+    "DOC-COURSES-001 p.6",
+    "DOC-POLICIES-001 p.3"
+   ]
+  },
+  {
+   "question_id": "EVAL-046",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "top_score": 4.1327,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.3333333333333333,
+     "precision": 0.1,
+     "rr": 0.14285714285714285,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-FAQ-001 p.4",
+    "DOC-OFFICIAL-SYLLABUS-001 p.11",
+    "DOC-OFFICIAL-SYLLABUS-001 p.15",
+    "DOC-OFFICIAL-SYLLABUS-001 p.18",
+    "DOC-OFFICIAL-SYLLABUS-001 p.12"
+   ]
+  },
+  {
+   "question_id": "EVAL-047",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "top_score": 4.2517,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.2,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-PROGRAMS-001 p.4",
+    "DOC-COURSES-001 p.20",
+    "DOC-COURSES-001 p.17",
+    "DOC-COURSES-001 p.17",
+    "DOC-COURSES-001 p.18"
+   ]
+  },
+  {
+   "question_id": "EVAL-048",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "top_score": 0.5992,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.3333333333333333,
+     "rr": 1.0,
+     "entity_recall": 0.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.6,
+     "rr": 1.0,
+     "entity_recall": 0.2
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 0.8,
+     "rr": 1.0,
+     "entity_recall": 0.5
+    }
+   },
+   "top_hits": [
+    "DOC-FACULTY-001 p.1",
+    "DOC-COURSES-001 p.39",
+    "DOC-COURSES-001 p.42",
+    "DOC-FACULTY-001 p.7",
+    "DOC-FACULTY-001 p.8"
+   ]
+  },
+  {
+   "question_id": "EVAL-049",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "top_score": 4.9837,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.08333333333333333,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.16666666666666666,
+     "precision": 0.6666666666666666,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.6,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 0.3,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-PROGRAMS-001 p.5",
+    "DOC-PROGRAMS-001 p.3",
+    "DOC-FAQ-001 p.4",
+    "DOC-COURSES-001 p.43",
+    "DOC-PROGRAMS-001 p.2"
+   ]
+  },
+  {
+   "question_id": "EVAL-050",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "top_score": 0.2709,
+   "metrics": {
+    "1": {
+     "hit": 1.0,
+     "recall": 0.25,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.25
+    },
+    "3": {
+     "hit": 1.0,
+     "recall": 0.75,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 0.75
+    },
+    "5": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 1.0,
+     "precision": 1.0,
+     "rr": 1.0,
+     "entity_recall": 1.0
+    }
+   },
+   "top_hits": [
+    "DOC-LABS-001 p.2",
+    "DOC-LABS-001 p.4",
+    "DOC-LABS-001 p.5",
+    "DOC-LABS-001 p.3",
+    "DOC-LABS-001 p.2"
+   ]
+  },
+  {
+   "question_id": "EVAL-051",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "top_score": 3.7715,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "5": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.0
+    },
+    "10": {
+     "hit": 1.0,
+     "recall": 0.5,
+     "precision": 0.1,
+     "rr": 0.1111111111111111,
+     "entity_recall": 0.0
+    }
+   },
+   "top_hits": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.18",
+    "DOC-OFFICIAL-SYLLABUS-001 p.107",
+    "DOC-OFFICIAL-SYLLABUS-001 p.12",
+    "DOC-OFFICIAL-SYLLABUS-001 p.13",
+    "DOC-OFFICIAL-SYLLABUS-001 p.108"
+   ]
+  },
+  {
+   "question_id": "EVAL-052",
+   "category": "G_structured_sql",
+   "answerable": true,
+   "top_score": 4.2496,
+   "metrics": {
+    "1": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.2
+    },
+    "3": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.2
+    },
+    "5": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.3
+    },
+    "10": {
+     "hit": 0.0,
+     "recall": 0.0,
+     "precision": 0.0,
+     "rr": 0.0,
+     "entity_recall": 0.7
+    }
+   },
+   "top_hits": [
+    "DOC-COURSES-001 p.2",
+    "DOC-COURSES-001 p.1",
+    "DOC-COURSES-001 p.4",
+    "DOC-COURSES-001 p.41",
+    "DOC-COURSES-001 p.40"
+   ]
+  },
+  {
+   "question_id": "EVAL-053",
+   "category": "H_unanswerable",
+   "answerable": false,
+   "top_score": 3.6813,
+   "metrics": null,
+   "top_hits": [
+    "DOC-FAQ-001 p.4",
+    "DOC-FAQ-001 p.4",
+    "DOC-COURSES-001 p.10",
+    "DOC-PROGRAMS-001 p.4",
+    "DOC-COURSES-001 p.52"
+   ]
+  },
+  {
+   "question_id": "EVAL-054",
+   "category": "H_unanswerable",
+   "answerable": false,
+   "top_score": 4.9757,
+   "metrics": null,
+   "top_hits": [
+    "DOC-COURSES-001 p.41",
+    "DOC-COURSES-001 p.41",
+    "DOC-PROGRAMS-001 p.2",
+    "DOC-OFFICIAL-SYLLABUS-001 p.11",
+    "DOC-COURSES-001 p.41"
+   ]
+  },
+  {
+   "question_id": "EVAL-055",
+   "category": "H_unanswerable",
+   "answerable": false,
+   "top_score": 6.04,
+   "metrics": null,
+   "top_hits": [
+    "DOC-COURSES-001 p.49",
+    "DOC-COURSES-001 p.5",
+    "DOC-COURSES-001 p.5",
+    "DOC-FACULTY-001 p.7",
+    "DOC-COURSES-001 p.30"
+   ]
+  },
+  {
+   "question_id": "EVAL-056",
+   "category": "H_unanswerable",
+   "answerable": false,
+   "top_score": -2.4133,
+   "metrics": null,
+   "top_hits": [
+    "DOC-FAQ-001 p.4",
+    "DOC-OFFICIAL-SYLLABUS-001 p.13",
+    "DOC-OFFICIAL-SYLLABUS-001 p.18",
+    "DOC-NOTICES-001 p.2",
+    "DOC-PROGRAMS-001 p.1"
+   ]
+  },
+  {
+   "question_id": "EVAL-057",
+   "category": "H_unanswerable",
+   "answerable": false,
+   "top_score": -1.6919,
+   "metrics": null,
+   "top_hits": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.108",
+    "DOC-PROGRAMS-001 p.1",
+    "DOC-COURSES-001 p.1",
+    "DOC-PROGRAMS-001 p.6",
+    "DOC-PROGRAMS-001 p.9"
+   ]
+  },
+  {
+   "question_id": "EVAL-058",
+   "category": "H_unanswerable",
+   "answerable": false,
+   "top_score": -2.9601,
+   "metrics": null,
+   "top_hits": [
+    "DOC-OFFICIAL-SYLLABUS-001 p.15",
+    "DOC-OFFICIAL-SYLLABUS-001 p.11",
+    "DOC-OFFICIAL-SYLLABUS-001 p.104",
+    "DOC-OFFICIAL-SYLLABUS-001 p.107",
+    "DOC-OFFICIAL-SYLLABUS-001 p.14"
+   ]
+  }
+ ],
+ "run": {
+  "mode": "hybrid_rerank",
+  "label": "hybrid_rerank_minilm12",
+  "timestamp": "2026-09-19T07:59:07+00:00",
+  "reranker_model": "Xenova/ms-marco-MiniLM-L-12-v2",
+  "commit": "e9576c0",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "chunks": 935,
+  "dataset": "evaluation\\datasets\\evaluation_questions.json"
+ }
+}

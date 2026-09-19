@@ -6,6 +6,7 @@ from functools import lru_cache
 from app.core.config import get_settings
 from app.retrieval.embeddings import BgeEmbedder, Embedder
 from app.retrieval.indexing import ChunkIndexer
+from app.retrieval.rerank import CrossEncoderReranker, Reranker
 from app.retrieval.search import Bm25Cache
 from app.retrieval.vector_index import VectorIndex
 
@@ -30,3 +31,16 @@ def get_indexer() -> ChunkIndexer:
 @lru_cache
 def get_bm25_cache() -> Bm25Cache:
     return Bm25Cache()
+
+
+@lru_cache
+def get_reranker() -> Reranker:
+    settings = get_settings()
+    return CrossEncoderReranker(settings.reranker_model, settings.model_cache_dir)
+
+
+def reranker_provider():
+    """Returns the FUNCTION that loads the reranker, not the reranker itself: FastAPI resolves
+    every dependency of a route, and the cross-encoder should only be loaded when a request
+    actually asks for mode=hybrid_rerank."""
+    return get_reranker

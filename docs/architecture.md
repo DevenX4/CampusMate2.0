@@ -236,6 +236,24 @@ Vector and BM25 each propose 30 candidates, which are merged with Reciprocal Ran
 
 **Paired per question (reciprocal rank, versus vector):** hybrid is better on 15, the same on 31 and worse on 6; sign test **p = 0.078**. The improvement is consistent across the averages and the per-question comparison, but with 52 questions it is **not statistically conclusive** at the 0.05 level. It is reported as such, not as proven. Hybrid is the default search mode because it is best on every ranking metric and rarely worse.
 
+## Reranking (Phase 12)
+
+A cross-encoder reads (question, `title | section` + passage) *together* and rescores hybrid's top 30 candidates. `app/retrieval/rerank.py` provides a `Reranker` interface, fastembed ONNX cross-encoders, and a test stand-in. The model is loaded only when `mode=hybrid_rerank` is requested.
+
+**Measured grid (52 answerable questions; CPU):**
+
+| configuration | Hit@1 | Hit@5 | Recall@5 | MRR | p50 | vs hybrid (better/worse, p) |
+|---|---|---|---|---|---|---|
+| hybrid (no reranker) | 0.442 | 0.769 | 0.410 | 0.581 | **21 ms** | — |
+| MiniLM-L6, 600-char passages | 0.481 | 0.827 | 0.468 | 0.617 | 0.9 s | 14 / 14, p = 1.00 |
+| MiniLM-L12, 600-char passages | 0.462 | 0.788 | 0.442 | 0.618 | 1.7 s | 14 / 14, p = 1.00 |
+| MiniLM-L6, full passages | **0.500** | 0.769 | 0.441 | 0.624 | 3.1 s | 14 / 12, p = 0.85 |
+| MiniLM-L12, full passages | 0.481 | **0.827** | **0.477** | **0.644** | 5.2 s | 15 / 12, p = 0.70 |
+
+Against *vector*, L12 is the only configuration with a significant gain (24 better / 9 worse, p = 0.014). Against *hybrid*, however, **no reranker is reliably better**: each helps and hurts about equally often. The earlier gain was hybrid's. A plausible cause is domain mismatch: MS MARCO rerankers learned from web passages, while these chunks are key/value blocks and tables full of codes. Latency grows linearly with candidates and passage length (L12: 4.5 s full vs 1.6 s at 600 characters).
+
+**Decision:** default retrieval stays **hybrid**. `hybrid_rerank` remains available as an opt-in mode using the best-measured configuration (L12, full passages). Future experiments, each one command in the harness: BGE-reranker-base (1 GB), a GPU ONNX runtime, or a domain-tuned reranker.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

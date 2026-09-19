@@ -51,6 +51,12 @@ class Settings(BaseSettings):
     embedding_model: str = "BAAI/bge-small-en-v1.5"
     chroma_collection: str = "campusmate_chunks"
     retrieval_top_k: int = 8
+    # Opt-in reranking (search mode hybrid_rerank). Best measured configuration; it did NOT
+    # reliably beat plain hybrid on the evaluation set and costs ~5 s/query on CPU, so the
+    # default mode stays hybrid. See evaluation/results/RETRIEVAL.md.
+    reranker_model: str = "Xenova/ms-marco-MiniLM-L-12-v2"
+    rerank_candidates: int = 30  # hybrid candidates the cross-encoder rescores
+    rerank_max_chars: int | None = None  # passage prefix the cross-encoder reads (None = all)
 
     # Local folders. Overridable so a container can mount them elsewhere later.
     data_dir: Path = REPO_ROOT / "data"  # the canonical dataset (read-only input)

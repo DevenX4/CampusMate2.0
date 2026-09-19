@@ -9,7 +9,8 @@ So a deactivated or deleted document disappears from results immediately, with n
 to the vector index, and a stale vector can never produce an answer.
 
 BM25 (lexical) search works over the same eligible chunks; see Bm25Cache below.
-Hybrid search fuses both ranked lists with Reciprocal Rank Fusion (fusion.py).
+Hybrid search fuses both ranked lists with Reciprocal Rank Fusion (fusion.py), and can
+then be reranked by a cross-encoder (rerank.py).
 """
 
 import threading
@@ -22,6 +23,7 @@ from app.models.documents import Document, DocumentChunk, DocumentVersion
 from app.retrieval.bm25 import Bm25Index
 from app.retrieval.embeddings import Embedder, embedding_text
 from app.retrieval.fusion import reciprocal_rank_fusion
+from app.retrieval.rerank import Reranker
 from app.retrieval.vector_index import VectorIndex, version_key
 from app.schemas.search import Citation, SearchHit
 
@@ -208,3 +210,24 @@ def hybrid_search(db: Session, embedder: Embedder, index: VectorIndex, cache: Bm
     Each hit's `scores` shows both methods' ranks, so the fusion is explainable."""
     fused = hybrid_ranking(db, embedder, index, cache, query, max(candidates, k), filters or SearchFilters())[:k]
     return load_hits(db, [(c, s) for c, s, _ in fused], "rrf", {c: d for c, _, d in fused})
+
+
+def reranked_search(db: Session, embedder: Embedder, index: VectorIndex, cache: Bm25Cache, reranker: Reranker,
+                    query: str, k: int, filters: SearchFilters | None = None, candidates: int = 30,
+                    max_chars: int | None = None) -> list[SearchHit]:
+    """Hybrid retrieval proposes `candidates` chunks; the cross-encoder rescores each
+    (question, title | section + text) pair; the best k are returned. Every hit keeps its
+    earlier scores (rrf, vector_rank, bm25_rank) next to the new 'rerank' score.
+    max_chars: only the first max_chars characters of each passage are read by the
+    cross-encoder (its cost grows with length); the full chunk is still returned."""
+    pool = hybrid_search(db, embedder, index, cache, query, candidates, filters, candidates)
+    if not pool:
+        return []
+    passages = [embedding_text(h.citation.title, h.citation.section, h.text)[:max_chars] for h in pool]
+    scores = reranker.score(query, passages)
+    ranked = sorted(zip(pool, scores), key=lambda pair: pair[1], reverse=True)[:k]
+    return [
+        hit.model_copy(update={"rank": rank, "score": round(score, 4),
+                               "scores": {**hit.scores, "rerank": round(score, 4), "hybrid_rank": hit.rank}})
+        for rank, (hit, score) in enumerate(ranked, start=1)
+    ]

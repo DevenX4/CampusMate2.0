@@ -21,12 +21,13 @@ from app.core.logging import setup_logging
 from app.evaluation.metrics import Retrieved
 from app.evaluation.runner import category_table, evaluate, load_questions, paired_comparison, summary_table
 from app.models.documents import DocumentChunk
+from app.retrieval.rerank import CrossEncoderReranker
 from app.retrieval.runtime import get_bm25_cache, get_indexer
-from app.retrieval.search import bm25_search, hybrid_search, vector_search
+from app.retrieval.search import bm25_search, hybrid_search, reranked_search, vector_search
 
 QUESTIONS = REPO_ROOT / "evaluation" / "datasets" / "evaluation_questions.json"
 RESULTS = REPO_ROOT / "evaluation" / "results"
-MODES = ("vector", "bm25", "hybrid")  # extended as retrieval modes are added
+MODES = ("vector", "bm25", "hybrid", "hybrid_rerank")  # extended as retrieval modes are added
 
 
 def to_retrieved(hits) -> list[Retrieved]:
@@ -34,7 +35,7 @@ def to_retrieved(hits) -> list[Retrieved]:
                       tuple(h.entity_ids), h.score) for h in hits]
 
 
-def make_retriever(mode: str, db):
+def make_retriever(mode: str, db, reranker_model: str | None = None):
     if mode == "bm25":
         cache = get_bm25_cache()
         return lambda question, k: to_retrieved(bm25_search(db, cache, question, k))
@@ -44,6 +45,12 @@ def make_retriever(mode: str, db):
     if mode == "hybrid":
         cache = get_bm25_cache()
         return lambda question, k: to_retrieved(hybrid_search(db, indexer.embedder, indexer.index, cache, question, k))
+    if mode == "hybrid_rerank":
+        cache, settings = get_bm25_cache(), get_settings()
+        reranker = CrossEncoderReranker(reranker_model or settings.reranker_model, settings.model_cache_dir)
+        return lambda question, k: to_retrieved(reranked_search(
+            db, indexer.embedder, indexer.index, cache, reranker, question, k,
+            candidates=settings.rerank_candidates, max_chars=settings.rerank_max_chars))
     raise ValueError(f"unknown mode {mode}")
 
 
@@ -67,6 +74,10 @@ def write_report() -> None:
                   "Per question, on reciprocal rank (how high the first correct page appears). "
                   "A sign-test p below 0.05 means the difference is unlikely to be chance.", "",
                   paired_comparison(results, "vector"), ""]
+    if "hybrid" in results and len(results) > 2:
+        parts += ["## Paired comparison against hybrid", "",
+                  "Does anything improve on hybrid retrieval itself? (reciprocal rank)", "",
+                  paired_comparison(results, "hybrid"), ""]
     for mode, result in results.items():
         run = result["run"]
         parts += [f"## {mode}", "",
@@ -83,22 +94,27 @@ def main(argv: list[str] | None = None) -> int:
     commands = parser.add_subparsers(dest="command", required=True)
     retrieval = commands.add_parser("retrieval", help="evaluate one retrieval mode")
     retrieval.add_argument("--mode", choices=MODES, default="vector")
+    retrieval.add_argument("--reranker-model", default=None, help="for hybrid_rerank (default: RERANKER_MODEL)")
+    retrieval.add_argument("--label", default=None, help="name of the result, e.g. to compare two rerankers")
     args = parser.parse_args(argv)
     settings = get_settings()
     setup_logging("WARNING")
 
     questions = load_questions(QUESTIONS)
     with SessionLocal() as db:
-        result = evaluate(questions, make_retriever(args.mode, db))
+        result = evaluate(questions, make_retriever(args.mode, db, args.reranker_model))
         chunks = db.scalar(select(func.count()).select_from(DocumentChunk))
-    result["run"] = {"mode": args.mode, "timestamp": datetime.now(UTC).isoformat(timespec="seconds"),
+    label = args.label or args.mode
+    result["run"] = {"mode": args.mode, "label": label, "timestamp": datetime.now(UTC).isoformat(timespec="seconds"),
+                     "reranker_model": (args.reranker_model or settings.reranker_model) if args.mode == "hybrid_rerank" else None,
+                     "rerank_candidates": settings.rerank_candidates, "rerank_max_chars": settings.rerank_max_chars,
                      "commit": git_commit(), "embedding_model": settings.embedding_model, "chunks": chunks,
                      "dataset": str(QUESTIONS.relative_to(REPO_ROOT))}
     RESULTS.mkdir(parents=True, exist_ok=True)
-    (RESULTS / f"retrieval_{args.mode}.json").write_text(json.dumps(result, indent=1), encoding="utf-8")
+    (RESULTS / f"retrieval_{label}.json").write_text(json.dumps(result, indent=1), encoding="utf-8")
     write_report()
     o = result["overall"]
-    print(f"{args.mode}: Hit@1 {o['1']['hit']:.3f} | Hit@5 {o['5']['hit']:.3f} | Recall@5 {o['5']['recall']:.3f} | "
+    print(f"{label}: Hit@1 {o['1']['hit']:.3f} | Hit@5 {o['5']['hit']:.3f} | Recall@5 {o['5']['recall']:.3f} | "
           f"MRR {o['10']['rr']:.3f} | EntityRecall@5 {o['5']['entity_recall']:.3f} | p50 {result['latency_ms']['p50']} ms")
     return 0
 
