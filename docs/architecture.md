@@ -346,11 +346,13 @@ POST /chat/query ─► router (route, intents) ─► personal / automation: "n
 | Every exchange is stored (`chat_queries`); one rating per answer (`chat_feedback`, upsert with `ON CONFLICT`) | Answers can be audited, feedback points at the exact sources used, and real questions can become evaluation data. Query ids are random UUIDs, and someone else's query looks exactly like a missing one (404) |
 | Answer evaluation (`python -m app.evaluation answers`) reports: answered rate, fact recall (numbers and codes of the expected answer), term recall, whether a required source is cited, correct abstention on unanswerable questions, fallbacks, latency | The same run for each provider makes the SLM comparison measurable |
 
-**Baseline: the extractive provider, no model (58 questions, commit cfa5142, `evaluation/results/ANSWERS.md`)**
+**Baseline: the extractive provider, no model (58 questions, commit 353d253, `evaluation/results/ANSWERS.md`)**
 
 | answered (A–G) | fact recall | term recall | cites a required source | unanswerable abstained (H) | fallbacks | p50 |
 |---|---|---|---|---|---|---|
-| 0.654 | 0.327 | 0.310 | 0.462 | 4 / 6 | 0 | 59 ms |
+| 0.654 | 0.335 | 0.320 | 0.481 | 4 / 6 | 0 | 62 ms |
+
+(At cfa5142, before quoted graph clauses kept their subject: fact recall 0.327, required source cited 0.462.)
 
 It answers 88% of simple factual and 100% of exact-lexical questions, but only 14% of semantic ones: it abstains wherever the question's words differ from the source's. It never falls back, because copied text always passes the grounding check. On 2 of the 6 unanswerable questions it quoted a loosely matching sentence instead of abstaining. These are the gaps an SLM is expected to close; the same run with a model will show whether it does.
 
