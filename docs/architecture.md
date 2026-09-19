@@ -254,6 +254,26 @@ Against *vector*, L12 is the only configuration with a significant gain (24 bett
 
 **Decision:** default retrieval stays **hybrid**. `hybrid_rerank` remains available as an opt-in mode using the best-measured configuration (L12, full passages). Future experiments, each one command in the harness: BGE-reranker-base (1 GB), a GPU ONNX runtime, or a domain-tuned reranker.
 
+## OKF knowledge layer (Phase 13)
+
+```
+PostgreSQL rows + link tables ─► 29 edge queries (app/knowledge/graph.py) ─► 1,202 typed edges (with trust + citation)
+                              └► 16 entity types ─► OKF items (YAML front-matter + labelled Markdown) ─► storage/knowledge/
+```
+
+| Decision | Why |
+|---|---|
+| Edges are *derived* per predicate by SQL over foreign keys and link tables; there is no stored relationships table | One source of truth. The dataset's `relationships.json` becomes the test oracle |
+| An edge's trust level and citation come from the row that states it (TEACHES from the synthetic assignment, OFFERED_IN from the official/derived offering; HAS_OPTION from the official slot; BELONGS_TO is official via the syllabus, derived_official for legacy catalog-only courses) | A relationship can be less trustworthy than the entities it connects |
+| Per-attribute trust labels: `field_provenance`, then `synthetic_*` fields, then references to synthetic entities, then the row's level | A found bug: the first version printed `[official] synthetic_description` on an official course |
+| Files are rebuilt into a staging folder and swapped in (with retries on Windows file locks) | Readers never see a half-written knowledge base, and hand edits cannot survive, by design |
+
+**Validation (in the test suite):**
+- all **1,202** dataset edges are reproduced (0 missing, 0 extra, 0 trust-level mismatches);
+- all **297** OKF entities are reproduced.
+
+The only difference is the citation of the 2 COORDINATED_BY edges: the faculty record instead of the programmes document, at the same synthetic level. The schema stores a field's trust level (`field_provenance`) but not which document stated that one field.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 12 (reranking, measured).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index and searchable at `/api/v1/search`. There is no answer generation or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 13 (OKF knowledge layer).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index and searchable at `/api/v1/search`. There is no answer generation or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -197,6 +197,16 @@ cd backend
 ```
 
 This runs the 58 dataset questions through one retrieval mode and writes `evaluation/results/retrieval_<mode>.json` (per-question metrics and top hits). It also regenerates `evaluation/results/RETRIEVAL.md`, which compares every stored mode on Hit@K, Recall@K, Precision@K, MRR, entity recall, latency and a per-category breakdown.
+
+## Knowledge (OKF)
+
+```bash
+cd backend
+.venv/Scripts/python -m app.knowledge validate   # derived graph vs the dataset's 1,202 edges and 297 items
+.venv/Scripts/python -m app.knowledge generate   # write storage/knowledge/<type>/<id>.md (+ index.json, relationships.jsonl)
+```
+
+`GET /api/v1/knowledge/entities/{id}` returns any entity with its attributes, per-attribute trust labels, and typed relationships in both directions (`taught_by`, `offered_in`, …), each with its own `source_type`. `/entities/{id}/okf` returns the same as an OKF Markdown file. The OKF is generated from PostgreSQL and never edited by hand.
 
 ## Catalog API (read-only)
 
