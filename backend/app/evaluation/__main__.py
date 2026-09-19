@@ -21,12 +21,12 @@ from app.core.logging import setup_logging
 from app.evaluation.metrics import Retrieved
 from app.evaluation.runner import category_table, evaluate, load_questions, summary_table
 from app.models.documents import DocumentChunk
-from app.retrieval.runtime import get_indexer
-from app.retrieval.search import vector_search
+from app.retrieval.runtime import get_bm25_cache, get_indexer
+from app.retrieval.search import bm25_search, vector_search
 
 QUESTIONS = REPO_ROOT / "evaluation" / "datasets" / "evaluation_questions.json"
 RESULTS = REPO_ROOT / "evaluation" / "results"
-MODES = ("vector",)  # extended as retrieval modes are added
+MODES = ("vector", "bm25")  # extended as retrieval modes are added
 
 
 def to_retrieved(hits) -> list[Retrieved]:
@@ -35,6 +35,9 @@ def to_retrieved(hits) -> list[Retrieved]:
 
 
 def make_retriever(mode: str, db):
+    if mode == "bm25":
+        cache = get_bm25_cache()
+        return lambda question, k: to_retrieved(bm25_search(db, cache, question, k))
     indexer = get_indexer()
     if mode == "vector":
         return lambda question, k: to_retrieved(vector_search(db, indexer.embedder, indexer.index, question, k))

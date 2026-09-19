@@ -6,8 +6,8 @@ from fastapi import APIRouter, Depends, Query
 from app.api.deps import AUTH_ERRORS, DbSession, require
 from app.core.config import get_settings
 from app.retrieval.embeddings import Embedder
-from app.retrieval.runtime import get_embedder, get_vector_index
-from app.retrieval.search import SearchFilters, vector_search
+from app.retrieval.runtime import get_bm25_cache, get_embedder, get_vector_index
+from app.retrieval.search import Bm25Cache, SearchFilters, bm25_search, vector_search
 from app.retrieval.vector_index import VectorIndex
 from app.schemas.search import SearchResponse
 
@@ -22,7 +22,9 @@ def search(
     db: DbSession,
     embedder: Annotated[Embedder, Depends(get_embedder)],
     index: Annotated[VectorIndex, Depends(get_vector_index)],
+    bm25: Annotated[Bm25Cache, Depends(get_bm25_cache)],
     q: Annotated[str, Query(min_length=2, max_length=500, description="The question or keywords")],
+    mode: Annotated[Literal["vector", "bm25"], Query(description="vector = meaning, bm25 = exact words")] = "vector",
     k: Annotated[int | None, Query(ge=1, le=50)] = None,
     source_type: Annotated[list[SourceTypeFilter] | None, Query(description="Repeatable, e.g. official")] = None,
     document_type: Annotated[list[str] | None, Query()] = None,
@@ -34,5 +36,7 @@ def search(
     started = time.perf_counter()
     filters = SearchFilters(source_types=source_type or [], document_types=document_type or [],
                             program_id=program_id, semester_id=semester_id)
-    hits = vector_search(db, embedder, index, q, k or get_settings().retrieval_top_k, filters)
-    return SearchResponse(query=q, mode="vector", took_ms=round((time.perf_counter() - started) * 1000), hits=hits)
+    k = k or get_settings().retrieval_top_k
+    hits = (bm25_search(db, bm25, q, k, filters) if mode == "bm25"
+            else vector_search(db, embedder, index, q, k, filters))
+    return SearchResponse(query=q, mode=mode, took_ms=round((time.perf_counter() - started) * 1000), hits=hits)

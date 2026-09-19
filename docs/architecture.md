@@ -204,6 +204,24 @@ Findings:
 
 These are the targets for BM25, hybrid fusion and reranking.
 
+## BM25 (Phase 10)
+
+| Decision | Why |
+|---|---|
+| Okapi BM25 implemented in `app/retrieval/bm25.py` (k1 = 1.5, b = 0.75) | About 60 lines with the formula visible; no dependency |
+| Tokenizer: lowercase alphanumeric runs, small stopword list | `2CEIT78PE7` stays one token; `COURSE-2CEIT602` yields `2ceit602`, so a bare code matches the entity ID |
+| Indexed text = `title \| section` + chunk (same as the embeddings) | "Semester VI" and document titles are searchable words too |
+| In memory, built from PostgreSQL, cached under a fingerprint of the eligible corpus (active version keys, chunk count, newest chunk) | Nothing is persisted, so nothing can drift. Uploads and activation changes show on the next query (rebuild 336 ms; cached check 4 ms) |
+
+**Measured (52 answerable questions, K = 5):**
+
+| mode | Hit@1 | Hit@5 | Recall@5 | MRR | p50 |
+|---|---|---|---|---|---|
+| vector | **0.346** | **0.712** | 0.357 | **0.495** | 17 ms |
+| bm25 | 0.288 | 0.692 | **0.412** | 0.457 | **4 ms** |
+
+The two are complementary. BM25 wins on simple factual (recall 0.54 vs 0.38), semantic and cross-document questions; vector wins on metadata-style (Hit@5 0.71 vs 0.43) and multi-hop questions. Exact code lookups (`2CEIT78PE7`) now rank the right course first. Different failure patterns are the condition under which fusion should help. That is Phase 11's hypothesis to *measure*.
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

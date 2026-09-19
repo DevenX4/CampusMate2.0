@@ -108,11 +108,6 @@ def admin(client, db_session):
     return headers_for(client, db_session, "admin")
 
 
-@pytest.fixture
-def indexer(tmp_path):
-    return make_indexer(tmp_path / "chroma")
-
-
 FORM = {"title": "Exam Handbook", "document_type": "handbook", "source_type": "synthetic"}
 PAGES = [["1.1 Examination rules", "Students must carry their ID card."],
          ["1.2 Re-evaluation", "Apply within 7 days of results."]]

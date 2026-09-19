@@ -7,15 +7,19 @@ Step 3  PostgreSQL: load the chunks by ID, re-checking eligibility, in similarit
 
 So a deactivated or deleted document disappears from results immediately, with no change
 to the vector index, and a stale vector can never produce an answer.
+
+BM25 (lexical) search works over the same eligible chunks; see Bm25Cache below.
 """
 
+import threading
 from dataclasses import dataclass, field
 
-from sqlalchemy import select
+from sqlalchemy import select, text
 from sqlalchemy.orm import Session
 
 from app.models.documents import Document, DocumentChunk, DocumentVersion
-from app.retrieval.embeddings import Embedder
+from app.retrieval.bm25 import Bm25Index
+from app.retrieval.embeddings import Embedder, embedding_text
 from app.retrieval.vector_index import VectorIndex, version_key
 from app.schemas.search import Citation, SearchHit
 
@@ -87,3 +91,87 @@ def vector_search(db: Session, embedder: Embedder, index: VectorIndex, query: st
         return []
     ranked = index.query(embedder.embed_query(query), k, chroma_where(versions, filters))
     return load_hits(db, ranked, "vector")
+
+
+# --- BM25 ---------------------------------------------------------------------------------------
+
+_FINGERPRINT_SQL = text("""
+    SELECT count(c.chunk_id), max(c.created_at),
+           md5(coalesce(string_agg(DISTINCT v.document_id || '/' || v.version_no, ','
+                                   ORDER BY v.document_id || '/' || v.version_no), ''))  -- ':' would be read as a bind parameter
+    FROM document_versions v
+    JOIN documents d ON d.document_id = v.document_id
+    LEFT JOIN document_chunks c ON c.document_id = v.document_id AND c.version_no = v.version_no
+    WHERE v.status = 'active' AND d.status = 'active'
+""")
+
+
+@dataclass
+class _ChunkAttrs:
+    document_id: str
+    document_type: str
+    source_type: str
+    program_ids: frozenset[str]
+    semester_ids: frozenset[str]
+
+
+@dataclass
+class Bm25Corpus:
+    fingerprint: tuple
+    index: Bm25Index
+    attrs: list[_ChunkAttrs]
+
+
+class Bm25Cache:
+    """The BM25 statistics of the eligible chunks, kept in memory. Rebuilt whenever the
+    fingerprint changes: which versions are active, how many chunks, the newest chunk. So an
+    upload, activation or deactivation is reflected on the very next query, and there is no
+    separately stored lexical index that could drift out of sync."""
+
+    def __init__(self):
+        self._corpus: Bm25Corpus | None = None
+        self._lock = threading.Lock()  # API requests run in parallel threads
+
+    def get(self, db: Session) -> Bm25Corpus:
+        fingerprint = tuple(db.execute(_FINGERPRINT_SQL).one())
+        with self._lock:
+            if self._corpus is None or self._corpus.fingerprint != fingerprint:
+                self._corpus = self._build(db, fingerprint)
+            return self._corpus
+
+    @staticmethod
+    def _build(db: Session, fingerprint: tuple) -> Bm25Corpus:
+        rows = db.execute(
+            select(DocumentChunk, Document.title, Document.document_type)
+            .join(Document, Document.document_id == DocumentChunk.document_id)
+            .join(DocumentVersion, (DocumentVersion.document_id == DocumentChunk.document_id)
+                  & (DocumentVersion.version_no == DocumentChunk.version_no))
+            .where(DocumentVersion.status == "active", Document.status == "active")
+            .order_by(DocumentChunk.document_id, DocumentChunk.chunk_index)
+        ).all()
+        index = Bm25Index.build([str(c.chunk_id) for c, _, _ in rows],
+                               [embedding_text(title, c.section, c.text) for c, title, _ in rows])
+        attrs = [_ChunkAttrs(c.document_id, document_type, c.source_type,
+                             frozenset(c.metadata_.get("program_ids", [])),
+                             frozenset(c.metadata_.get("semester_ids", [])))
+                 for c, _, document_type in rows]
+        return Bm25Corpus(fingerprint, index, attrs)
+
+
+def _allowed(attrs: list[_ChunkAttrs], filters: SearchFilters):
+    def check(i: int) -> bool:
+        a = attrs[i]
+        return ((not filters.source_types or a.source_type in filters.source_types)
+                and (not filters.document_types or a.document_type in filters.document_types)
+                and (not filters.document_ids or a.document_id in filters.document_ids)
+                and (not filters.program_id or filters.program_id in a.program_ids)
+                and (not filters.semester_id or filters.semester_id in a.semester_ids))
+    return check
+
+
+def bm25_search(db: Session, cache: Bm25Cache, query: str, k: int,
+                filters: SearchFilters | None = None) -> list[SearchHit]:
+    filters = filters or SearchFilters()
+    corpus = cache.get(db)
+    ranked = corpus.index.search(query, k, _allowed(corpus.attrs, filters))
+    return load_hits(db, ranked, "bm25")

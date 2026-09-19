@@ -2,48 +2,19 @@
 The test embedder only measures word overlap, so these tests check behaviour, not quality
 (retrieval quality is measured by the evaluation harness)."""
 
-import uuid
-
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import delete
 
 from app.core.db import get_db
 from app.main import app
-from app.models.documents import Document, DocumentChunk, DocumentVersion
+from app.models.documents import DocumentChunk
 from app.retrieval.runtime import get_embedder, get_vector_index
 from app.retrieval.search import SearchFilters, vector_search
 from app.retrieval.vector_index import VectorIndex
 from app.services import documents
 from app.services.audit import RequestContext
-from tests.helpers import API, headers_for, make_indexer
-
-
-@pytest.fixture
-def indexer(tmp_path):
-    return make_indexer(tmp_path / "chroma")
-
-
-def add_document(db, indexer, document_id: str, chunks: list[dict], *, source_type="synthetic",
-                 versions: dict[int, str] | None = None) -> None:
-    """A document whose versions (status by number) each hold the given chunks, indexed."""
-    document = Document(document_id=document_id, title=f"Title of {document_id}", document_type="other",
-                        source_type=source_type, status="active")
-    db.add(document)
-    db.flush()
-    for version_no, status in (versions or {1: "active"}).items():
-        db.add(DocumentVersion(document_id=document_id, version_no=version_no, sha256=uuid.uuid4().hex * 2,
-                               storage_key=f"k/{uuid.uuid4()}", original_filename="f.pdf",
-                               mime_type="application/pdf", size_bytes=1, status=status))
-        db.flush()
-        rows = [DocumentChunk(chunk_id=uuid.uuid4(), document_id=document_id, version_no=version_no,
-                              chunk_index=i, text=c["text"], content_sha256="x", page_start=1, page_end=1,
-                              source_type=c.get("source_type", source_type),
-                              metadata_={"semester_ids": c.get("semester_ids", [])})
-                for i, c in enumerate(chunks)]
-        db.add_all(rows)
-        db.flush()
-        indexer.index_chunks(document, rows)
+from tests.helpers import API, add_document, headers_for, make_indexer
 
 
 def search(db, indexer, query, **filters):

@@ -90,3 +90,10 @@ def db_session(migrated_engine):
         finally:
             session.close()
             transaction.rollback()
+
+
+@pytest.fixture
+def indexer(tmp_path):
+    """A vector index in a temporary folder with the deterministic test embedder."""
+    from tests.helpers import make_indexer
+    return make_indexer(tmp_path / "chroma")

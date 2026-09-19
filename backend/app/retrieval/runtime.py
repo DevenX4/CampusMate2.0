@@ -6,6 +6,7 @@ from functools import lru_cache
 from app.core.config import get_settings
 from app.retrieval.embeddings import BgeEmbedder, Embedder
 from app.retrieval.indexing import ChunkIndexer
+from app.retrieval.search import Bm25Cache
 from app.retrieval.vector_index import VectorIndex
 
 
@@ -24,3 +25,8 @@ def get_vector_index() -> VectorIndex:
 
 def get_indexer() -> ChunkIndexer:
     return ChunkIndexer(get_embedder(), get_vector_index())
+
+
+@lru_cache
+def get_bm25_cache() -> Bm25Cache:
+    return Bm25Cache()

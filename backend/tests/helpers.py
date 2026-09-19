@@ -7,6 +7,7 @@ from pathlib import Path
 from fpdf import FPDF
 from pypdf import PdfWriter
 
+from app.models.documents import Document, DocumentChunk, DocumentVersion
 from app.retrieval.embeddings import HashEmbedder
 from app.retrieval.indexing import ChunkIndexer
 from app.retrieval.vector_index import VectorIndex
@@ -56,3 +57,25 @@ def make_indexer(folder: Path) -> ChunkIndexer:
     """A vector index in a temporary folder with the deterministic test embedder (no download)."""
     embedder = HashEmbedder()
     return ChunkIndexer(embedder, VectorIndex(folder, "test-chunks", embedder.model_name, embedder.dimension))
+
+
+def add_document(db, indexer, document_id: str, chunks: list[dict], *, source_type="synthetic",
+                 versions: dict[int, str] | None = None) -> None:
+    """A document whose versions (status by number) each hold the given chunks, indexed."""
+    document = Document(document_id=document_id, title=f"Title of {document_id}", document_type="other",
+                        source_type=source_type, status="active")
+    db.add(document)
+    db.flush()
+    for version_no, status in (versions or {1: "active"}).items():
+        db.add(DocumentVersion(document_id=document_id, version_no=version_no, sha256=uuid.uuid4().hex * 2,
+                               storage_key=f"k/{uuid.uuid4()}", original_filename="f.pdf",
+                               mime_type="application/pdf", size_bytes=1, status=status))
+        db.flush()
+        rows = [DocumentChunk(chunk_id=uuid.uuid4(), document_id=document_id, version_no=version_no,
+                              chunk_index=i, text=c["text"], content_sha256="x", page_start=1, page_end=1,
+                              source_type=c.get("source_type", source_type),
+                              metadata_={"semester_ids": c.get("semester_ids", [])})
+                for i, c in enumerate(chunks)]
+        db.add_all(rows)
+        db.flush()
+        indexer.index_chunks(document, rows)
