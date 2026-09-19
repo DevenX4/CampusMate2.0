@@ -83,6 +83,7 @@ class DocumentSummary(FromORM):
     updated_at: datetime
     active_version: VersionOut | None = None
     latest_version_no: int | None = None
+    chunk_count: int = Field(default=0, description="Chunks of the active version (what answers can use)")
 
 
 class DocumentDetail(DocumentSummary):

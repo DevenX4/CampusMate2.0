@@ -1,36 +1,127 @@
 @import "tailwindcss";
-@import "@fontsource-variable/geist";
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/newsreader/opsz-italic.css";
 @import "@fontsource-variable/jetbrains-mono";
 
-/* Tokens from frontend/stitch-reference/calm_intelligence/DESIGN.md: warm neutral surfaces,
-   one sapphire accent reserved for actions, focus and verified provenance. Amber marks
-   synthetic demo data, so it can never be mistaken for official information. */
+/* Dark mode follows the "dark" class on <html> (the theme toggle), not only the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Colours from the Stitch designs (frontend/stitch-reference): slate neutrals, blue for actions
+   and verified sources, emerald for live/official status, amber for synthetic demo data. The
+   neutrals are variables so that the same classes work in light and dark mode. */
+:root {
+  --c-app: #fafbfc;
+  --c-panel: #ffffff;
+  --c-panel-2: #f8fafc;
+  --c-panel-3: #f1f5f9;
+  --c-ink: #0f172a;
+  --c-ink-2: #334155;
+  --c-ink-3: #64748b;
+  --c-ink-4: #94a3b8;
+  --c-line: #e2e8f0;
+  --c-line-2: #f1f5f9;
+  --c-solid: #0f172a;
+  --c-solid-ink: #ffffff;
+  --c-admin-bg: #f0f4fa;
+  color-scheme: light;
+}
+
+.dark {
+  --c-app: #060a13;
+  --c-panel: #0d1422;
+  --c-panel-2: #111a2b;
+  --c-panel-3: #172236;
+  --c-ink: #f1f5f9;
+  --c-ink-2: #cbd5e1;
+  --c-ink-3: #94a3b8;
+  --c-ink-4: #64748b;
+  --c-line: #1e2a40;
+  --c-line-2: #162033;
+  --c-solid: #e2e8f0;
+  --c-solid-ink: #0b1220;
+  --c-admin-bg: #070b14;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-app: var(--c-app);
+  --color-panel: var(--c-panel);
+  --color-panel-2: var(--c-panel-2);
+  --color-panel-3: var(--c-panel-3);
+  --color-ink: var(--c-ink);
+  --color-ink-2: var(--c-ink-2);
+  --color-ink-3: var(--c-ink-3);
+  --color-ink-4: var(--c-ink-4);
+  --color-line: var(--c-line);
+  --color-line-2: var(--c-line-2);
+  --color-solid: var(--c-solid);
+  --color-solid-ink: var(--c-solid-ink);
+  --color-admin-bg: var(--c-admin-bg);
+}
+
 @theme {
-  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-admin: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader Variable", Georgia, serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
-  --color-canvas: #f9f8f6;
-  --color-surface: #ffffff;
-  --color-sunken: #f4f3f1;
-  --color-ink: #18181b;
-  --color-ink-2: #52525b;
-  --color-ink-3: #71717a;
-  --color-line: rgb(28 25 23 / 0.08);
-  --color-accent: #1e3a8a;
-  --color-accent-soft: rgb(30 58 138 / 0.07);
-  --color-demo: #773205;
-  --color-demo-soft: #fff1e8;
-  --color-danger: #ba1a1a;
-  --color-danger-soft: #ffdad6;
-  --color-ok: #166534;
-  --color-ok-soft: #e8f5ec;
-  --shadow-float: 0 12px 32px -8px rgb(0 0 0 / 0.06), 0 4px 12px -2px rgb(0 0 0 / 0.03);
+  --color-navy: #0d1527;
+  --color-navy-2: #090f1d;
+  --shadow-glass: 0 20px 40px -15px rgb(15 23 42 / 0.05), 0 1px 2px rgb(15 23 42 / 0.04);
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 0.02), 0 10px 24px -8px rgb(15 23 42 / 0.06);
+  --shadow-float: 0 12px 36px -8px rgb(15 23 42 / 0.12), 0 2px 8px -2px rgb(15 23 42 / 0.04);
+  --animate-pulse-ring: pulse-ring 2.8s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.35s ease-out both;
+
+  @keyframes pulse-ring {
+    0%, 100% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 0.3; }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }
 
 body {
-  @apply bg-canvas text-ink font-sans antialiased;
+  @apply bg-app font-sans text-ink antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The student workspace's soft background, as in the Stitch design. */
+.campus-backdrop {
+  background-image:
+    radial-gradient(at 18% 12%, rgb(224 231 255 / 0.45) 0px, transparent 55%),
+    radial-gradient(at 88% 15%, rgb(219 234 254 / 0.4) 0px, transparent 50%),
+    radial-gradient(at 52% 85%, rgb(241 245 249 / 0.8) 0px, transparent 65%);
+}
+.dark .campus-backdrop {
+  background-image:
+    radial-gradient(at 18% 12%, rgb(30 58 138 / 0.18) 0px, transparent 55%),
+    radial-gradient(at 88% 15%, rgb(49 46 129 / 0.16) 0px, transparent 50%);
+}
+
+::selection {
+  background: #0f172a;
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--c-line);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-ink-4);
 }
 
 :focus-visible {
-  outline: 1.5px solid var(--color-accent);
+  outline: 2px solid #2563eb;
   outline-offset: 2px;
 }

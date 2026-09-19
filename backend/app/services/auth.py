@@ -27,14 +27,14 @@ def _now() -> datetime:
     return datetime.now(UTC)
 
 
-def check_login_throttle(db: Session, email: str, ip: str | None, limits: LoginLimits) -> None:
+def check_login_throttle(db: Session, login: str, ip: str | None, limits: LoginLimits) -> None:
     """Counted from the audit log's failed logins, so there is nothing extra to store or expire.
     Raises RateLimited until the oldest counted failure leaves the window."""
     now = _now()
     since = now - timedelta(minutes=limits.window_minutes)
     failures = select(func.count(), func.min(AuditLog.occurred_at)).where(
         AuditLog.action == "auth.login_failed", AuditLog.occurred_at >= since)
-    checks = [(failures.where(AuditLog.details["email"].astext == email.lower()), limits.max_failures)]
+    checks = [(failures.where(AuditLog.details["login"].astext == login.strip().lower()), limits.max_failures)]
     if ip:
         checks.append((failures.where(AuditLog.ip_address == ip), limits.max_failures_per_ip))
     for query, limit in checks:
@@ -56,27 +56,35 @@ def find_user_by_email(db: Session, email: str) -> User | None:
     return db.scalar(select(User).where(func.lower(User.email) == email.lower()))
 
 
-def login(db: Session, email: str, password: str, *, ttl_hours: int, context: RequestContext,
-          limits: LoginLimits = LoginLimits()) -> LoginResult | None:
+def find_user_by_login(db: Session, login: str) -> User | None:
+    """A username ("admin") or an email address, case-insensitively."""
+    key = login.strip().lower()
+    return db.scalar(select(User).where(or_(func.lower(User.email) == key, User.username == key)))
+
+
+def login(db: Session, login_name: str, password: str, *, ttl_hours: int, context: RequestContext,
+          limits: LoginLimits = LoginLimits(), allow_demo: bool = True) -> LoginResult | None:
     """Check the credentials and open a session. Returns None for ANY failure (unknown email,
     wrong password, deactivated account) so the caller cannot tell which one it was.
 
     Throttled before the password is even checked: during a lockout, the right password does
     not get in either, so guessing learns nothing. Throttled attempts are audited separately
     and do not extend the lockout."""
+    login_key = login_name.strip().lower()
     try:
-        check_login_throttle(db, email, context.ip_address, limits)
+        check_login_throttle(db, login_key, context.ip_address, limits)
     except RateLimited:
         audit.record(db, "auth.login_throttled", actor_id=None, context=context, entity_type="user",
-                     details={"email": email.lower()})
+                     details={"login": login_key})
         db.commit()
         raise
-    user = find_user_by_email(db, email)
+    user = find_user_by_login(db, login_key)
     valid = verify_password(user.password_hash if user else None, password)
-    if not valid or not user.is_active:
+    # Demo accounts have public passwords: they never get in where APP_ENV=production.
+    if not valid or not user.is_active or (user.is_demo and not allow_demo):
         # Actor unknown (whoever typed the password); the targeted account is the entity.
         audit.record(db, "auth.login_failed", actor_id=None, context=context, entity_type="user",
-                     entity_id=str(user.id) if user else None, details={"email": email.lower()})
+                     entity_id=str(user.id) if user else None, details={"login": login_key})
         db.commit()
         return None
 

@@ -98,14 +98,22 @@ def extract_answer(question: str, context: list[ContextBlock]) -> str:
     ranked = sorted((candidates[i][0].kind != "structured", -w, i) for i, w in enumerate(weights)
                     if total and w / total >= MIN_COVERAGE)
     chosen: list[str] = []
+    covered: set[str] = set()  # question words the structured facts chosen so far answer
     synthetic = False
     for _, _, i in ranked:
         if len(chosen) == MAX_SENTENCES:
             break
         block, text = candidates[i]
+        # A structured fact is a complete computed statement: after one, a passage sentence is
+        # used only if it answers a part of the question the facts do not (a two-part question).
+        # Otherwise the answer to "Semester VI courses" trails off into catalogue metadata lines.
+        if covered and block.kind != "structured" and not (wanted & token_sets[i]) - covered:
+            continue
         if not any(text.lower() in c.lower() for c in chosen):  # not said already
             chosen.append(_cited(text if block.kind == "structured" else _shorten(text), block))
             synthetic |= _is_synthetic(text, block)
+            if block.kind == "structured":
+                covered |= wanted & token_sets[i]
     if not chosen:
         return ABSTAIN_MESSAGE
     return " ".join(chosen + [SYNTHETIC_NOTE] if synthetic else chosen)

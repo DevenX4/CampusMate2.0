@@ -38,6 +38,7 @@ class ChatAnswer:
     answer_type: str  # answered | fallback | abstained | unsupported
     route: str
     intents: list[str]
+    reasons: list[str]
     context: Context
     grounding: GroundingReport
     provider: str
@@ -60,17 +61,27 @@ class _Stopwatch:
 
 
 def answer_question(db: Session, question: str, deps: RetrievalDeps, generator: GenerationProvider,
-                    max_tokens: int = 400, temperature: float = 0.0) -> ChatAnswer:
+                    max_tokens: int = 400, temperature: float = 0.0, *, program_id: str | None = None,
+                    semester_id: str | None = None) -> ChatAnswer:
+    """program_id / semester_id: the programme and semester the user has selected. They apply only
+    when the question names none itself ("Which courses are in this semester?")."""
     watch = _Stopwatch()
     with watch.stage("routing"):
         resolution = EntityResolver(db).resolve(question)
+        defaults = []
+        if program_id and not resolution.program_ids:
+            resolution.program_ids, defaults = [program_id], defaults + [program_id]
+        if semester_id and not resolution.semester_ids:
+            resolution.semester_ids, defaults = [semester_id], defaults + [semester_id]
         decision = decide(question, resolution)
+        if defaults:
+            decision.reasons.append(f"from the selected context: {', '.join(defaults)}")
 
     # The provider recorded is always the configured one; answer_type "fallback" says the text
     # shown came from the extractive fallback instead.
     def finish(answer: str, answer_type: str, context: Context, report: GroundingReport) -> ChatAnswer:
-        return ChatAnswer(question, answer, answer_type, decision.route, decision.intents, context, report,
-                          generator.name, generator.model, watch.total())
+        return ChatAnswer(question, answer, answer_type, decision.route, decision.intents, decision.reasons,
+                          context, report, generator.name, generator.model, watch.total())
 
     if decision.route in UNSUPPORTED:
         message = UNSUPPORTED[decision.route]

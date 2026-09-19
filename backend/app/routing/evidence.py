@@ -29,6 +29,14 @@ _HUBS = ("PROG-", "SEM-", "EGRP-", "DEPT-", "UNIV-", "SCHOOL-", "COLLEGE-", "DOC
 
 
 @dataclass
+class Table:
+    """The same structured facts as the evidence text, as rows for the UI to show as a table."""
+    title: str
+    columns: list[str]
+    rows: list[list[str]]
+
+
+@dataclass
 class Evidence:
     kind: str  # structured | graph | document
     text: str
@@ -36,6 +44,7 @@ class Evidence:
     citation: Citation
     entity_ids: list[str] = field(default_factory=list)
     score: float = 1.0
+    table: Table | None = None
 
 
 @dataclass
@@ -51,6 +60,10 @@ def _citation(provenance: dict, title: str, document_type: str = "structured_rec
                     section=provenance.get("section"))
 
 
+def _num(value) -> str:
+    return "–" if value is None else f"{value:g}"
+
+
 def _credits(c) -> str:
     return (f"{c.total:g} credits (theory {c.theory:g} + practical/TW {c.practical:g}), "
             f"{c.contact_hours:g} contact hours" if c.total is not None else "credits not stated")
@@ -62,14 +75,21 @@ def course_facts(db: Session, course_ids: list[str]) -> list[Evidence]:
     evidence = []
     for course_id in course_ids[:3]:
         course = course_service.get_course(db, course_id)
-        for o in course.offerings:
+        if course.offerings:
+            table = Table(f"{course.course_code} {course.course_name}",
+                          ["Programme", "Semester", "Type", "Credits (T + P)", "Contact hours", "Total marks"],
+                          [[o.program.short_name, o.semester.semester_name,
+                            o.course_type.capitalize() + (f" ({o.elective_group_id})" if o.elective_group_id else ""),
+                            f"{_num(o.credits.total)} ({_num(o.credits.theory)} + {_num(o.credits.practical)})",
+                            _num(o.credits.contact_hours), _num(o.marks.total)] for o in course.offerings])
+        for i, o in enumerate(course.offerings):
             evidence.append(Evidence(
                 "structured",
                 f"{course.course_code} {course.course_name}: {_credits(o.credits)}, {o.marks.total} total marks; "
                 f"{o.course_type} course in {o.program.short_name} {o.semester.semester_name}"
                 + (f" (slot {o.elective_group_id})" if o.elective_group_id else "") + ".",
                 o.provenance.source_type, _citation(o.provenance.model_dump(), f"{course.course_code} {course.course_name}"),
-                [course.course_id, o.semester.semester_id]))
+                [course.course_id, o.semester.semester_id], table=table if i == 0 else None))
         if not course.offerings:  # legacy courses: only the official catalog lists them
             for entry in course.catalog_listings[:3]:
                 evidence.append(Evidence(
@@ -95,12 +115,18 @@ def semester_courses(db: Session, semester_ids: list[str], question: str) -> lis
                 f"{r.course.course_code} {r.course.course_name} ({r.credits.total:g} cr)" for r in s.regular_courses))
         parts += [f"{slot.group_name} ({slot.slot_kind}, {slot.credits.total:g} cr), choose one of: "
                   + ", ".join(f"{c.course_code} {c.course_name}" for c in slot.options) for slot in s.elective_slots]
+        rows = [] if electives_only else [
+            [r.course.course_code, r.course.course_name, _num(r.credits.total), r.course_type.capitalize()] for r in s.regular_courses]
+        rows += [[c.course_code, c.course_name, _num(slot.credits.total), f"{slot.group_name} (choose one)"]
+                 for slot in s.elective_slots for c in slot.options]
         evidence.append(Evidence(
             "structured", f"{s.program.short_name} {s.semester_name} ({s.total_credits:g} credits in total): "
             + " | ".join(parts), s.provenance.source_type,
             _citation(s.provenance.model_dump(), f"{s.program.short_name} {s.semester_name}"),
             [semester_id] + [r.course.course_id for r in s.regular_courses]
-            + [c.course_id for slot in s.elective_slots for c in slot.options]))
+            + [c.course_id for slot in s.elective_slots for c in slot.options],
+            table=Table(f"{s.program.short_name} {s.semester_name} · {s.total_credits:g} credits in total",
+                        ["Course code", "Course title", "Credits", "Classification"], rows)))
     return evidence
 
 
@@ -113,7 +139,9 @@ def program_summary(db: Session, program_ids: list[str]) -> list[Evidence]:
             "structured", f"{p.program_name} ({p.short_name}): {p.semester_count} semesters and "
             f"{p.total_credits:g} credits in total, computed from the official semester totals ({per_semester}).",
             "derived_official", _citation(p.provenance.model_dump(), p.short_name), [program_id]
-            + [s.semester_id for s in p.semesters]))
+            + [s.semester_id for s in p.semesters],
+            table=Table(f"{p.program_name} · {p.total_credits:g} credits in total", ["Semester", "Credits"],
+                        [[s.semester_name, _num(s.total_credits)] for s in p.semesters])))
     return evidence
 
 
@@ -135,7 +163,10 @@ def elective_slot_options(db: Session, decision: RouteDecision, question: str) -
                     f"{len(slot.options)} options ({slot.credits.total:g} credits): "
                     + ", ".join(f"{c.course_code} {c.course_name}" for c in slot.options) + ".",
                     slot.provenance.source_type, _citation(slot.provenance.model_dump(), slot.group_name),
-                    [slot.elective_group_id] + [c.course_id for c in slot.options]))
+                    [slot.elective_group_id] + [c.course_id for c in slot.options],
+                    table=Table(f"{slot.group_name} · {s.program.short_name} {s.semester_name} · choose one",
+                                ["Course code", "Course title", "Credits"],
+                                [[c.course_code, c.course_name, _num(slot.credits.total)] for c in slot.options])))
     return evidence
 
 
@@ -159,7 +190,11 @@ def grade_for_marks(db: Session, numbers: list[float]) -> list[Evidence]:
                     "structured", f"{marks:g} marks falls in the band '{band.marks_range}': grade {band.grade_regular} "
                     f"(grade point {band.grade_point_regular}) for regular students, {band.grade_remedial} "
                     f"({band.grade_point_remedial}) for remedial.", band.source_type,
-                    _citation(band.provenance, "Examination grade range & value"), [band.grade_band_id]))
+                    _citation(band.provenance, "Examination grade range & value"), [band.grade_band_id],
+                    table=Table(f"Grade for {marks:g} marks", ["Marks band", "Grade", "Grade point",
+                                                              "Grade (remedial)", "Grade point (remedial)"],
+                                [[band.marks_range, band.grade_regular, str(band.grade_point_regular),
+                                  band.grade_remedial, str(band.grade_point_remedial)]])))
     return evidence
 
 

@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 from app.chat.pipeline import ChatAnswer
 from app.models.chat import ChatFeedback, ChatQuery
 from app.services.errors import NotFoundError, RateLimited
+from app.services.helpers import contains
 
 
 def source_records(answer: ChatAnswer) -> list[dict]:
@@ -33,6 +34,46 @@ def check_rate(db: Session, user_id: uuid.UUID | None, per_minute: int) -> None:
         wait = oldest + timedelta(seconds=60) - datetime.now(UTC)
         raise RateLimited(f"You can ask {per_minute} questions per minute. Please wait a moment.",
                           int(wait.total_seconds()) + 1)
+
+
+def history(db: Session, user_id: uuid.UUID, q: str | None, limit: int) -> list[ChatQuery]:
+    """The user's own questions, newest first."""
+    query = select(ChatQuery).where(ChatQuery.user_id == user_id).order_by(ChatQuery.created_at.desc()).limit(limit)
+    if q:
+        query = query.where(contains(ChatQuery.question, q))
+    return list(db.scalars(query))
+
+
+def analytics(db: Session) -> dict:
+    """Usage of the assistant, for administrators. No user identities: questions only."""
+    today = datetime.now(UTC).date()
+    days = [today - timedelta(days=n) for n in range(6, -1, -1)]
+    per_day = dict(db.execute(select(func.date(ChatQuery.created_at), func.count())
+                              .where(ChatQuery.created_at >= datetime.combine(days[0], datetime.min.time(), UTC))
+                              .group_by(func.date(ChatQuery.created_at))).all())
+    count_by = lambda column: dict(db.execute(select(column, func.count()).group_by(column)).all())  # noqa: E731
+    ratings = count_by(ChatFeedback.rating)
+    p50, p95 = db.execute(select(func.percentile_cont(0.5).within_group(ChatQuery.latency_ms),
+                                 func.percentile_cont(0.95).within_group(ChatQuery.latency_ms))).one()
+    unanswered = db.execute(select(ChatQuery.question, ChatQuery.created_at)
+                            .where(ChatQuery.answer_type == "abstained")
+                            .order_by(ChatQuery.created_at.desc()).limit(10)).all()
+    downvoted = db.execute(select(ChatQuery.question, ChatFeedback.updated_at, ChatFeedback.comment)
+                           .join(ChatFeedback, ChatFeedback.query_id == ChatQuery.id)
+                           .where(ChatFeedback.rating == "down")
+                           .order_by(ChatFeedback.updated_at.desc()).limit(10)).all()
+    return {
+        "total_questions": db.scalar(select(func.count()).select_from(ChatQuery)),
+        "last_7_days": [{"day": d, "questions": per_day.get(d, 0)} for d in days],
+        "by_answer_type": count_by(ChatQuery.answer_type),
+        "by_route": count_by(ChatQuery.route),
+        "feedback_up": ratings.get("up", 0),
+        "feedback_down": ratings.get("down", 0),
+        "latency_p50_ms": round(p50) if p50 is not None else None,
+        "latency_p95_ms": round(p95) if p95 is not None else None,
+        "unanswered": [{"question": q, "created_at": t} for q, t in unanswered],
+        "downvoted": [{"question": q, "created_at": t, "comment": c} for q, t, c in downvoted],
+    }
 
 
 def log_answer(db: Session, user_id: uuid.UUID | None, answer: ChatAnswer) -> ChatQuery:

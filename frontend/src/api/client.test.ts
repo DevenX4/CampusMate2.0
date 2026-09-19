@@ -14,9 +14,9 @@ it("sends JSON to /api/v1 with same-origin credentials only", async () => {
 });
 
 it("turns the backend error format into an ApiError", async () => {
-  mockApi({ "POST /api/v1/auth/login": Response.json({ error: { code: "unauthorized", message: "Invalid email or password." } }, { status: 401 }) });
+  mockApi({ "POST /api/v1/auth/login": Response.json({ error: { code: "unauthorized", message: "Invalid username or password." } }, { status: 401 }) });
   await expect(api.login("a@campusmate-demo.example", "wrong")).rejects.toMatchObject(
-    { status: 401, code: "unauthorized", message: "Invalid email or password." });
+    { status: 401, code: "unauthorized", message: "Invalid username or password." });
 });
 
 it("reports an unreachable server", async () => {

@@ -14,10 +14,11 @@ type AuthState =
 
 interface Auth {
   state: AuthState;
+  me: Me | null;
   can: (permission: string) => boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (username: string, password: string) => Promise<Me | null>;
   logout: () => Promise<void>;
-  refresh: () => Promise<void>;
+  refresh: () => Promise<Me | null>;
 }
 
 const AuthContext = createContext<Auth | null>(null);
@@ -27,10 +28,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const refresh = useCallback(async () => {
     try {
-      setState({ status: "signed-in", me: await api.me() });
+      const me = await api.me();
+      setState({ status: "signed-in", me });
+      return me;
     } catch (error) {
       if (error instanceof ApiError && error.status === 401) setState({ status: "anonymous" });
       else setState({ status: "offline", message: error instanceof Error ? error.message : "Unknown error" });
+      return null;
     }
   }, []);
 
@@ -38,19 +42,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     void refresh();
   }, [refresh]);
 
-  const value = useMemo<Auth>(() => ({
-    state,
-    can: (permission) => state.status === "signed-in" && state.me.permissions.includes(permission),
-    login: async (email, password) => {
-      await api.login(email, password);
-      await refresh();
-    },
-    logout: async () => {
-      await api.logout();
-      setState({ status: "anonymous" });
-    },
-    refresh,
-  }), [state, refresh]);
+  const value = useMemo<Auth>(() => {
+    const me = state.status === "signed-in" ? state.me : null;
+    return {
+      state,
+      me,
+      can: (permission) => !!me?.permissions.includes(permission),
+      login: async (username, password) => {
+        await api.login(username, password);
+        return refresh();
+      },
+      logout: async () => {
+        await api.logout();
+        setState({ status: "anonymous" });
+      },
+      refresh,
+    };
+  }, [state, refresh]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
@@ -60,3 +68,7 @@ export function useAuth(): Auth {
   if (!auth) throw new Error("useAuth must be used inside <AuthProvider>");
   return auth;
 }
+
+// Where a user starts: administrators in the knowledge console, everyone else in the assistant.
+export const homeFor = (me: Me | null) =>
+  me?.permissions.includes("documents:manage") ? "/admin" : "/";

@@ -101,6 +101,18 @@ def test_extractive_keeps_structured_facts_whole_and_is_deterministic():
     assert course_list in answer and answer == ask("Which courses are in Semester VI?", context)
 
 
+def test_after_a_structured_fact_a_passage_is_used_only_for_another_part_of_the_question():
+    context = [
+        ContextBlock(1, "structured", "official", "Syllabus p.15", "B.Tech IT Semester VI courses: 2CEIT602 ARTIFICIAL INTELLIGENCE (4 cr)."),
+        ContextBlock(2, "document", "synthetic", "Catalogue", "Semester VI course table also in B.Tech IT syllabus."),
+        ContextBlock(3, "document", "synthetic", "Labs", "Semester VI practicals of B.Tech IT are held in the AI lab."),
+    ]
+    assert ask("Which courses are in Semester VI of B.Tech IT?", context) == \
+        "B.Tech IT Semester VI courses: 2CEIT602 ARTIFICIAL INTELLIGENCE (4 cr) [1]."
+    both = ask("Which courses are in Semester VI of B.Tech IT, and where are its practicals held?", context)
+    assert "[1]." in both and f"{SYNTHETIC_PREFIX} Semester VI practicals of B.Tech IT are held in the AI lab [3]." in both
+
+
 # --- prompt -------------------------------------------------------------------------------------
 
 def test_prompt_carries_rules_trust_labels_and_question():

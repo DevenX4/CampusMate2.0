@@ -19,9 +19,10 @@ against which threat, the test that proves it, and what is left open.
 | Threat | Control | Tested in |
 |---|---|---|
 | Invented facts (hallucination) | Answers only from retrieved sources. A deterministic grounding check requires that cited sources exist and that every number, code and name occurs in them; a failed check falls back to quoting the sources. A reference to an ID that does not exist ("LAB-IT-011") makes CampusMate abstain | `test_chat.py`, `test_hallucination.py` (all 23 trap questions) |
-| Demo data passed off as official | Trust level (`official`, `derived_official`, `synthetic`) on every row, chunk, graph edge and source; synthetic sources are labelled in the answer and in the UI. A question that asks for "official" information drops synthetic sources. An upload must declare its trust level; there is no default | `test_generation.py`, `test_chat.py`, `test_hallucination.py`, `AdminPage.test.tsx` |
+| Demo data passed off as official | Trust level (`official`, `derived_official`, `synthetic`) on every row, chunk, graph edge and source; synthetic sources are labelled in the answer and in the UI. A question that asks for "official" information drops synthetic sources. An upload must declare its trust level; there is no default | `test_generation.py`, `test_chat.py`, `test_hallucination.py`, `admin.test.tsx` |
 | A misleading quotation | Quoted relationship clauses keep their subject; a sentence wrapped over two PDF lines is never quoted in half | `test_generation.py`, `test_hallucination.py` |
 | Password guessing | Argon2id hashes (verification runs even for unknown emails, so timing reveals nothing). After 5 failures for an account, or 30 from one client IP, within 15 minutes: 429 with Retry-After, **before** the password is checked. Counted from the audit log | `test_auth.py`, `test_security.py` |
+| Demo accounts with public passwords (`admin` / `admin@123`, `student` / `student@123`) | Created only by `python -m app.accounts demo`, which refuses when `APP_ENV=production`. They are marked `is_demo`, and the API refuses their logins in production even if they exist. `/auth/demo` shows them to the login page only outside production | `test_ui_api.py` |
 | Session theft or replay | 256-bit random tokens, stored only as SHA-256. httpOnly `SameSite=Lax` cookie, `Secure` required in production. Logout and deactivation revoke sessions at once; dead sessions are purged | `test_auth.py`, `test_security.py` |
 | Privilege escalation | The role is always read from the database, never from the client. Every endpoint checks a permission; UI guards are only a convenience | `test_auth.py`, `test_documents.py`, `test_chat.py`, `App.test.tsx` |
 | Reading or rating someone else's answers | Feedback only on one's own answers. Query ids are random UUIDs, and another user's query looks like a missing one (404) | `test_chat.py` |
@@ -70,3 +71,6 @@ against which threat, the test that proves it, and what is left open.
 - **No retention period for chat history** and no account self-service (password change,
   deletion). Needed before real students use it.
 - **No multi-factor authentication** for admins.
+- **The demo accounts** are real accounts on a development machine: anyone who can reach the
+  local UI can sign in as `admin`. Keep the servers on 127.0.0.1 (as the scripts do), and
+  deactivate the demo accounts in **Users** before showing CampusMate on a shared network.

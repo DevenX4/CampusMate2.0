@@ -37,7 +37,9 @@ def create_user(db: Session, data: UserCreate, *, actor_id: uuid.UUID | None, co
     _check_role(db, data.role)
     if find_user_by_email(db, data.email):
         raise ConflictError(f"A user with email {data.email} already exists")
-    user = User(email=data.email.lower(), full_name=data.full_name,
+    if data.username and db.scalar(select(User).where(User.username == data.username)):
+        raise ConflictError(f"The username {data.username} is already taken")
+    user = User(email=data.email.lower(), username=data.username, full_name=data.full_name,
                 password_hash=hash_password(data.password), role_code=data.role)
     db.add(user)
     db.flush()  # assigns user.id
@@ -45,6 +47,34 @@ def create_user(db: Session, data: UserCreate, *, actor_id: uuid.UUID | None, co
                  entity_id=str(user.id), details={"email": user.email, "role": user.role_code})
     db.commit()
     return UserOut.model_validate(user)
+
+
+# Local demo accounts: simple, public passwords for trying CampusMate out. They bypass the password
+# rules on purpose, so they are flagged is_demo and refused at login when APP_ENV=production.
+DEMO_ACCOUNTS = (
+    # username, password, role, email, full name
+    ("admin", "admin@123", "admin", "admin@campusmate-demo.example", "Demo Administrator"),
+    ("student", "student@123", "student", "student@campusmate-demo.example", "Demo Student"),
+)
+
+
+def ensure_demo_accounts(db: Session, *, context: RequestContext) -> list[str]:
+    """Create the demo accounts, or reset them (password, role, active) if they exist."""
+    done = []
+    for username, password, role, email, full_name in DEMO_ACCOUNTS:
+        user = db.scalar(select(User).where(User.username == username)) or find_user_by_email(db, email)
+        created = user is None
+        if created:
+            user = User(email=email, full_name=full_name, role_code=role, password_hash="")
+            db.add(user)
+        user.username, user.role_code, user.is_active, user.is_demo = username, role, True, True
+        user.password_hash = hash_password(password)
+        db.flush()
+        audit.record(db, "user.demo_account", actor_id=None, context=context, entity_type="user",
+                     entity_id=str(user.id), details={"username": username, "created": created})
+        done.append(username)
+    db.commit()
+    return done
 
 
 def update_user(db: Session, user_id: uuid.UUID, data: UserUpdate, *, actor: User, context: RequestContext) -> UserOut:

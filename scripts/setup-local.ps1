@@ -6,6 +6,7 @@ databases, the schema, the dataset, and queued ingestion of the 12 PDFs. Safe to
 .EXAMPLE
 .\scripts\setup-local.ps1
 .\scripts\setup-local.ps1 -AdminEmail admin@campusmate-demo.example   # also create the first admin
+.\scripts\setup-local.ps1 -DemoAccounts   # also the demo logins admin/admin@123 and student/student@123
 
 The postgres superuser's password is asked for once (or taken from $env:PGPASSWORD) and used
 only for step 1. Everything else connects as the application role from .env.
@@ -14,7 +15,8 @@ param(
     [int]$Port = 5432,
     [string]$DbHost = "localhost",
     [string]$SuperUser = "postgres",
-    [string]$AdminEmail = ""
+    [string]$AdminEmail = "",
+    [switch]$DemoAccounts
 )
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
@@ -81,6 +83,11 @@ try {
         Invoke-Native "Creating the admin account" {
             & $python -m app.accounts create --email $AdminEmail --role admin --name "Administrator"
         }
+    }
+    if ($DemoAccounts) {
+        # Public passwords, for a local demo only: refused when APP_ENV=production, and such
+        # accounts cannot log in there.
+        Invoke-Native "Creating the demo accounts" { & $python -m app.accounts demo }
     }
 } finally {
     Pop-Location

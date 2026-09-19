@@ -58,9 +58,11 @@ def _summary(db: Session, document: Document) -> DocumentSummary:
     active = _active_version(db, document.document_id)
     latest = db.scalar(select(func.max(DocumentVersion.version_no))
                        .where(DocumentVersion.document_id == document.document_id))
+    chunks = db.scalar(select(func.count()).select_from(DocumentChunk).where(
+        DocumentChunk.document_id == document.document_id, DocumentChunk.version_no == active.version_no)) if active else 0
     return build(DocumentSummary, document,
                  active_version=VersionOut.model_validate(active) if active else None,
-                 latest_version_no=latest)
+                 latest_version_no=latest, chunk_count=chunks)
 
 
 def list_documents(db: Session, *, q: str | None, document_type: str | None, source_type: str | None,

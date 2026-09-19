@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from app.api.errors import register_error_handlers
 from app.api.middleware import BodySizeLimit, add_request_id_middleware, add_security_headers_middleware
 from app.api.routes import (
-    audit, auth, chat, courses, departments, documents, faculty, ingestion, knowledge, programs, routing, search, system,
+    audit, auth, chat, content, courses, departments, documents, faculty, ingestion, knowledge, programs, routing, search, system,
     users,
 )
 from app.core.config import get_settings
@@ -62,5 +62,5 @@ app.add_middleware(BodySizeLimit, max_bytes=settings.max_body_kb * 1024)
 add_request_id_middleware(app)
 add_security_headers_middleware(app)
 for module in (system, auth, users, audit, documents, ingestion, search, routing, chat,
-               departments, programs, courses, faculty, knowledge):
+               departments, programs, courses, faculty, knowledge, content):
     app.include_router(module.router, prefix=API_PREFIX)

@@ -399,13 +399,35 @@ browser ── http://127.0.0.1:5173 ──► Vite (static UI) ── /api/* �
 The admin page describes the pipeline as implemented, and shows counts from `GET /documents/stats`.
 
 **Testing:**
-- Vitest + Testing Library (17 tests) with a fetch mock that exercises the real client, routing and auth.
+- Vitest + Testing Library (21 tests since the redesign) with a fetch mock that exercises the real client, routing and auth.
 - The whole flow was also checked against the running API through the Vite proxy, with curl: login cookie, `/me`, a chat answer, feedback, a 403 for a student on documents, and logout.
 - Headless Edge, driven over the DevTools protocol, took screenshots of the login page, the assistant (desktop and 390 px mobile), the admin page and a document's versions panel.
 
 Found by the headless browser and fixed:
 - Chromium's `scrollIntoView` returns a Promise. An effect returned it, React called it as a clean-up and the page went blank. jsdom has no `scrollIntoView`, so the unit tests could not see it; a regression test now simulates Chromium.
 - An extractive answer quoted a neighbouring course's relationship without its subject.
+
+### Redesign to the Stitch layouts (after Phase 21)
+
+The first UI kept only the Stitch tokens. It was rebuilt to follow the two Stitch screens
+closely: the student workspace (header with context selectors, tool sidebar, conversation,
+Sources / Tree / Trace panel) and the admin Knowledge Control Center (navy sidebar, statistics,
+category tabs, quick actions, pipeline). What the new screens needed was added to the API first,
+so the UI still shows only what the server returns:
+
+| Addition | Why |
+|---|---|
+| Username login (`username` column, `LoginRequest.username` also accepts an email) and two demo accounts (`is_demo`), created by `python -m app.accounts demo` | The requested `admin` / `admin@123` and `student` / `student@123`. Refused in production, both when created and at login |
+| `ChatResponse.tables` (cited structured evidence as rows), `reasons` and `SourceOut.entity_ids` | The answer's course table, the Trace tab and the Tree tab come from the server, not from parsing the answer text |
+| `ChatRequest.program_id` / `semester_id` | The header's Program and Term selectors. They fill in only what the question leaves open, and the trace says so |
+| `/chat/history`, `/chat/analytics`, `/policies`, `/notices`, `/calendar`, `/knowledge/sources`, `/system/info`, chunk counts per document | Sidebar archive, admin analytics, directory pages, "Verified Repositories", the settings page and the table's Chunks column |
+
+| Decision | Why |
+|---|---|
+| Light by default (the designed look); dark mode only when chosen in the header, remembered per browser | The Stitch screens are light. Following the OS setting made the first impression a different design |
+| A long statement cited only to tabulated evidence is shown as its lead ("Semester VI (23 credits), listed in the table below [1]") with "Show as text" | The same facts twice (a 30-item sentence above the table) buried the answer. Copy still copies the full answer |
+| The extractive provider adds a passage after a structured fact only if the passage answers a part of the question the fact does not | Answers to "Semester VI courses" trailed off into catalogue metadata lines ("also in syllabus of [DO]") |
+| Official records listed first in the document table | Admins look for the syllabus first; synthetic records follow |
 
 ## Full integration (Phase 18)
 

@@ -18,6 +18,7 @@ htmlcov/
 # --- Node (frontend, later) ---
 node_modules/
 dist/
+*.tsbuildinfo
 
 # --- Local data: PDFs are verified with data/pdfs.sha256 instead ---
 data/pdfs/**

@@ -86,7 +86,7 @@ def test_login_is_case_insensitive_on_email(client, student):
 def test_failed_login_gives_the_same_vague_answer(client, student, email, password):
     response = login(client, email, password)
     assert response.status_code == 401
-    assert response.json()["error"]["message"] == "Invalid email or password."
+    assert response.json()["error"]["message"] == "Invalid username or password."
 
 
 def test_deactivated_account_cannot_log_in(client, db_session, student):

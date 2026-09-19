@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: all 21 phases done, local only; pending decisions: the SLM, the vector store, building the Docker images. See [docs/deployment-evaluation.md](docs/deployment-evaluation.md).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. A React frontend (`frontend/`) has the assistant for students and faculty, and a knowledge-base page for administrators. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: all 21 phases done, local only; pending decisions: the SLM, the vector store, building the Docker images. See [docs/deployment-evaluation.md](docs/deployment-evaluation.md).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. A React frontend (`frontend/`), built to the Stitch designs, has the student workspace (assistant with sources, knowledge tree and trace; curriculum; faculty; calendar; policies) and the admin Knowledge Control Center. Demo logins: `admin` / `admin@123` and `student` / `student@123` (local only). See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Quick start (Windows)
 
@@ -10,15 +10,24 @@ Needs Python 3.11+, Node.js 20+, PostgreSQL running on port 5432, the 12 PDFs in
 
 ```powershell
 cd "D:\MP 7th Sem\CampusMate"
-.\scripts\setup-local.ps1 -AdminEmail admin@campusmate-demo.example
+.\scripts\setup-local.ps1 -DemoAccounts
 .\scripts\start-local.ps1
 ```
 
-`setup-local.ps1` runs once, and is safe to re-run. It asks once for the `postgres` superuser's password and uses it only to create the low-privilege role `campusmate_app` and its two databases. The role's password comes from `DB_PASSWORD` in `.env`. The script then creates the schema, loads the dataset, queues the 12 PDFs for ingestion and creates the admin (it prompts for that password; pass `-AdminEmail` only on the first run).
+Then sign in at http://127.0.0.1:5173 with a demo account:
+
+| Username | Password | Opens |
+|---|---|---|
+| `admin` | `admin@123` | the Knowledge Control Center (`/admin`); **Open assistant** switches to the student view |
+| `student` | `student@123` | the assistant (`/`) |
+
+The demo accounts are for a local demo only: their passwords are public. `python -m app.accounts demo` (which `-DemoAccounts` runs) refuses to create them when `APP_ENV=production`, and the API refuses their logins there. For a real admin, use `-AdminEmail you@example.org` instead (a hidden prompt asks for its password).
+
+`setup-local.ps1` runs once, and is safe to re-run. It asks once for the `postgres` superuser's password and uses it only to create the low-privilege role `campusmate_app` and its two databases. The role's password comes from `DB_PASSWORD` in `.env`. The script then creates the schema, loads the dataset, queues the 12 PDFs for ingestion and creates the demo accounts (`-DemoAccounts`, safe to repeat: it resets their passwords) or a real admin (`-AdminEmail`, prompts for the password; first run only).
 
 `start-local.ps1` opens two windows, **CampusMate API** and **CampusMate UI**, then opens http://127.0.0.1:5173. Close the two windows to stop. The API ingests the queued PDFs by itself during the first minute or two; the knowledge-base page shows the progress.
 
-To add a student account: `backend\.venv\Scripts\python -m app.accounts create --email student@campusmate-demo.example --role student` (run it from `backend`).
+To add another account: `backend\.venv\Scripts\python -m app.accounts create --email jane@campusmate-demo.example --username jane --role student` (run it from `backend`), or use **Users** in the admin console.
 
 ## Repository layout
 
@@ -43,7 +52,9 @@ data/
 evaluation/datasets/  evaluation questions (58) and negative/hallucination questions (23)
 frontend/           React + TypeScript UI (Vite, Tailwind); talks only to the FastAPI API
   src/api/          the only code that calls the server (client.ts) and the response types
-  src/pages/        login, assistant, knowledge base (admin)
+  src/student/      the student workspace: assistant, curriculum, faculty, calendar, policies
+  src/admin/        the admin console: dashboard, documents, ingestion, analytics, users, settings
+  src/components/   shared pieces (citations, source cards, badges, dialogs)
   stitch-reference/ Stitch UI mockups: visual reference only. Their sample data is NOT factual.
 storage/            runtime files (uploads, processed, vector index, tmp). NOT in Git
 docs/               architecture and decisions
@@ -158,16 +169,20 @@ CAMPUSMATE_ADMIN_PASSWORD=... CAMPUSMATE_STUDENT_PASSWORD=...   .venv/Scripts/py
 
 ## Accounts and login
 
-Create the first admin (the password is asked for at a hidden prompt):
+Create the first admin (the password is asked for at a hidden prompt), or the two demo accounts:
 
 ```bash
 cd backend
-.venv/Scripts/python -m app.accounts create --email admin@campusmate-demo.example --role admin --name "Admin"
+.venv/Scripts/python -m app.accounts create --email admin@campusmate-demo.example --username admin2 --role admin --name "Admin"
+.venv/Scripts/python -m app.accounts demo   # admin / admin@123 and student / student@123 (refused when APP_ENV=production)
 ```
+
+Users sign in with their username or their email (both case-insensitive). A username is 3 to 40 characters: lower-case letters, digits, `.`, `_` and `-`.
 
 | Endpoint | Who |
 |---|---|
-| `POST /api/v1/auth/login` `{"email", "password"}` | anyone. Sets an httpOnly session cookie and also returns `access_token` |
+| `POST /api/v1/auth/login` `{"username", "password"}` | anyone. `username` is a username or an email (`"email"` is still accepted as the field name). Sets an httpOnly session cookie and also returns `access_token`. Demo accounts are refused when `APP_ENV=production` |
+| `GET /api/v1/auth/demo` | anyone. The demo logins for the login page; `{"enabled": false}` in production or when they do not exist |
 | `POST /api/v1/auth/logout` | revokes the session immediately |
 | `GET /api/v1/auth/me` | logged in. Returns the user and their permissions |
 | `GET/POST /api/v1/users`, `PATCH /api/v1/users/{id}` | `users:manage` (admin) |
@@ -270,7 +285,13 @@ The response has:
 - `answer` and `answer_type`: `answered`; `fallback` (the model's answer failed the check, so the extractive answer is shown); `abstained` ("I couldn't find authoritative information..."); or `unsupported` (personal records, reminders);
 - `sources`: each source with its trust level and whether the answer cites it;
 - `contains_synthetic`: whether a cited source is synthetic demo data;
+- `tables`: cited structured facts as tables (a semester's courses, a course's offerings, the grading scheme), each linked to its source number;
+- `reasons`: why the router chose this evidence (shown as the answer's trace);
 - the grounding result and per-stage timings.
+
+The request may carry `program_id` and `semester_id` (the programme and term chosen in the UI). They apply only when the question names no programme or semester itself.
+
+`GET /api/v1/chat/history?q=` lists your own earlier questions. `GET /api/v1/chat/analytics` (`audit:read`) gives 7-day counts, answer types, routes, feedback, latency percentiles, and the questions that were not answered or were rated down, without user identities.
 
 Every exchange is stored in `chat_queries`. `POST /api/v1/chat/feedback` with `{"query_id", "rating": "up"|"down", "comment"}` rates one of your own answers; rating again replaces the previous rating.
 
@@ -293,9 +314,14 @@ In development, Vite forwards `/api` to the API (`CAMPUSMATE_API` overrides the 
 
 | Page | Who | What |
 |---|---|---|
-| `/login` | everyone | Sign in (the account is created with `python -m app.accounts`) |
-| `/` | students, faculty, admins (`chat:use`) | Ask questions. Each `[n]` in an answer opens its source (document, version, page, trust level, text). Synthetic data carries a warning. Answers can be rated |
-| `/admin` | faculty (read), admins (manage) | Document statistics and list; upload with an explicit trust level; activate, deactivate, archive, delete and re-index. A document's panel shows its versions (new-version upload, rollback by activating an older one, the original PDF for admins) and recent ingestion. Ingestion jobs with retry |
+| `/login` | everyone | Sign in with a username or email. In development, the demo accounts are shown and fill the form with one click |
+| `/` | students, faculty, admins (`chat:use`) | The assistant (the Stitch "Universal Student AI Assistant" design). Ask a question, or pick a quick inquiry; the header's Dept / Program / Term selectors give the question its context. Answers show their tables and `[n]` citations. The side panel has three tabs: **Sources** (document, version, page, trust level, text), **Tree** (the knowledge graph around the answer's entities) and **Trace** (route, reasons, grounding, timings). Answers can be rated. Ctrl K searches courses and faculty, Alt N starts a new question, and the microphone dictates (where the browser supports it) |
+| `/curriculum` | same | Programmes → semesters → courses, from the official syllabus: credits, contact hours, marks and elective slots, with a course drawer |
+| `/faculty`, `/calendar`, `/policies` | same | Faculty directory, academic calendar (filterable by the selected term) and policies. These are synthetic demo data and say so |
+| `/admin` | faculty (read), admins (manage) | The Knowledge Control Center (the Stitch admin design): statistics, documents by category, quick actions on the selected document, upload with an explicit trust level, the ingestion pipeline. A document's panel shows its versions (new-version upload, rollback by activating an older one, the original PDF for admins) and recent ingestion |
+| `/admin/documents`, `/admin/ingestion`, `/admin/analytics`, `/admin/users`, `/admin/settings` | by permission | All documents; ingestion jobs with retry; usage analytics; accounts; the running configuration (read-only, no secrets) |
+
+The UI is light by default, as designed in Stitch; the moon button in the header switches to dark mode (remembered in this browser).
 
 ## Docker
 

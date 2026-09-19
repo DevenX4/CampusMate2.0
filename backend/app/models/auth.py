@@ -5,7 +5,7 @@ Roles and permissions are reference data inserted by a migration, because code d
 import uuid
 from datetime import datetime
 
-from sqlalchemy import CheckConstraint, Column, ForeignKey, Index, Table, func, text
+from sqlalchemy import CheckConstraint, Column, ForeignKey, Index, Table, UniqueConstraint, func, text
 from sqlalchemy.dialects.postgresql import INET
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -42,15 +42,22 @@ class User(TimestampMixin, Base):
     __table_args__ = (
         # Case-insensitive uniqueness: "A@x.com" and "a@x.com" are the same account.
         Index("uq_users_email_lower", text("lower(email)"), unique=True),
+        # Usernames are stored lower case, so a plain unique constraint is case-insensitive.
+        UniqueConstraint("username"),
+        CheckConstraint(r"username ~ '^[a-z0-9][a-z0-9._-]{2,39}$'", name="username_format"),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, server_default=func.gen_random_uuid())
     email: Mapped[str]
+    username: Mapped[str | None]  # optional short login name, e.g. "admin"
     full_name: Mapped[str | None]
     password_hash: Mapped[str]  # Argon2 hash, never the password itself
     role_code: Mapped[str] = mapped_column(ForeignKey("roles.code"))
     is_active: Mapped[bool] = mapped_column(server_default=text("true"))
     last_login_at: Mapped[datetime | None]
+    # A demo account (python -m app.accounts demo): a public, deliberately simple password, so it
+    # can never log in when APP_ENV=production.
+    is_demo: Mapped[bool] = mapped_column(server_default=text("false"))
 
 
 class UserSession(Base):
