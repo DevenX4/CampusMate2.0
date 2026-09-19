@@ -116,7 +116,8 @@ class CreditSchemeMixin:
 
 
 class ElectiveGroup(CreditSchemeMixin, ProvenanceMixin, TimestampMixin, Base):
-    """An elective/audit/open slot in a semester; students pick one of its option courses."""
+    """An elective/audit/open slot in a semester; students pick one of its option courses.
+    The options are the course_offerings whose elective_group_id points here (not stored twice)."""
 
     __tablename__ = "elective_groups"
     __table_args__ = (
@@ -130,18 +131,6 @@ class ElectiveGroup(CreditSchemeMixin, ProvenanceMixin, TimestampMixin, Base):
     slot_kind: Mapped[str]
     slot_title: Mapped[str | None]
     slot_no: Mapped[int | None]
-
-
-elective_group_options = Table(
-    "elective_group_options",
-    Base.metadata,
-    Column(
-        "elective_group_id",
-        ForeignKey("elective_groups.elective_group_id", ondelete="CASCADE"),
-        primary_key=True,
-    ),
-    Column("course_id", ForeignKey("courses.course_id", ondelete="CASCADE"), primary_key=True),
-)
 
 
 class CourseOffering(CreditSchemeMixin, ProvenanceMixin, TimestampMixin, Base):

@@ -32,15 +32,15 @@
 
 ## Database schema (Phase 2)
 
-43 tables across 8 model modules in `backend/app/models/`, created by Alembic migrations.
+41 tables across 8 model modules in `backend/app/models/`, created by Alembic migrations.
 
 | Module | Tables |
 |---|---|
 | organization | universities, org_units, departments, research_areas |
 | campus | buildings, rooms, laboratories, facilities, lab_courses |
-| curriculum | programs, semesters, courses, course_offerings, elective_groups, elective_group_options, course_prerequisites, catalog_listings, course_shared_listings, grade_bands, grade_band_programs, data_quality_conflicts |
+| curriculum | programs, semesters, courses, course_offerings, elective_groups, course_prerequisites, catalog_listings, course_shared_listings, grade_bands, grade_band_programs, data_quality_conflicts |
 | people | faculty, faculty_research_areas, teaching_assignments |
-| content | policies, policy_links, notices, notice_links, faq, faq_links, calendar_events, calendar_event_programs, calendar_event_semesters |
+| content | policies, policy_links, notices, notice_links, faq, faq_links, calendar_events, calendar_event_semesters |
 | documents | documents, document_versions, document_entities, document_chunks |
 | auth | roles, permissions, role_permissions, users |
 | operations | ingestion_jobs, audit_logs |
@@ -63,6 +63,24 @@
 | Status/type columns use `TEXT` + `CHECK`, not PostgreSQL ENUM | Adding a value later is a one-line migration |
 | Vague source dates stay `NULL` (with a note) | "2021-06-01 (exact date not stated)" must not become a fake precise date |
 
+Migration 2 (`drop redundant link tables`) removed `elective_group_options` (identical to `course_offerings.elective_group_id`) and `calendar_event_programs` (always the programmes of the event's semesters). Its downgrade rebuilds both tables from those sources, so it is lossless in both directions.
+
+## Dataset seeding (Phase 3)
+
+`python -m app.seed` runs source → transform → write → validate in one transaction.
+
+| Aspect | Design |
+|---|---|
+| Input | `data/structured/*.json` (22 tables), `data/registry/` (documents, entity pages) and `data/pdfs/` (verified against registry SHA-256). `relationships.json` is not loaded; it is the Phase 13 test oracle |
+| Write order | `Base.metadata.sorted_tables` (parents before children). SQLAlchemy orders INSERTs only by `relationship()`, so the seed never relies on that |
+| Idempotency | `INSERT … ON CONFLICT DO UPDATE … WHERE <any column IS DISTINCT FROM new value>`, so a re-run touches 0 rows |
+| Write modes | `upsert` for entity tables. `sync` (upsert + delete stale) for link tables and `document_entities`. `insert_only` for `documents` / `document_versions`, whose lifecycle belongs to the admin after bootstrap |
+| Provenance | Every row cites `(source_document_id, version 1, page)`. Validated: official/derived facts → official document with a page; synthetic → synthetic document |
+| Text repair | UTF-8 decoded as cp1252 (`â€“` for `–`) is repaired: 2 strings, both in the catalog PDF's own text layer |
+| Dates | Only exact ISO dates are stored. Approximate registry dates go into `document_versions.notes` |
+| Lost-information check | 25 comparisons rebuild every dropped JSON field (e.g. `faculty.courses_taught`, `laboratories.room_number`, notice status as of 2026-09-18) from the database |
+| Totals | 2,360 rows in 34 tables. Facts: official 436, derived_official 444, synthetic 286. These reconcile with the dataset audit (145 / 135 / 286) once the 291 catalog-listing and 309 shared-listing sub-records are excluded |
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed · 4 REST catalog · 5 auth · 6 documents · 7 ingestion · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog · 5 auth · 6 documents · 7 ingestion · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

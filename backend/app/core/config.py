@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Literal
 from urllib.parse import quote_plus
 
-from pydantic import SecretStr
+from pydantic import SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # backend/app/core/config.py -> parents[3] is the CampusMate repo root.
@@ -33,6 +33,16 @@ class Settings(BaseSettings):
     db_name: str = "campusmate"
     db_user: str = "campusmate_app"
     db_password: SecretStr  # SecretStr prints as '**********' in logs and reprs
+
+    # Local folders. Overridable so a container can mount them elsewhere later.
+    data_dir: Path = REPO_ROOT / "data"  # the canonical dataset (read-only input)
+    storage_dir: Path = REPO_ROOT / "storage"  # uploaded/original documents and indexes
+
+    @field_validator("data_dir", "storage_dir")
+    @classmethod
+    def _relative_to_repo_root(cls, value: Path) -> Path:
+        # "data" means <repo>/data regardless of the folder the app is started from.
+        return value if value.is_absolute() else REPO_ROOT / value
 
     @property
     def database_url(self) -> str:

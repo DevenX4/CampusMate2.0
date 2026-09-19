@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 2 (PostgreSQL schema).** FastAPI skeleton plus the complete database schema (43 tables) managed by Alembic migrations, and health/readiness endpoints. The dataset is not loaded yet (Phase 3), and there is no authentication, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 3 (dataset seeded).** FastAPI skeleton, a 41-table PostgreSQL schema managed by Alembic, and an idempotent, validated seed that loads the whole dataset (2,360 rows plus the 12 PDFs). There are no API endpoints for the data yet (Phase 4), and no authentication, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -10,6 +10,8 @@ An AI-powered campus assistant for Ganpat University's IT programmes. It combine
 backend/            FastAPI application (Python)
   app/core/         configuration (config.py), logging (logging.py), database session (db.py)
   app/models/       SQLAlchemy models = the database schema, one file per domain
+  app/seed/         dataset loader: source -> transform -> write -> validate (python -m app.seed)
+  app/services/     reusable business logic (storage.py: content-addressed file storage)
   app/api/routes/   HTTP endpoints
   app/schemas/      Pydantic request/response models
   migrations/       Alembic migrations (versions/ holds one file per schema change)
@@ -87,8 +89,25 @@ Then create the schema:
 ```bash
 cd backend
 .venv/Scripts/alembic upgrade head      # apply all migrations
-.venv/Scripts/alembic current           # shows the revision, e.g. 7cc478e218c5 (head)
+.venv/Scripts/alembic current           # shows the current revision, marked (head)
 ```
+
+Then load the dataset:
+
+```bash
+.venv/Scripts/python -m app.seed --dry-run   # validate everything, then roll back
+.venv/Scripts/python -m app.seed             # load and commit
+```
+
+The seed is **idempotent**: run it again and it reports `inserted 0, updated 0, deleted 0`. It also **repairs drift**: if a seeded value was changed in the database, the next run restores it. Everything happens in one transaction, and if any validation fails, nothing is written. It also copies the 12 PDFs (after checking their SHA-256) into `storage/originals/<2 hex>/<sha256>.pdf`.
+
+Validation checks:
+- exact row counts;
+- official facts cite an official document and page, and synthetic facts cite synthetic documents;
+- every cross-reference resolves;
+- record version labels match version 1;
+- no garbled text remains (2 known strings are repaired and listed);
+- every field the schema deliberately does not store (because it repeats other data) can be rebuilt from the database and equals the original JSON. So normalization lost nothing.
 
 ## Run
 

@@ -129,15 +129,7 @@ class CalendarEvent(ProvenanceMixin, TimestampMixin, Base):
     academic_year: Mapped[str | None]
 
 
-calendar_event_programs = Table(
-    "calendar_event_programs",
-    Base.metadata,
-    Column(
-        "event_id", ForeignKey("calendar_events.event_id", ondelete="CASCADE"), primary_key=True
-    ),
-    Column("program_id", ForeignKey("programs.program_id", ondelete="CASCADE"), primary_key=True),
-)
-
+# Which semesters an event applies to. Its programmes are those semesters' programmes.
 calendar_event_semesters = Table(
     "calendar_event_semesters",
     Base.metadata,

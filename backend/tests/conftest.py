@@ -21,6 +21,21 @@ def alembic_config() -> Config:
     return Config(str(ALEMBIC_INI))
 
 
+def _pdfs_present() -> bool:
+    """The dataset PDFs are not in Git; tests that load the dataset need them locally."""
+    data_dir = get_settings().data_dir
+    manifest = data_dir / "pdfs.sha256"
+    return manifest.is_file() and all(
+        (data_dir / "pdfs" / line.split("*", 1)[1].strip()).is_file()
+        for line in manifest.read_text(encoding="utf-8").splitlines() if line.strip()
+    )
+
+
+requires_dataset = pytest.mark.skipif(
+    not _pdfs_present(), reason="dataset PDFs missing from data/pdfs (see README > PDFs)"
+)
+
+
 @pytest.fixture(scope="session")
 def migrated_engine():
     """A freshly migrated campusmate_test database, shared by the whole test run."""
