@@ -53,15 +53,19 @@ EDGE_QUERIES: dict[str, str] = {
     "OFFERED_IN": f"SELECT course_id, semester_id, {_p()} FROM course_offerings",
     # Official when the course is printed on its programme's syllabus pages; derived_official
     # for legacy courses, whose programme is inferred from the catalog programme code.
+    # DISTINCT ON keeps an arbitrary row unless ordered: a legacy course listed in several
+    # academic years cites its first (earliest) listing.
     "BELONGS_TO": """
-        SELECT DISTINCT ON (o.course_id, s.program_id)
-               o.course_id, s.program_id, 'official', c.source_document_id, c.source_page
-        FROM course_offerings o JOIN semesters s USING (semester_id) JOIN courses c USING (course_id)
+        (SELECT DISTINCT ON (o.course_id, s.program_id)
+                o.course_id, s.program_id, 'official', c.source_document_id, c.source_page
+         FROM course_offerings o JOIN semesters s USING (semester_id) JOIN courses c USING (course_id)
+         ORDER BY o.course_id, s.program_id, o.semester_id)
         UNION ALL
-        SELECT DISTINCT ON (cl.course_id, p.program_id)
-               cl.course_id, p.program_id, 'derived_official', cl.source_document_id, cl.source_page
-        FROM catalog_listings cl JOIN programs p ON p.catalog_program_code = cl.catalog_program_code
-        WHERE cl.course_id NOT IN (SELECT course_id FROM course_offerings)""",
+        (SELECT DISTINCT ON (cl.course_id, p.program_id)
+                cl.course_id, p.program_id, 'derived_official', cl.source_document_id, cl.source_page
+         FROM catalog_listings cl JOIN programs p ON p.catalog_program_code = cl.catalog_program_code
+         WHERE cl.course_id NOT IN (SELECT course_id FROM course_offerings)
+         ORDER BY cl.course_id, p.program_id, cl.academic_year)""",
     "HAS_ELECTIVE_GROUP": f"SELECT semester_id, elective_group_id, {_p()} FROM elective_groups",
     # The option list is printed in the official syllabus, so the slot's provenance applies.
     "HAS_OPTION": f"""SELECT o.elective_group_id, o.course_id, {_p('g')}

@@ -27,6 +27,14 @@ def test_derived_graph_reproduces_the_dataset_relationships(seeded_session):
     assert report["citation_differences"] == {"COORDINATED_BY": 2}
 
 
+def test_legacy_course_cites_its_earliest_catalog_listing(seeded_session):
+    # Listed in 2017-18 (p.112), 2018-19 (p.89) and 2019-20 (p.62): the citation must not
+    # depend on the order PostgreSQL happens to return rows in.
+    [edge] = [e for e in all_edges(seeded_session) if (e.subject_id, e.predicate) == ("COURSE-2IT503", "BELONGS_TO")]
+    assert (edge.source_type, edge.source_document_id, edge.source_page) == (
+        "derived_official", "DOC-OFFICIAL-CATALOG-001", 112)
+
+
 def test_items_match_the_dataset_okf_entities(seeded_session):
     report = compare_items(build_items(seeded_session),
                            get_settings().data_dir / "knowledge" / "OKF_style" / "index.json")
