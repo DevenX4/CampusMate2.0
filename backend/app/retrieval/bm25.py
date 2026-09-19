@@ -62,12 +62,14 @@ class Bm25Index:
 
     def search(self, query: str, k: int, allowed: Callable[[int], bool] | None = None) -> list[tuple[str, float]]:
         scores: dict[int, float] = defaultdict(float)
-        for term in set(tokenize(query)):
+        # Sorted, not set order: a set of strings iterates differently in every process (hash
+        # randomisation), which reordered tied chunks and changed float sums between runs.
+        for term in sorted(set(tokenize(query))):
             idf = self.idf(term)
             for index, frequency in self.postings.get(term, {}).items():
                 if allowed is not None and not allowed(index):
                     continue
                 norm = K1 * (1 - B + B * self.lengths[index] / self.avgdl)
                 scores[index] += idf * frequency * (K1 + 1) / (frequency + norm)
-        best = sorted(scores.items(), key=lambda item: item[1], reverse=True)[:k]
+        best = sorted(scores.items(), key=lambda item: (-item[1], self.ids[item[0]]))[:k]  # ties: by chunk id
         return [(self.ids[index], score) for index, score in best]

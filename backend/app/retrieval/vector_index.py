@@ -3,12 +3,20 @@
 Chroma is a DERIVED index: every vector can be rebuilt from document_chunks in PostgreSQL
 (`python -m app.retrieval rebuild-index`). PostgreSQL decides which chunks are eligible
 (active versions of active documents); Chroma only measures similarity among them.
+
+The search is EXACT: Chroma filters the vectors by metadata and numpy compares the query with
+every one of them. Chroma's own approximate (HNSW) search was measured to return different
+neighbours in different processes, missing a true #2 neighbour in about half the runs, even on
+a freshly built index. At this size (about 1,000 chunks) the exact search costs about 25 ms; it
+grows linearly (roughly 30 ms per 1,000 chunks), so with tens of thousands of chunks an
+approximate index would be worth its errors again, after measuring its recall.
 """
 
 from dataclasses import dataclass
 from pathlib import Path
 
 import chromadb
+import numpy as np
 
 
 def version_key(document_id: str, version_no: int) -> str:
@@ -59,9 +67,16 @@ class VectorIndex:
         return len(stale)
 
     def query(self, vector: list[float], k: int, where: dict) -> list[tuple[str, float]]:
-        """(chunk_id, cosine similarity) of the k nearest vectors matching `where`."""
-        result = self._collection.query(query_embeddings=[vector], n_results=k, where=where, include=["distances"])
-        return [(chunk_id, 1.0 - distance) for chunk_id, distance in zip(result["ids"][0], result["distances"][0])]
+        """(chunk_id, cosine similarity) of the k most similar vectors matching `where`: exact,
+        and deterministic (equal scores are ordered by chunk id)."""
+        found = self._collection.get(where=where, include=["embeddings"])
+        if not found["ids"]:
+            return []
+        matrix = np.asarray(found["embeddings"], dtype=np.float32)
+        query = np.asarray(vector, dtype=np.float32)
+        similarity = matrix @ query / (np.linalg.norm(matrix, axis=1) * np.linalg.norm(query) + 1e-12)
+        order = np.lexsort((np.asarray(found["ids"]), -similarity))[:k]
+        return [(found["ids"][i], float(similarity[i])) for i in order]
 
     def reset(self) -> None:
         name, metadata = self._collection.name, self._collection.metadata

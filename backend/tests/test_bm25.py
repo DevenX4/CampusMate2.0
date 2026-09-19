@@ -20,6 +20,13 @@ def test_exact_rare_term_beats_near_miss_codes():
     assert [chunk_id for chunk_id, _ in index.search("2CEIT78PE7", 3)] == ["pe7"]  # others don't match at all
 
 
+def test_equal_scores_are_ordered_by_chunk_id():
+    # Found by the answer evaluation: tied chunks came back in a different order in every
+    # process (query terms were iterated in set order, which depends on hash randomisation).
+    index = Bm25Index.build(["z", "m", "a"], ["attendance policy rules"] * 3)
+    assert [chunk_id for chunk_id, _ in index.search("policy attendance rules", 3)] == ["a", "m", "z"]
+
+
 def test_rare_terms_weigh_more_than_common_ones():
     index = Bm25Index.build(list("abcd"), ["course alpha", "course beta", "course gamma", "course zeta"])
     assert index.idf("zeta") > index.idf("course")

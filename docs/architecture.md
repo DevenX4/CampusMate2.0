@@ -164,7 +164,8 @@ Real dataset: 12 documents → 935 chunks in about 20 s. The official catalog is
 
 ```
 query ─► PostgreSQL: eligible versions (active version of an active document, + document filters)
-      ─► Chroma: nearest vectors WHERE version_key IN eligible AND chunk filters (source_type, semester, programme)
+      ─► Chroma: vectors WHERE version_key IN eligible AND chunk filters (source_type, semester, programme)
+      ─► numpy: exact cosine similarity against every one of them, ties ordered by chunk id
       ─► PostgreSQL: load chunks by id, re-check eligibility, keep similarity order ─► hits with citations
 ```
 
@@ -176,6 +177,7 @@ query ─► PostgreSQL: eligible versions (active version of an active document
 | PostgreSQL decides eligibility at query time via `version_key` | Activating, deactivating or deleting a document needs no index update. Stale vectors can never answer |
 | Vectors written before the chunk commit; stale vectors removed after | A committed chunk always has a vector. A leftover vector is ignored by the eligibility check |
 | Collection records model name and dimension; a mismatch refuses to start | Vectors from different models are never mixed. `rebuild-index --reset` re-embeds from PostgreSQL |
+| **Exact search** (changed in Phase 16): Chroma stores and filters; numpy scores | Chroma's approximate HNSW search was *measured* to be non-deterministic. The same query in different processes returned different neighbours, and the true #2 neighbour was missing in about half the runs, even on a freshly built index and with `ef_search` = 200. Exact search over about 1,000 vectors costs about 25 ms (p50 of hybrid: 21 → 49 ms) and makes every evaluation reproducible. It grows linearly (about 30 ms per 1,000 chunks); at tens of thousands of chunks an approximate index becomes worth its errors, after its recall is measured |
 
 First observations with the real model (to be *measured* in Phase 9):
 - semantic questions work (attendance → FAQ-026 and POLICY-001);

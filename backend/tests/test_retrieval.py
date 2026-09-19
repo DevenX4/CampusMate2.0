@@ -11,7 +11,7 @@ from app.main import app
 from app.models.documents import DocumentChunk
 from app.retrieval.runtime import get_embedder, get_vector_index
 from app.retrieval.search import SearchFilters, vector_search
-from app.retrieval.vector_index import VectorIndex
+from app.retrieval.vector_index import VectorIndex, VectorItem
 from app.services import documents
 from app.services.audit import RequestContext
 from tests.helpers import API, add_document, headers_for, make_indexer
@@ -60,6 +60,19 @@ def test_a_vector_whose_chunk_is_gone_is_ignored(db_session, indexer):
     add_document(db_session, indexer, "DOC-A", [{"text": "attendance policy"}, {"text": "attendance rules"}])
     db_session.execute(delete(DocumentChunk).where(DocumentChunk.text == "attendance rules"))
     assert [h.text for h in search(db_session, indexer, "attendance")] == ["attendance policy"]
+
+
+def test_vector_query_is_exact_and_breaks_ties_by_id(tmp_path):
+    # Chroma's approximate search returned different neighbours in different processes; the
+    # exact search must rank every matching vector by cosine similarity, ties by chunk id.
+    index = VectorIndex(tmp_path / "chroma", "exact", "toy-model", 2)
+    meta = {"version_key": "DOC-A:v1"}
+    index.upsert([VectorItem(chunk_id, vector, chunk_id, meta) for chunk_id, vector in [
+        ("c-far", [0.0, 1.0]), ("b-tie", [1.0, 1.0]), ("a-tie", [2.0, 2.0]), ("d-best", [1.0, 0.1])]])
+    index.upsert([VectorItem("e-other", [1.0, 0.0], "e", {"version_key": "DOC-B:v1"})])
+    ranked = index.query([1.0, 0.0], 3, {"version_key": {"$in": ["DOC-A:v1"]}})
+    assert [chunk_id for chunk_id, _ in ranked] == ["d-best", "a-tie", "b-tie"]  # e-other is filtered out
+    assert ranked[1][1] == pytest.approx(ranked[2][1]) == pytest.approx(0.7071, abs=1e-4)
 
 
 def test_index_refuses_vectors_from_a_different_model(tmp_path):
