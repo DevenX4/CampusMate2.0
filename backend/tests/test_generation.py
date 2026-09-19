@@ -12,7 +12,9 @@ from pydantic import ValidationError
 from app.core.config import Settings
 from app.generation import runtime
 from app.generation.base import ABSTAIN_MESSAGE, ContextBlock, GenerationError, GenerationRequest
-from app.generation.extractive import MAX_SENTENCE_CHARS, SYNTHETIC_PREFIX, ExtractiveProvider, sentences
+from app.generation.extractive import (
+    MAX_SENTENCE_CHARS, SYNTHETIC_NOTE, SYNTHETIC_PREFIX, ExtractiveProvider, sentences, terms,
+)
 from app.generation.openai_compatible import OpenAICompatibleProvider, display_url, is_local
 from app.generation.prompt import SYSTEM_PROMPT, render_messages
 
@@ -53,7 +55,13 @@ def test_graph_facts_are_quoted_clause_by_clause_and_questions_never():
     faq = ContextBlock(2, "document", "synthetic", "FAQ", "Where are the AI practicals held?")
     answer = ask("Where are the practicals of AI held?", [graph, faq])
     # The course is official, the lab is not: the quoted clause carries the synthetic label.
-    assert answer == f"{SYNTHETIC_PREFIX} practicals_in: LAB-1 (AI Lab) [synthetic] [1]."
+    assert answer == f"{SYNTHETIC_PREFIX} practicals_in: LAB-1 (AI Lab) [synthetic] [1]. {SYNTHETIC_NOTE}"
+
+
+def test_matching_normalises_numerals_and_plurals():
+    assert terms("official electives in Semester VII, facilities, credits") >= {"elective", "semester", "7", "facility", "credit"}
+    semester = ContextBlock(1, "structured", "official", "Syllabus", "B.Tech IT Semester VII: ELECTIVE-V, choose one of: A, B.")
+    assert ask("What are the official electives in semester 7?", [semester]).endswith("[1].")
 
 
 def test_extractive_labels_synthetic_evidence():

@@ -321,6 +321,33 @@ Two bugs found while testing the extractive provider:
 
 Model choice: [slm-evaluation.md](slm-evaluation.md).
 
+## Chat pipeline (Phase 16)
+
+```
+POST /chat/query ─► router (route, intents) ─► personal / automation: "not supported yet" (no search, no model)
+                 ─► evidence ─► context builder ─► generation provider ─► grounding check ─┬─ passed ─► answer
+                                                                                            └─ failed ─► extractive answer from the same sources
+                                                                                                         (or abstain)
+                 ─► chat_queries row (question, answer, sources, grounding result, timings) ─► response with query_id
+```
+
+| Decision | Why |
+|---|---|
+| Context builder: at most 8 sources, 3 of them graph items, and 6,000 characters in total. Order: structured, graph, documents. Duplicates are removed. A question that asks for "official" drops synthetic sources | Fits a small model's 4,096-token window with room for the rules and the answer. The exact facts come first |
+| Grounding check without a model (`chat/grounding.py`): citations exist; every number and code occurs in the sources; every capitalised name occurs in the sources | Wrong numbers and invented names are the most harmful and the most checkable errors. A false positive only costs a fallback to the extractive answer |
+| A rejected or failed generation falls back to the extractive answer, not to an error | The extractive answer is grounded by construction. The user gets the sources' own words instead of nothing. `answer_type` says so |
+| A refusal in the model's own words becomes the one canonical abstain sentence | Abstentions are recognisable in the UI and in evaluation |
+| An undisclosed synthetic source gets a notice appended (a fix, not a rejection) | Synthetic information is never presented as official, whatever the model wrote |
+| Personal and automation routes answer "not supported yet" without searching | Searching documents for "my marks" can only produce a misleading answer |
+| Every exchange is stored (`chat_queries`); one rating per answer (`chat_feedback`, upsert with `ON CONFLICT`) | Answers can be audited, feedback points at the exact sources used, and real questions can become evaluation data. Query ids are random UUIDs, and someone else's query looks exactly like a missing one (404) |
+| Answer evaluation (`python -m app.evaluation answers`) reports: answered rate, fact recall (numbers and codes of the expected answer), term recall, whether a required source is cited, correct abstention on unanswerable questions, fallbacks, latency | The same run for each provider makes the SLM comparison measurable |
+
+Limits of the grounding check: a false statement made only of words found in the sources ("closed" vs "open", or a number from the wrong row) passes. Catching that needs a model as a judge, or human review.
+
+Found by the answer evaluation and fixed:
+- the name check read the letters inside `2CEIT78PE7` as names;
+- BM25 ties and Chroma's approximate search made evidence differ between processes (see Phase 8).
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion ✅ · 8 vector ✅ · 9 evaluation ✅ · 10 BM25 ✅ · 11 hybrid ✅ · 12 rerank ✅ · 13 OKF ✅ · 14 router ✅ · 15 generation ✅ (model choice pending) · 16 chat API ✅ · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

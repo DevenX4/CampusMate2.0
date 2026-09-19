@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 15 (generation providers).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). There is no chat endpoint or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 16 (chat API).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. A durable worker turns each document version into structure-aware chunks with provenance. Chunks are embedded with BGE-small into a Chroma index. Hybrid (BM25 + vector) search is at `/api/v1/search`, and a knowledge graph (OKF) is generated from PostgreSQL. A deterministic router gathers cited evidence for a question (`/api/v1/route`), and a replaceable generation provider writes answers: no model yet, see [docs/slm-evaluation.md](docs/slm-evaluation.md). `POST /api/v1/chat/query` answers with citations, and every answer is checked against its sources before it is returned. There is no frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -220,6 +220,27 @@ python -m app.generation check --probe   # does it cite, label demo data and abs
 ```
 
 No model is downloaded yet. The options, the hardware budget (4 GB VRAM) and the comparison plan are in [docs/slm-evaluation.md](docs/slm-evaluation.md).
+
+## Chat
+
+`POST /api/v1/chat/query` with `{"question": "..."}` (needs `chat:use`, which logged-in students, faculty and admins have):
+
+```
+question -> router -> evidence (SQL facts / knowledge graph / hybrid passages) -> numbered sources
+         -> generation provider -> grounding check -> answer with [n] citations
+```
+
+The response has:
+- `answer` and `answer_type`: `answered`; `fallback` (the model's answer failed the check, so the extractive answer is shown); `abstained` ("I couldn't find authoritative information..."); or `unsupported` (personal records, reminders);
+- `sources`: each source with its trust level and whether the answer cites it;
+- `contains_synthetic`: whether a cited source is synthetic demo data;
+- the grounding result and per-stage timings.
+
+Every exchange is stored in `chat_queries`. `POST /api/v1/chat/feedback` with `{"query_id", "rating": "up"|"down", "comment"}` rates one of your own answers; rating again replaces the previous rating.
+
+```bash
+python -m app.evaluation answers   # all dataset questions through the whole pipeline -> evaluation/results/ANSWERS.md
+```
 
 ## Knowledge (OKF)
 

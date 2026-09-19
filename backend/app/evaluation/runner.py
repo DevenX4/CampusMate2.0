@@ -26,6 +26,7 @@ class Question:
     answerable: bool
     sources: list[Source]
     entities: list[str]
+    expected_answer: str = ""
 
 
 def load_questions(path: Path) -> list[Question]:
@@ -33,7 +34,7 @@ def load_questions(path: Path) -> list[Question]:
     return [
         Question(q["question_id"], q["question"], q["category"], q["answerable"],
                  [Source(s["document_id"], s.get("page")) for s in q["required_sources"]],
-                 q["expected_entities"])
+                 q["expected_entities"], q.get("expected_answer", ""))
         for q in data
     ]
 

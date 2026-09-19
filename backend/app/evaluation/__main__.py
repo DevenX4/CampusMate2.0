@@ -1,14 +1,19 @@
 """Evaluation command line.
 
     python -m app.evaluation retrieval --mode vector
+    python -m app.evaluation answers [--label NAME]
 
-Runs the 58 dataset questions through one retrieval mode against the development database
-and vector index, writes evaluation/results/retrieval_<mode>.json (every question's metrics
-and top hits), and regenerates evaluation/results/RETRIEVAL.md comparing all stored modes.
+`retrieval` runs the 58 dataset questions through one retrieval mode against the development
+database and vector index, writes evaluation/results/retrieval_<mode>.json (every question's
+metrics and top hits), and regenerates evaluation/results/RETRIEVAL.md comparing all stored modes.
+
+`answers` runs them through the whole chat pipeline with the configured generation provider
+(GENERATION_*), writes evaluation/results/answers_<label>.json and regenerates ANSWERS.md.
 """
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from datetime import UTC, datetime
@@ -18,7 +23,10 @@ from sqlalchemy import func, select
 from app.core.config import REPO_ROOT, get_settings
 from app.core.db import SessionLocal
 from app.core.logging import setup_logging
+from app.chat.pipeline import answer_question
+from app.evaluation.answers import evaluate_answers, report
 from app.evaluation.metrics import Retrieved
+from app.generation.runtime import get_generator
 from app.evaluation.runner import category_table, evaluate, load_questions, paired_comparison, summary_table
 from app.models.documents import DocumentChunk
 from app.retrieval.rerank import CrossEncoderReranker
@@ -72,7 +80,8 @@ def make_retriever(mode: str, db, reranker_model: str | None = None):
 
 def git_commit() -> str | None:
     try:
-        return subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=REPO_ROOT, capture_output=True,
+        # "-dirty" marks results measured with uncommitted code, which the commit alone would misstate.
+        return subprocess.run(["git", "describe", "--always", "--dirty"], cwd=REPO_ROOT, capture_output=True,
                               text=True, check=True).stdout.strip()
     except (OSError, subprocess.CalledProcessError):
         return None
@@ -122,6 +131,29 @@ def write_report() -> None:
     (RESULTS / "RETRIEVAL.md").write_text("\n".join(parts), encoding="utf-8")
 
 
+def run_answers(label: str | None) -> int:
+    settings, generator, indexer = get_settings(), get_generator(), get_indexer()
+    print(generator.check())
+    with SessionLocal() as db:
+        deps = RetrievalDeps(indexer.embedder, indexer.index, get_bm25_cache())
+        result = evaluate_answers(load_questions(QUESTIONS), lambda question: answer_question(
+            db, question, deps, generator, settings.generation_max_tokens, settings.generation_temperature))
+    label = label or re.sub(r"[^A-Za-z0-9_.-]+", "-", generator.model)
+    result["run"] = {"label": label, "provider": generator.name, "model": generator.model, "commit": git_commit(),
+                     "timestamp": datetime.now(UTC).isoformat(timespec="seconds"),
+                     "max_tokens": settings.generation_max_tokens, "temperature": settings.generation_temperature}
+    RESULTS.mkdir(parents=True, exist_ok=True)
+    (RESULTS / f"answers_{label}.json").write_text(json.dumps(result, indent=1), encoding="utf-8")
+    results = {path.stem.removeprefix("answers_"): json.loads(path.read_text(encoding="utf-8"))
+               for path in sorted(RESULTS.glob("answers_*.json"))}
+    (RESULTS / "ANSWERS.md").write_text(report(results), encoding="utf-8")
+    s = result["summary"]
+    print(f"{label}: answered {s['answerable']['answered']} | fact recall {s['answerable']['fact_recall']} | "
+          f"term recall {s['answerable']['term_recall']} | cites required {s['answerable']['cites_required']} | "
+          f"H abstained {s['unanswerable']['abstained']} | fallbacks {s['fallbacks']} | p50 {s['latency_ms']['p50']} ms")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="python -m app.evaluation")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -129,9 +161,13 @@ def main(argv: list[str] | None = None) -> int:
     retrieval.add_argument("--mode", choices=MODES, default="vector")
     retrieval.add_argument("--reranker-model", default=None, help="for hybrid_rerank (default: RERANKER_MODEL)")
     retrieval.add_argument("--label", default=None, help="name of the result, e.g. to compare two rerankers")
+    answers = commands.add_parser("answers", help="evaluate answers with the configured generation provider")
+    answers.add_argument("--label", default=None, help="name of the result (default: the model name)")
     args = parser.parse_args(argv)
     settings = get_settings()
     setup_logging("WARNING")
+    if args.command == "answers":
+        return run_answers(args.label)
 
     questions = load_questions(QUESTIONS)
     with SessionLocal() as db:

@@ -1,0 +1,123 @@
+"""Answer evaluation: every dataset question through the whole chat pipeline, scored against the
+expected answer. The same run for each generation provider makes models comparable.
+
+Per answerable question (categories A-G):
+  answered       an answer was given (generated or extractive fallback), not an abstention
+  fact_recall    share of the expected answer's numbers and codes (4, 150, 2CEIT602) in the answer;
+                 only for questions whose expected answer has any
+  term_recall    share of the expected answer's content words in the answer (a ROUGE-1-style recall)
+  cites_required the answer cites at least one of the question's required sources
+  grounded       the answer passed the grounding check (without falling back)
+Per unanswerable question (H): abstained, the correct behaviour.
+
+These are lexical proxies: they reward stating the expected facts and citing the right pages,
+but cannot judge a paraphrase. Wrong-but-plausible wording needs a human or a model judge.
+"""
+
+import re
+import time
+from collections.abc import Callable
+from statistics import mean
+
+from app.chat.pipeline import ChatAnswer
+from app.evaluation.metrics import Retrieved, matches, percentile
+from app.evaluation.runner import Question
+from app.generation.extractive import terms
+from app.retrieval.bm25 import tokenize
+
+Ask = Callable[[str], ChatAnswer]
+_PAGE_REFERENCE = re.compile(r"\bpp?\.\s*\d+(?:\s*-\s*\d+)?", re.I)
+
+
+def key_facts(expected: str) -> set[str]:
+    """Numbers and codes in the expected answer, except page references ("syllabus p.15")."""
+    return {t for t in tokenize(_PAGE_REFERENCE.sub(" ", expected)) if any(c.isdigit() for c in t)}
+
+
+def _share(wanted: set[str], found: set[str]) -> float | None:
+    return round(len(wanted & found) / len(wanted), 4) if wanted else None
+
+
+def _cited_sources(answer: ChatAnswer) -> list[Retrieved]:
+    return [Retrieved(e.citation.document_id, e.citation.page_start, e.citation.page_end, tuple(e.entity_ids), 0.0)
+            for ref, e in answer.context.evidence.items() if ref in answer.grounding.cited]
+
+
+def score(question: Question, answer: ChatAnswer) -> dict:
+    answered = answer.answer_type in ("answered", "fallback")
+    cited = _cited_sources(answer)
+    row = {"question_id": question.question_id, "category": question.category, "answerable": question.answerable,
+           "answer_type": answer.answer_type, "route": answer.route, "answer": answer.answer[:500],
+           "cited": [f"{c.document_id} p.{c.page_start}" for c in cited],
+           "issues": answer.grounding.issues, "warnings": answer.grounding.warnings,
+           "latency_ms": answer.timings_ms["total"]}
+    if not question.answerable:
+        return {**row, "abstained": answer.answer_type == "abstained"}
+    expected_terms = terms(_PAGE_REFERENCE.sub(" ", question.expected_answer))
+    return {**row, "answered": answered,
+            "fact_recall": _share(key_facts(question.expected_answer), set(tokenize(answer.answer))) if answered else 0.0,
+            "term_recall": _share(expected_terms, terms(answer.answer)) if answered else 0.0,
+            "cites_required": any(matches(c, s) for c in cited for s in question.sources) if question.sources else None,
+            "grounded": answer.answer_type == "answered"}
+
+
+def _mean(rows: list[dict], key: str) -> float | None:
+    values = [float(r[key]) for r in rows if r.get(key) is not None]
+    return round(mean(values), 3) if values else None
+
+
+def summarise(rows: list[dict]) -> dict:
+    answerable = [r for r in rows if r["answerable"]]
+    unanswerable = [r for r in rows if not r["answerable"]]
+    latencies = [r["latency_ms"] for r in rows]
+    return {
+        "answerable": {"n": len(answerable), **{k: _mean(answerable, k) for k in
+                       ("answered", "fact_recall", "term_recall", "cites_required", "grounded")}},
+        "unanswerable": {"n": len(unanswerable), "abstained": _mean(unanswerable, "abstained")},
+        "fallbacks": sum(r["answer_type"] == "fallback" for r in rows),
+        "latency_ms": {"p50": round(percentile(latencies, 0.5)), "p95": round(percentile(latencies, 0.95))},
+        "by_category": {cat: {k: _mean([r for r in answerable if r["category"] == cat], k)
+                              for k in ("answered", "fact_recall", "term_recall", "cites_required")}
+                        for cat in sorted({r["category"] for r in answerable})},
+    }
+
+
+def evaluate_answers(questions: list[Question], ask: Ask) -> dict:
+    rows = []
+    for question in questions:
+        started = time.perf_counter()
+        answer = ask(question.text)
+        rows.append({**score(question, answer), "wall_ms": round((time.perf_counter() - started) * 1000)})
+    return {"summary": summarise(rows), "questions": rows}
+
+
+def _fmt(value) -> str:
+    return "–" if value is None else f"{value:.3f}" if isinstance(value, float) else str(value)
+
+
+def report(results: dict[str, dict]) -> str:
+    lines = ["# Answer evaluation", "",
+             "Generated by `python -m app.evaluation answers`. Lexical proxies (see `app/evaluation/answers.py`): "
+             "they reward stating the expected numbers, codes and words and citing a required source, "
+             "but cannot judge paraphrases.", "",
+             "| provider / model | answered | fact recall | term recall | cites required | grounded (no fallback) "
+             "| H abstained | fallbacks | p50 ms | p95 ms |",
+             "|---|---|---|---|---|---|---|---|---|---|"]
+    for label, result in results.items():
+        s, a = result["summary"], result["summary"]["answerable"]
+        lines.append(f"| {label} | {_fmt(a['answered'])} | {_fmt(a['fact_recall'])} | {_fmt(a['term_recall'])} | "
+                     f"{_fmt(a['cites_required'])} | {_fmt(a['grounded'])} | {_fmt(s['unanswerable']['abstained'])} | "
+                     f"{s['fallbacks']} | {s['latency_ms']['p50']} | {s['latency_ms']['p95']} |")
+    for label, result in results.items():
+        run = result["run"]
+        lines += ["", f"## {label}", "",
+                  f"Commit `{run['commit']}` · {run['timestamp']} · provider `{run['provider']}` · model `{run['model']}`", "",
+                  "| category | answered | fact recall | term recall | cites required |", "|---|---|---|---|---|"]
+        lines += [f"| {cat} | " + " | ".join(_fmt(v) for v in m.values()) + " |"
+                  for cat, m in result["summary"]["by_category"].items()]
+        wrong = [r for r in result["questions"] if (not r["answerable"] and not r["abstained"])
+                 or (r["answerable"] and not r["answered"])]
+        if wrong:
+            lines += ["", "Abstained on answerable / answered unanswerable:", ""]
+            lines += [f"- {r['question_id']} ({r['category']}, {r['answer_type']}): {r['answer'][:160]}" for r in wrong]
+    return "\n".join(lines) + "\n"

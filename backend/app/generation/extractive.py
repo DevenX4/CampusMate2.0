@@ -18,24 +18,46 @@ MAX_SENTENCE_CHARS = 400
 # Share of the question's words (weighted by rarity) a candidate must contain to be used. Low
 # enough for a two-part question, where each source answers one part.
 MIN_COVERAGE = 0.35
-# Words that shape a question without saying what it is about ("how MANY credits").
-QUESTION_WORDS = frozenset("many much tell please about give list explain describe know".split())
+# Words that shape a question without saying what it is about ("how MANY credits"), and
+# "official", which the router turns into a filter.
+QUESTION_WORDS = frozenset("many much tell please about give list explain describe know official".split())
+_ROMAN = {"ii": "2", "iii": "3", "iv": "4", "v": "5", "vi": "6", "vii": "7", "viii": "8", "ix": "9", "x": "10"}
 # A sentence ends at . ! ? or a line break, but not after a title or an initial ("Dr. A. Patel").
 _ABBREVIATIONS = ("Dr", "Mr", "Mrs", "Ms", "Prof", "No", "e.g", "i.e", "[A-Z]")
 _SENTENCE_END = re.compile(r"(?<=[.!?])" + "".join(rf"(?<!\b{a}\.)" for a in _ABBREVIATIONS) + r"\s+|[\r\n]+")
-SYNTHETIC_PREFIX = "(Synthetic demo data, not official GUNI information)"
+SYNTHETIC_PREFIX = "(Synthetic demo data)"
+SYNTHETIC_NOTE = "Synthetic demo data is not official GUNI information."
 
 
 def sentences(text: str) -> list[str]:
     return [s.strip() for s in _SENTENCE_END.split(text) if len(s.strip()) > 2]
 
 
+def _term(token: str) -> str:
+    """A light normalisation for matching only: Semester VII = semester 7, electives = elective,
+    facilities = facility. (Irregular forms such as teaches/taught still do not match.)"""
+    if token in _ROMAN:
+        return _ROMAN[token]
+    if len(token) > 4 and token.endswith("ies"):
+        return token[:-3] + "y"
+    if len(token) > 3 and token.endswith("s") and not token.endswith(("ss", "us", "is")):
+        return token[:-1]
+    return token
+
+
+def terms(text: str) -> set[str]:
+    return {_term(t) for t in tokenize(text)}
+
+
+def _is_synthetic(text: str, block: ContextBlock) -> bool:
+    # An official graph item can relate to synthetic entities ("taught_by: FAC-1 [synthetic]"):
+    # a piece is labelled by what it says, not only by the block it came from.
+    return block.source_type == "synthetic" or "[synthetic]" in text
+
+
 def _cited(sentence: str, block: ContextBlock) -> str:
     cited = f"{sentence.rstrip('. ')} [{block.ref}]."
-    # An official graph item can relate to synthetic entities ("taught_by: FAC-1 [synthetic]"):
-    # the piece is labelled by what it says, not only by the block it came from.
-    synthetic = block.source_type == "synthetic" or "[synthetic]" in sentence
-    return f"{SYNTHETIC_PREFIX} {cited}" if synthetic else cited
+    return f"{SYNTHETIC_PREFIX} {cited}" if _is_synthetic(sentence, block) else cited
 
 
 def _shorten(sentence: str) -> str:
@@ -53,24 +75,29 @@ def pieces(block: ContextBlock) -> list[str]:
 
 def extract_answer(question: str, context: list[ContextBlock]) -> str:
     candidates = [(block, text) for block in context for text in pieces(block)]
-    wanted = set(tokenize(question)) - QUESTION_WORDS
-    token_sets = [set(tokenize(text)) for _, text in candidates]
+    wanted = terms(question) - QUESTION_WORDS
+    token_sets = [terms(text) for _, text in candidates]
     # Rare question words (a course code) decide; words found everywhere barely count. Question
     # words found nowhere keep a high weight, so missing them lowers every coverage.
     idf = {t: math.log(1 + len(candidates) / (1 + sum(t in ts for ts in token_sets))) for t in wanted}
-    total = sum(idf.values())
-    weights = [sum(idf[t] for t in wanted & ts) for ts in token_sets]
+    # Summed in sorted order: float addition depends on order, and set order changes per process.
+    total = sum(idf[t] for t in sorted(wanted))
+    weights = [sum(idf[t] for t in sorted(wanted & ts)) for ts in token_sets]
     # Relevant candidates only; structured facts first (exact), then the best passage sentences.
     ranked = sorted((candidates[i][0].kind != "structured", -w, i) for i, w in enumerate(weights)
                     if total and w / total >= MIN_COVERAGE)
     chosen: list[str] = []
+    synthetic = False
     for _, _, i in ranked:
         if len(chosen) == MAX_SENTENCES:
             break
         block, text = candidates[i]
         if not any(text.lower() in c.lower() for c in chosen):  # not said already
             chosen.append(_cited(text if block.kind == "structured" else _shorten(text), block))
-    return " ".join(chosen) if chosen else ABSTAIN_MESSAGE
+            synthetic |= _is_synthetic(text, block)
+    if not chosen:
+        return ABSTAIN_MESSAGE
+    return " ".join(chosen + [SYNTHETIC_NOTE] if synthetic else chosen)
 
 
 class ExtractiveProvider:
