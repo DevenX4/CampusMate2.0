@@ -16,6 +16,8 @@ dependencies = [
     "alembic>=1.14",
     "argon2-cffi>=23.1",
     "email-validator>=2.1",
+    "python-multipart>=0.0.9",
+    "pypdf>=5.0",
 ]
 
 [project.optional-dependencies]

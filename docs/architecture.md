@@ -118,6 +118,26 @@ HTTP request -> route (app/api/routes)  -> service (app/services) -> SQLAlchemy 
 
 Not yet: login rate limiting and account lockout, and expired-session cleanup. Both are planned for Phase 18 (hardening).
 
+## Document management (Phase 6)
+
+```
+upload ─► validate (ext, declared type, %PDF- magic, opens, not encrypted, size) ─► SHA-256 duplicate check
+       ─► storage/originals/<sha> (atomic rename) ─► version N (pending) + ingestion job + audit, one transaction
+pending ─(Phase 7 ingest)─► ready ─(activate)─► active ─(another version activated)─► superseded ─(rollback)─► active
+document: active ⇄ inactive, active/inactive ─► archived ─► active, any ─► deleted (soft, final)
+```
+
+| Decision | Why |
+|---|---|
+| Metadata and file arrive as one multipart form model, validated before any bytes are written | An invalid request stores nothing |
+| Size checked from `Content-Length` first, then enforced while streaming to `storage/tmp` | Oversized uploads are cut off. (A reverse proxy limit is still needed in production for chunked uploads.) |
+| The content is checked, not just the filename or declared type | A renamed `.txt` or a broken PDF is refused (415/422) |
+| Activation moves a pointer; old versions are `superseded`, not deleted | Instant rollback, and citations to old versions stay valid |
+| Activation requires `ready` (ingested) or `superseded` | Nothing un-indexed ever becomes the answering version |
+| Soft delete only; files stay | The audit trail and past citations remain verifiable |
+| Upload IDs are `DOC-<10 hex>` | Unique without a counter race. Seeded documents keep their dataset IDs |
+| `storage_root` is a FastAPI dependency | Tests store files in a temporary folder |
+
 ## Phases
 
-0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents · 7 ingestion · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep
+0 audit ✅ · 1 foundation ✅ · 2 PostgreSQL ✅ · 3 seed ✅ · 4 REST catalog ✅ · 5 auth ✅ · 6 documents ✅ · 7 ingestion · 8 vector · 9 evaluation · 10 BM25 · 11 hybrid · 12 rerank · 13 OKF · 14 router · 15 generation · 16 chat API · 17 frontend · 18 hardening · 19 testing · 20 Docker · 21 deployment prep

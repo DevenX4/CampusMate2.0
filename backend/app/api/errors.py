@@ -13,7 +13,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.services.errors import ConflictError, NotFoundError
+from app.services.errors import ConflictError, NotFoundError, UploadRejected
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +33,17 @@ async def not_found(request: Request, exc: NotFoundError) -> JSONResponse:
 
 async def conflict(request: Request, exc: ConflictError) -> JSONResponse:
     return error_response(status.HTTP_409_CONFLICT, "conflict", str(exc))
+
+
+UPLOAD_STATUS = {
+    "too_large": status.HTTP_413_CONTENT_TOO_LARGE,
+    "unsupported_type": status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
+    "invalid": status.HTTP_422_UNPROCESSABLE_CONTENT,
+}
+
+
+async def upload_rejected(request: Request, exc: UploadRejected) -> JSONResponse:
+    return error_response(UPLOAD_STATUS[exc.kind], f"upload_{exc.kind}", str(exc))
 
 
 async def invalid_request(request: Request, exc: RequestValidationError) -> JSONResponse:
@@ -64,6 +75,7 @@ async def unexpected_error(request: Request, exc: Exception) -> JSONResponse:
 def register_error_handlers(app: FastAPI) -> None:
     app.add_exception_handler(NotFoundError, not_found)
     app.add_exception_handler(ConflictError, conflict)
+    app.add_exception_handler(UploadRejected, upload_rejected)
     app.add_exception_handler(RequestValidationError, invalid_request)
     app.add_exception_handler(StarletteHTTPException, http_error)
     app.add_exception_handler(Exception, unexpected_error)

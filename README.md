@@ -2,7 +2,7 @@
 
 An AI-powered campus assistant for Ganpat University's IT programmes. It combines structured university data (PostgreSQL) with document retrieval (hybrid RAG) and gives grounded answers with citations. Official, derived-official and synthetic information are always labelled as such.
 
-**Status: Phase 5 (authentication and RBAC).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. There is no document management, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
+**Status: Phase 6 (document management).** A 41-table PostgreSQL schema (Alembic), an idempotent validated seed (2,360 rows plus 12 PDFs), and a REST API for departments, programmes, semesters, courses and faculty. Every item in the API carries its provenance. Login sessions, roles and permissions, user management and an audit-log API are in place. Admins can upload, version, activate, deactivate, archive and delete documents. There is no ingestion, RAG or frontend yet. See [docs/architecture.md](docs/architecture.md) for the target design and the phase plan.
 
 ## Repository layout
 
@@ -145,6 +145,22 @@ In `/docs`, click **Authorize** and paste the `access_token` to call protected e
 | student | + chat:use |
 | faculty | + documents:read |
 | admin | + documents:manage, ingestion:manage, users:manage, audit:read |
+
+## Document management
+
+| Endpoint | Who |
+|---|---|
+| `GET /api/v1/documents` (`q`, `document_type`, `source_type`, `status`, `department_id`), `/documents/stats`, `/documents/{id}`, `/documents/{id}/versions` | `documents:read` (faculty, admin) |
+| `POST /api/v1/documents` (multipart: `file` + `title`, `document_type`, `source_type`, …) | `documents:manage` (admin) |
+| `POST /documents/{id}/versions` (replace), `POST /documents/{id}/versions/{v}/activate` (activate or roll back) | admin |
+| `POST /documents/{id}/activate`, `/deactivate`, `/archive`, `DELETE /documents/{id}` (soft), `POST /documents/{id}/reindex` | admin |
+| `GET /documents/{id}/versions/{v}/file` (original download) | admin |
+
+```bash
+curl -b jar.txt -F "file=@rules.pdf;type=application/pdf" -F "title=Exam rules"      -F "document_type=examination" -F "source_type=synthetic" http://127.0.0.1:8000/api/v1/documents
+```
+
+Uploads are checked for extension, declared type, **content** (`%PDF-` and it must open), size (`MAX_UPLOAD_MB`) and duplicates (SHA-256). They are stored as `storage/originals/<2 hex>/<sha256>.pdf`, never under the client's filename, and each upload queues an ingestion job.
 
 ## Catalog API (read-only)
 

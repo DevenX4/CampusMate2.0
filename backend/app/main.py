@@ -8,7 +8,7 @@ from fastapi import FastAPI
 
 from app.api.errors import register_error_handlers
 from app.api.middleware import add_request_id_middleware
-from app.api.routes import audit, auth, courses, departments, faculty, programs, system, users
+from app.api.routes import audit, auth, courses, departments, documents, faculty, programs, system, users
 from app.core.config import get_settings
 from app.core.logging import setup_logging
 
@@ -43,5 +43,5 @@ app = FastAPI(
 )
 register_error_handlers(app)
 add_request_id_middleware(app)
-for module in (system, auth, users, audit, departments, programs, courses, faculty):
+for module in (system, auth, users, audit, documents, departments, programs, courses, faculty):
     app.include_router(module.router, prefix=API_PREFIX)

@@ -38,6 +38,9 @@ class Settings(BaseSettings):
     session_ttl_hours: int = 12
     cookie_secure: bool = False
 
+    # Largest accepted upload. The official syllabus PDF is 37 MB.
+    max_upload_mb: int = 50
+
     # Local folders. Overridable so a container can mount them elsewhere later.
     data_dir: Path = REPO_ROOT / "data"  # the canonical dataset (read-only input)
     storage_dir: Path = REPO_ROOT / "storage"  # uploaded/original documents and indexes
