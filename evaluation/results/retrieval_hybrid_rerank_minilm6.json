@@ -242,9 +242,9 @@
   }
  },
  "latency_ms": {
-  "mean": 3189.7,
-  "p50": 3053.7,
-  "p95": 4456.1
+  "mean": 2159.4,
+  "p50": 2167.9,
+  "p95": 2556.1
  },
  "top_score": {
   "answerable_mean": 2.6689,
@@ -2579,9 +2579,11 @@
  "run": {
   "mode": "hybrid_rerank",
   "label": "hybrid_rerank_minilm6",
-  "timestamp": "2026-09-19T07:53:27+00:00",
+  "timestamp": "2026-09-19T09:59:55+00:00",
   "reranker_model": "Xenova/ms-marco-MiniLM-L-6-v2",
-  "commit": "e9576c0",
+  "rerank_candidates": 30,
+  "rerank_max_chars": null,
+  "commit": "cfa5142",
   "embedding_model": "BAAI/bge-small-en-v1.5",
   "chunks": 935,
   "dataset": "evaluation\\datasets\\evaluation_questions.json"

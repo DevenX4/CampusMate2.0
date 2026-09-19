@@ -242,9 +242,9 @@
   }
  },
  "latency_ms": {
-  "mean": 5288.4,
-  "p50": 5215.9,
-  "p95": 6597.6
+  "mean": 4366.1,
+  "p50": 4434.7,
+  "p95": 5431.9
  },
  "top_score": {
   "answerable_mean": 3.2889,
@@ -1198,7 +1198,7 @@
     "DOC-FAQ-001 p.2",
     "DOC-COURSES-001 p.13",
     "DOC-NOTICES-001 p.3",
-    "DOC-OFFICIAL-CATALOG-001 p.21"
+    "DOC-OFFICIAL-CATALOG-001 p.103"
    ]
   },
   {
@@ -2579,9 +2579,11 @@
  "run": {
   "mode": "hybrid_rerank",
   "label": "hybrid_rerank_minilm12",
-  "timestamp": "2026-09-19T07:59:07+00:00",
+  "timestamp": "2026-09-19T09:57:46+00:00",
   "reranker_model": "Xenova/ms-marco-MiniLM-L-12-v2",
-  "commit": "e9576c0",
+  "rerank_candidates": 30,
+  "rerank_max_chars": null,
+  "commit": "cfa5142",
   "embedding_model": "BAAI/bge-small-en-v1.5",
   "chunks": 935,
   "dataset": "evaluation\\datasets\\evaluation_questions.json"

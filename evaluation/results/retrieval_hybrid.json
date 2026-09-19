@@ -242,12 +242,12 @@
   }
  },
  "latency_ms": {
-  "mean": 29.1,
-  "p50": 20.5,
-  "p95": 25.4
+  "mean": 52.9,
+  "p50": 45.8,
+  "p95": 52.3
  },
  "top_score": {
-  "answerable_mean": 0.0318,
+  "answerable_mean": 0.032,
   "unanswerable_mean": 0.0322
  },
  "questions": {
@@ -990,7 +990,7 @@
    "question_id": "EVAL-018",
    "category": "C_semantic",
    "answerable": true,
-   "top_score": 0.0164,
+   "top_score": 0.0279,
    "metrics": {
     "1": {
      "hit": 0.0,
@@ -1022,10 +1022,10 @@
     }
    },
    "top_hits": [
+    "DOC-COURSES-001 p.48",
     "DOC-OFFICIAL-CATALOG-001 p.20",
     "DOC-COURSES-001 p.47",
     "DOC-OFFICIAL-CATALOG-001 p.67",
-    "DOC-COURSES-001 p.48",
     "DOC-OFFICIAL-CATALOG-001 p.119"
    ]
   },
@@ -1420,7 +1420,7 @@
    "question_id": "EVAL-028",
    "category": "D_metadata_filtered",
    "answerable": true,
-   "top_score": 0.0311,
+   "top_score": 0.0313,
    "metrics": {
     "1": {
      "hit": 0.0,
@@ -2578,8 +2578,12 @@
  ],
  "run": {
   "mode": "hybrid",
-  "timestamp": "2026-09-19T07:46:37+00:00",
-  "commit": "7e2ed4a",
+  "label": "hybrid",
+  "timestamp": "2026-09-19T09:53:06+00:00",
+  "reranker_model": null,
+  "rerank_candidates": 30,
+  "rerank_max_chars": null,
+  "commit": "cfa5142",
   "embedding_model": "BAAI/bge-small-en-v1.5",
   "chunks": 935,
   "dataset": "evaluation\\datasets\\evaluation_questions.json"

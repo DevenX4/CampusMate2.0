@@ -24,7 +24,7 @@
   "10": {
    "hit": 0.7885,
    "recall": 0.4755,
-   "precision": 0.1923,
+   "precision": 0.1904,
    "rr": 0.4947,
    "entity_recall": 0.8699
   }
@@ -235,16 +235,16 @@
    "10": {
     "hit": 0.4286,
     "recall": 0.3214,
-    "precision": 0.2571,
+    "precision": 0.2429,
     "rr": 0.3571,
     "entity_recall": 0.8
    }
   }
  },
  "latency_ms": {
-  "mean": 23.2,
-  "p50": 16.9,
-  "p95": 22.0
+  "mean": 44.6,
+  "p50": 41.4,
+  "p95": 48.7
  },
  "top_score": {
   "answerable_mean": 0.7079,
@@ -2306,7 +2306,7 @@
     "10": {
      "hit": 1.0,
      "recall": 1.0,
-     "precision": 0.9,
+     "precision": 0.8,
      "rr": 1.0,
      "entity_recall": 1.0
     }
@@ -2578,8 +2578,12 @@
  ],
  "run": {
   "mode": "vector",
-  "timestamp": "2026-09-19T07:40:27+00:00",
-  "commit": "b348107",
+  "label": "vector",
+  "timestamp": "2026-09-19T09:52:56+00:00",
+  "reranker_model": null,
+  "rerank_candidates": 30,
+  "rerank_max_chars": null,
+  "commit": "cfa5142",
   "embedding_model": "BAAI/bge-small-en-v1.5",
   "chunks": 935,
   "dataset": "evaluation\\datasets\\evaluation_questions.json"

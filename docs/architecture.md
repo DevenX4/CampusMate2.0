@@ -236,6 +236,8 @@ Vector and BM25 each propose 30 candidates, which are merged with Reciprocal Ran
 | bm25 | 0.288 | 0.692 | **0.412** | 0.457 | 4 ms |
 | hybrid | **0.442** | **0.769** | 0.410 | **0.581** | 21 ms |
 
+Latencies in this table were measured with Chroma's approximate search. With exact vector search (Phase 16) every quality metric above is identical, and p50 is vector 41 ms and hybrid 46 ms.
+
 **Paired per question (reciprocal rank, versus vector):** hybrid is better on 15, the same on 31 and worse on 6; sign test **p = 0.078**. The improvement is consistent across the averages and the per-question comparison, but with 52 questions it is **not statistically conclusive** at the 0.05 level. It is reported as such, not as proven. Hybrid is the default search mode because it is best on every ranking metric and rarely worse.
 
 ## Reranking (Phase 12)
@@ -251,6 +253,8 @@ A cross-encoder reads (question, `title | section` + passage) *together* and res
 | MiniLM-L12, 600-char passages | 0.462 | 0.788 | 0.442 | 0.618 | 1.7 s | 14 / 14, p = 1.00 |
 | MiniLM-L6, full passages | **0.500** | 0.769 | 0.441 | 0.624 | 3.1 s | 14 / 12, p = 0.85 |
 | MiniLM-L12, full passages | 0.481 | **0.827** | **0.477** | **0.644** | 5.2 s | 15 / 12, p = 0.70 |
+
+Re-measured with exact vector search (commit cfa5142): identical quality and paired comparisons; p50 latencies 0.9 s, 1.8 s, 2.2 s and 4.4 s respectively (the machine's load varies between runs).
 
 Against *vector*, L12 is the only configuration with a significant gain (24 better / 9 worse, p = 0.014). Against *hybrid*, however, **no reranker is reliably better**: each helps and hurts about equally often. The earlier gain was hybrid's. A plausible cause is domain mismatch: MS MARCO rerankers learned from web passages, while these chunks are key/value blocks and tables full of codes. Latency grows linearly with candidates and passage length (L12: 4.5 s full vs 1.6 s at 600 characters).
 
@@ -292,7 +296,7 @@ question ─► resolve entities (IDs, printed codes, names, unambiguous acronym
 | An acronym is used only if it names exactly one entity and is not a department code | A found bug: "IT" in "B.Tech IT" matched four "Industrial Training"-style course names |
 | Arbitrary aggregates ("faculty with more than four courses") are **not** handled; they fall back to documents | That needs text-to-SQL (an LLM plus a read-only, whitelisted query layer), a deliberate future step |
 
-**Measured (same 52 questions):** routed Hit@1 **0.615** (hybrid 0.442), MRR **0.707** (0.581), Hit@5 0.827, p50 27 ms. Against hybrid it is better on 11, the same on 38, worse on 3 (p = 0.057). It is strongest on structured (Hit@5 0.857 vs vector 0.429) and multi-hop questions (MRR 0.875).
+**Measured (same 52 questions; re-measured with exact vector search, commit cfa5142):** routed Hit@1 **0.615** (hybrid 0.442), MRR **0.710** (0.581), Hit@5 0.846, p50 52 ms. Against hybrid it is better on 11, the same on 39, worse on 2 (p = 0.022). With approximate search it was MRR 0.707, 11/38/3, p = 0.057. It is strongest on structured (Hit@5 0.857 vs vector 0.429) and multi-hop questions (MRR 0.875).
 
 **Caveat:** the rules were written while reading these same questions, so this is an **in-sample, optimistic** estimate. A held-out question set is needed for an unbiased number.
 
@@ -341,6 +345,14 @@ POST /chat/query ─► router (route, intents) ─► personal / automation: "n
 | Personal and automation routes answer "not supported yet" without searching | Searching documents for "my marks" can only produce a misleading answer |
 | Every exchange is stored (`chat_queries`); one rating per answer (`chat_feedback`, upsert with `ON CONFLICT`) | Answers can be audited, feedback points at the exact sources used, and real questions can become evaluation data. Query ids are random UUIDs, and someone else's query looks exactly like a missing one (404) |
 | Answer evaluation (`python -m app.evaluation answers`) reports: answered rate, fact recall (numbers and codes of the expected answer), term recall, whether a required source is cited, correct abstention on unanswerable questions, fallbacks, latency | The same run for each provider makes the SLM comparison measurable |
+
+**Baseline: the extractive provider, no model (58 questions, commit cfa5142, `evaluation/results/ANSWERS.md`)**
+
+| answered (A–G) | fact recall | term recall | cites a required source | unanswerable abstained (H) | fallbacks | p50 |
+|---|---|---|---|---|---|---|
+| 0.654 | 0.327 | 0.310 | 0.462 | 4 / 6 | 0 | 59 ms |
+
+It answers 88% of simple factual and 100% of exact-lexical questions, but only 14% of semantic ones: it abstains wherever the question's words differ from the source's. It never falls back, because copied text always passes the grounding check. On 2 of the 6 unanswerable questions it quoted a loosely matching sentence instead of abstaining. These are the gaps an SLM is expected to close; the same run with a model will show whether it does.
 
 Limits of the grounding check: a false statement made only of words found in the sources ("closed" vs "open", or a number from the wrong row) passes. Catching that needs a model as a judge, or human review.
 

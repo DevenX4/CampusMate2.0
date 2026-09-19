@@ -8,24 +8,24 @@
    "entity_recall": 0.6572
   },
   "3": {
-   "hit": 0.7885,
-   "recall": 0.4092,
-   "precision": 0.3526,
-   "rr": 0.6923,
-   "entity_recall": 0.81
+   "hit": 0.8077,
+   "recall": 0.413,
+   "precision": 0.359,
+   "rr": 0.6987,
+   "entity_recall": 0.8052
   },
   "5": {
-   "hit": 0.8269,
-   "recall": 0.4435,
-   "precision": 0.2654,
-   "rr": 0.701,
+   "hit": 0.8462,
+   "recall": 0.4473,
+   "precision": 0.2692,
+   "rr": 0.7074,
    "entity_recall": 0.847
   },
   "10": {
    "hit": 0.8654,
-   "recall": 0.5595,
-   "precision": 0.2269,
-   "rr": 0.7066,
+   "recall": 0.5633,
+   "precision": 0.2288,
+   "rr": 0.7098,
    "entity_recall": 0.9343
   }
  },
@@ -189,24 +189,24 @@
     "entity_recall": 0.5595
    },
    "3": {
-    "hit": 0.7143,
-    "recall": 0.25,
-    "precision": 0.2857,
-    "rr": 0.6429,
-    "entity_recall": 0.9048
+    "hit": 0.8571,
+    "recall": 0.2786,
+    "precision": 0.3333,
+    "rr": 0.6905,
+    "entity_recall": 0.869
    },
    "5": {
-    "hit": 0.7143,
-    "recall": 0.2857,
-    "precision": 0.2,
-    "rr": 0.6429,
+    "hit": 0.8571,
+    "recall": 0.3143,
+    "precision": 0.2286,
+    "rr": 0.6905,
     "entity_recall": 0.9048
    },
    "10": {
     "hit": 0.8571,
-    "recall": 0.4095,
-    "precision": 0.1429,
-    "rr": 0.6667,
+    "recall": 0.4381,
+    "precision": 0.1571,
+    "rr": 0.6905,
     "entity_recall": 0.9048
    }
   },
@@ -242,12 +242,12 @@
   }
  },
  "latency_ms": {
-  "mean": 50.4,
-  "p50": 26.7,
-  "p95": 100.2
+  "mean": 66.6,
+  "p50": 52.0,
+  "p95": 103.5
  },
  "top_score": {
-  "answerable_mean": 0.4785,
+  "answerable_mean": 0.4787,
   "unanswerable_mean": 0.5158
  },
  "questions": {
@@ -939,8 +939,8 @@
     "DOC-COURSES-001 p.50",
     "DOC-COURSES-001 p.49",
     "DOC-COURSES-001 p.49",
-    "DOC-COURSES-001 p.51",
-    "DOC-COURSES-001 p.52"
+    "DOC-OFFICIAL-CATALOG-001 p.18",
+    "DOC-COURSES-001 p.51"
    ]
   },
   {
@@ -990,7 +990,7 @@
    "question_id": "EVAL-018",
    "category": "C_semantic",
    "answerable": true,
-   "top_score": 0.0164,
+   "top_score": 0.0279,
    "metrics": {
     "1": {
      "hit": 0.0,
@@ -1022,10 +1022,10 @@
     }
    },
    "top_hits": [
+    "DOC-COURSES-001 p.48",
     "DOC-OFFICIAL-CATALOG-001 p.20",
     "DOC-COURSES-001 p.47",
     "DOC-OFFICIAL-CATALOG-001 p.67",
-    "DOC-COURSES-001 p.48",
     "DOC-OFFICIAL-CATALOG-001 p.119"
    ]
   },
@@ -2075,33 +2075,33 @@
      "entity_recall": 0.75
     },
     "3": {
-     "hit": 0.0,
-     "recall": 0.0,
-     "precision": 0.0,
-     "rr": 0.0,
-     "entity_recall": 1.0
+     "hit": 1.0,
+     "recall": 0.2,
+     "precision": 0.3333333333333333,
+     "rr": 0.3333333333333333,
+     "entity_recall": 0.75
     },
     "5": {
-     "hit": 0.0,
-     "recall": 0.0,
-     "precision": 0.0,
-     "rr": 0.0,
+     "hit": 1.0,
+     "recall": 0.2,
+     "precision": 0.2,
+     "rr": 0.3333333333333333,
      "entity_recall": 1.0
     },
     "10": {
      "hit": 1.0,
-     "recall": 0.2,
-     "precision": 0.1,
-     "rr": 0.16666666666666666,
+     "recall": 0.4,
+     "precision": 0.2,
+     "rr": 0.3333333333333333,
      "entity_recall": 1.0
     }
    },
    "top_hits": [
     "DOC-FAQ-001 p.2",
+    "DOC-PROGRAMS-001 p.5",
+    "DOC-COURSES-001 p.21",
     "DOC-NOTICES-001 p.7",
-    "DOC-CALENDAR-001 p.4",
-    "DOC-NOTICES-001 p.2",
-    "DOC-NOTICES-001 p.2"
+    "DOC-CALENDAR-001 p.4"
    ]
   },
   {
@@ -2639,11 +2639,11 @@
  "run": {
   "mode": "routed",
   "label": "routed",
-  "timestamp": "2026-09-19T09:00:47+00:00",
+  "timestamp": "2026-09-19T09:53:13+00:00",
   "reranker_model": null,
   "rerank_candidates": 30,
   "rerank_max_chars": null,
-  "commit": "81a36f4",
+  "commit": "cfa5142",
   "embedding_model": "BAAI/bge-small-en-v1.5",
   "chunks": 935,
   "dataset": "evaluation\\datasets\\evaluation_questions.json"

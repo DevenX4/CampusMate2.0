@@ -242,9 +242,9 @@
   }
  },
  "latency_ms": {
-  "mean": 8.9,
-  "p50": 4.1,
-  "p95": 5.9
+  "mean": 7.6,
+  "p50": 3.3,
+  "p95": 4.9
  },
  "top_score": {
   "answerable_mean": 18.1516,
@@ -2578,8 +2578,12 @@
  ],
  "run": {
   "mode": "bm25",
-  "timestamp": "2026-09-19T07:44:00+00:00",
-  "commit": "f694e07",
+  "label": "bm25",
+  "timestamp": "2026-09-19T09:52:59+00:00",
+  "reranker_model": null,
+  "rerank_candidates": 30,
+  "rerank_max_chars": null,
+  "commit": "cfa5142",
   "embedding_model": "BAAI/bge-small-en-v1.5",
   "chunks": 935,
   "dataset": "evaluation\\datasets\\evaluation_questions.json"
