@@ -54,8 +54,17 @@ def test_graph_facts_are_quoted_clause_by_clause_and_questions_never():
                          "[synthetic]; taught_by: FAC-1 (Dr. Rao) [synthetic]")
     faq = ContextBlock(2, "document", "synthetic", "FAQ", "Where are the AI practicals held?")
     answer = ask("Where are the practicals of AI held?", [graph, faq])
-    # The course is official, the lab is not: the quoted clause carries the synthetic label.
-    assert answer == f"{SYNTHETIC_PREFIX} practicals_in: LAB-1 (AI Lab) [synthetic] [1]. {SYNTHETIC_NOTE}"
+    # The course is official, the lab is not: the quoted clause carries the synthetic label, and
+    # its subject, so it cannot be read as a fact about another course.
+    assert answer == f"{SYNTHETIC_PREFIX} AI: practicals_in: LAB-1 (AI Lab) [synthetic] [1]. {SYNTHETIC_NOTE}"
+
+
+def test_a_neighbour_s_relationship_names_its_own_subject():
+    # Found in the UI: asked for the AI lab, the answer quoted "practicals_in: LAB-IT-004" from the
+    # graph item of another course (a neighbour), as if it were the AI lab.
+    other = ContextBlock(2, "graph", "official", "Knowledge graph",
+                         "2CEIT402 ALGORITHMS (Course COURSE-2CEIT402, official). Relationships: practicals_in: LAB-4 [synthetic]")
+    assert "2CEIT402 ALGORITHMS: practicals_in: LAB-4" in ask("Which lab hosts the practicals?", [other])
 
 
 def test_matching_normalises_numerals_and_plurals():

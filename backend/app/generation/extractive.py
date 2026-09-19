@@ -69,7 +69,11 @@ def pieces(block: ContextBlock) -> list[str]:
     if block.kind == "structured":  # one computed statement: a semester's course list must not be cut
         return [block.text]
     if block.kind == "graph":  # "Title (...). key: value; key: value. Relationships: reading: targets; ..."
-        return [p.removeprefix("Relationships: ") for s in sentences(block.text) for p in s.split("; ")]
+        # Each clause keeps its subject: a graph item can be a neighbour of the course asked
+        # about, and "practicals_in: LAB-4" alone would read as if it were about that course.
+        header, *clauses = [p.removeprefix("Relationships: ") for s in sentences(block.text) for p in s.split("; ")]
+        title = header.split(" (", 1)[0]
+        return [header] + [f"{title}: {clause}" for clause in clauses]
     return [s for s in sentences(block.text) if not s.endswith("?")]  # a question (FAQ title) answers nothing
 
 
