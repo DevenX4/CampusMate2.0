@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Literal
 from urllib.parse import quote_plus
 
-from pydantic import Field, SecretStr, ValidationInfo, field_validator
+from pydantic import AliasChoices, Field, SecretStr, ValidationInfo, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # backend/app/core/config.py -> parents[3] is the CampusMate repo root.
@@ -77,15 +77,26 @@ class Settings(BaseSettings):
     rerank_max_chars: int | None = None  # passage prefix the cross-encoder reads (None = all)
 
     # Answer generation. "extractive" needs no model (copies cited sentences); "openai_compatible"
-    # talks to any server speaking the OpenAI chat API: a local Ollama / llama.cpp / LM Studio
-    # server, or a hosted API. A non-local URL sends questions and evidence off this machine.
-    generation_provider: Literal["extractive", "openai_compatible"] = "extractive"
-    generation_base_url: str = "http://127.0.0.1:11434/v1"  # Ollama's default address
-    generation_model: str | None = Field(default=None, validate_default=True)
-    generation_api_key: SecretStr | None = None  # only for hosted APIs; local servers need none
-    generation_timeout_seconds: float = 120.0
+    # talks to any server speaking the OpenAI chat API. Hosted providers: "remote_open_model", "huggingface", "openrouter".
+    generation_provider: Literal[
+        "extractive", "openai_compatible", "remote_open_model", "huggingface", "openrouter"
+    ] = Field(default="extractive", validation_alias=AliasChoices("GENERATION_PROVIDER", "LLM_PROVIDER"))
+    generation_base_url: str = Field(
+        default="http://127.0.0.1:11434/v1", validation_alias=AliasChoices("GENERATION_BASE_URL", "LLM_BASE_URL")
+    )
+    generation_model: str | None = Field(
+        default=None, validate_default=True, validation_alias=AliasChoices("GENERATION_MODEL", "LLM_MODEL")
+    )
+    generation_api_key: SecretStr | None = Field(
+        default=None, validation_alias=AliasChoices("GENERATION_API_KEY", "LLM_API_KEY")
+    )
+    generation_timeout_seconds: float = Field(
+        default=120.0, validation_alias=AliasChoices("GENERATION_TIMEOUT_SECONDS", "LLM_TIMEOUT_SECONDS")
+    )
     generation_max_tokens: int = 400
     generation_temperature: float = 0.0  # deterministic: the same evidence gives the same answer
+    pipeline_trace: bool = Field(default=False, validation_alias=AliasChoices("PIPELINE_TRACE", "CHAT_PIPELINE_TRACE"))
+
 
     # Local folders. Overridable so a container can mount them elsewhere later.
     data_dir: Path = REPO_ROOT / "data"  # the canonical dataset (read-only input)
@@ -110,9 +121,11 @@ class Settings(BaseSettings):
     @field_validator("generation_model")
     @classmethod
     def _generation_model_required(cls, value: str | None, info: ValidationInfo) -> str | None:
-        if info.data.get("generation_provider") == "openai_compatible" and not value:
-            raise ValueError("GENERATION_MODEL is required when GENERATION_PROVIDER=openai_compatible")
+        provider = info.data.get("generation_provider")
+        if provider and provider != "extractive" and not value:
+            raise ValueError(f"GENERATION_MODEL is required when GENERATION_PROVIDER={provider}")
         return value
+
 
     @property
     def database_url(self) -> str:

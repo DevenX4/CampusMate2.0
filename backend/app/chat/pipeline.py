@@ -16,6 +16,8 @@ from sqlalchemy.orm import Session
 
 from app.chat.context import Context, build_context
 from app.chat.grounding import GroundingReport, validate
+from app.chat.tracing import is_trace_enabled, print_trace
+from app.core.config import get_settings
 from app.generation.base import ABSTAIN_MESSAGE, GenerationError, GenerationProvider, GenerationRequest
 from app.generation.extractive import ExtractiveProvider
 from app.routing.entities import EntityResolver
@@ -77,11 +79,31 @@ def answer_question(db: Session, question: str, deps: RetrievalDeps, generator: 
         if defaults:
             decision.reasons.append(f"from the selected context: {', '.join(defaults)}")
 
-    # The provider recorded is always the configured one; answer_type "fallback" says the text
-    # shown came from the extractive fallback instead.
+    generated_text_for_trace = None
+    request_for_trace = None
+
     def finish(answer: str, answer_type: str, context: Context, report: GroundingReport) -> ChatAnswer:
+        tot_timings = watch.total()
+        settings = get_settings()
+        if is_trace_enabled(settings):
+            print_trace(
+                question=question,
+                route=decision.route,
+                intents=decision.intents,
+                reasons=decision.reasons,
+                resolution=resolution,
+                context=context,
+                request=request_for_trace,
+                generated_text=generated_text_for_trace,
+                grounding=report,
+                answer=answer,
+                answer_type=answer_type,
+                provider=generator.name,
+                model=generator.model,
+                timings=tot_timings,
+            )
         return ChatAnswer(question, answer, answer_type, decision.route, decision.intents, decision.reasons,
-                          context, report, generator.name, generator.model, watch.total())
+                          context, report, generator.name, generator.model, tot_timings)
 
     if decision.route in UNSUPPORTED:
         message = UNSUPPORTED[decision.route]
@@ -99,9 +121,11 @@ def answer_question(db: Session, question: str, deps: RetrievalDeps, generator: 
         return finish(ABSTAIN_MESSAGE, "abstained", context, GroundingReport(ABSTAIN_MESSAGE, passed=True, abstained=True))
 
     request = GenerationRequest(question, context.blocks, max_tokens, temperature)
+    request_for_trace = request
     with watch.stage("generation"):
         try:
             generated = generator.generate(request).text
+            generated_text_for_trace = generated
         except GenerationError as exc:
             logger.warning("Generation failed, using the extractive answer: %s", exc)
             generated = None
@@ -115,3 +139,4 @@ def answer_question(db: Session, question: str, deps: RetrievalDeps, generator: 
     fallback.warnings.insert(0, "generation failed" if report is None else f"generated answer rejected: {'; '.join(report.issues)}")
     answer_type = "abstained" if fallback.abstained else "fallback"
     return finish(fallback.answer, answer_type, context, fallback)
+

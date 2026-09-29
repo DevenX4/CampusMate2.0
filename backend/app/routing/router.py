@@ -20,7 +20,7 @@ from dataclasses import dataclass, field
 from app.routing.entities import Resolution
 
 _AUTOMATION = re.compile(r"\b(remind(er)?|notify|notification|alert me|email me|send me|schedule (a|an|my))\b", re.I)
-_PERSONAL = re.compile(r"\bmy (marks|grades?|results?|attendance|cgpa|sgpa|fees?|timetable|exam schedule)\b", re.I)
+_PERSONAL = re.compile(r"\bmy\b.*?\b(marks|grades?|results?|attendance|cgpa|sgpa|fees?|timetable|exam schedule)\b", re.I)
 _GRADE = re.compile(r"\bgrade\b.*\bmarks?\b|\bmarks?\b.*\bgrade\b", re.I)
 _OPTIONS = re.compile(r"\b(options?|choices?|choose|pick)\b", re.I)
 _ELECTIVE_SLOT = re.compile(r"\belective[-\s]*(viii|vii|vi|iv|v|iii|ii|i)\b", re.I)

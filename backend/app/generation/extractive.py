@@ -42,9 +42,11 @@ def sentences(text: str) -> list[str]:
 
 def _term(token: str) -> str:
     """A light normalisation for matching only: Semester VII = semester 7, electives = elective,
-    facilities = facility. (Irregular forms such as teaches/taught still do not match.)"""
+    facilities = facility, examinations = exam."""
     if token in _ROMAN:
         return _ROMAN[token]
+    if token in ("examination", "examinations", "exams"):
+        return "exam"
     if len(token) > 4 and token.endswith("ies"):
         return token[:-3] + "y"
     if len(token) > 3 and token.endswith("s") and not token.endswith(("ss", "us", "is")):

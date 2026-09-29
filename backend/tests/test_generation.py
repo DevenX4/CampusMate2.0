@@ -209,5 +209,83 @@ def test_provider_is_chosen_by_configuration(monkeypatch, caplog):
                                 generation_base_url="https://api.example.com/v1", generation_api_key=SECRET_KEY)
         assert isinstance(remote, OpenAICompatibleProvider) and remote.model == "m"
         assert "not on this machine" in caplog.text and SECRET_KEY not in caplog.text
+
+        # Test remote_open_model provider configuration
+        remote_open = configured(generation_provider="remote_open_model", generation_model="meta-llama/Llama-3.1-8B-Instruct",
+                                 generation_base_url="https://router.huggingface.co/hf-inference/v1", generation_api_key=SECRET_KEY)
+        assert isinstance(remote_open, RemoteOpenModelProvider) and remote_open.model == "meta-llama/Llama-3.1-8B-Instruct"
     finally:
         runtime.get_generator.cache_clear()
+
+
+def test_llm_env_aliases():
+    settings = Settings(_env_file=None, db_password="x", LLM_PROVIDER="openrouter", LLM_MODEL="qwen/qwen-2.5-72b-instruct",
+                        LLM_API_KEY="sk-or-123", LLM_BASE_URL="https://openrouter.ai/api/v1")
+    assert settings.generation_provider == "openrouter"
+    assert settings.generation_model == "qwen/qwen-2.5-72b-instruct"
+    assert settings.generation_api_key.get_secret_value() == "sk-or-123"
+    assert settings.generation_base_url == "https://openrouter.ai/api/v1"
+
+
+# --- Remote open model provider tests --------------------------------------------------------
+
+from app.generation.remote_open_model import RemoteOpenModelProvider
+
+
+def test_remote_open_model_provider_success():
+    seen = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.update(url=str(request.url), auth=request.headers.get("authorization"),
+                    referer=request.headers.get("http-referer"), body=json.loads(request.content))
+        return completion("Artificial Intelligence is 2CEIT602 [1].")
+
+    provider = RemoteOpenModelProvider(
+        base_url="https://openrouter.ai/api/v1",
+        model="Qwen/Qwen2.5-72B-Instruct",
+        api_key=SECRET_KEY,
+        provider_name="openrouter",
+        transport=fake_server(handler),
+    )
+
+    result = provider.generate(GenerationRequest("What is AI?", CONTEXT))
+    assert seen["url"] == "https://openrouter.ai/api/v1/chat/completions"
+    assert seen["auth"] == f"Bearer {SECRET_KEY}"
+    assert seen["referer"] == "https://github.com/campusmate"
+    assert result.text == "Artificial Intelligence is 2CEIT602 [1]."
+    assert result.provider == "openrouter"
+    assert result.model == "Qwen/Qwen2.5-72B-Instruct"
+
+
+@pytest.mark.parametrize("status_code,message_part", [
+    (401, "Authentication failed"),
+    (403, "Authentication failed"),
+    (429, "Rate limit exceeded"),
+    (503, "returned HTTP 503"),
+])
+def test_remote_open_model_provider_http_errors(status_code, message_part):
+    handler = lambda r: httpx.Response(status_code, text="error details")
+    provider = RemoteOpenModelProvider(
+        base_url="https://router.huggingface.co/hf-inference/v1",
+        model="Qwen/Qwen2.5-72B-Instruct",
+        api_key=SECRET_KEY,
+        provider_name="huggingface",
+        transport=fake_server(handler),
+    )
+    with pytest.raises(GenerationError, match=message_part) as error:
+        provider.generate(GenerationRequest("Q", CONTEXT))
+    assert SECRET_KEY not in str(error.value)
+
+
+def test_remote_open_model_provider_check_resilience():
+    # Hosted endpoints might return 404 or 403 on GET /models, check should not raise
+    handler = lambda r: httpx.Response(404, text="Not found")
+    provider = RemoteOpenModelProvider(
+        base_url="https://router.huggingface.co/hf-inference/v1",
+        model="Qwen/Qwen2.5-72B-Instruct",
+        api_key=SECRET_KEY,
+        provider_name="huggingface",
+        transport=fake_server(handler),
+    )
+    assert "huggingface: Qwen/Qwen2.5-72B-Instruct" in provider.check()
+
