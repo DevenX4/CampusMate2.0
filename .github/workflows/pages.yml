@@ -1,0 +1,64 @@
+name: Deploy landing page
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Use the landing page only
+        run: |
+          cat > src/pages-main.jsx <<'EOF'
+          import { StrictMode, useEffect, useState } from 'react';
+          import { createRoot } from 'react-dom/client';
+          import './index.css';
+          import LandingPage from './components/LandingPage';
+
+          const repo = 'https://github.com/DevenX4/CampusMate2.0';
+
+          function PagesApp() {
+            const [theme, setTheme] = useState(() => localStorage.getItem('cm_theme') || 'dark');
+            useEffect(() => {
+              document.documentElement.classList.toggle('light', theme === 'light');
+              localStorage.setItem('cm_theme', theme);
+            }, [theme]);
+            const navigate = (to) => { if (!to.startsWith('#')) window.location.assign(repo); };
+            const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+            return <LandingPage navigate={navigate} theme={theme} toggleTheme={toggleTheme} />;
+          }
+
+          createRoot(document.getElementById('root')).render(<StrictMode><PagesApp /></StrictMode>);
+          EOF
+          sed -i 's#/src/main.jsx#/src/pages-main.jsx#' index.html
+      - run: npx vite build --base=/CampusMate2.0/
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
