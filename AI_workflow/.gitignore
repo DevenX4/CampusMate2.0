@@ -43,3 +43,8 @@ storage/**
 Thumbs.db
 .idea/
 .vscode/
+
+# The live knowledge base is required by a fresh clone
+!storage/
+storage/*
+!storage/knowledge_base.json
