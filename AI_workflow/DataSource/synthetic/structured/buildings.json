@@ -1,0 +1,28 @@
+{
+  "table": "buildings",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 2,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "building_id": "BLDG-DEMO-A",
+      "name": "Demo Academic Block A",
+      "code": "DA",
+      "floors": 5,
+      "description": "Fictional academic block used for CampusMate testing. Houses the IT department office, faculty cabins and most teaching laboratories.",
+      "source_type": "synthetic",
+      "source_document": "DOC-FACILITIES-001",
+      "academic_year": "2026-2027"
+    },
+    {
+      "building_id": "BLDG-DEMO-B",
+      "name": "Demo Innovation Block B",
+      "code": "DB",
+      "floors": 3,
+      "description": "Fictional block housing the seminar hall, hardware lab and innovation spaces.",
+      "source_type": "synthetic",
+      "source_document": "DOC-FACILITIES-001",
+      "academic_year": "2026-2027"
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+[
+ {
+  "question": "How many credits does Artificial Intelligence carry?",
+  "language": "English",
+  "intent": "campus",
+  "search_query": "Artificial Intelligence course credits",
+  "bm25": [
+   {
+    "title": "Course: 2CEIT602 - ARTIFICIAL INTELLIGENCE",
+    "score": 10.71
+   },
+   {
+    "title": "FAQ: Are there prerequisites for Artificial Intelligence?",
+    "score": 10.17
+   },
+   {
+    "title": "Faculty: Dr. Arjun Tensorkar (Professor)",
+    "score": 9.61
+   }
+  ],
+  "vector": [
+   {
+    "title": "Course: 2CEIT602 - ARTIFICIAL INTELLIGENCE",
+    "score": 0.84
+   },
+   {
+    "title": "Course: 3CEIT101 - COMPUTATIONAL INTELLIGENCE",
+    "score": 0.78
+   },
+   {
+    "title": "Course: 2CEIT5PE6 - HUMAN COMPUTER INTERACTION",
+    "score": 0.74
+   }
+  ],
+  "fused": [
+   {
+    "title": "Course: 2CEIT602 - ARTIFICIAL INTELLIGENCE",
+    "score": 0.0328
+   },
+   {
+    "title": "Course: 3CEIT101 - COMPUTATIONAL INTELLIGENCE",
+    "score": 0.0313
+   },
+   {
+    "title": "FAQ: Are there prerequisites for Artificial Intelligence?",
+    "score": 0.031
+   }
+  ],
+  "search_ms": 223,
+  "answer": "The Artificial Intelligence (2CEIT602) course carries 4.0 credits - 3.0 credits for theory and 1.0 credit for the practical component[1].",
+  "provider": "Groq gpt-oss-120b",
+  "checked_facts": [
+   "1.0",
+   "2CEIT602",
+   "3.0",
+   "4.0"
+  ],
+  "grounded": true,
+  "sources": [
+   "Course: 2CEIT602 - ARTIFICIAL INTELLIGENCE"
+  ],
+  "total_ms": 1827
+ },
+ {
+  "question": "bhai attendance kitni chahiye exam ke liye?",
+  "language": "Hinglish",
+  "intent": "campus",
+  "search_query": "minimum attendance requirement for exams",
+  "bm25": [
+   {
+    "title": "FAQ: What is the minimum attendance requirement?",
+    "score": 23.48
+   },
+   {
+    "title": "Policy: Attendance Policy (Demo)",
+    "score": 11.66
+   },
+   {
+    "title": "FAQ: When do odd-semester end-semester exams start?",
+    "score": 7.96
+   }
+  ],
+  "vector": [
+   {
+    "title": "FAQ: What is the minimum attendance requirement?",
+    "score": 0.77
+   },
+   {
+    "title": "Policy: Attendance Policy (Demo)",
+    "score": 0.73
+   },
+   {
+    "title": "Calendar: Practical and viva examinations – odd semester",
+    "score": 0.66
+   }
+  ],
+  "fused": [
+   {
+    "title": "FAQ: What is the minimum attendance requirement?",
+    "score": 0.0328
+   },
+   {
+    "title": "Policy: Attendance Policy (Demo)",
+    "score": 0.0323
+   },
+   {
+    "title": "FAQ: When do odd-semester end-semester exams start?",
+    "score": 0.0159
+   }
+  ],
+  "search_ms": 20,
+  "answer": "Hey! Lectures: You need to attend at least 75 % of the lecture classes. Labs: You need to attend at least 80 % of the laboratory sessions. Attendance is checked twice - once around the mid-semester exams and again before the end-semester exams.",
+  "provider": "Groq gpt-oss-120b",
+  "checked_facts": [
+   "75",
+   "80"
+  ],
+  "grounded": true,
+  "sources": [
+   "FAQ: What is the minimum attendance requirement?",
+   "Policy: Attendance Policy (Demo)"
+  ],
+  "total_ms": 1286
+ },
+ {
+  "question": "Which lab is used for Database practicals?",
+  "language": "English",
+  "intent": "campus",
+  "search_query": "Database practicals lab",
+  "bm25": [
+   {
+    "title": "FAQ: Which lab is used for Database Management System prac",
+    "score": 12.99
+   },
+   {
+    "title": "Notice: Odd semester timetable published",
+    "score": 9.71
+   },
+   {
+    "title": "Notice: Timetable update: Cloud Computing and Big Data Ana",
+    "score": 7.29
+   }
+  ],
+  "vector": [
+   {
+    "title": "FAQ: Which lab is used for Database Management System prac",
+    "score": 0.81
+   },
+   {
+    "title": "Lab: Database Systems Lab",
+    "score": 0.79
+   },
+   {
+    "title": "Notice: Weekly lab slot registration opens for Database Sy",
+    "score": 0.74
+   }
+  ],
+  "fused": [
+   {
+    "title": "FAQ: Which lab is used for Database Management System prac",
+    "score": 0.0328
+   },
+   {
+    "title": "Lab: Database Systems Lab",
+    "score": 0.0323
+   },
+   {
+    "title": "Notice: Weekly lab slot registration opens for Database Sy",
+    "score": 0.0317
+   }
+  ],
+  "search_ms": 3637,
+  "answer": "The Database Management System practicals are conducted in LAB-IT-003 - Database Systems Lab (Room DA-303). The lab is overseen by Dr. Meera Datavala (FAC-IT-001)[1].",
+  "provider": "Groq gpt-oss-120b",
+  "checked_facts": [
+   "303",
+   "FAC-IT-001",
+   "LAB-IT-003"
+  ],
+  "grounded": true,
+  "sources": [
+   "FAQ: Which lab is used for Database Management System prac",
+   "Lab: Database Systems Lab",
+   "Notice: Weekly lab slot registration opens for Database Sy"
+  ],
+  "total_ms": 2373
+ }
+]

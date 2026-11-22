@@ -1,0 +1,11 @@
+research_area_id,name,department_id,source_type,source_document,academic_year
+RA-IT-001,Artificial Intelligence & Machine Learning,DEPT-IT-001,synthetic,DOC-DEPT-PROFILE-001,2026-2027
+RA-IT-002,Natural Language Processing,DEPT-IT-001,synthetic,DOC-DEPT-PROFILE-001,2026-2027
+RA-IT-003,Databases & Data Engineering,DEPT-IT-001,synthetic,DOC-DEPT-PROFILE-001,2026-2027
+RA-IT-004,Cyber Security & Cryptography,DEPT-IT-001,synthetic,DOC-DEPT-PROFILE-001,2026-2027
+RA-IT-005,"Cloud, Distributed & High Performance Computing",DEPT-IT-001,synthetic,DOC-DEPT-PROFILE-001,2026-2027
+RA-IT-006,Internet of Things & Robotics,DEPT-IT-001,synthetic,DOC-DEPT-PROFILE-001,2026-2027
+RA-IT-007,Computer Vision & Graphics,DEPT-IT-001,synthetic,DOC-DEPT-PROFILE-001,2026-2027
+RA-IT-008,Software Engineering & Human-Computer Interaction,DEPT-IT-001,synthetic,DOC-DEPT-PROFILE-001,2026-2027
+RA-IT-009,Theoretical Computer Science & Algorithms,DEPT-IT-001,synthetic,DOC-DEPT-PROFILE-001,2026-2027
+RA-IT-010,Computer Networks,DEPT-IT-001,synthetic,DOC-DEPT-PROFILE-001,2026-2027

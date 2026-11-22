@@ -1,0 +1,47 @@
+{
+ "datasets": 23,
+ "structured_records": 574,
+ "indexed_records": 261,
+ "vectors": 261,
+ "tables": {
+  "academic_calendar": 25,
+  "buildings": 2,
+  "course_offerings": 112,
+  "course_prerequisites": 24,
+  "courses": 116,
+  "data_quality_conflicts": 10,
+  "department_directory": 8,
+  "departments": 1,
+  "elective_groups": 18,
+  "facilities": 10,
+  "faculty": 20,
+  "faq": 32,
+  "grading_scheme": 7,
+  "laboratories": 10,
+  "notices": 20,
+  "org_units": 2,
+  "policies": 11,
+  "programs": 2,
+  "research_areas": 10,
+  "rooms": 31,
+  "semesters": 12,
+  "teaching_assignments": 90,
+  "university": 1
+ },
+ "source_types": {
+  "synthetic": 294,
+  "official": 145,
+  "derived_official": 135
+ },
+ "indexed_by_category": {
+  "curriculum": 131,
+  "faculty": 20,
+  "calendar": 25,
+  "policy": 11,
+  "notice": 20,
+  "faq": 32,
+  "facility": 20,
+  "academic": 1,
+  "department": 1
+ }
+}

@@ -1,0 +1,1787 @@
+{
+ "generated_at": "2026-09-18T12:00:00+05:30",
+ "items": [
+  {
+   "id": "UNIV-GUNI-001",
+   "type": "university",
+   "path": "university/UNIV-GUNI-001.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SCHOOL-FET-001",
+   "type": "org_unit",
+   "path": "org_units/SCHOOL-FET-001.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COLLEGE-UVPCE-001",
+   "type": "org_unit",
+   "path": "org_units/COLLEGE-UVPCE-001.md",
+   "source_type": "official"
+  },
+  {
+   "id": "DEPT-IT-001",
+   "type": "department",
+   "path": "departments/DEPT-IT-001.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "RA-IT-001",
+   "type": "research_area",
+   "path": "research_areas/RA-IT-001.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "RA-IT-002",
+   "type": "research_area",
+   "path": "research_areas/RA-IT-002.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "RA-IT-003",
+   "type": "research_area",
+   "path": "research_areas/RA-IT-003.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "RA-IT-004",
+   "type": "research_area",
+   "path": "research_areas/RA-IT-004.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "RA-IT-005",
+   "type": "research_area",
+   "path": "research_areas/RA-IT-005.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "RA-IT-006",
+   "type": "research_area",
+   "path": "research_areas/RA-IT-006.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "RA-IT-007",
+   "type": "research_area",
+   "path": "research_areas/RA-IT-007.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "RA-IT-008",
+   "type": "research_area",
+   "path": "research_areas/RA-IT-008.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "RA-IT-009",
+   "type": "research_area",
+   "path": "research_areas/RA-IT-009.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "RA-IT-010",
+   "type": "research_area",
+   "path": "research_areas/RA-IT-010.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "PROG-BTECH-IT-001",
+   "type": "program",
+   "path": "programs/PROG-BTECH-IT-001.md",
+   "source_type": "official"
+  },
+  {
+   "id": "PROG-MTECH-IT-001",
+   "type": "program",
+   "path": "programs/PROG-MTECH-IT-001.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-BTECH-IT-01",
+   "type": "semester",
+   "path": "semesters/SEM-BTECH-IT-01.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-BTECH-IT-02",
+   "type": "semester",
+   "path": "semesters/SEM-BTECH-IT-02.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-BTECH-IT-03",
+   "type": "semester",
+   "path": "semesters/SEM-BTECH-IT-03.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-BTECH-IT-04",
+   "type": "semester",
+   "path": "semesters/SEM-BTECH-IT-04.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-BTECH-IT-05",
+   "type": "semester",
+   "path": "semesters/SEM-BTECH-IT-05.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-BTECH-IT-06",
+   "type": "semester",
+   "path": "semesters/SEM-BTECH-IT-06.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-BTECH-IT-07",
+   "type": "semester",
+   "path": "semesters/SEM-BTECH-IT-07.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-BTECH-IT-08",
+   "type": "semester",
+   "path": "semesters/SEM-BTECH-IT-08.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-MTECH-IT-01",
+   "type": "semester",
+   "path": "semesters/SEM-MTECH-IT-01.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-MTECH-IT-02",
+   "type": "semester",
+   "path": "semesters/SEM-MTECH-IT-02.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-MTECH-IT-03",
+   "type": "semester",
+   "path": "semesters/SEM-MTECH-IT-03.md",
+   "source_type": "official"
+  },
+  {
+   "id": "SEM-MTECH-IT-04",
+   "type": "semester",
+   "path": "semesters/SEM-MTECH-IT-04.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-01-AUDIT",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-01-AUDIT.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-02-UHV-ELECTIVE-I",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-02-UHV-ELECTIVE-I.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-02-AUDIT",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-02-AUDIT.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-03-AUDIT",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-03-AUDIT.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-03-UHV-ELECTIVE-II",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-03-UHV-ELECTIVE-II.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-05-ELECTIVE-I",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-05-ELECTIVE-I.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-05-ELECTIVE-II",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-05-ELECTIVE-II.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-06-ELECTIVE-III",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-06-ELECTIVE-III.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-06-ELECTIVE-IV",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-06-ELECTIVE-IV.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-07-ELECTIVE-V",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-07-ELECTIVE-V.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-BTECH-IT-07-ELECTIVE-VI",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-BTECH-IT-07-ELECTIVE-VI.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-MTECH-IT-01-ELECTIVE-I",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-MTECH-IT-01-ELECTIVE-I.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-MTECH-IT-01-ELECTIVE-II",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-MTECH-IT-01-ELECTIVE-II.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-MTECH-IT-02-ELECTIVE-III",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-MTECH-IT-02-ELECTIVE-III.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-MTECH-IT-02-ELECTIVE-IV",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-MTECH-IT-02-ELECTIVE-IV.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-MTECH-IT-02-OPEN",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-MTECH-IT-02-OPEN.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-MTECH-IT-03-ELECTIVE-V",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-MTECH-IT-03-ELECTIVE-V.md",
+   "source_type": "official"
+  },
+  {
+   "id": "EGRP-MTECH-IT-03-ELECTIVE-VI",
+   "type": "elective_group",
+   "path": "elective_groups/EGRP-MTECH-IT-03-ELECTIVE-VI.md",
+   "source_type": "official"
+  },
+  {
+   "id": "GRADE-BAND-01",
+   "type": "grade_band",
+   "path": "grading/GRADE-BAND-01.md",
+   "source_type": "official"
+  },
+  {
+   "id": "GRADE-BAND-02",
+   "type": "grade_band",
+   "path": "grading/GRADE-BAND-02.md",
+   "source_type": "official"
+  },
+  {
+   "id": "GRADE-BAND-03",
+   "type": "grade_band",
+   "path": "grading/GRADE-BAND-03.md",
+   "source_type": "official"
+  },
+  {
+   "id": "GRADE-BAND-04",
+   "type": "grade_band",
+   "path": "grading/GRADE-BAND-04.md",
+   "source_type": "official"
+  },
+  {
+   "id": "GRADE-BAND-05",
+   "type": "grade_band",
+   "path": "grading/GRADE-BAND-05.md",
+   "source_type": "official"
+  },
+  {
+   "id": "GRADE-BAND-06",
+   "type": "grade_band",
+   "path": "grading/GRADE-BAND-06.md",
+   "source_type": "official"
+  },
+  {
+   "id": "GRADE-BAND-07",
+   "type": "grade_band",
+   "path": "grading/GRADE-BAND-07.md",
+   "source_type": "official"
+  },
+  {
+   "id": "FAC-IT-001",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-001.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-002",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-002.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-003",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-003.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-004",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-004.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-005",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-005.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-006",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-006.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-007",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-007.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-008",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-008.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-009",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-009.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-010",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-010.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-011",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-011.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-012",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-012.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-013",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-013.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-014",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-014.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-015",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-015.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-016",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-016.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-017",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-017.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-018",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-018.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-019",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-019.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAC-IT-020",
+   "type": "faculty",
+   "path": "faculty/FAC-IT-020.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "LAB-IT-001",
+   "type": "laboratory",
+   "path": "laboratories/LAB-IT-001.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "LAB-IT-002",
+   "type": "laboratory",
+   "path": "laboratories/LAB-IT-002.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "LAB-IT-003",
+   "type": "laboratory",
+   "path": "laboratories/LAB-IT-003.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "LAB-IT-004",
+   "type": "laboratory",
+   "path": "laboratories/LAB-IT-004.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "LAB-IT-005",
+   "type": "laboratory",
+   "path": "laboratories/LAB-IT-005.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "LAB-IT-006",
+   "type": "laboratory",
+   "path": "laboratories/LAB-IT-006.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "LAB-IT-007",
+   "type": "laboratory",
+   "path": "laboratories/LAB-IT-007.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "LAB-IT-008",
+   "type": "laboratory",
+   "path": "laboratories/LAB-IT-008.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "LAB-IT-009",
+   "type": "laboratory",
+   "path": "laboratories/LAB-IT-009.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "LAB-IT-010",
+   "type": "laboratory",
+   "path": "laboratories/LAB-IT-010.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FCL-IT-001",
+   "type": "facility",
+   "path": "facilities/FCL-IT-001.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FCL-IT-002",
+   "type": "facility",
+   "path": "facilities/FCL-IT-002.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FCL-IT-003",
+   "type": "facility",
+   "path": "facilities/FCL-IT-003.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FCL-IT-004",
+   "type": "facility",
+   "path": "facilities/FCL-IT-004.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FCL-IT-005",
+   "type": "facility",
+   "path": "facilities/FCL-IT-005.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FCL-IT-006",
+   "type": "facility",
+   "path": "facilities/FCL-IT-006.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FCL-IT-007",
+   "type": "facility",
+   "path": "facilities/FCL-IT-007.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FCL-IT-008",
+   "type": "facility",
+   "path": "facilities/FCL-IT-008.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FCL-IT-009",
+   "type": "facility",
+   "path": "facilities/FCL-IT-009.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FCL-IT-010",
+   "type": "facility",
+   "path": "facilities/FCL-IT-010.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "COURSE-2AC103",
+   "type": "course",
+   "path": "courses/COURSE-2AC103.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2BS101",
+   "type": "course",
+   "path": "courses/COURSE-2BS101.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2ES101",
+   "type": "course",
+   "path": "courses/COURSE-2ES101.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2ES103",
+   "type": "course",
+   "path": "courses/COURSE-2ES103.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2ES109",
+   "type": "course",
+   "path": "courses/COURSE-2ES109.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2ES110",
+   "type": "course",
+   "path": "courses/COURSE-2ES110.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2HS102",
+   "type": "course",
+   "path": "courses/COURSE-2HS102.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2BS102",
+   "type": "course",
+   "path": "courses/COURSE-2BS102.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2BS103",
+   "type": "course",
+   "path": "courses/COURSE-2BS103.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2ES102",
+   "type": "course",
+   "path": "courses/COURSE-2ES102.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2ES104",
+   "type": "course",
+   "path": "courses/COURSE-2ES104.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2ES111",
+   "type": "course",
+   "path": "courses/COURSE-2ES111.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2HS101",
+   "type": "course",
+   "path": "courses/COURSE-2HS101.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-UHV1IPDC1",
+   "type": "course",
+   "path": "courses/COURSE-UHV1IPDC1.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-UHV3DYSBG1",
+   "type": "course",
+   "path": "courses/COURSE-UHV3DYSBG1.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2AC301",
+   "type": "course",
+   "path": "courses/COURSE-2AC301.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2BS3102",
+   "type": "course",
+   "path": "courses/COURSE-2BS3102.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT301",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT301.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT302",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT302.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT303",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT303.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT304",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT304.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-UHV2IPDC2",
+   "type": "course",
+   "path": "courses/COURSE-UHV2IPDC2.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-UHV4DYSBG2",
+   "type": "course",
+   "path": "courses/COURSE-UHV4DYSBG2.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2BS4101",
+   "type": "course",
+   "path": "courses/COURSE-2BS4101.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT401",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT401.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT402",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT402.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT403",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT403.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT404",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT404.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT405",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT405.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT501",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT501.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT502",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT502.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT503",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT503.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT504",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT504.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT5PE1",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT5PE1.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT5PE2",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT5PE2.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT5PE3",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT5PE3.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT5PE4",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT5PE4.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT5PE5",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT5PE5.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT5PE6",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT5PE6.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT5PE7",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT5PE7.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT5PE8",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT5PE8.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2HS5101",
+   "type": "course",
+   "path": "courses/COURSE-2HS5101.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT601",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT601.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT602",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT602.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT603",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT603.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT604",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT604.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT605",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT605.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT6PE1",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT6PE1.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT6PE2",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT6PE2.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT6PE3",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT6PE3.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT6PE4",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT6PE4.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT6PE5",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT6PE5.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT6PE6",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT6PE6.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT6PE7",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT6PE7.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT6PE8",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT6PE8.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT6PE9",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT6PE9.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2HS6101",
+   "type": "course",
+   "path": "courses/COURSE-2HS6101.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT701",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT701.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT702",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT702.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT703",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT703.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT704",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT704.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE1",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE1.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE10",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE10.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE11",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE11.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE12",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE12.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE13",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE13.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE2",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE2.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE3",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE3.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE4",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE4.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE5",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE5.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE6",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE6.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE7",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE7.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE8",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE8.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT78PE9",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT78PE9.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-2CEIT801",
+   "type": "course",
+   "path": "courses/COURSE-2CEIT801.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3CEIT101",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT101.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3CEIT102",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT102.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3CEIT103",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT103.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3CEIT104",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT104.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3CEIT105",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT105.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT106",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT106.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT107",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT107.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT108",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT108.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT109",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT109.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT110",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT110.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT111",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT111.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT112",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT112.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT113",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT113.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT201",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT201.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3CEIT202",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT202.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3CEIT203",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT203.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3CEIT204",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT204.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT205",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT205.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT206",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT206.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT207",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT207.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT208",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT208.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT209",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT209.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT210",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT210.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT211",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT211.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3OS201",
+   "type": "course",
+   "path": "courses/COURSE-3OS201.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT301",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT301.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3CEIT302",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT302.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3CEIT303",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT303.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT304",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT304.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT305",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT305.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT306",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT306.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT307",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT307.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT308",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT308.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT309",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT309.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT310",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT310.md",
+   "source_type": "derived_official"
+  },
+  {
+   "id": "COURSE-3CEIT401",
+   "type": "course",
+   "path": "courses/COURSE-3CEIT401.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2IT302",
+   "type": "course",
+   "path": "courses/COURSE-2IT302.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2IT503",
+   "type": "course",
+   "path": "courses/COURSE-2IT503.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-2IT606",
+   "type": "course",
+   "path": "courses/COURSE-2IT606.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3IT101",
+   "type": "course",
+   "path": "courses/COURSE-3IT101.md",
+   "source_type": "official"
+  },
+  {
+   "id": "COURSE-3IT201",
+   "type": "course",
+   "path": "courses/COURSE-3IT201.md",
+   "source_type": "official"
+  },
+  {
+   "id": "POLICY-001",
+   "type": "policy",
+   "path": "policies/POLICY-001.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "POLICY-002",
+   "type": "policy",
+   "path": "policies/POLICY-002.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "POLICY-003",
+   "type": "policy",
+   "path": "policies/POLICY-003.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "POLICY-004",
+   "type": "policy",
+   "path": "policies/POLICY-004.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "POLICY-005",
+   "type": "policy",
+   "path": "policies/POLICY-005.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "POLICY-006",
+   "type": "policy",
+   "path": "policies/POLICY-006.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "POLICY-007",
+   "type": "policy",
+   "path": "policies/POLICY-007.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "POLICY-008",
+   "type": "policy",
+   "path": "policies/POLICY-008.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "POLICY-009",
+   "type": "policy",
+   "path": "policies/POLICY-009.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "POLICY-010",
+   "type": "policy",
+   "path": "policies/POLICY-010.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "POLICY-011",
+   "type": "policy",
+   "path": "policies/POLICY-011.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-001",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-001.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-002",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-002.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-003",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-003.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-004",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-004.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-005",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-005.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-006",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-006.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-007",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-007.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-008",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-008.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-009",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-009.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-010",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-010.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-011",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-011.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-012",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-012.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-013",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-013.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-014",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-014.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-015",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-015.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-016",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-016.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-017",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-017.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-018",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-018.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-019",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-019.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-020",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-020.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-021",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-021.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-022",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-022.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-023",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-023.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-024",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-024.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "CAL-2026-27-025",
+   "type": "calendar_event",
+   "path": "calendar/CAL-2026-27-025.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-001",
+   "type": "notice",
+   "path": "notices/NOTICE-001.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-002",
+   "type": "notice",
+   "path": "notices/NOTICE-002.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-003",
+   "type": "notice",
+   "path": "notices/NOTICE-003.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-004",
+   "type": "notice",
+   "path": "notices/NOTICE-004.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-005",
+   "type": "notice",
+   "path": "notices/NOTICE-005.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-006",
+   "type": "notice",
+   "path": "notices/NOTICE-006.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-007",
+   "type": "notice",
+   "path": "notices/NOTICE-007.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-008",
+   "type": "notice",
+   "path": "notices/NOTICE-008.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-009",
+   "type": "notice",
+   "path": "notices/NOTICE-009.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-010",
+   "type": "notice",
+   "path": "notices/NOTICE-010.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-011",
+   "type": "notice",
+   "path": "notices/NOTICE-011.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-012",
+   "type": "notice",
+   "path": "notices/NOTICE-012.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-013",
+   "type": "notice",
+   "path": "notices/NOTICE-013.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-014",
+   "type": "notice",
+   "path": "notices/NOTICE-014.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-015",
+   "type": "notice",
+   "path": "notices/NOTICE-015.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-016",
+   "type": "notice",
+   "path": "notices/NOTICE-016.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-017",
+   "type": "notice",
+   "path": "notices/NOTICE-017.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-018",
+   "type": "notice",
+   "path": "notices/NOTICE-018.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-019",
+   "type": "notice",
+   "path": "notices/NOTICE-019.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "NOTICE-020",
+   "type": "notice",
+   "path": "notices/NOTICE-020.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-001",
+   "type": "faq",
+   "path": "services/FAQ-001.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-002",
+   "type": "faq",
+   "path": "services/FAQ-002.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-003",
+   "type": "faq",
+   "path": "services/FAQ-003.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-004",
+   "type": "faq",
+   "path": "services/FAQ-004.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-005",
+   "type": "faq",
+   "path": "services/FAQ-005.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-006",
+   "type": "faq",
+   "path": "services/FAQ-006.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-007",
+   "type": "faq",
+   "path": "services/FAQ-007.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-008",
+   "type": "faq",
+   "path": "services/FAQ-008.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-009",
+   "type": "faq",
+   "path": "services/FAQ-009.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-010",
+   "type": "faq",
+   "path": "services/FAQ-010.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-011",
+   "type": "faq",
+   "path": "services/FAQ-011.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-012",
+   "type": "faq",
+   "path": "services/FAQ-012.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-013",
+   "type": "faq",
+   "path": "services/FAQ-013.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-014",
+   "type": "faq",
+   "path": "services/FAQ-014.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-015",
+   "type": "faq",
+   "path": "services/FAQ-015.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-016",
+   "type": "faq",
+   "path": "services/FAQ-016.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-017",
+   "type": "faq",
+   "path": "services/FAQ-017.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-018",
+   "type": "faq",
+   "path": "services/FAQ-018.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-019",
+   "type": "faq",
+   "path": "services/FAQ-019.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-020",
+   "type": "faq",
+   "path": "services/FAQ-020.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-021",
+   "type": "faq",
+   "path": "services/FAQ-021.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-022",
+   "type": "faq",
+   "path": "services/FAQ-022.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-023",
+   "type": "faq",
+   "path": "services/FAQ-023.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-024",
+   "type": "faq",
+   "path": "services/FAQ-024.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-025",
+   "type": "faq",
+   "path": "services/FAQ-025.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-026",
+   "type": "faq",
+   "path": "services/FAQ-026.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-027",
+   "type": "faq",
+   "path": "services/FAQ-027.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-028",
+   "type": "faq",
+   "path": "services/FAQ-028.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-029",
+   "type": "faq",
+   "path": "services/FAQ-029.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-030",
+   "type": "faq",
+   "path": "services/FAQ-030.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-031",
+   "type": "faq",
+   "path": "services/FAQ-031.md",
+   "source_type": "synthetic"
+  },
+  {
+   "id": "FAQ-032",
+   "type": "faq",
+   "path": "services/FAQ-032.md",
+   "source_type": "synthetic"
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+  "table": "org_units",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 2,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "org_unit_id": "SCHOOL-FET-001",
+      "unit_type": "faculty_school",
+      "name": "Faculty of Engineering & Technology",
+      "parent_id": "UNIV-GUNI-001",
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "Page header (B.TECH-IT Semester I)",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    },
+    {
+      "org_unit_id": "COLLEGE-UVPCE-001",
+      "unit_type": "college",
+      "name": "U.V. Patel College of Engineering",
+      "parent_id": "SCHOOL-FET-001",
+      "source_type": "official",
+      "source_document": "DOC-OFFICIAL-SYLLABUS-001",
+      "source_page": 10,
+      "source_section": "Page header (B.TECH-IT Semester I)",
+      "document_version": "Syllabus Details dated 28/09/2022; Effective Year 2021-2022"
+    }
+  ]
+}

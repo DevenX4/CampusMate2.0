@@ -1,0 +1,95 @@
+{
+  "table": "department_directory",
+  "note": "Sample department heads for demonstrating follow-up questions. Only the IT entry links to the existing faculty record.",
+  "records": [
+    {
+      "department_id": "DEPT-IT-001",
+      "name": "Information Technology",
+      "aliases": ["it", "information technology", "i.t."],
+      "hod_name": "Dr. Meera Datavala",
+      "faculty_id": "FAC-IT-001",
+      "building": "Demo Academic Block A",
+      "office": "ROOM-DA-202",
+      "email": "meera.datavala@campusmate-demo.example",
+      "consultation_hours": "Tuesday and Thursday, 15:00 to 16:30",
+      "source_type": "synthetic"
+    },
+    {
+      "department_id": "DEPT-CE-SAMPLE",
+      "name": "Computer Engineering",
+      "aliases": ["ce", "computer engineering", "computer engg", "comp engg"],
+      "hod_name": "Dr. Nikhil Kernelkar",
+      "building": "Demo Academic Block A",
+      "office": "ROOM-DA-305",
+      "email": "nikhil.kernelkar@campusmate-demo.example",
+      "consultation_hours": "Monday and Wednesday, 14:00 to 15:30",
+      "source_type": "synthetic"
+    },
+    {
+      "department_id": "DEPT-CSE-SAMPLE",
+      "name": "Computer Science and Engineering",
+      "aliases": ["cse", "cs", "computer science", "computer science and engineering", "computer science engineering"],
+      "hod_name": "Dr. Priya Graphwala",
+      "building": "Demo Innovation Block B",
+      "office": "ROOM-DB-310",
+      "email": "priya.graphwala@campusmate-demo.example",
+      "consultation_hours": "Tuesday and Friday, 11:00 to 12:30",
+      "source_type": "synthetic"
+    },
+    {
+      "department_id": "DEPT-EC-SAMPLE",
+      "name": "Electronics and Communication",
+      "aliases": ["ec", "ece", "electronics", "electronics and communication", "electronics communication"],
+      "hod_name": "Dr. Harsh Signalwala",
+      "building": "Demo Innovation Block B",
+      "office": "ROOM-DB-214",
+      "email": "harsh.signalwala@campusmate-demo.example",
+      "consultation_hours": "Monday and Thursday, 10:00 to 11:30",
+      "source_type": "synthetic"
+    },
+    {
+      "department_id": "DEPT-EE-SAMPLE",
+      "name": "Electrical Engineering",
+      "aliases": ["ee", "eee", "electrical", "electrical engineering"],
+      "hod_name": "Dr. Kavya Voltkar",
+      "building": "Demo Innovation Block B",
+      "office": "ROOM-DB-118",
+      "email": "kavya.voltkar@campusmate-demo.example",
+      "consultation_hours": "Wednesday and Friday, 15:00 to 16:30",
+      "source_type": "synthetic"
+    },
+    {
+      "department_id": "DEPT-ME-SAMPLE",
+      "name": "Mechanical Engineering",
+      "aliases": ["me", "mech", "mechanical", "mechanical engineering"],
+      "hod_name": "Dr. Rajiv Gearwala",
+      "building": "Demo Academic Block A",
+      "office": "ROOM-DA-108",
+      "email": "rajiv.gearwala@campusmate-demo.example",
+      "consultation_hours": "Tuesday and Thursday, 11:00 to 12:30",
+      "source_type": "synthetic"
+    },
+    {
+      "department_id": "DEPT-CIVIL-SAMPLE",
+      "name": "Civil Engineering",
+      "aliases": ["civil", "civil engineering"],
+      "hod_name": "Dr. Snehal Bridgekar",
+      "building": "Demo Academic Block A",
+      "office": "ROOM-DA-112",
+      "email": "snehal.bridgekar@campusmate-demo.example",
+      "consultation_hours": "Monday and Friday, 14:00 to 15:30",
+      "source_type": "synthetic"
+    },
+    {
+      "department_id": "DEPT-AUTO-SAMPLE",
+      "name": "Automobile Engineering",
+      "aliases": ["auto", "automobile", "automobile engineering"],
+      "hod_name": "Dr. Mihir Torquekar",
+      "building": "Demo Academic Block A",
+      "office": "ROOM-DA-116",
+      "email": "mihir.torquekar@campusmate-demo.example",
+      "consultation_hours": "Wednesday and Thursday, 10:00 to 11:30",
+      "source_type": "synthetic"
+    }
+  ]
+}

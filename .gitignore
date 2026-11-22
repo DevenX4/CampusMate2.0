@@ -1,45 +1,51 @@
-# --- Secrets: never commit. .env.example IS committed. ---
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables — never commit secrets
 .env
 .env.*
 !.env.example
 
-# --- Python ---
-.venv/
-venv/
-__pycache__/
-*.py[cod]
+# Uploaded files — store these on the server, not in git
+server/uploads/
+
+# AI workflow generated files
+AI_workflow/storage/chroma/
+AI_workflow/storage/originals/
+AI_workflow/storage/processed/
+AI_workflow/storage/tmp/
+AI_workflow/model_cache/
+AI_workflow/.env
+
+# Browser temp profile (generated at runtime)
+.temp_profile/
+
+# Build metadata and local test output
 *.egg-info/
+__pycache__/
 .pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.coverage
-htmlcov/
-
-# --- Node (frontend, later) ---
-node_modules/
-dist/
-*.tsbuildinfo
-
-# --- Local data: PDFs are verified with data/pdfs.sha256 instead ---
-data/pdfs/**
-!data/pdfs/.gitkeep
-
-# --- Runtime storage: uploads, processed files, vector index, temp ---
-storage/**
-!storage/*/
-!storage/*/.gitkeep
-
-# --- Model weights, caches, logs ---
-# Leading "/" = only at the repo root. An unanchored "models/" would also hide
-# backend/app/models/ (the SQLAlchemy models), which must be committed.
-/models/
-/model_cache/
-/chroma/
-/logs/
-*.log
-
-# --- OS / editor ---
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
+pytest_out.txt
+scratch/
+.campusmate-launcher.pid

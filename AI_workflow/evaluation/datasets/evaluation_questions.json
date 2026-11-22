@@ -1,0 +1,1776 @@
+{
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "count": 58,
+  "questions": [
+    {
+      "question_id": "EVAL-001",
+      "question": "How many credits does ARTIFICIAL INTELLIGENCE carry in B.Tech IT?",
+      "expected_answer": "2CEIT602 ARTIFICIAL INTELLIGENCE carries 4 credits (TH 3 + PR/TW 1), 5 contact hours, 150 total marks (official, syllabus p.15).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 10
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 15
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 41
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT602",
+        "SEM-BTECH-IT-06"
+      ],
+      "retrieval_type": "hybrid",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "A_simple_factual",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-002",
+      "question": "What is the total number of credits in B.Tech IT Semester III?",
+      "expected_answer": "24 credits (TH 18, PR 6); total marks 800 (official, syllabus p.12).",
+      "required_sources": [
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 12
+        }
+      ],
+      "expected_entities": [
+        "SEM-BTECH-IT-03"
+      ],
+      "retrieval_type": "structured",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "A_simple_factual",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-003",
+      "question": "Who is the Head of the IT department?",
+      "expected_answer": "FAC-IT-001 Dr. Meera Datavala (Professor & Head of Department) — a synthetic demo identity; the official GUNI documents do not name a head of department.",
+      "required_sources": [
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-DEPT-PROFILE-001",
+          "page": 1
+        }
+      ],
+      "expected_entities": [
+        "FAC-IT-001",
+        "DEPT-IT-001"
+      ],
+      "retrieval_type": "hybrid",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "A_simple_factual",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-004",
+      "question": "What is the seating capacity of the IT Seminar Hall?",
+      "expected_answer": "180 (FCL-IT-001, Demo Innovation Block B, Floor 2, Room DB-201; synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-FACILITIES-001",
+          "page": 1
+        }
+      ],
+      "expected_entities": [
+        "FCL-IT-001"
+      ],
+      "retrieval_type": "hybrid",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "A_simple_factual",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-005",
+      "question": "Which college and faculty run the B.Tech Information Technology programme according to the syllabus?",
+      "expected_answer": "U.V. Patel College of Engineering (COLLEGE-UVPCE-001) under the Faculty of Engineering & Technology (SCHOOL-FET-001), Ganpat University (official, syllabus p.10 header).",
+      "required_sources": [
+        {
+          "document_id": "DOC-DEPT-PROFILE-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 1
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 10
+        }
+      ],
+      "expected_entities": [
+        "PROG-BTECH-IT-001",
+        "COLLEGE-UVPCE-001",
+        "SCHOOL-FET-001"
+      ],
+      "retrieval_type": "semantic",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "A_simple_factual",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-006",
+      "question": "What is taught in Semester VIII of B.Tech IT?",
+      "expected_answer": "Only 2CEIT801 INDUSTRIAL TRAINING: 20 credits (PR/TW), 40 hours, 400 marks (official, syllabus p.18).",
+      "required_sources": [
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 5
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 18
+        },
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 21
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "SEM-BTECH-IT-08",
+        "COURSE-2CEIT801"
+      ],
+      "retrieval_type": "hybrid",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "A_simple_factual",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-007",
+      "question": "What grade and grade point does a regular student get for 85 marks?",
+      "expected_answer": "Grade A with 9 grade points (80 To 89 band, regular); remedial equivalent B+ (8) (official grade table, syllabus p.10).",
+      "required_sources": [
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 9
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 10
+        }
+      ],
+      "expected_entities": [
+        "GRADE-BAND-02"
+      ],
+      "retrieval_type": "structured",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "A_simple_factual",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-008",
+      "question": "How many semesters and total credits does the M.Tech IT programme have?",
+      "expected_answer": "4 semesters and 74 credits (21+23+18+12, derived from official semester totals, syllabus pp.104-108).",
+      "required_sources": [
+        {
+          "document_id": "DOC-DEPT-PROFILE-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 6
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 104
+        }
+      ],
+      "expected_entities": [
+        "PROG-MTECH-IT-001"
+      ],
+      "retrieval_type": "structured",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "A_simple_factual",
+      "expected_source_types": [
+        "derived_official"
+      ]
+    },
+    {
+      "question_id": "EVAL-009",
+      "question": "What is 2CEIT78PE7?",
+      "expected_answer": "2CEIT78PE7 NATURAL LANGUAGE PROCESSING — an option in ELECTIVE-VI (EGRP-BTECH-IT-07-ELECTIVE-VI) of B.Tech IT Semester VII; slot credits 4 (official list, syllabus p.16).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 20
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 16
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT78PE7",
+        "EGRP-BTECH-IT-07-ELECTIVE-VI"
+      ],
+      "retrieval_type": "bm25",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "B_exact_lexical",
+      "expected_source_types": [
+        "official",
+        "derived_official"
+      ]
+    },
+    {
+      "question_id": "EVAL-010",
+      "question": "What does policy CM-SYN-POL-004 cover?",
+      "expected_answer": "POLICY-004 Capstone Project Submission Policy (Demo): How B.Tech IT Capstone Project-I, II and III deliverables are submitted. Synthetic policy.",
+      "required_sources": [
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 3
+        }
+      ],
+      "expected_entities": [
+        "POLICY-004"
+      ],
+      "retrieval_type": "bm25",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "B_exact_lexical",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-011",
+      "question": "What is in room DA-302?",
+      "expected_answer": "LAB-IT-002 Natural Language Processing Lab, Demo Academic Block A, Floor 3 (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "LAB-IT-002",
+        "ROOM-DA-302"
+      ],
+      "retrieval_type": "bm25",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "B_exact_lexical",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-012",
+      "question": "What is NOTICE-008 about?",
+      "expected_answer": "REVISED mid-semester examination schedule – odd semester (version 2) dated 2026-08-28: it supersedes NOTICE-005; exam window 7-12 Sept 2026 unchanged, 2CEIT602 paper for re-registered students moved to 12 Sept, papers start 10:00 (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 5
+        },
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 4
+        }
+      ],
+      "expected_entities": [
+        "NOTICE-008",
+        "NOTICE-005"
+      ],
+      "retrieval_type": "bm25",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "B_exact_lexical",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-013",
+      "question": "Which course has the code 3CEIT211?",
+      "expected_answer": "3CEIT211 ADVANCED DATABASE MANAGEMENT SYSTEM — option in ELECTIVE-IV of M.Tech IT Semester II (EGRP-MTECH-IT-02-ELECTIVE-IV) (official, syllabus p.105).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 33
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 105
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 77
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 55
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 20
+        }
+      ],
+      "expected_entities": [
+        "COURSE-3CEIT211"
+      ],
+      "retrieval_type": "bm25",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "B_exact_lexical",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-014",
+      "question": "What is the specialization of FAC-IT-004?",
+      "expected_answer": "Dr. Kabir Modelkar: Applied machine learning and data science (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 3
+        }
+      ],
+      "expected_entities": [
+        "FAC-IT-004"
+      ],
+      "retrieval_type": "bm25",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "B_exact_lexical",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-015",
+      "question": "What are the options in EGRP-BTECH-IT-06-ELECTIVE-IV?",
+      "expected_answer": "2CEIT6PE6 ROBOTICS; 2CEIT6PE7 ETHICAL HACKING; 2CEIT6PE8 IT INFRASTRUCTURE & MANAGEMENT; 2CEIT6PE9 INTERNET OF THINGS (official, syllabus p.15).",
+      "required_sources": [
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 3
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 15
+        }
+      ],
+      "expected_entities": [
+        "EGRP-BTECH-IT-06-ELECTIVE-IV",
+        "COURSE-2CEIT6PE6",
+        "COURSE-2CEIT6PE7",
+        "COURSE-2CEIT6PE8",
+        "COURSE-2CEIT6PE9"
+      ],
+      "retrieval_type": "bm25",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "B_exact_lexical",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-016",
+      "question": "Which programme is catalog programme code 202?",
+      "expected_answer": "BTech(Information Technology) → PROG-BTECH-IT-001. In the certified list, 2CEIT course codes are actually listed under programme code 201 BTech(Computer Engineering); code 202 lists only 2IT302, 2IT503, 2IT606 (2017-2020).",
+      "required_sources": [
+        {
+          "document_id": "DOC-DEPT-PROFILE-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 1
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 10
+        },
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 49
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 112
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 89
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 62
+        }
+      ],
+      "expected_entities": [
+        "PROG-BTECH-IT-001",
+        "COURSE-2IT503",
+        "COURSE-2IT302",
+        "COURSE-2IT606"
+      ],
+      "retrieval_type": "bm25",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "B_exact_lexical",
+      "expected_source_types": [
+        "official",
+        "derived_official"
+      ]
+    },
+    {
+      "question_id": "EVAL-017",
+      "question": "Where can my team sit and work on our project outside class hours?",
+      "expected_answer": "Capstone Project Room (FCL-IT-002, Room DA-205, open Mon–Sat 08:30–20:00 to registered teams) or Student Project Workspace (FCL-IT-007, Room DB-103, daily 08:00–21:00) (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-FACILITIES-001",
+          "page": 1
+        },
+        {
+          "document_id": "DOC-FACILITIES-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "FCL-IT-002",
+        "FCL-IT-007"
+      ],
+      "retrieval_type": "semantic",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "C_semantic",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-018",
+      "question": "Is there a course about building apps for smartphones?",
+      "expected_answer": "Yes: 2CEIT5PE5 MOBILE APPLICATION DEVELOPMENT (ELECTIVE-II, Semester V); related: 2CEIT78PE4 MOBILE COMPUTING (ELECTIVE-V, Semester VII) (official).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 8
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 14
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 41
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 19
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 16
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT5PE5",
+        "COURSE-2CEIT78PE4"
+      ],
+      "retrieval_type": "semantic",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "C_semantic",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-019",
+      "question": "What happens if I hand in my capstone report a couple of days late?",
+      "expected_answer": "Under the synthetic POLICY-004 §3 you lose 10% per day late, for up to 3 days.",
+      "required_sources": [
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 3
+        }
+      ],
+      "expected_entities": [
+        "POLICY-004"
+      ],
+      "retrieval_type": "semantic",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "C_semantic",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-020",
+      "question": "Is there an elective on legally testing systems for security weaknesses?",
+      "expected_answer": "2CEIT6PE7 ETHICAL HACKING (ELECTIVE-IV, Semester VI) (official); taught by FAC-IT-008 Prof. Dev Firewallani (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 14
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 15
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 41
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT6PE7",
+        "FAC-IT-008"
+      ],
+      "retrieval_type": "semantic",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "C_semantic",
+      "expected_source_types": [
+        "official",
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-021",
+      "question": "I want to learn how chatbots and language models work — which B.Tech elective fits?",
+      "expected_answer": "2CEIT78PE7 NATURAL LANGUAGE PROCESSING in ELECTIVE-VI, Semester VII (official).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 20
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 16
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT78PE7"
+      ],
+      "retrieval_type": "semantic",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "C_semantic",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-022",
+      "question": "Do I need any training before working with the robots?",
+      "expected_answer": "Yes — a mandatory safety induction before operating hardware in LAB-IT-007 IoT & Robotics Lab (POLICY-003 §2; see NOTICE-016) (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 3
+        },
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 4
+        },
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 3
+        }
+      ],
+      "expected_entities": [
+        "POLICY-003",
+        "LAB-IT-007",
+        "NOTICE-016"
+      ],
+      "retrieval_type": "semantic",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "C_semantic",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-023",
+      "question": "Where do I go to get forms and certificates sorted out?",
+      "expected_answer": "Department Office & Student Help Desk, FCL-IT-010, Room DA-201; Mon–Fri 09:30–17:00, Sat 09:30–13:00 (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-FACILITIES-001",
+          "page": 3
+        }
+      ],
+      "expected_entities": [
+        "FCL-IT-010"
+      ],
+      "retrieval_type": "semantic",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "C_semantic",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-024",
+      "question": "What courses are offered in Semester VI of B.Tech IT?",
+      "expected_answer": "Regular: 2CEIT601 THEORY OF COMPUTATION; 2CEIT602 ARTIFICIAL INTELLIGENCE; 2CEIT603 CLOUD COMPUTING; 2CEIT604 USER EXPERIENCE DESIGN; 2CEIT605 CAPSTONE PROJECT-II; 2HS6101 APTITUDE SKILL BUILDING–II. Plus one course from ELECTIVE-III (2CEIT6PE1, 2CEIT6PE2, 2CEIT6PE3, 2CEIT6PE4, 2CEIT6PE5) and one from ELECTIVE-IV (2CEIT6PE6, 2CEIT6PE7, 2CEIT6PE8, 2CEIT6PE9). Semester total 23 credits (official, syllabus p.15).",
+      "required_sources": [
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 4
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 15
+        }
+      ],
+      "expected_entities": [
+        "SEM-BTECH-IT-06",
+        "COURSE-2CEIT601",
+        "COURSE-2CEIT602",
+        "COURSE-2CEIT603",
+        "COURSE-2CEIT604",
+        "COURSE-2CEIT605",
+        "COURSE-2HS6101"
+      ],
+      "retrieval_type": "metadata_filter",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "D_metadata_filtered",
+      "expected_source_types": [
+        "official"
+      ],
+      "reference_sql": "SELECT c.course_code, c.course_name, o.course_type FROM course_offerings o JOIN courses c USING (course_id) WHERE o.semester_id='SEM-BTECH-IT-06' ORDER BY o.course_type DESC, c.course_code;"
+    },
+    {
+      "question_id": "EVAL-025",
+      "question": "What notices were issued in September 2026?",
+      "expected_answer": "NOTICE-009 (2026-09-01) Weekly lab slot registration opens for Database Systems Lab and Programming Lab; NOTICE-010 (2026-09-03) Guest seminar: Responsible AI in education; NOTICE-011 (2026-09-08) Faculty meeting – capstone mid-review panels; NOTICE-012 (2026-09-10) Capstone mid-review schedule; NOTICE-013 (2026-09-14) GPU Computing Facility maintenance; NOTICE-014 (2026-09-17) Timetable update: Cloud Computing and Big Data Analytics practicals; NOTICE-018 (2026-09-18) End-semester examination form submission (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 6
+        },
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 7
+        }
+      ],
+      "expected_entities": [
+        "NOTICE-009",
+        "NOTICE-010",
+        "NOTICE-011",
+        "NOTICE-012",
+        "NOTICE-013",
+        "NOTICE-014",
+        "NOTICE-018"
+      ],
+      "retrieval_type": "metadata_filter",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "D_metadata_filtered",
+      "expected_source_types": [
+        "synthetic"
+      ],
+      "reference_sql": "SELECT notice_id, notice_date, title FROM notices WHERE notice_date BETWEEN '2026-09-01' AND '2026-09-30' ORDER BY notice_date;"
+    },
+    {
+      "question_id": "EVAL-026",
+      "question": "Which department notices are still active as of 18 September 2026?",
+      "expected_answer": "NOTICE-003 Odd semester timetable published (expires 2026-11-20); NOTICE-009 Weekly lab slot registration opens for Database Systems Lab and Programming Lab (expires 2026-11-20); NOTICE-012 Capstone mid-review schedule (expires 2026-10-03); NOTICE-013 GPU Computing Facility maintenance (expires 2026-09-20); NOTICE-014 Timetable update: Cloud Computing and Big Data Analytics practicals (expires 2026-11-20); NOTICE-018 End-semester examination form submission (expires 2026-10-09); NOTICE-019 Department reading room extended hours (expires 2026-12-12). Expired and superseded notices (e.g. NOTICE-005 superseded by NOTICE-008) must be excluded.",
+      "required_sources": [
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 3
+        },
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 6
+        },
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 7
+        },
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 5
+        }
+      ],
+      "expected_entities": [
+        "NOTICE-003",
+        "NOTICE-009",
+        "NOTICE-012",
+        "NOTICE-013",
+        "NOTICE-014",
+        "NOTICE-018",
+        "NOTICE-019"
+      ],
+      "retrieval_type": "metadata_filter",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "D_metadata_filtered",
+      "expected_source_types": [
+        "synthetic"
+      ],
+      "reference_sql": "SELECT notice_id, title, expiry_date FROM notices WHERE status='active' ORDER BY notice_id;"
+    },
+    {
+      "question_id": "EVAL-027",
+      "question": "Which policies apply to the M.Tech IT programme?",
+      "expected_answer": "POLICY-001 Attendance Policy (Demo); POLICY-002 Laboratory Usage Policy (Demo); POLICY-003 Laboratory Safety Policy (Demo); POLICY-005 Project Evaluation Policy (Demo); POLICY-007 Seminar Policy (Demo); POLICY-008 Faculty Consultation Policy (Demo); POLICY-009 Facility Booking Policy (Demo); POLICY-010 M.Tech Major Project Policy (Demo); POLICY-011 Academic Integrity Policy (Demo) — all synthetic.",
+      "required_sources": [
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 3
+        },
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 4
+        },
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 5
+        },
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 6
+        },
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 7
+        }
+      ],
+      "expected_entities": [
+        "POLICY-001",
+        "POLICY-002",
+        "POLICY-003",
+        "POLICY-005",
+        "POLICY-007",
+        "POLICY-008",
+        "POLICY-009",
+        "POLICY-010",
+        "POLICY-011",
+        "PROG-MTECH-IT-001"
+      ],
+      "retrieval_type": "metadata_filter",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "D_metadata_filtered",
+      "expected_source_types": [
+        "synthetic"
+      ],
+      "reference_sql": "SELECT p.policy_id, p.title FROM policies p JOIN policy_links l USING (policy_id) WHERE l.link_type='program' AND l.target_id='PROG-MTECH-IT-001' ORDER BY 1;"
+    },
+    {
+      "question_id": "EVAL-028",
+      "question": "Which Semester VII B.Tech IT courses are electives?",
+      "expected_answer": "ELECTIVE-V: 2CEIT78PE1 DEEP LEARNING, 2CEIT78PE2 BLOCKCHAIN TECHNOLOGIES, 2CEIT78PE3 FUNDAMENTALS OF IMAGE PROCESSING, 2CEIT78PE4 MOBILE COMPUTING, 2CEIT78PE5 SEARCH ENGINE OPTIMIZATION, 2CEIT78PE6 VIRTUAL REALITY. ELECTIVE-VI: 2CEIT78PE7 NATURAL LANGUAGE PROCESSING, 2CEIT78PE8 FORENSICS & CYBER LAW, 2CEIT78PE9 ADVANCED ALGORITHMS, 2CEIT78PE10 FOG COMPUTING, 2CEIT78PE11 FAULT TOLERANT SYSTEMS, 2CEIT78PE12 HIGH PERFORMANCE COMPUTING, 2CEIT78PE13 COMPUTER VISION (official, syllabus p.16).",
+      "required_sources": [
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 4
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 16
+        }
+      ],
+      "expected_entities": [
+        "SEM-BTECH-IT-07",
+        "EGRP-BTECH-IT-07-ELECTIVE-V",
+        "EGRP-BTECH-IT-07-ELECTIVE-VI"
+      ],
+      "retrieval_type": "metadata_filter",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "D_metadata_filtered",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-029",
+      "question": "What examinations are scheduled in the odd semester of 2026-2027?",
+      "expected_answer": "CAL-2026-27-006 Mid-semester examinations – odd semester: 2026-09-07 to 2026-09-12; CAL-2026-27-011 Practical and viva examinations – odd semester: 2026-11-23 to 2026-11-28; CAL-2026-27-012 End-semester theory examinations – odd semester: 2026-11-30 to 2026-12-12 (synthetic demo calendar).",
+      "required_sources": [
+        {
+          "document_id": "DOC-CALENDAR-001",
+          "page": 1
+        }
+      ],
+      "expected_entities": [
+        "CAL-2026-27-006",
+        "CAL-2026-27-011",
+        "CAL-2026-27-012"
+      ],
+      "retrieval_type": "metadata_filter",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "D_metadata_filtered",
+      "expected_source_types": [
+        "synthetic"
+      ],
+      "reference_sql": "SELECT event_id, title, start_date, end_date FROM academic_calendar WHERE event_type='examination' AND term LIKE 'Odd%' ORDER BY start_date;"
+    },
+    {
+      "question_id": "EVAL-030",
+      "question": "Using only official sources, what is known about 2CEIT303?",
+      "expected_answer": "DATABASE MANAGEMENT SYSTEM, B.Tech IT Semester III, regular course, 4 credits (TH 3 + PR/TW 1), 5 hours, 150 marks (syllabus p.12); also in the B.TECH-CE and B.TECH-CE(AI) schemes; listed in the employability list for 2019-2020, 2020-2021 and 2021-2022 under programme code 201. Faculty, lab and prerequisites are not in official sources.",
+      "required_sources": [
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 12
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 62
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 41
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT303"
+      ],
+      "retrieval_type": "metadata_filter",
+      "difficulty": "hard",
+      "answerable": true,
+      "category": "D_metadata_filtered",
+      "expected_source_types": [
+        "official",
+        "derived_official"
+      ],
+      "notes": "Retriever must filter source_type IN ('official','derived_official') and ignore synthetic fields."
+    },
+    {
+      "question_id": "EVAL-031",
+      "question": "Which faculty member teaches the AI course in Semester VI?",
+      "expected_answer": "2CEIT602 ARTIFICIAL INTELLIGENCE (SEM-BTECH-IT-06, official) is taught by FAC-IT-002 Dr. Arjun Tensorkar (instructor) with FAC-IT-004 Dr. Kabir Modelkar as lab instructor (synthetic assignments TA).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 10
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 15
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 41
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 3
+        }
+      ],
+      "expected_entities": [
+        "SEM-BTECH-IT-06",
+        "COURSE-2CEIT602",
+        "FAC-IT-002",
+        "FAC-IT-004"
+      ],
+      "retrieval_type": "graph_multi_hop",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "E_multi_hop",
+      "expected_source_types": [
+        "official",
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-032",
+      "question": "What laboratory is associated with the courses taught by FAC-IT-004?",
+      "expected_answer": "FAC-IT-004 teaches 2CEIT602 ARTIFICIAL INTELLIGENCE, 2CEIT6PE4 DATA SCIENCES AND MACHINE LEARNING, 3CEIT309 DEEP LEARNING; all run practicals in LAB-IT-001 AI & Machine Learning Lab (Room DA-301) (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 3
+        },
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "FAC-IT-004",
+        "COURSE-2CEIT602",
+        "COURSE-2CEIT6PE4",
+        "COURSE-3CEIT309",
+        "LAB-IT-001"
+      ],
+      "retrieval_type": "graph_multi_hop",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "E_multi_hop",
+      "expected_source_types": [
+        "synthetic",
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-033",
+      "question": "Which policies apply to students using the laboratory where DBMS practicals are conducted?",
+      "expected_answer": "DBMS (2CEIT303) practicals run in LAB-IT-003 Database Systems Lab (Room DA-303); it is governed by POLICY-002 Laboratory Usage Policy (Demo) and POLICY-003 Laboratory Safety Policy (Demo) (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 12
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 62
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 41
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 3
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT303",
+        "LAB-IT-003",
+        "POLICY-002",
+        "POLICY-003"
+      ],
+      "retrieval_type": "graph_multi_hop",
+      "difficulty": "hard",
+      "answerable": true,
+      "category": "E_multi_hop",
+      "expected_source_types": [
+        "official",
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-034",
+      "question": "Which courses belong to the programmes offered by the IT department?",
+      "expected_answer": "DEPT-IT-001 offers PROG-BTECH-IT-001 and PROG-MTECH-IT-001 (synthetic link). The 2021-2022 syllabus lists 75 distinct course codes for B.Tech IT (regular, elective options, audit) and 36 for M.Tech IT (official); 5 further legacy IT codes appear only in the certified list. Full lists: Course_Catalog.pdf sections A–D.",
+      "required_sources": [
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": null
+        },
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": null
+        }
+      ],
+      "expected_entities": [
+        "DEPT-IT-001",
+        "PROG-BTECH-IT-001",
+        "PROG-MTECH-IT-001"
+      ],
+      "retrieval_type": "structured",
+      "difficulty": "hard",
+      "answerable": true,
+      "category": "E_multi_hop",
+      "expected_source_types": [
+        "official",
+        "synthetic"
+      ],
+      "reference_sql": "SELECT p.short_name, count(DISTINCT o.course_id) FROM course_offerings o JOIN programs p USING (program_id) WHERE p.department_id='DEPT-IT-001' GROUP BY 1;"
+    },
+    {
+      "question_id": "EVAL-035",
+      "question": "Who is in charge of the lab where NLP (2CEIT78PE7) practicals are held, and where is their office?",
+      "expected_answer": "LAB-IT-002 Natural Language Processing Lab (Room DA-302) is managed by FAC-IT-003 Dr. Nisha Tokenwala, office ROOM-DA-210 (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 20
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 16
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT78PE7",
+        "LAB-IT-002",
+        "FAC-IT-003",
+        "ROOM-DA-210"
+      ],
+      "retrieval_type": "graph_multi_hop",
+      "difficulty": "hard",
+      "answerable": true,
+      "category": "E_multi_hop",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-036",
+      "question": "What are the recommended prerequisites of the prerequisite of Deep Learning (2CEIT78PE1)?",
+      "expected_answer": "2CEIT78PE1 DEEP LEARNING → requires 2CEIT602 ARTIFICIAL INTELLIGENCE → which requires 2CEIT402 DESIGN AND ANALYSIS OF ALGORITHMS and 2BS3102 DISCRETE MATHEMATICS & PROBABILITY. These REQUIRES links are synthetic advisory prerequisites; the official syllabus specifies none.",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 52
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT78PE1",
+        "COURSE-2CEIT602",
+        "COURSE-2CEIT402",
+        "COURSE-2BS3102"
+      ],
+      "retrieval_type": "graph_multi_hop",
+      "difficulty": "hard",
+      "answerable": true,
+      "category": "E_multi_hop",
+      "expected_source_types": [
+        "synthetic"
+      ],
+      "reference_sql": "WITH RECURSIVE p AS (SELECT requires_course_id, 1 AS depth FROM course_prerequisites WHERE course_id='COURSE-2CEIT78PE1' UNION SELECT cp.requires_course_id, p.depth+1 FROM course_prerequisites cp JOIN p ON cp.course_id=p.requires_course_id) SELECT * FROM p;"
+    },
+    {
+      "question_id": "EVAL-037",
+      "question": "In which building is the lab used for Big Data Analytics practicals?",
+      "expected_answer": "2CEIT702 BIG DATA ANALYTICS → LAB-IT-006 Cloud & Big Data Lab → Room DA-402, Floor 4, Demo Academic Block A (BLDG-DEMO-A) (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 15
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 16
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 3
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT702",
+        "LAB-IT-006",
+        "ROOM-DA-402",
+        "BLDG-DEMO-A"
+      ],
+      "retrieval_type": "graph_multi_hop",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "E_multi_hop",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-038",
+      "question": "Which research area does the Computer Networks instructor work in?",
+      "expected_answer": "2CEIT503 COMPUTER NETWORKS is taught by FAC-IT-006 Dr. Vikram Packetkar, research area RA-IT-010 Computer Networks (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 5
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 14
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 41
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 3
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT503",
+        "FAC-IT-006",
+        "RA-IT-010"
+      ],
+      "retrieval_type": "graph_multi_hop",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "E_multi_hop",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-039",
+      "question": "How are the capstone projects coordinated by FAC-IT-020 evaluated, and where are final presentations held?",
+      "expected_answer": "FAC-IT-020 Dr. Leena Projectkar coordinates 2CEIT504/2CEIT605/2CEIT703 (Faculty Directory). POLICY-005 (Academic Policies): panel of ≥2 faculty + guide, mid-review then final presentation in the IT Seminar Hall FCL-IT-001; rubric 15/20/30/15/20 (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 10
+        },
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 4
+        },
+        {
+          "document_id": "DOC-FACILITIES-001",
+          "page": 1
+        }
+      ],
+      "expected_entities": [
+        "FAC-IT-020",
+        "POLICY-005",
+        "FCL-IT-001",
+        "COURSE-2CEIT504",
+        "COURSE-2CEIT605",
+        "COURSE-2CEIT703"
+      ],
+      "retrieval_type": "cross_document",
+      "difficulty": "hard",
+      "answerable": true,
+      "category": "F_cross_document",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-040",
+      "question": "When and where is the capstone mid-review?",
+      "expected_answer": "28 September – 3 October 2026 (CAL-2026-27-007, Academic Calendar) in the Capstone Project Room FCL-IT-002, Room DA-205 (NOTICE-012); interim report due 48 h before the slot (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-CALENDAR-001",
+          "page": 1
+        },
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 7
+        },
+        {
+          "document_id": "DOC-FACILITIES-001",
+          "page": 1
+        }
+      ],
+      "expected_entities": [
+        "CAL-2026-27-007",
+        "NOTICE-012",
+        "FCL-IT-002"
+      ],
+      "retrieval_type": "cross_document",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "F_cross_document",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-041",
+      "question": "Is ARTIFICIAL INTELLIGENCE listed in GUNI's employability/skill-development course list, and under which programme?",
+      "expected_answer": "Yes. 2CEIT602 (B.Tech IT Semester VI per syllabus p.15) appears in the certified 1.1.3 list for 2020-2021 (p.41) and 2021-2022 (p.2) under programme code 201 BTech(Computer Engineering), not under code 202 (official).",
+      "required_sources": [
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 15
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 41
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT602"
+      ],
+      "retrieval_type": "cross_document",
+      "difficulty": "hard",
+      "answerable": true,
+      "category": "F_cross_document",
+      "expected_source_types": [
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-042",
+      "question": "The revised mid-semester notice moved one paper — who teaches that course?",
+      "expected_answer": "NOTICE-008 moved the 2CEIT602 ARTIFICIAL INTELLIGENCE paper to 12 September 2026; the course is taught by FAC-IT-002 Dr. Arjun Tensorkar (lab: FAC-IT-004 Dr. Kabir Modelkar) (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 5
+        },
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "NOTICE-008",
+        "COURSE-2CEIT602",
+        "FAC-IT-002",
+        "FAC-IT-004"
+      ],
+      "retrieval_type": "cross_document",
+      "difficulty": "hard",
+      "answerable": true,
+      "category": "F_cross_document",
+      "expected_source_types": [
+        "synthetic",
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-043",
+      "question": "When is the Industrial Training final report due, and what must be submitted before Semester VIII starts?",
+      "expected_answer": "Final report and presentation due 30 April 2027 (CAL-2026-27-020); an offer letter from the host organisation must be submitted to FAC-IT-020 before Semester VIII (POLICY-006 §1) (synthetic). 2CEIT801 itself is official: 20 credits, 400 marks.",
+      "required_sources": [
+        {
+          "document_id": "DOC-CALENDAR-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-POLICIES-001",
+          "page": 4
+        },
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 21
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 18
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "CAL-2026-27-020",
+        "POLICY-006",
+        "COURSE-2CEIT801",
+        "FAC-IT-020"
+      ],
+      "retrieval_type": "cross_document",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "F_cross_document",
+      "expected_source_types": [
+        "synthetic",
+        "official"
+      ]
+    },
+    {
+      "question_id": "EVAL-044",
+      "question": "Which workshop was held in the NLP lab, when, and who ran it?",
+      "expected_answer": "NOTICE-007: hands-on workshop on Retrieval-Augmented Generation with local SLMs, 29 August 2026, by FAC-IT-003 Dr. Nisha Tokenwala in LAB-IT-002 (Room DA-302) (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-NOTICES-001",
+          "page": 5
+        },
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 2
+        }
+      ],
+      "expected_entities": [
+        "NOTICE-007",
+        "LAB-IT-002",
+        "FAC-IT-003"
+      ],
+      "retrieval_type": "cross_document",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "F_cross_document",
+      "expected_source_types": [
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-045",
+      "question": "How many credits does CAPSTONE PROJECT-III carry and who coordinates it?",
+      "expected_answer": "2CEIT703 CAPSTONE PROJECT-III: 6 credits (PR/TW), 12 hours, 100 marks (official, syllabus p.16); coordinated by FAC-IT-020 Dr. Leena Projectkar (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-COURSES-001",
+          "page": 16
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 16
+        },
+        {
+          "document_id": "DOC-OFFICIAL-CATALOG-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": 10
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT703",
+        "FAC-IT-020"
+      ],
+      "retrieval_type": "cross_document",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "F_cross_document",
+      "expected_source_types": [
+        "official",
+        "synthetic"
+      ]
+    },
+    {
+      "question_id": "EVAL-046",
+      "question": "What is the total credit requirement of B.Tech IT?",
+      "expected_answer": "174 credits (sum of eight official semester totals).",
+      "required_sources": [
+        {
+          "document_id": "DOC-DEPT-PROFILE-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 1
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 10
+        }
+      ],
+      "expected_entities": [
+        "PROG-BTECH-IT-001"
+      ],
+      "retrieval_type": "sql",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "G_structured_sql",
+      "expected_source_types": [
+        "derived_official"
+      ],
+      "reference_sql": "SELECT sum(total_credits) FROM semesters WHERE program_id='PROG-BTECH-IT-001';"
+    },
+    {
+      "question_id": "EVAL-047",
+      "question": "How many options are there in ELECTIVE-VI of B.Tech IT Semester VII?",
+      "expected_answer": "7 options.",
+      "required_sources": [
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 4
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 16
+        }
+      ],
+      "expected_entities": [
+        "EGRP-BTECH-IT-07-ELECTIVE-VI"
+      ],
+      "retrieval_type": "sql",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "G_structured_sql",
+      "expected_source_types": [
+        "official"
+      ],
+      "reference_sql": "SELECT count(*) FROM elective_group_options WHERE elective_group_id='EGRP-BTECH-IT-07-ELECTIVE-VI';"
+    },
+    {
+      "question_id": "EVAL-048",
+      "question": "Which faculty members are assigned to more than four courses?",
+      "expected_answer": "FAC-IT-009 Dr. Aditi Cloudani (5); FAC-IT-010 Dr. Harsh Clusterwala (5); FAC-IT-011 Prof. Tanya Pixelani (5); FAC-IT-013 Dr. Pooja Lambdani (6); FAC-IT-014 Prof. Rohan Kernelwala (5); FAC-IT-015 Prof. Kavya Graphwala (5); FAC-IT-016 Prof. Aman Circuitkar (5); FAC-IT-017 Dr. Neha Testani (5); FAC-IT-019 Dr. Farhan Pythonwala (5); FAC-IT-020 Dr. Leena Projectkar (10) (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-FACULTY-001",
+          "page": null
+        }
+      ],
+      "expected_entities": [
+        "FAC-IT-009",
+        "FAC-IT-010",
+        "FAC-IT-011",
+        "FAC-IT-013",
+        "FAC-IT-014",
+        "FAC-IT-015",
+        "FAC-IT-016",
+        "FAC-IT-017",
+        "FAC-IT-019",
+        "FAC-IT-020"
+      ],
+      "retrieval_type": "sql",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "G_structured_sql",
+      "expected_source_types": [
+        "synthetic"
+      ],
+      "reference_sql": "SELECT f.faculty_id, f.name, count(*) FROM teaching_assignments t JOIN faculty f USING (faculty_id) GROUP BY 1,2 HAVING count(*)>4 ORDER BY 1;"
+    },
+    {
+      "question_id": "EVAL-049",
+      "question": "How many regular courses does each B.Tech IT semester have?",
+      "expected_answer": "Semester I: 6; Semester II: 6; Semester III: 5; Semester IV: 6; Semester V: 5; Semester VI: 6; Semester VII: 4; Semester VIII: 1 (official 'Total Regular Course' header values).",
+      "required_sources": [
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 10
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 11
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 12
+        },
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 3
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 13
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 14
+        },
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 4
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 15
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 16
+        },
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 5
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 18
+        }
+      ],
+      "expected_entities": [
+        "PROG-BTECH-IT-001"
+      ],
+      "retrieval_type": "sql",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "G_structured_sql",
+      "expected_source_types": [
+        "official"
+      ],
+      "reference_sql": "SELECT semester_name, (record->>'total_regular_course')::int FROM semesters WHERE program_id='PROG-BTECH-IT-001' ORDER BY semester_number;",
+      "notes": "Uses the printed 'Total Regular Course' header value of each semester page."
+    },
+    {
+      "question_id": "EVAL-050",
+      "question": "Which labs can seat at least 40 students?",
+      "expected_answer": "LAB-IT-003 Database Systems Lab (40); LAB-IT-004 Programming Lab (60); LAB-IT-008 Web & Mobile Development Lab (40); LAB-IT-010 Systems & Software Engineering Lab (40) (synthetic).",
+      "required_sources": [
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 2
+        },
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 3
+        },
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 4
+        },
+        {
+          "document_id": "DOC-LABS-001",
+          "page": 5
+        }
+      ],
+      "expected_entities": [
+        "LAB-IT-003",
+        "LAB-IT-004",
+        "LAB-IT-008",
+        "LAB-IT-010"
+      ],
+      "retrieval_type": "sql",
+      "difficulty": "easy",
+      "answerable": true,
+      "category": "G_structured_sql",
+      "expected_source_types": [
+        "synthetic"
+      ],
+      "reference_sql": "SELECT lab_id, lab_name, capacity FROM laboratories WHERE capacity>=40 ORDER BY lab_id;"
+    },
+    {
+      "question_id": "EVAL-051",
+      "question": "What is the average credit value of the regular (non-elective) courses in B.Tech IT Semester V?",
+      "expected_answer": "3.00 credits across 5 regular courses (2CEIT501=4, 2CEIT502=4, 2CEIT503=5, 2CEIT504=1, 2HS5101=1).",
+      "required_sources": [
+        {
+          "document_id": "DOC-PROGRAMS-001",
+          "page": 3
+        },
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": 14
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT501",
+        "COURSE-2CEIT502",
+        "COURSE-2CEIT503",
+        "COURSE-2CEIT504",
+        "COURSE-2HS5101"
+      ],
+      "retrieval_type": "sql",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "G_structured_sql",
+      "expected_source_types": [
+        "official"
+      ],
+      "reference_sql": "SELECT round(avg(credits),2), count(*) FROM course_offerings WHERE semester_id='SEM-BTECH-IT-05' AND course_type='regular';"
+    },
+    {
+      "question_id": "EVAL-052",
+      "question": "Which regular B.Tech IT courses carry 2 or more practical/TW credits?",
+      "expected_answer": "2CEIT302 OBJECT ORIENTED PROGRAMMING; 2CEIT304 DATA STRUCTURES; 2CEIT403 APPLICATION DEVELOPMENT TOOLS; 2CEIT703 CAPSTONE PROJECT-III; 2CEIT801 INDUSTRIAL TRAINING; 2ES102 WORKSHOP MANUFACTURING PRACTICE; 2ES104 PROGRAMMING FOR PROBLEM SOLVING; 2ES110 IT PERIPHERALS & TOOLS; 2ES111 IT WORKSHOP; 2HS102 SEMINAR (official).",
+      "required_sources": [
+        {
+          "document_id": "DOC-OFFICIAL-SYLLABUS-001",
+          "page": null
+        }
+      ],
+      "expected_entities": [
+        "COURSE-2CEIT302",
+        "COURSE-2CEIT304",
+        "COURSE-2CEIT403",
+        "COURSE-2CEIT703",
+        "COURSE-2CEIT801",
+        "COURSE-2ES102",
+        "COURSE-2ES104",
+        "COURSE-2ES110",
+        "COURSE-2ES111",
+        "COURSE-2HS102"
+      ],
+      "retrieval_type": "sql",
+      "difficulty": "medium",
+      "answerable": true,
+      "category": "G_structured_sql",
+      "expected_source_types": [
+        "official"
+      ],
+      "reference_sql": "SELECT DISTINCT c.course_code, c.course_name FROM course_offerings o JOIN courses c USING (course_id) WHERE o.program_id='PROG-BTECH-IT-001' AND o.course_type='regular' AND o.credit_pr>=2 ORDER BY 1;"
+    },
+    {
+      "question_id": "EVAL-053",
+      "question": "What topics/units are covered in 2CEIT602 ARTIFICIAL INTELLIGENCE according to the official syllabus?",
+      "expected_answer": "I don't have authoritative information for that. The supplied official pages give only the scheme (credits, hours, marks), not unit-wise content. Only a labelled synthetic summary exists.",
+      "required_sources": [],
+      "expected_entities": [
+        "COURSE-2CEIT602"
+      ],
+      "retrieval_type": "abstain",
+      "difficulty": "medium",
+      "answerable": false,
+      "category": "H_unanswerable",
+      "expected_source_types": []
+    },
+    {
+      "question_id": "EVAL-054",
+      "question": "Who teaches PHYSICS (2BS103) to B.Tech IT students?",
+      "expected_answer": "I don't have authoritative information for that. Not available: common courses are not assigned to faculty in either the official sources or the demo dataset.",
+      "required_sources": [],
+      "expected_entities": [
+        "COURSE-2BS103"
+      ],
+      "retrieval_type": "abstain",
+      "difficulty": "medium",
+      "answerable": false,
+      "category": "H_unanswerable",
+      "expected_source_types": []
+    },
+    {
+      "question_id": "EVAL-055",
+      "question": "In which semester is 2IT503 COMPUTER SYSTEM ARCHITECTURE taught?",
+      "expected_answer": "I don't have authoritative information for that. Not available: 2IT503 appears only in the 2017-2020 certified lists under programme code 202; it is not in the 2021-2022 syllabus, so semester and credits are unknown.",
+      "required_sources": [],
+      "expected_entities": [
+        "COURSE-2IT503"
+      ],
+      "retrieval_type": "abstain",
+      "difficulty": "medium",
+      "answerable": false,
+      "category": "H_unanswerable",
+      "expected_source_types": []
+    },
+    {
+      "question_id": "EVAL-056",
+      "question": "What is the annual intake (number of seats) for B.Tech IT?",
+      "expected_answer": "I don't have authoritative information for that. Not present in the official PDFs or the demo dataset.",
+      "required_sources": [],
+      "expected_entities": [
+        "PROG-BTECH-IT-001"
+      ],
+      "retrieval_type": "abstain",
+      "difficulty": "medium",
+      "answerable": false,
+      "category": "H_unanswerable",
+      "expected_source_types": []
+    },
+    {
+      "question_id": "EVAL-057",
+      "question": "What is the tuition fee for M.Tech IT?",
+      "expected_answer": "I don't have authoritative information for that. Not present in the official PDFs or the demo dataset.",
+      "required_sources": [],
+      "expected_entities": [
+        "PROG-MTECH-IT-001"
+      ],
+      "retrieval_type": "abstain",
+      "difficulty": "medium",
+      "answerable": false,
+      "category": "H_unanswerable",
+      "expected_source_types": []
+    },
+    {
+      "question_id": "EVAL-058",
+      "question": "Who is the Dean of the Faculty of Engineering & Technology?",
+      "expected_answer": "I don't have authoritative information for that. Not present. SCHOOL-FET-001 is named in the syllabus but no office holders are given.",
+      "required_sources": [],
+      "expected_entities": [
+        "SCHOOL-FET-001"
+      ],
+      "retrieval_type": "abstain",
+      "difficulty": "medium",
+      "answerable": false,
+      "category": "H_unanswerable",
+      "expected_source_types": []
+    }
+  ]
+}

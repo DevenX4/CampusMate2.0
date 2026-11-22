@@ -1,0 +1,45 @@
+# --- Secrets: never commit. .env.example IS committed. ---
+.env
+.env.*
+!.env.example
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Node (frontend, later) ---
+node_modules/
+dist/
+*.tsbuildinfo
+
+# --- Local data: PDFs are verified with data/pdfs.sha256 instead ---
+data/pdfs/**
+!data/pdfs/.gitkeep
+
+# --- Runtime storage: uploads, processed files, vector index, temp ---
+storage/**
+!storage/*/
+!storage/*/.gitkeep
+
+# --- Model weights, caches, logs ---
+# Leading "/" = only at the repo root. An unanchored "models/" would also hide
+# backend/app/models/ (the SQLAlchemy models), which must be committed.
+/models/
+/model_cache/
+/chroma/
+/logs/
+*.log
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

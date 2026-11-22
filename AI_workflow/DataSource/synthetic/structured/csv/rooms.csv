@@ -1,0 +1,32 @@
+room_id,room_number,building_id,floor,room_type,label,source_type,source_document,academic_year
+ROOM-DA-201,DA-201,BLDG-DEMO-A,2,office,IT Department Office & Student Help Desk,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-202,DA-202,BLDG-DEMO-A,2,office,Head of Department cabin,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-205,DA-205,BLDG-DEMO-A,2,project_room,Capstone Project Room,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-206,DA-206,BLDG-DEMO-A,2,lounge,Faculty Lounge,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-207,DA-207,BLDG-DEMO-A,2,discussion_room,Discussion Room 1,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-208,DA-208,BLDG-DEMO-A,2,discussion_room,Discussion Room 2,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-209,DA-209,BLDG-DEMO-A,2,reading_room,Department Reading Room,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-210,DA-210,BLDG-DEMO-A,2,office,Faculty cabin 210,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-211,DA-211,BLDG-DEMO-A,2,office,Faculty cabin 211,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-212,DA-212,BLDG-DEMO-A,2,office,Faculty cabin 212,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-213,DA-213,BLDG-DEMO-A,2,office,Faculty cabin 213,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-214,DA-214,BLDG-DEMO-A,2,office,Faculty cabin 214,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-215,DA-215,BLDG-DEMO-A,2,office,Faculty cabin 215,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-216,DA-216,BLDG-DEMO-A,2,office,Faculty cabin 216,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-217,DA-217,BLDG-DEMO-A,2,office,Faculty cabin 217,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-218,DA-218,BLDG-DEMO-A,2,office,Faculty cabin 218,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-219,DA-219,BLDG-DEMO-A,2,office,Faculty cabin 219,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-301,DA-301,BLDG-DEMO-A,3,laboratory,AI & Machine Learning Lab,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-302,DA-302,BLDG-DEMO-A,3,laboratory,Natural Language Processing Lab,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-303,DA-303,BLDG-DEMO-A,3,laboratory,Database Systems Lab,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-304,DA-304,BLDG-DEMO-A,3,laboratory,Programming Lab,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-305,DA-305,BLDG-DEMO-A,3,laboratory,Systems & Software Engineering Lab,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-401,DA-401,BLDG-DEMO-A,4,laboratory,Networks & Security Lab,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-402,DA-402,BLDG-DEMO-A,4,laboratory,Cloud & Big Data Lab,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-403,DA-403,BLDG-DEMO-A,4,laboratory,Web & Mobile Development Lab,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-404,DA-404,BLDG-DEMO-A,4,laboratory,Vision & Graphics Lab,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DA-405,DA-405,BLDG-DEMO-A,4,computing_facility,GPU Computing Facility,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DB-101,DB-101,BLDG-DEMO-B,1,laboratory,IoT & Robotics Lab,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DB-102,DB-102,BLDG-DEMO-B,1,innovation_centre,Innovation & Incubation Centre,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DB-103,DB-103,BLDG-DEMO-B,1,workspace,Student Project Workspace,synthetic,DOC-FACILITIES-001,2026-2027
+ROOM-DB-201,DB-201,BLDG-DEMO-B,2,seminar_hall,IT Seminar Hall,synthetic,DOC-FACILITIES-001,2026-2027

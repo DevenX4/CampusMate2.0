@@ -1,0 +1,8 @@
+grade_band_id,marks_range,grade_regular,grade_point_regular,grade_remedial,grade_point_remedial,applies_to_program_ids,source_type,source_document,source_page,source_section,document_version
+GRADE-BAND-01,90>=,A+,10,A,9,PROG-BTECH-IT-001|PROG-MTECH-IT-001,official,DOC-OFFICIAL-SYLLABUS-001,10,Examination Grade Range & Value,Syllabus Details dated 28/09/2022; Effective Year 2021-2022
+GRADE-BAND-02,80 To 89,A,9,B+,8,PROG-BTECH-IT-001|PROG-MTECH-IT-001,official,DOC-OFFICIAL-SYLLABUS-001,10,Examination Grade Range & Value,Syllabus Details dated 28/09/2022; Effective Year 2021-2022
+GRADE-BAND-03,70 To 79,B+,8,B,7,PROG-BTECH-IT-001|PROG-MTECH-IT-001,official,DOC-OFFICIAL-SYLLABUS-001,10,Examination Grade Range & Value,Syllabus Details dated 28/09/2022; Effective Year 2021-2022
+GRADE-BAND-04,60 To 69,B,7,C+,6,PROG-BTECH-IT-001|PROG-MTECH-IT-001,official,DOC-OFFICIAL-SYLLABUS-001,10,Examination Grade Range & Value,Syllabus Details dated 28/09/2022; Effective Year 2021-2022
+GRADE-BAND-05,50 To 59,C+,6,C,5,PROG-BTECH-IT-001|PROG-MTECH-IT-001,official,DOC-OFFICIAL-SYLLABUS-001,10,Examination Grade Range & Value,Syllabus Details dated 28/09/2022; Effective Year 2021-2022
+GRADE-BAND-06,40 To 49,C,5,C,5,PROG-BTECH-IT-001|PROG-MTECH-IT-001,official,DOC-OFFICIAL-SYLLABUS-001,10,Examination Grade Range & Value,Syllabus Details dated 28/09/2022; Effective Year 2021-2022
+GRADE-BAND-07,<40,F,0,F,0,PROG-BTECH-IT-001|PROG-MTECH-IT-001,official,DOC-OFFICIAL-SYLLABUS-001,10,Examination Grade Range & Value,Syllabus Details dated 28/09/2022; Effective Year 2021-2022

@@ -1,0 +1,88 @@
+{
+  "table": "research_areas",
+  "generated_at": "2026-09-18T12:00:00+05:30",
+  "record_count": 10,
+  "note": "Every record carries source_type (official | derived_official | synthetic). Records mixing sources carry field_provenance.",
+  "records": [
+    {
+      "research_area_id": "RA-IT-001",
+      "name": "Artificial Intelligence & Machine Learning",
+      "department_id": "DEPT-IT-001",
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027"
+    },
+    {
+      "research_area_id": "RA-IT-002",
+      "name": "Natural Language Processing",
+      "department_id": "DEPT-IT-001",
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027"
+    },
+    {
+      "research_area_id": "RA-IT-003",
+      "name": "Databases & Data Engineering",
+      "department_id": "DEPT-IT-001",
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027"
+    },
+    {
+      "research_area_id": "RA-IT-004",
+      "name": "Cyber Security & Cryptography",
+      "department_id": "DEPT-IT-001",
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027"
+    },
+    {
+      "research_area_id": "RA-IT-005",
+      "name": "Cloud, Distributed & High Performance Computing",
+      "department_id": "DEPT-IT-001",
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027"
+    },
+    {
+      "research_area_id": "RA-IT-006",
+      "name": "Internet of Things & Robotics",
+      "department_id": "DEPT-IT-001",
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027"
+    },
+    {
+      "research_area_id": "RA-IT-007",
+      "name": "Computer Vision & Graphics",
+      "department_id": "DEPT-IT-001",
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027"
+    },
+    {
+      "research_area_id": "RA-IT-008",
+      "name": "Software Engineering & Human-Computer Interaction",
+      "department_id": "DEPT-IT-001",
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027"
+    },
+    {
+      "research_area_id": "RA-IT-009",
+      "name": "Theoretical Computer Science & Algorithms",
+      "department_id": "DEPT-IT-001",
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027"
+    },
+    {
+      "research_area_id": "RA-IT-010",
+      "name": "Computer Networks",
+      "department_id": "DEPT-IT-001",
+      "source_type": "synthetic",
+      "source_document": "DOC-DEPT-PROFILE-001",
+      "academic_year": "2026-2027"
+    }
+  ]
+}

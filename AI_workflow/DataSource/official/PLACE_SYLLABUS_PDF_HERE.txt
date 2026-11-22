@@ -1,0 +1,4 @@
+The 38 MB official syllabus PDF is too large for the chat download, so it is not in this zip.
+Copy your original file "1.2.2._1_GUNI_A_STRUCTURED_SYLLABUS.pdf" into this folder and rename it to:
+    GUNI_BTech_IT_Syllabus.pdf
+Verify it against the sha256 recorded in registry/document_registry.json (document DOC-OFFICIAL-SYLLABUS-001).

@@ -1,0 +1,30 @@
+---
+id: EGRP-BTECH-IT-06-ELECTIVE-III
+type: elective_group
+title: ELECTIVE-III (SEM-BTECH-IT-06)
+program: PROG-BTECH-IT-001
+semester: SEM-BTECH-IT-06
+academic_year: 2021-2022
+source_type: official
+source_document: DOC-OFFICIAL-SYLLABUS-001
+source_page: 15
+rendered_in:
+- DOC-PROGRAMS-001#page=3
+structured_record: synthetic/structured/elective_groups.json#EGRP-BTECH-IT-06-ELECTIVE-III
+version: '1.0'
+status: active
+last_updated: '2026-09-18'
+relationships:
+  has_option:
+  - COURSE-2CEIT6PE1
+  - COURSE-2CEIT6PE2
+  - COURSE-2CEIT6PE3
+  - COURSE-2CEIT6PE4
+  - COURSE-2CEIT6PE5
+  elective_group_of:
+  - SEM-BTECH-IT-06
+---
+
+# ELECTIVE-III (SEM-BTECH-IT-06)
+
+ELECTIVE SUBJECT - 1 (ELECTIVE-III) in SEM-BTECH-IT-06: options 2CEIT6PE1 WEB TECHNOLOGY; 2CEIT6PE2 SOFTWARE VALIDATION & TESTING; 2CEIT6PE3 CRYPTOGRAPHY AND NETWORK SECURITY; 2CEIT6PE4 DATA SCIENCES AND MACHINE LEARNING; 2CEIT6PE5 GAME DESIGN & DEVELOPMENT. Slot credits 4.0.

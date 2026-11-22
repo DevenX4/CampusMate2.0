@@ -1,0 +1,104 @@
+"""User accounts: create, list, update. There is deliberately no delete: accounts with audit
+history are deactivated instead, so the history keeps pointing at a real account."""
+
+import uuid
+
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from app.core.security import hash_password
+from app.models.auth import Role, User
+from app.schemas.common import Page
+from app.schemas.users import UserCreate, UserOut, UserUpdate
+from app.services import audit
+from app.services.audit import RequestContext
+from app.services.auth import GUEST_ROLE, find_user_by_email, revoke_all_sessions
+from app.services.errors import ConflictError, NotFoundError
+from app.services.helpers import contains, paginate
+
+
+def _check_role(db: Session, role_code: str) -> None:
+    if role_code == GUEST_ROLE:
+        raise ConflictError("'guest' is the role of visitors who are not logged in; it cannot be assigned")
+    if db.get(Role, role_code) is None:
+        raise NotFoundError("Role", role_code)
+
+
+def list_users(db: Session, *, q: str | None, role: str | None, limit: int, offset: int) -> Page[UserOut]:
+    query = select(User).order_by(User.email)
+    if q:
+        query = query.where(contains(User.email, q) | contains(User.full_name, q))
+    if role:
+        query = query.where(User.role_code == role)
+    return paginate(db, query, UserOut, limit, offset)
+
+
+def create_user(db: Session, data: UserCreate, *, actor_id: uuid.UUID | None, context: RequestContext) -> UserOut:
+    _check_role(db, data.role)
+    if find_user_by_email(db, data.email):
+        raise ConflictError(f"A user with email {data.email} already exists")
+    if data.username and db.scalar(select(User).where(User.username == data.username)):
+        raise ConflictError(f"The username {data.username} is already taken")
+    user = User(email=data.email.lower(), username=data.username, full_name=data.full_name,
+                password_hash=hash_password(data.password), role_code=data.role)
+    db.add(user)
+    db.flush()  # assigns user.id
+    audit.record(db, "user.create", actor_id=actor_id, context=context, entity_type="user",
+                 entity_id=str(user.id), details={"email": user.email, "role": user.role_code})
+    db.commit()
+    return UserOut.model_validate(user)
+
+
+# Local demo accounts: simple, public passwords for trying CampusMate out. They bypass the password
+# rules on purpose, so they are flagged is_demo and refused at login when APP_ENV=production.
+DEMO_ACCOUNTS = (
+    # username, password, role, email, full name
+    ("admin", "DemoAdmin@2026", "admin", "admin@campusmate-demo.example", "Demo Administrator"),
+    ("student", "DemoStudent@2026", "student", "student@campusmate-demo.example", "Demo Student"),
+)
+
+
+def ensure_demo_accounts(db: Session, *, context: RequestContext) -> list[str]:
+    """Create the demo accounts, or reset them (password, role, active) if they exist."""
+    done = []
+    for username, password, role, email, full_name in DEMO_ACCOUNTS:
+        user = db.scalar(select(User).where(User.username == username)) or find_user_by_email(db, email)
+        created = user is None
+        if created:
+            user = User(email=email, full_name=full_name, role_code=role, password_hash="")
+            db.add(user)
+        user.username, user.role_code, user.is_active, user.is_demo = username, role, True, True
+        user.password_hash = hash_password(password)
+        db.flush()
+        audit.record(db, "user.demo_account", actor_id=None, context=context, entity_type="user",
+                     entity_id=str(user.id), details={"username": username, "created": created})
+        done.append(username)
+    db.commit()
+    return done
+
+
+def update_user(db: Session, user_id: uuid.UUID, data: UserUpdate, *, actor: User, context: RequestContext) -> UserOut:
+    user = db.get(User, user_id)
+    if user is None:
+        raise NotFoundError("User", str(user_id))
+    # Guard against locking the last door: an admin cannot demote or deactivate themselves.
+    if user.id == actor.id and (data.role not in (None, user.role_code) or data.is_active is False):
+        raise ConflictError("You cannot change your own role or deactivate your own account")
+
+    # Fields actually sent; an explicit null only means something for full_name.
+    changes = {k: v for k, v in data.model_dump(exclude_unset=True, exclude={"password"}).items()
+               if v is not None or k == "full_name"}
+    if data.role is not None:
+        _check_role(db, data.role)
+    for field, value in changes.items():
+        setattr(user, "role_code" if field == "role" else field, value)
+    if data.password is not None:
+        user.password_hash = hash_password(data.password)
+        changes["password"] = "changed"  # the audit log records THAT it changed, never the value
+    if data.is_active is False or data.password is not None:
+        revoke_all_sessions(db, user)  # takes effect immediately, on every device
+
+    audit.record(db, "user.update", actor_id=actor.id, context=context, entity_type="user",
+                 entity_id=str(user.id), details=changes)
+    db.commit()
+    return UserOut.model_validate(user)

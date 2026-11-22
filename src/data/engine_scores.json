@@ -1,0 +1,11 @@
+{
+  "measured_on": "2026-11-21",
+  "campus_questions": 52,
+  "off_topic_questions": 20,
+  "right_record_found_pct": 90.4,
+  "right_record_top3_pct": 84.6,
+  "campus_questions_accepted_pct": 100.0,
+  "off_topic_refused_pct": 100.0,
+  "median_search_ms": 49,
+  "records_indexed": 261
+}
